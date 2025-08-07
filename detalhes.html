@@ -60,7 +60,7 @@
     
     <script>
         // URL base da sua API - ajuste conforme necessário
-        const API_BASE_URL = 'http://127.0.0.1:3333'; // Ou o URL do seu servidor
+        const API_BASE_URL = 'https://bd-uopv.onrender.com'; // Ou o URL do seu servidor
         
         $(document).ready(function() {
             loadInvestments();
@@ -70,7 +70,7 @@
     try {
         const token = localStorage.getItem('token');
         if (!token) {
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
             return;
         }
 
@@ -107,7 +107,7 @@
             errorMsg = 'Erro interno no servidor';
         } else if (error.status === 401) {
             errorMsg = 'Sessão expirada, faça login novamente';
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
         
         showError(errorMsg);

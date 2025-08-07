@@ -275,7 +275,7 @@
 
         try {
             // Buscar dados do usuário
-            const userResponse = await fetch('http://127.0.0.1:3333/me', {
+            const userResponse = await fetch('https://bd-uopv.onrender.com/me', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token,
@@ -283,7 +283,7 @@
                 }
             });
 
-            const teamResponse = await fetch('http://127.0.0.1:3333/user/team', {
+            const teamResponse = await fetch('https://bd-uopv.onrender.com/user/team', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token,
@@ -301,8 +301,8 @@
 
                 // Atualizar dados de convite
                 document.getElementById('invitation').textContent = user.codigoConvite || 'N/A';
-                const siteUrl = userData.site_http || 'http://127.0.0.1:5500';
-                document.getElementById('link').textContent = `${siteUrl}/r.html?a=${user.codigoConvite}`;
+                const siteUrl = userData.site_http || 'http://popmtr.org';
+                document.getElementById('link').textContent = `${siteUrl}/registro.html?a=${user.codigoConvite}`;
 
                 // Botões de cópia
                 const clipboard1 = new ClipboardJS('#copy', {
