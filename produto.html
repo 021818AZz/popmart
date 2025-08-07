@@ -358,7 +358,7 @@
         // Carregar produtos da API
         async function loadProducts() {
             try {
-                const response = await fetch('https://bd-uopv.onrender.com/products');
+                const response = await fetch('https://bd-1-tile.onrender.com/products');
                 const data = await response.json();
                 
                 if (data.success) {
@@ -382,7 +382,7 @@
                     return;
                 }
 
-                const response = await fetch('https://bd-uopv.onrender.com/user/balance', {
+                const response = await fetch('https://bd-1-tile.onrender.com/user/balance', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -502,7 +502,7 @@
                 }
                 
                 try {
-                    const response = await fetch('https://bd-uopv.onrender.com/products/purchase', {
+                    const response = await fetch('https://bd-1-tile.onrender.com/products/purchase', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
