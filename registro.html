@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Registre uma conta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/layui/2.5.6/css/layui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/layui/2.5.6/layui.min.js"></script>
+    <style>
+        /* Mantenha seus estilos CSS existentes */
+        html, body {
+            width: 100%;
+            height: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .inputdiv {
+            display: flex;
+            border-bottom: 1px solid #e6e6e6 !important;
+            background-color: #fff !important;
+            height: 45px;
+            line-height: 45px;
+            padding: 0px 10px;
+            border-radius: 0px;
+            color: #000;
+        }
+        
+        /* Outros estilos permanecem iguais */
+    </style>
+</head>
+<body style="background: #fff; background-size: 100% 100%;">
+    <input type="hidden" id="moblie_qu_hid" value="244" />
+
+    <div style="max-width:450px; margin:0 auto;">
+        <div style="width: 95%; margin: 0 auto; background: #fff; border-radius: 10px; padding-top: 60px;">
+            <div style="text-align: center;">
+                <img src="https://popmbbb.cc/ui2/logo.png" style="margin: 0 auto; width: 50%; margin-top: 40px; border-radius: 5px;" />
+            </div>
+
+            <div class="layui-form" style="margin:0 auto; width:95%; margin-top:80px;">
+                <div class="layui-form-item" style="height:42px;">
+                    <div class="inputdiv">
+                        <i class="layui-icon layui-icon-cellphone" style="margin-right:5px; font-size: 20px; color: #000;"></i>
+                        <font style="height: 45px; line-height: 45px;" id="moblie_qu">+244</font>
+                        <input type="number" id="moblie" pattern="[0-9]*" oninput="if(value.length>9)value=value.slice(0,9)" 
+                               style="width:100%; height: 45px;" placeholder="Telefone (9 dígitos)" class="layui-input" autocomplete="off">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item" style="height:42px;">
+                    <div class="inputdiv">
+                        <i class="layui-icon layui-icon-password" style="margin-right:5px; font-size: 20px; color: #000;"></i>
+                        <input type="password" id="password" maxlength="20" placeholder="Senha (mínimo 6 caracteres)" 
+                               style="width:100%; height: 45px;" autocomplete="off" class="layui-input" />
+                    </div>
+                </div>
+                
+                <div class="layui-form-item" style="height:42px;">
+                    <div class="inputdiv">
+                        <i class="layui-icon layui-icon-password" style="margin-right:5px; font-size: 20px; color: #000;"></i>
+                        <input type="password" id="password1" maxlength="20" placeholder="Repita a senha" 
+                               style="width:100%; height: 45px;" autocomplete="off" class="layui-input" />
+                    </div>
+                </div>
+                
+                <div class="layui-form-item" style="height:42px;">
+                    <div class="inputdiv">
+                        <i class="layui-icon layui-icon-friends" style="margin-right:5px; font-size: 20px; color: #000;"></i>
+                        <input type="text" id="invitation" maxlength="6" placeholder="Código de convite (opcional)" 
+                               style="width:100%; height: 45px;" autocomplete="off" class="layui-input" />
+                    </div>
+                </div>
+                
+                <div class="layui-form-item" style="margin-top:35px;">
+                    <div style="width:100%; margin:0 auto; text-align:center;">
+                        <button class="layui-btn" id="reg" style="width: 100%; font-weight: 600; height: 55px; line-height: 55px; 
+                                font-size: 16px; background: #D2001F; color: #fff; border: 1px groove #D2001F; border-radius: 5px;">
+                            Registre uma conta
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="layui-form-item" style="margin-top:20px; text-align:center;">
+                    <button class="layui-btn" id="loginBtn" style="width: 100%; font-weight: 600; height: 55px; line-height: 55px; 
+                            font-size: 16px; background: #fff; color: #D2001F; border: 1px groove #D2001F; border-radius: 5px;">
+                        Já tem conta? Faça login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       $(document).ready(function() {
+    // Configuração do LayUI
+    layui.use(['layer', 'form'], function(){
+        var layer = layui.layer;
+        var form = layui.form;
+        
+        // Função para exibir mensagens
+        function showMessage(type, message) {
+            if(type === 'error') {
+                layer.msg(message, {icon: 2, time: 3000});
+            } else {
+                layer.msg(message, {icon: 1, time: 1500});
+            }
+        }
+        
+        // Função para verificar telefone
+        function checkPhoneExists(phone) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: 'http://localhost:3333/usuarios/verificar',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ telefone: phone }),
+                    success: function(response) {
+                        if (response.success) {
+                            resolve(response.existe);
+                        } else {
+                            reject(response.mensagem);
+                        }
+                    },
+                    error: function(xhr) {
+                        reject(xhr.responseJSON?.mensagem || 'Erro ao verificar telefone');
+                    }
+                });
+            });
+        }
+        
+        // Função para registrar usuário
+        function registerUser(phone, password, invitation) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: 'http://localhost:3333/usuarios',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ 
+                        telefone: phone, 
+                        senha: password, 
+                        codigoConvite: invitation 
+                    }),
+                    success: function(response) {
+                        if (response.success) {
+                            resolve(response);
+                        } else {
+                            reject(response.mensagem);
+                        }
+                    },
+                    error: function(xhr) {
+                        reject(xhr.responseJSON?.mensagem || 'Erro no registro');
+                    }
+                });
+            });
+        }
+        
+        // Evento de clique no botão de registro
+        $('#reg').click(async function() {
+            var phone = '+244' + $('#moblie').val().trim();
+            var password = $('#password').val().trim();
+            var password1 = $('#password1').val().trim();
+            var invitation = $('#invitation').val().trim();
+            
+            // Validações básicas
+            if (!phone || !password || !password1) {
+                showMessage('error', 'Todos os campos são obrigatórios!');
+                return;
+            }
+            
+            if (password !== password1) {
+                showMessage('error', 'As senhas não coincidem!');
+                return;
+            }
+            
+            if (!phone.match(/^\+244\d{9}$/)) {
+                showMessage('error', 'Telefone inválido! Deve ter 9 dígitos após +244');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showMessage('error', 'A senha deve ter pelo menos 6 caracteres!');
+                return;
+            }
+            
+            var loading = layer.load(1, {shade: [0.5, '#000']});
+            
+            try {
+                // Verificar se telefone existe
+                const phoneExists = await checkPhoneExists(phone);
+                
+                if (phoneExists) {
+                    showMessage('error', 'Este telefone já está registrado!');
+                    return;
+                }
+                
+                // Registrar usuário
+                const response = await registerUser(phone, password, invitation);
+                
+                showMessage('success', 'Registro bem-sucedido!');
+                
+                // Armazenar token e redirecionar
+                if (response.token) {
+                    localStorage.setItem('token', response.token);
+                    setTimeout(() => {
+                        window.location.href = '/index.html';
+                    }, 1500);
+                }
+                
+            } catch (error) {
+                showMessage('error', error);
+            } finally {
+                layer.close(loading);
+            }
+        });
+        
+        // Evento de clique no botão de login
+        $('#loginBtn').click(function() {
+            window.location.href = '/index.html';
+        });
+    });
+});
+    </script>
+</body>
+</html>

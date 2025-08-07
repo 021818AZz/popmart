@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1, minimum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Minha Conta</title>
+    <link href="https://popmbbb.cc/Lay/css/layui.css?v1.6" rel="stylesheet" />
+    <link href="https://popmbbb.cc/css/main.css?v2.7" rel="stylesheet" />
+    <link href="https://popmbbb.cc/layer_mobile/need/layer.css?v1.6" rel="stylesheet" />
+    <script src="https://popmbbb.cc/Lay/layui.js?v1.7"></script>
+    <script src="https://popmbbb.cc/js/comm.js?v1.7"></script>
+    <script src="https://popmbbb.cc/js/jquery-1.11.0.min.js"></script>
+    <style type="text/css">
+        /* Estilos gerais */
+        div {
+            cursor: pointer;
+        }
+        
+        /* Estilo para loading */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0,0,0,.3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Estilo para valores monetários */
+        .currency-value {
+            font-weight: bold;
+            font-family: 'HarmonyOS Sans SC', sans-serif;
+        }
+        
+        /* Estilo para cabeçalho */
+        .user-header {
+            position: relative;
+            height: 210px;
+        }
+        
+        .user-info {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(0deg,#fff,#D2001F 0%,#FF94A3);
+            color: #fff;
+            height: 70px;
+            z-index: 2;
+        }
+        
+        /* Estilos existentes mantidos */
+        .top1 {
+            position: fixed;
+            background: #fff;
+            z-index: 10000;
+            width: 100%;
+            height: 30px;
+            top: -30px;
+        }
+        
+        .nav {
+            background-size:100% 100%; 
+            height:60px;
+        }
+        
+        .navtab {
+            cursor: pointer;
+        }
+        
+        .gray {
+            -webkit-filter: grayscale(100%);
+            -moz-filter: grayscale(100%);
+            -ms-filter: grayscale(100%);
+            -o-filter: grayscale(100%);
+            filter: grayscale(100%);
+        }
+        
+        /* Outros estilos específicos */
+        .logout-btn {
+            height: 30px; 
+            line-height:30px; 
+            color:#fff; 
+            width: 110px; 
+            cursor: pointer; 
+            text-align: center; 
+            background: #D2001F; 
+            font-size: 12px; 
+            border-radius: 100px;
+        }
+    </style>
+</head>
+<body style="min-height: 100%; width: 100%; background:url(/ui2/bg.png) no-repeat; background-size: 100% auto;">
+    <input type="hidden" id="telegram" value="" />
+    <input type="hidden" id="androidurl" value="" />
+
+    <div style="max-width:450px; margin:0 auto;">
+        <div class="top1"></div>
+        
+        <!-- Cabeçalho do usuário -->
+        <div style="background: none; height: auto; overflow: hidden; position: relative;">
+            <div class="user-header">
+                <!-- Botão de logout -->
+                <div style="position: absolute; right: 10px; top: 10px; z-index: 11111;">
+                    <div id="outlogin" class="logout-btn">Saída segura</div>
+                </div>
+
+                <!-- Avatar -->
+                <div style="width: 40%; position: absolute; text-align: left; color: #fff; padding-bottom: 10px;">
+                    <div style="height: 70px; line-height: 70px; margin: 0 auto; margin-top: 20px; width: 80px; border-radius: 100px;">
+                        <img src="https://popmbbb.cc/ui2/lo.jpg" style="height: 70px; border-radius: 80px;" />
+                    </div>
+                </div>
+
+                <!-- Informações do usuário -->
+                <div class="user-info">
+                    <div style="width:50%; float:left; text-align:center; line-height:25px; margin-top:10px; height:50px;">
+                        <div id="uid"><span class="loading"></span></div>
+                        <div>Número de telefone</div>
+                    </div>
+                    <div style="width: 50%; float: left; text-align: center; line-height: 25px; margin-top: 10px; height: 50px;">
+                        <div id="useramount" class="currency-value"><span class="loading"></span></div>
+                        <div>Saldo da conta</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div style="text-align: center; overflow: hidden; height: auto; margin-top:5px; margin-bottom:10px; position: relative; border-radius: 5px;">
+            <div style="width:98%; margin:0 auto;">
+                <img src="https://popmbbb.cc/ui2/88.jpg" style="width: 100%; border-radius: 5px;" class="tabs" url="/main/myd.html" />
+            </div>
+        </div>
+
+        <!-- Menu de ações -->
+        <div style="text-align: center; width: 100%; margin: 0 auto; background: #fff; height: auto; overflow: hidden; margin-top:5px;">
+            <div style="width: 30%; float: left; text-align: left;" id="Recharge">
+                <div style="padding-right:0px; width:95%; margin-left:5%;">
+                    <div style="padding: 0px;">
+                        <div style="padding: 5px; padding-top:10px;">
+                            <div style="text-align: center; height: 35px;">
+                                <img src="https://popmbbb.cc/ui2/m/1.png" style="width: 28px; margin-top: 2px;" />
+                            </div>
+                            <div style="text-align: center; line-height: 30px;">Recarregar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="width: 5%; float: left;padding-bottom: 10px; height: 73px;"></div>
+            
+            <div style="width: 30%; float: left; text-align: left;" id="Withdraw">
+                <div style="padding-left:0px; margin-left:5%; padding-right: 0px; width: 95%;">
+                    <div style="padding: 0px;">
+                        <div style="padding: 5px; padding-top:10px;">
+                            <div style="text-align: center; height: 35px;">
+                                <img src="https://popmbbb.cc/ui2/m/2.png" style="width: 28px;" />
+                            </div>
+                            <div style="text-align: center; line-height: 30px;">Retirada</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="width: 5%; float: left; padding-bottom: 10px; height: 73px;"></div>
+            
+            <div style="width: 30%; float: left; text-align: left;" id="Record">
+                <div style="padding-left:0px; margin-left:5%; padding-right: 0px; width: 95%;">
+                    <div style="padding: 0px;">
+                        <div style="padding: 5px; padding-top:10px;">
+                            <div style="text-align: center; height: 35px;">
+                                <img src="https://popmbbb.cc/ui2/m/5.png" style="width: 24px;" />
+                            </div>
+                            <div style="text-align: center; line-height: 30px;">Registro de conta</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de serviços -->
+        <div style="font-family: DinC; font-size:20px; margin-left:2%; height:35px; line-height:35px; text-align:left; font-weight:bold;">
+            Outros serviços
+        </div>
+        <hr style="margin:0 auto; width:93%; color:#000;border:1px groove #000; margin-bottom:15px; margin-top:5px;" />
+        
+        <div style="text-align: center; overflow: hidden; height: auto; margin-bottom:70px; position: relative; border-radius: 5px;">
+            <div style="text-align: center; width: 98%; margin: 0 auto; height: auto; overflow: hidden; position: relative; border-radius: 5px;">
+                <div style="padding: 15px; padding-left:0; padding-right:0; padding-top: 0; padding-bottom: 10px;">
+                    <!-- Linha 1 de serviços -->
+                    <div style="width:100%; margin-bottom:5px; height:60px;">
+                        <div style="width:50%; float:left;" class="tabs1" url="/main/helpinfo.html?id=1">
+                            <div style="padding: 10px; height: 40px; margin: 0 auto;border: 1px groove #eee; line-height: 40px; position: relative; background: #fff; border-radius: 5px">
+                                <div style="float: left; width: 20%;">
+                                    <img src="https://popmbbb.cc/ui2/po/2.png" style="height:28px;" />
+                                </div>
+                                <div style="float: left; width: 80%; text-align: center; font-size: 12px;">Sobre nós</div>
+                            </div>
+                        </div>
+                        <div style="width:50%; float:left;" class="tabs1" url="/main/helpinfo.html?id=2">
+                            <div style="padding: 10px; height: 40px; margin: 0 auto; margin-left: 5px; border: 1px groove #eee; line-height: 40px; position: relative; background: #fff; border-radius: 5px">
+                                <div style="float: left; width: 20%;">
+                                    <img src="https://popmbbb.cc/ui2/po/3.png" style="height:28px;" />
+                                </div>
+                                <div style="float: left; width: 80%; text-align: center; font-size: 12px;">Regras da plataforma</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Linha 2 de serviços -->
+                    <div style="width: 100%; margin-bottom: 5px; height: 60px;">
+                        <div style="width: 50%; float: left;" class="tabs" url="/main/cs.html">
+                            <div style="padding: 10px; height: 40px; margin: 0 auto;border: 1px groove #eee; line-height: 40px; position: relative; background: #fff; border-radius: 5px">
+                                <div style="float: left; width: 20%;">
+                                    <img src="https://popmbbb.cc/ui2/po/4.png" style="height:28px;" />
+                                </div>
+                                <div style="float: left; width: 80%; text-align: center; font-size: 12px;">Serviço ao cliente</div>
+                            </div>
+                        </div>
+                        <div style="width:50%; float:left;" id="down">
+                            <div style="padding: 10px; height: 40px; margin: 0 auto; margin-left: 5px; border: 1px groove #eee; line-height: 40px; position: relative; background: #fff; border-radius: 5px">
+                                <div style="float: left; width: 20%;">
+                                    <img src="https://popmbbb.cc/ui2/po/5.png" style="height:28px;" />
+                                </div>
+                                <div style="float: left; width: 80%; text-align: center; font-size: 12px;">Baixe o aplicativo</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mais linhas de serviços... -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegação inferior -->
+        <nav class="nav">
+            <div url="dashboard.html" class="navtab">
+                <img src="https://popmbbb.cc/ui2/nav/11.png" class="gray" style="height: 32px;" /> <br />
+                <span id="nav_btn1">Lar</span>
+            </div>
+            <div url="produto.html" class="navtab">
+                <img src="https://popmbbb.cc/ui2/nav/22.png" class="gray" style="height: 28px;" /> <br />
+                <span id="nav_btn2">Produto</span>
+            </div>
+            <div url="team.html" class="navtab">
+                <img src="https://popmbbb.cc/ui2/nav/33.png" class="gray" style="height:28px;" /> <br />
+                <span id="nav_btn3">Equipe</span>
+            </div>
+            <div style="color: #000 !important; font-weight: bold;">
+                <img src="https://popmbbb.cc/ui2/nav/4.png" style="height: 28px;" /> <br />
+                <span id="nav_btn4">Meu</span>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        // Função para formatar valores em KZ (Kwanza Angolano)
+        function formatCurrency(value) {
+            if (isNaN(value)) value = 0;
+            return 'KZ ' + parseFloat(value).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Função para formatar número de telefone
+        function formatPhoneNumber(phone) {
+            if (!phone) return '';
+            
+            // Formatar números brasileiros (assumindo formato 55XXXXXXXXXXX)
+            if (phone.startsWith('55') && phone.length >= 12) {
+                return phone.replace(/(\d{2})(\d{2})(\d{5})(\d{4})/, '+$1 ($2) $3-$4');
+            }
+            // Formatar números angolanos (assumindo formato 244XXXXXXXXX)
+            else if (phone.startsWith('244') && phone.length >= 12) {
+                return phone.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '+$1 $2 $3 $4');
+            }
+            // Formato internacional padrão
+            else if (phone.startsWith('+')) {
+                return phone.replace(/(\+\d{3})(\d{3})(\d{3})(\d{3})/, '$1 $2 $3 $4');
+            }
+            
+            return phone;
+        }
+
+        // Função para buscar dados do usuário
+        async function fetchUserData() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            // Mostrar loading
+            document.getElementById('uid').innerHTML = '<span class="loading"></span>';
+            document.getElementById('useramount').innerHTML = '<span class="loading"></span>';
+
+            try {
+                // Verificar cache primeiro (válido por 30 segundos)
+                const cachedData = sessionStorage.getItem('userDataCache');
+                const cacheTime = sessionStorage.getItem('userDataCacheTime');
+                
+                if (cachedData && cacheTime && (Date.now() - cacheTime < 30000)) {
+                    updateUserUI(JSON.parse(cachedData));
+                }
+
+                // Buscar dados atualizados
+                const response = await fetch('http://127.0.0.1:3333/me', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Cache-Control': 'no-cache'
+                    }
+                });
+
+                if (!response.ok) throw new Error('Erro na rede');
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Armazenar em cache
+                    sessionStorage.setItem('userDataCache', JSON.stringify(data));
+                    sessionStorage.setItem('userDataCacheTime', Date.now());
+                    updateUserUI(data);
+                } else {
+                    throw new Error(data.mensagem || 'Erro ao buscar dados');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                // Tentar usar dados em cache se disponível
+                const cachedData = sessionStorage.getItem('userDataCache');
+                if (cachedData) {
+                    updateUserUI(JSON.parse(cachedData));
+                } else {
+                    document.getElementById('uid').textContent = 'Erro ao carregar';
+                    document.getElementById('useramount').textContent = 'Erro ao carregar';
+                }
+            }
+        }
+
+        // Atualizar a interface com os dados do usuário
+        function updateUserUI(data) {
+            // Formatar e exibir telefone
+            const phone = data.user.telefone || '';
+            document.getElementById('uid').textContent = formatPhoneNumber(phone);
+            
+            // Formatar e exibir saldo
+            document.getElementById('useramount').textContent = formatCurrency(data.user.saldo);
+        }
+
+        // Inicialização quando o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar autenticação
+            if (!localStorage.getItem('token')) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            // Carregar dados imediatamente
+            fetchUserData();
+
+            // Atualizar a cada 30 segundos
+            setInterval(fetchUserData, 30000);
+        });
+
+        // Configuração do LayUI e event listeners
+        layui.use(['layer', 'jquery'], function() {
+            var layer = layui.layer;
+            var $ = layui.jquery;
+
+            // Logout
+            $(document).on("click", '#outlogin', function() {
+                layer.confirm('Tem certeza que deseja sair?', {
+                    btn: ['Sim', 'Não']
+                }, function() {
+                    // Limpar cache e redirecionar
+                    sessionStorage.removeItem('userDataCache');
+                    sessionStorage.removeItem('userDataCacheTime');
+                    localStorage.removeItem('token');
+                    window.location.href = "/index.html?time=" + Math.random();
+                });
+            });
+
+            // Outros event listeners...
+            $(document).on("click", '.tabs, .tabs1', function() {
+                const url = $(this).attr("url") + "?time=" + Math.random();
+                layer.open({
+                    type: 2,
+                    title: false,
+                    area: ['100%', '100%'],
+                    shadeClose: true,
+                    isOutAnim: false,
+                    closeBtn: 0,
+                    anim: 5,
+                    shade: [0.8, '#393D49'],
+                    content: url
+                });
+            });
+
+            $(document).on("click", '#Recharge', function() {
+                layer.open({
+                    type: 2,
+                    title: false,
+                    area: ['100%', '100%'],
+                    shadeClose: true,
+                    isOutAnim: false,
+                    closeBtn: 0,
+                    anim: 5,
+                    shade: [0.8, '#393D49'],
+                    content: "https://popmbbb.cc/main/prop/Recharge.html?time=" + Math.random()
+                });
+            });
+
+            $(document).on("click", '#Withdraw', function() {
+                layer.open({
+                    type: 2,
+                    title: false,
+                    area: ['100%', '100%'],
+                    shadeClose: true,
+                    isOutAnim: false,
+                    closeBtn: 0,
+                    anim: 5,
+                    shade: [0.8, '#393D49'],
+                    content: "https://popmbbb.cc/main/prop/withdrawal.html?time=" + Math.random()
+                });
+            });
+
+            $(document).on("click", '#Record', function() {
+                layer.open({
+                    type: 2,
+                    title: false,
+                    area: ['100%', '100%'],
+                    shadeClose: true,
+                    isOutAnim: false,
+                    closeBtn: 0,
+                    anim: 5,
+                    shade: [0.8, '#393D49'],
+                    content: "https://popmbbb.cc/main/prop/accountdetails.html?time=" + Math.random()
+                });
+            });
+
+            $(document).on("click", '#down', function() {
+                layer.msg("O aplicativo está em desenvolvimento.");
+            });
+
+            $(document).on("click", '.navtab', function() {
+                const url = $(this).attr("url");
+                location.href = url + "?time=" + Math.random();
+            });
+        });
+    </script>
+</body>
+</html>

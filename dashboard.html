@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1, minimum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Finance App</title>
+    <link href="https://popmbbb.cc/Lay/css/layui.css?v1.6" rel="stylesheet" />
+    <link href="https://popmbbb.cc/css/main.css?v2.7" rel="stylesheet" />
+    <link href="https://popmbbb.cc/layer_mobile/need/layer.css?v1.6" rel="stylesheet" />
+    <script src="https://popmbbb.cc/Lay/layui.js?v1.6"></script>
+    <script src="https://popmbbb.cc/js/comm.js?v1.6"></script>
+    <link href="https://popmbbb.cc/css/video-js.min.css" rel="stylesheet" />
+    <script src="https://popmbbb.cc/js/video.min.js"></script>
+    <style type="text/css">
+        /* Manter todos os estilos originais */
+        .small-font {
+            font-size: 12px;
+            -webkit-transform-origin-x: 0;
+            -webkit-transform: scale(0.80);
+        }
+
+        .smallsize-font {
+            font-size: 9.6px;
+        }
+
+        .tblue {
+            background: #1476ff !important;
+        }
+
+        .tgreen {
+            background: #4caf50 !important;
+        }
+
+        .tred {
+            background: #f44336 !important;
+        }
+
+        .tzs {
+            background: #6739b6 !important;
+        }
+
+        .tss {
+            font-weight: bold;
+            font-size: 17px;
+            text-align: center;
+            border: 0px;
+            color: #fff;
+            height: 45px;
+            line-height: 45px;
+            border-radius: 10px;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+
+        .typeitem {
+            color: #999;
+            float: left;
+            margin-left: 2.5%;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+
+        .layui-carousel > [carousel-item] > * {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f1f1f1;
+            transition-duration: .3s;
+            -webkit-transition-duration: .3s;
+        }
+
+        .typeitemover {
+            color: #fff;
+            border-bottom: 1px solid #fff;
+            float: left;
+            margin-left: 2.5%;
+            cursor: pointer;
+            margin-bottom: 1px;
+        }
+
+        .top1 {
+            position: fixed;
+            background: #fff;
+            z-index: 10000;
+            width: 100%;
+            height: 30px;
+            top: -30px;
+        }
+
+        .aui {
+            overflow: hidden;
+            background: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .scroll-wrapper {
+            -webkit-overflow-scrolling: touch;
+            overflow-y: scroll;
+        }
+
+        .aui li {
+            width: 33.33%;
+            float: left;
+            padding: 5px 0;
+        }
+
+        .aui li img {
+            display: block;
+            margin: 0 auto;
+            width: auto;
+            height: 45px;
+        }
+
+        .aui li p {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 5px;
+            color: #566172;
+            font-family: MicrosoftYaHei;
+        }
+
+        .announcement-title {
+            text-align: left;
+            font-size: 20px;
+            font-weight: 600;
+            color: #434343;
+            margin-left: 5%;
+        }
+
+        .layui-m-layercont {
+            padding: 30px 15px;
+            padding-top: 10px;
+            line-height: 22px;
+            text-align: center;
+        }
+
+        .layui-m-layerbtn span[yes] {
+            color: rgb(58,114,198) !important
+        }
+
+        .layui-m-layerchild {
+            box-shadow: 8px 8px 8px rgb(0 0 0 / 60%);
+        }
+
+        .navtab {
+            cursor: pointer;
+        }
+
+        .gray {
+            -webkit-filter: grayscale(100%);
+            -moz-filter: grayscale(100%);
+            -ms-filter: grayscale(100%);
+            -o-filter: grayscale(100%);
+            filter: grayscale(100%);
+            filter: gray;
+        }
+
+        layer-page .layui-layer-btn {
+            padding-top: 0px !important;
+        }
+
+        .layui-layer-btn {
+            text-align: center !important;
+            padding: 0 0px 12px;
+            pointer-events: auto;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .layui-layer-btn a {
+            margin: 5px 5px 0;
+            padding: 0 0px !important;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            width: 50%;
+            border: 1px solid #dedede;
+            background-color: #fff;
+            color: #333;
+            border-radius: 2px;
+            font-weight: 400;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 20px !important;
+        }
+
+        .layui-layer-page {
+            border-radius: 20px !important;
+        }
+
+        .layui-layer-btn .layui-layer-btn0 {
+            border-color: #e7d1a6 !important;
+            background-image: linear-gradient(6deg, #ccaa78 21%, #e7d1a6 77%) !important;
+            color: #fff;
+        }
+
+        .navtab {
+            cursor: pointer;
+        }
+
+        .topname {
+            line-height: 46px;
+            font-weight: 700;
+            font-size: 16px;
+            width: 50%;
+            text-align: center;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        div#div1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+        }
+
+        div#div1 > img {
+            height: 100%;
+            width: 100%;
+            border: 0;
+        }
+
+        .cmbtn {
+            width: 60%;
+            cursor: pointer;
+            font-size: 14px;
+            height: 40px;
+            line-height: 40px;
+            margin-top: 20px;
+            border-radius: 5px !important;
+            color: #fff;
+            margin: 0 auto;
+            background: #D2001F;
+        }
+
+        .topname {
+            line-height: 46px;
+            font-weight: bold;
+            font-size: 14px;
+            width: 75%;
+            text-align: center;
+            color: #000;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .indexdiv {
+            background: #000000;
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 101;
+            filter: alpha(opacity=90);
+            opacity: 0.90 !important;
+            display: none;
+        }
+
+        .divWrap {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .div {
+            display: inline-block;
+            white-space: nowrap;
+            animation: 5s div linear infinite normal;
+        }
+
+        div {
+            cursor: pointer;
+        }
+
+        @keyframes marqueeAnim {
+            0% {
+                transform: translateX(100vw);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .marquee-content {
+            white-space: nowrap;
+            display: inline-block;
+            animation: marqueeAnim 5s linear 0s infinite;
+        }
+
+        .marquee-root {
+            width: 100%;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        /* Novos estilos para loading e formatação */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0,0,0,.3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .currency-value {
+            font-family: 'HarmonyOS Sans SC', sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="min-height: 100%; width: 100%; background-size: 100% auto; background: #fff; ">
+    <input type="hidden" id="techannel" value="" />
+    <input type="hidden" id="androidurl" value="" />
+    <div class="indexdiv"></div>
+    <div style=" position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; margin: 0 auto; z-index: 102; height:510px; width: 100%; max-width:450px; display: none; " id="noctie">
+        <div style="position: relative; width: 100%; text-align: center; background: none; height: auto; margin: 0 auto; width: 92%; background: #fff; background-size: 100% 100%; height: 500px; border-radius: 5px; color: #000; margin-top: 10px; ">
+            <div style="height: 40px; line-height: 40px; font-weight: bold; font-size: 22px; padding-top: 20px; padding-bottom: 20px; background: #D2001F; color: #fff; ">
+                Perceber
+            </div>
+
+            <div style="width:88%;position:relative; margin:0 auto;  height:auto; overflow:hidden;border:0px;  padding-top:20px; font-size:12px;line-height:19px; text-align:left; ">
+                <div style="max-height: 300px; height: 280px; overflow: scroll; font-size: 12px !important; margin-top: 20px;" id="notice_info">
+
+                </div>
+            </div>
+
+            <div style='line-height: 24px; color: #000; font-size: 12px; width: 100%; position: absolute; bottom: 60px; margin-top: 5px; text-align: center;'>
+                <button id="Join" style="height: 40px; width: 40px; font-weight: bold; border: 0px; width: 90%; border-radius: 5px; ">
+                    <img src="https://popmbbb.cc/ui/cs_t1.png" style="height:22px; margin-bottom:3px; margin-right:5px;" />Clique para entrar no canal oficial no Telegram
+                </button>
+            </div>
+
+            <div style="width:100%; position:absolute; bottom:10px; text-align:center;">
+                <button class="cmbtn" id="close" style="height: 40px; width: 40px; border: 0px; width: 90%; border-radius: 5px; ">
+                    Eu entendo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div style=" max-width:450px; margin:0 auto;">
+        <div class="top1">
+        </div>
+
+        <div style="  text-align: center; margin-bottom: 60px;  ">
+            <div style="width: 100%; margin: 0 auto; background: #fff !important; border-bottom: 1px solid #fff; " class="top">
+                <div style="float:left; text-align:left; line-height:46px;width:50%;">
+
+                </div>
+                <font class="topname" style="color: #000;">
+                    <img src="https://popmbbb.cc/ui2/logo.png" style="height:30px; margin-left:5px;" />
+                </font>
+                <div style="float:right; text-align:right; line-height:46px;width:50%;">
+
+                </div>
+            </div>
+            <div style=" width: 100%; margin: 0 auto; background: none;  margin-top:50px; border-radius: 9px !important; position:relative; ">
+                <img src="https://popmbbb.cc/ui2/topp.jpg" style="width:100%;" />
+            </div>
+
+            <div style="height: auto; overflow: hidden; margin-top:5px; font-size:12px; background:#fff; padding-top:10px; padding-bottom:10px;">
+                <div style="float:left;width: 25%; text-align:center;" id="Recharge">
+                    <div style="height:45px;">
+                        <img src="https://popmbbb.cc/ui2/m/1.png" style="width:32px;" />
+                    </div>
+                    <div>
+                        Recarregar
+                    </div>
+                </div>
+                <div style="float: left; width: 25%; text-align: center;" id="Withdraw">
+                    <div style="height:45px;">
+                        <img src="https://popmbbb.cc/ui2/m/2.png" style="width: 32px;" />
+                    </div>
+                    <div>
+                        Retirada
+                    </div>
+                </div>
+                <div style="float: left; width: 25%; text-align: center;" id="cs">
+                    <div style="height:45px;">
+                        <img src="https://popmbbb.cc/ui2/m/3.png" style="width: 32px;" />
+                    </div>
+                    <div>
+                        Ajuda
+                    </div>
+                </div>
+                <div style="float: left; width: 25%; text-align: center;" id="task">
+                    <div style="height:45px;">
+                        <img src="https://popmbbb.cc/ui2/m/4.png" style="width: 32px;" />
+                    </div>
+                    <div>
+                        Recompensas diárias
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; background: #DBDBDB; width: 98%; margin: 0 auto; margin-top: 5px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px !important; height: auto; margin-bottom:10px; overflow: hidden; position: relative; ">
+                <div class='divWrap' style="padding: 10px; padding-top: 5px; padding-bottom: 5px;">
+                    <div style="float: left; width: 10%; font-size: 12px; color: #1476ff;">
+                        <img src="https://popmbbb.cc/ui2/5.png" style="height:17px;margin-right:5px;" />
+                    </div>
+                    <div class='div' style="float:left; width:80%; color:#000;">
+                        <div class="marquee-root">
+                            <div class="marquee-content" id="intext">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="font-family: DinC; font-size:20px; margin-left:2%; height:35px; line-height:35px; text-align:left; font-weight:bold;">
+                Minha renda
+            </div>
+            <hr style="margin:0 auto; width:98%; color:#000;border:1px groove #000 !important; margin-bottom:5px; margin-top:5px;" />
+            <div style="height: auto; overflow: hidden; font-size: 12px; background: #fff; color: #303030; text-align:center; padding-bottom: 25px; padding-top:5px;">
+                <div style="float: left; background: url(https://popmbbb.cc/ui2/i1.png); background-size: 100% 100%; width: 48%; margin-left: 1%; height: 100px; position: relative;">
+                    <div style="position:absolute; left:80px; top:20px; font-weight: bold; font-family: HarmonyOS Sans SC; color: #484848; font-size: 16px; " id="amount"><span class="loading"></span></div>
+                    <div style="position: absolute; left: 80px; top: 50px; font-family: HarmonyOS Sans SC; font-size: 12px; color: #484848; ">Saldo da conta</div>
+                </div>
+                <div style="float: left; background: url(https://popmbbb.cc/ui2/i2.png); background-size: 100% 100%; width: 48%; margin-left: 2%; height: 100px; position: relative; ">
+                    <div style="position:absolute; left:100px; top:20px; font-weight: bold; font-family: HarmonyOS Sans SC; color: #484848; font-size: 16px; " id="all_income"><span class="loading"></span></div>
+                    <div style="position: absolute; left: 100px; top: 50px; font-family: HarmonyOS Sans SC; font-size: 12px; color: #484848; ">Receita total</div>
+                </div>
+            </div>
+
+            <div style="font-family: DinC; font-size:20px; margin-left:2%; height:35px; line-height:35px; text-align:left; font-weight:bold;">
+                Mais
+            </div>
+            <hr style="margin:0 auto; width:98%; color:#000;border:1px groove #000 !important; margin-bottom:5px; margin-top:5px;" />
+            <div style="height: auto; overflow: hidden; font-size: 12px; background: #fff; color: #303030; text-align:center; padding-bottom: 5px; padding-top:5px;">
+                <div style="float: left; background: url(https://popmbbb.cc/ui2/ii1.png); background-size: 100% 100%; width: 48%; margin-left: 1%; height: 100px; position: relative;" id="help">
+                    <div style="position: absolute; left: 10px; top: 15px; font-family: HarmonyOS Sans SC; font-size: 18px; color: #000; width: 90px; text-align: left; font-weight: bold;">Atendimento ao Cliente</div>
+                </div>
+                <div style="float: left; background: url(https://popmbbb.cc/ui2/ii2.png); background-size: 100% 100%; width: 48%; margin-left: 2%; height: 100px; position: relative; " id="down">
+                    <div style="position: absolute; left: 10px; top: 15px; font-family: HarmonyOS Sans SC; font-size: 18px; color: #000; width: 90px; text-align: left; font-weight: bold; ">Código de presente</div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="nav" style="background-size:100% 100%; height:60px; ">
+            <div style="color: #000 !important; font-weight: bold; ">
+                <img src="https://popmbbb.cc/ui2/nav/1.png" style="height: 28px;" /> <br />
+                <span id="nav_btn1">Lar</span>
+            </div>
+            <div url="produto.html" class="navtab ">
+                <img src="https://popmbbb.cc/ui2/nav/22.png" class="gray" style="height: 28px;" /> <br />
+                <span id="nav_btn2">Produto</span>
+            </div>
+            <div url="team.html" class="navtab">
+                <img src="https://popmbbb.cc/ui2/nav/33.png" class="gray" style="height:28px;" /> <br />
+                <span id="nav_btn3">Equipe</span>
+            </div>
+            <div url="meu.html" class="navtab">
+                <img src="https://popmbbb.cc/ui2/nav/44.png" class="gray" style="height: 28px;" /> <br />
+                <span id="nav_btn4">Meu</span>
+            </div>
+        </nav>
+    </div>
+
+    <script type="text/javascript">
+        // Função para formatar valores em KZ
+        function formatCurrency(value) {
+            if (isNaN(value)) value = 0;
+            return 'KZ ' + parseFloat(value).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Função otimizada para buscar dados do usuário
+        function getUserData() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            // Mostrar loading
+            document.getElementById('amount').innerHTML = '<span class="loading"></span>';
+            document.getElementById('all_income').innerHTML = '<span class="loading"></span>';
+
+            // Verificar cache primeiro
+            const cachedData = sessionStorage.getItem('userFinancialData');
+            if (cachedData) {
+                const data = JSON.parse(cachedData);
+                updateUI(data);
+            }
+
+            // Buscar dados atualizados
+            fetch('http://127.0.0.1:3333/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Cache-Control': 'no-cache'
+                }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Erro na rede');
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Armazenar em cache por 30 segundos
+                    sessionStorage.setItem('userFinancialData', JSON.stringify(data));
+                    sessionStorage.setItem('lastUpdate', new Date().getTime());
+                    updateUI(data);
+                } else {
+                    throw new Error(data.mensagem || 'Erro ao buscar dados');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                if (!cachedData) {
+                    document.getElementById('amount').textContent = 'Erro ao carregar';
+                    document.getElementById('all_income').textContent = 'Erro ao carregar';
+                }
+            });
+        }
+
+        // Atualizar a interface com os dados
+        function updateUI(data) {
+            document.getElementById('amount').textContent = formatCurrency(data.user.saldo);
+            document.getElementById('all_income').textContent = formatCurrency(data.totals.withdrawals || 0);
+        }
+
+        // Verificar autenticação e carregar dados ao iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar token
+            if (!localStorage.getItem('token')) {
+                window.location.href = '/index.html';
+                return;
+            }
+
+            // Carregar dados imediatamente
+            getUserData();
+
+            // Atualizar a cada 30 segundos
+            setInterval(getUserData, 30000);
+        });
+
+        // Manter outras funções do LayUI conforme original
+        layui.use(['form', 'layedit', 'laydate', 'layer', 'carousel', 'flow', 'element', 'cookie', 'mobile'], function() {
+            var form = layui.form;
+            var element = layui.element;
+            var $ = layui.jquery, layer = layui.layer;
+            var carousel = layui.carousel;
+            var mobile = layui.mobile;
+            var mobilelayer = mobile.layer;
+            var flow = layui.flow;
+            var cookie = layui.cookie;
+
+            $().ready(function() {
+                onloads();
+                function onloads() {
+                    indexdata();
+                    banner();
+                    getcsinfo();
+                    Textgpt();
+                    getUserData(); // Substitui getuserinfo()
+                }
+                
+                // Manter todos os outros event listeners originais
+                $(document).on("click", '#close', function() {
+                    $('.indexdiv').hide();
+                    $("#noctie").hide();
+                });
+
+                function banner() {
+                    var url = "http://127.0.0.1:3333/ashx/SiteServer.ashx";
+                    var pm = {
+                        action: "selectbanner",
+                        time: Math.random()
+                    };
+                    $.ajaxSettings.async = false;
+                    $.getJSON(url, pm,
+                        function(json) {
+                            if (json.State == "200") {
+                                var html = "";
+                                html += "<div carousel-item=\"\" style=\"text-align:center;width:100%;margin:0 auto;background: rgb(0,203,227);border-radius: 10px !important;\">";
+                                for (var i = 0; i < json.JsonResult.length; i++) {
+
+                                    html += "<div>";
+                                    if (json.JsonResult[i].jumpurl == "") {
+                                        html += "<div style=\"height:170px; width:100%; background-image:url('" + json.JsonResult[i].imgurl + "'); background-repeat:no-repeat;background-size:cover;background-position: 50%;border-radius: 10px !important;\" />";
+                                    } else {
+                                        html += "<img src=\"" + json.JsonResult[i].imgurl + "\" style=\"height:170px; width:100%;border-radius: 10px !important;\" class='jump' url='" + json.JsonResult[i].jumpurl + "' />";
+                                    }
+                                    html += "</div>";
+
+                                }
+                                html += "</div>";
+                                $("#test2").html(html);
+                            }
+                        });
+
+                    var ins = carousel.render({
+                        elem: '#test2'
+                        , interval: 5000
+                        , anim: 'default'
+                        , height: '170px'
+                        , width: '98%'
+                        , arrow: 'none'
+                        , backgroundcolor: '#000'
+                    });
+
+                    $("#test2").on("touchstart", function(e) {
+                        var startX = e.originalEvent.targetTouches[0].pageX;
+                        $(this).on('touchmove', function(e) {
+                            arguments[0].preventDefault();
+                        });
+                        $(this).on('touchend', function(e) {
+                            var endX = e.originalEvent.changedTouches[0].pageX;
+                            e.stopPropagation();
+                            if (endX - startX > 30) {
+                                ins.slide("sub");
+                            }
+                            else if (startX - endX > 30) {
+                                ins.slide("add");
+                            }
+                            $(this).off('touchmove touchend');
+                        });
+                    });
+                }
+
+                function indexdata() {
+                    var url = "http://127.0.0.1:3333/ashx/BusServer.ashx";
+                    var pm = {
+                        action: "indexdata",
+                        time: Math.random()
+                    };
+                    $.ajaxSettings.async = false;
+                    $.getJSON(url, pm,
+                        function(json) {
+                            if (json.State == "200") {
+                                var html = "";
+                                for (var i = 0; i < json.JsonResult.length; i++) {
+                                    html += json.JsonResult[i].context + "&nbsp;&nbsp;";
+                                }
+                                $("#intext").html(html);
+                                var ss = html.length * 0.05 + 5
+                                $(".marquee-content").css("animation", "marqueeAnim " + ss + "s linear 0s infinite");
+                            }
+                        });
+                }
+
+                function Textgpt() {
+                    var url = "/ashx/BusServer.ashx";
+                    var pm = {
+                        action: "Textgpt",
+                        time: Math.random()
+                    };
+                    $.ajaxSettings.async = false;
+                    $.getJSON(url, pm,
+                        function(json) {
+                            if (json.State == "200") {
+                                if (json.JsonResult.notice != "") {
+                                    var main_prop_txt1 = "Notice";
+                                    var main_prop_txt2 = json.JsonResult.notice;
+                                    var main_prop_txt3 = "OK";
+                                    var xkefu = "";
+                                    $('.indexdiv').show();
+                                    $("#noctie").show();
+                                    $("#notices").html(xkefu);
+                                    $("#notice_info").html(main_prop_txt2);
+                                    $("#notice_btn").html(main_prop_txt3);
+                                    $("#notice_title").html(main_prop_txt1);
+                                }
+                            }
+                        });
+                }
+
+                function getcsinfo() {
+                    var url = "/ashx/BusServer.ashx";
+                    var pm = {
+                        action: "getcsinfo",
+                        time: Math.random()
+                    };
+                    $.getJSON(url, pm,
+                        function(json) {
+                            if (json.State == "200") {
+                                $("#techannel").val(json.JsonResult.techannel);
+                                $("#androidurl").val(json.JsonResult.androidurl);
+                            }
+                        });
+                }
+
+                // Manter todos os outros event listeners originais
+                $(document).on("click", '#Join', function() {
+                    var url2 = document.getElementById("techannel").value;
+                    if (window.android) {
+                        window.android.callAndroid("open," + url2);
+                        return;
+                    }
+                    if (window.webkit && window.webkit.messageHandlers) {
+                        window.webkit.messageHandlers.nativeExt.postMessage({ msg: 'open,' + url2 });
+                        return;
+                    }
+                    window.open(url2, "_blank");
+                });
+
+                $(document).on("click", '#Recharge', function() {
+                    var url1 = "/main/prop/Recharge.html?time=" + Math.random();
+                    layer.open({
+                        type: 2,
+                        title: false,
+                        area: ['100%', '100%'],
+                        shadeClose: true,
+                        isOutAnim: false,
+                        closeBtn: 0,
+                        anim: 5,
+                        shade: [0.8, '#393D49'],
+                        maxmin: false,
+                        content: url1
+                    });
+                });
+
+                $(document).on("click", '#help', function() {
+                    var url1 = "/main/cs.html?time=" + Math.random();
+                    layer.open({
+                        type: 2,
+                        title: false,
+                        area: ['100%', '100%'],
+                        shadeClose: true,
+                        isOutAnim: false,
+                        closeBtn: 0,
+                        anim: 5,
+                        shade: [0.8, '#393D49'],
+                        maxmin: false,
+                        content: url1
+                    });
+                });
+
+                $(document).on("click", '#task', function() {
+                    var url1 = "/main/prop/checkin.html?time=" + Math.random();
+                    layer.open({
+                        type: 2,
+                        title: false,
+                        area: ['100%', '100%'],
+                        shadeClose: true,
+                        isOutAnim: false,
+                        closeBtn: 0,
+                        anim: 5,
+                        shade: [0.8, '#393D49'],
+                        maxmin: false,
+                        content: url1
+                    });
+                });
+
+                $(document).on("click", '#Withdraw', function() {
+                    var url1 = "/main/prop/withdrawal.html?time=" + Math.random();
+                    layer.open({
+                        type: 2,
+                        title: false,
+                        area: ['100%', '100%'],
+                        shadeClose: true,
+                        isOutAnim: false,
+                        closeBtn: 0,
+                        anim: 5,
+                        shade: [0.8, '#393D49'],
+                        maxmin: false,
+                        content: url1
+                    });
+                });
+
+                $(document).on("click", '#down', function() {
+                    var url1 = "/main/lq.html?time=" + Math.random();
+                    layer.open({
+                        type: 2,
+                        title: false,
+                        area: ['100%', '100%'],
+                        shadeClose: true,
+                        isOutAnim: false,
+                        closeBtn: 0,
+                        anim: 5,
+                        shade: [0.8, '#393D49'],
+                        maxmin: false,
+                        content: url1
+                    });
+                });
+
+                $(document).on("click", '.navtab', function() {
+                    var urlx = $(this).attr("url");
+                    location.href = urlx + "?time=" + Math.random();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

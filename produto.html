@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+        
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .header-img {
+            width: 100%;
+        }
+        
+        .product-card {
+            width: 95%;
+            background: #fff;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px auto;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            position: absolute;
+            right: 10px;
+            top: 55px;
+        }
+        
+        .product-image img {
+            height: 80px;
+            border-radius: 5px;
+        }
+        
+        .buy-button {
+            position: absolute;
+            right: 5px;
+            top: 15px;
+            width: 95px;
+            color: #fff;
+            background: linear-gradient(180deg,#D2001F,#D2001F);
+            height: 25px;
+            line-height: 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .product-name {
+            height: 35px;
+            line-height: 35px;
+            margin-left: 3%;
+            font-size: 16px;
+            color: #303353;
+            text-align: left;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .product-details {
+            margin-left: 3%;
+            margin-bottom: 10px;
+        }
+        
+        .detail-row {
+            height: 25px;
+            line-height: 25px;
+            width: 100%;
+            color: #646464;
+            font-size: 12px;
+            border-radius: 5px;
+        }
+        
+        .detail-label {
+            float: left;
+        }
+        
+        .detail-value {
+            float: left;
+            color: #D2001F;
+            margin-left: 5px;
+        }
+        
+        .disclaimer {
+            height: 25px;
+            line-height: 25px;
+            width: 100%;
+            color: #D2001F;
+            font-size: 12px;
+            border-radius: 5px;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #fff;
+            height: 60px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item {
+            text-align: center;
+            cursor: pointer;
+            padding: 5px 0;
+            flex: 1;
+        }
+        
+        .nav-item img {
+            height: 28px;
+            margin-bottom: 2px;
+        }
+        
+        .nav-item span {
+            font-size: 12px;
+            display: block;
+            color: #666;
+        }
+        
+        .nav-item.active span,
+        .nav-item:not(.navtab) span {
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .gray {
+            filter: grayscale(100%);
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: #eee;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .modal-logo {
+            height: 20px;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+        
+        .modal-product-image {
+            height: 100px;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .modal-product-name {
+            font-weight: bold;
+            font-size: 20px;
+            text-align: left;
+            margin: 25px 0 10px 15px;
+        }
+        
+        .modal-disclaimer {
+            font-size: 12px;
+            text-align: left;
+            padding: 0 20px;
+        }
+        
+        .modal-details {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        
+        .modal-detail {
+            padding: 5px;
+            font-size: 12px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .modal-button {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .cancel-btn {
+            background: #888;
+            color: #ccc;
+            border: none;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 25px;
+            width: 80%;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        
+        .confirm-btn {
+            background: linear-gradient(180deg,#000,#D2001F);
+            color: #fff;
+            border: none;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 25px;
+            width: 80%;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .toast-message {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #272626;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            animation: fadeInOut 3s forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <div style="position: relative;">
+            <img src="https://popmbbb.cc/ui2/p/1.png" class="header-img">
+            
+            <div id="in1" style="position: absolute; top: 20px; right:5px; width: 150px; padding: 10px; border-radius: 5px;">
+                <div style="color: #fff; font-size: 16px;">
+                    <font id="number1" style="font-weight: bold; font-size: 16px; margin-top: 15px; font-family: HarmonyOS Sans SC;">0</font>
+                </div>
+                <div style="margin-top: 5px; color: #fff; font-size: 16px;">Minha loja >></div>
+            </div>
+            
+            <div id="in2" style="position: absolute; top: 100px; right:5px; width: 150px; padding: 10px; border-radius: 5px;">
+                <div style="color: #fff; font-size: 16px;">
+                    <font id="number2" style="font-weight: bold; font-size: 16px; margin-top: 15px; font-family: HarmonyOS Sans SC;">0</font>
+                </div>
+                <div style="margin-top: 5px; color: #fff; font-size: 16px;">Minha renda >></div>
+            </div>
+        </div>
+
+        <!-- Lista de Produtos -->
+        <div id="list" style="margin-bottom: 70px; margin-top: 10px;">
+            <!-- Os produtos serão carregados dinamicamente via JavaScript -->
+        </div>
+
+        <!-- Modal de Confirmação -->
+        <div id="noctie1" class="modal">
+            <div class="modal-content">
+                <input type="hidden" id="proid" value="">
+                <img src="https://popmbbb.cc/ui2/logo.png" class="modal-logo">
+                <img src="https://popmbbb.cc/ui2/logo.png" id="imgurlss" class="modal-product-image">
+                <div id="pname" class="modal-product-name">&nbsp;</div>
+                <div class="modal-disclaimer" id="tishi">
+                    A renda será liquidada dentro de 24 horas após a compra.
+                </div>
+                <div class="modal-details">
+                    <div class="modal-detail">Preço: <span id="price" style="color: #D2001F"></span></div>
+                    <div class="modal-detail">Renda diária: <span id="hour_income" style="color: #D2001F"></span></div>
+                    <div class="modal-detail">Renda total: <span id="total_income" style="color: #D2001F"></span></div>
+                    <div class="modal-detail">Período de validade: <span id="dayss" style="color: #D2001F"></span> dias</div>
+                </div>
+                <div class="modal-buttons">
+                    <div class="modal-button">
+                        <button id="qx1" class="cancel-btn">Cancelar</button>
+                    </div>
+                    <div class="modal-button">
+                        <button id="Confirm1" class="confirm-btn">Certificar-se</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu de Navegação -->
+        <nav class="nav">
+            <div url="meu.html" class="nav-item navtab">
+                <img src="https://popmbbb.cc/ui2/nav/11.png" class="gray" style="height: 28px;"><br>
+                <span>Lar</span>
+            </div>
+            <div class="nav-item" style="color: #000 !important; font-weight: bold;">
+                <img src="https://popmbbb.cc/ui2/nav/2.png" style="height: 28px;"><br>
+                <span>Produto</span>
+            </div>
+            <div url="team.html" class="nav-item navtab">
+                <img src="https://popmbbb.cc/ui2/nav/33.png" class="gray" style="height: 28px;"><br>
+                <span>Equipe</span>
+            </div>
+            <div url="meu.html" class="nav-item navtab">
+                <img src="https://popmbbb.cc/ui2/nav/44.png" class="gray" style="height: 28px;"><br>
+                <span>Meu</span>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Notificação -->
+    <div id="toast" style="display: none;" class="toast-message"></div>
+
+    <script>
+        // Função para mostrar notificação
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+
+            // Reinicia a animação
+            toast.classList.remove('toast-message');
+            void toast.offsetWidth; // força reflow
+            toast.classList.add('toast-message');
+
+            // Esconde depois de 3 segundos
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Carregar produtos da API
+        async function loadProducts() {
+            try {
+                const response = await fetch('http://127.0.0.1:3333/products');
+                const data = await response.json();
+                
+                if (data.success) {
+                    renderProducts(data.products);
+                    loadUserBalance(); // Carrega o saldo do usuário após carregar produtos
+                } else {
+                    showToast('Erro ao carregar produtos');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                showToast('Erro ao carregar produtos');
+            }
+        }
+
+        // Carregar saldo do usuário
+        async function loadUserBalance() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    window.location.href = '/index.html';
+                    return;
+                }
+
+                const response = await fetch('http://127.0.0.1:3333/user/balance', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('number1').textContent = data.saldo.toLocaleString('pt-PT');
+                } else {
+                    showToast('Erro ao carregar saldo');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar saldo:', error);
+            }
+        }
+
+        // Renderizar produtos na página
+        function renderProducts(products) {
+            const listContainer = document.getElementById('list');
+            listContainer.innerHTML = ''; // Limpa produtos existentes
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.setAttribute('value', product.id);
+                productCard.setAttribute('imgurl', 'https://popmbbb.cc/ui2/logo.png');
+                productCard.setAttribute('day', product.days);
+                productCard.setAttribute('price', product.price);
+                productCard.setAttribute('hour_income', product.day_income);
+                productCard.setAttribute('day_income', product.day_income);
+                productCard.setAttribute('total_income', product.total_income);
+                productCard.setAttribute('pname', product.name);
+                productCard.setAttribute('ptype', '0');
+                
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="https://popmbbb.cc//ui2/pro/1.jpg">
+                    </div>
+                    <div class="buy-button">Comprar</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-details">
+                        <div class="detail-row">
+                            <div class="detail-label">Preço:</div>
+                            <div class="detail-value">KZ ${product.price.toLocaleString('pt-PT')}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Renda diária:</div>
+                            <div class="detail-value">KZ ${product.day_income.toLocaleString('pt-PT')}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Renda total:</div>
+                            <div class="detail-value">KZ ${product.total_income.toLocaleString('pt-PT')}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Período de validade:</div>
+                            <div class="detail-value">${product.days} dias</div>
+                        </div>
+                        <div class="disclaimer">
+                            <div>Gere renda em até 24 horas após a compra</div>
+                        </div>
+                    </div>
+                `;
+                
+                listContainer.appendChild(productCard);
+            });
+            
+            // Configurar eventos dos botões de compra
+            setupBuyButtons();
+        }
+
+        // Configurar eventos dos botões de compra
+        function setupBuyButtons() {
+            const buyButtons = document.querySelectorAll('.buy-button');
+            const modal = document.getElementById('noctie1');
+            const cancelBtn = document.getElementById('qx1');
+            
+            buyButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    const productCard = this.closest('.product-card');
+                    
+                    document.getElementById('pname').textContent = productCard.getAttribute('pname');
+                    document.getElementById('price').textContent = 'KZ ' + parseFloat(productCard.getAttribute('price')).toLocaleString('pt-PT');
+                    document.getElementById('hour_income').textContent = 'KZ ' + parseFloat(productCard.getAttribute('hour_income')).toLocaleString('pt-PT');
+                    document.getElementById('total_income').textContent = 'KZ ' + parseFloat(productCard.getAttribute('total_income')).toLocaleString('pt-PT');
+                    document.getElementById('dayss').textContent = productCard.getAttribute('day');
+                    document.getElementById('imgurlss').src = productCard.getAttribute('imgurl');
+                    document.getElementById('proid').value = productCard.getAttribute('value');
+                    
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            // Fecha o modal ao clicar em Cancelar
+            cancelBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Configura o botão de confirmação de compra
+            setupConfirmButton();
+        }
+
+        // Configurar o botão de confirmação de compra
+        function setupConfirmButton() {
+            const confirmBtn = document.getElementById('Confirm1');
+            
+            confirmBtn.addEventListener('click', async function() {
+                const productId = document.getElementById('proid').value;
+                const token = localStorage.getItem('token');
+                
+                if (!token) {
+                    showToast('Por favor, faça login novamente');
+                    window.location.href = '/index.html';
+                    return;
+                }
+                
+                try {
+                    const response = await fetch('http://127.0.0.1:3333/products/purchase', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ productId })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        showToast('Compra realizada com sucesso!');
+                        // Atualizar saldo exibido
+                        document.getElementById('number1').textContent = data.saldoAtualizado.toLocaleString('pt-PT');
+                    } else {
+                        if (data.redirectTo) {
+                            window.location.href = data.redirectTo;
+                        } else {
+                            showToast(data.mensagem || 'Erro ao processar compra');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Erro:', error);
+                    showToast('Erro ao processar compra');
+                }
+                
+                document.getElementById('noctie1').style.display = 'none';
+            });
+        }
+
+        // Configuração dos botões de navegação
+        function setupNavButtons() {
+            const navTabs = document.querySelectorAll('.navtab');
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const url = this.getAttribute('url');
+                    if (url) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        }
+
+        // Inicialização quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            setupNavButtons();
+            
+            // Verificar se há token
+            if (!localStorage.getItem('token')) {
+                window.location.href = '/index.html';
+            }
+        });
+    </script>
+</body>
+</html>

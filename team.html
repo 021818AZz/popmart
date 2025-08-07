@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1, minimum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Minha Equipe</title>
+    <link href="https://popmbbb.cc/Lay/css/layui.css?v1.6" rel="stylesheet" />
+    <link href="https://popmbbb.cc/css/main.css?v2.7" rel="stylesheet" />
+    <link href="https://popmbbb.cc/layer_mobile/need/layer.css?v1.6" rel="stylesheet" />
+    <script src="https://popmbbb.cc/Lay/layui.js?v1.6"></script>
+    <script src="https://popmbbb.cc/js/comm.js?v1.6"></script>
+    <script src="https://popmbbb.cc/js/clipboard.min.js"></script>
+    <style type="text/css">
+        /* Estilos gerais */
+        body {
+            min-height: 100%; 
+            width: 100%; 
+            background: #f1f1f1;
+            font-family: 'HarmonyOS Sans SC', sans-serif;
+        }
+        
+        /* Estilo para loading */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0,0,0,.3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Estilo para valores monetários */
+        .currency-value {
+            font-weight: bold;
+            color: #D2001F;
+        }
+        
+        .team-header {
+            background: #D2001F; 
+            color: white;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .team-level {
+            background: white;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .invite-section {
+            background: linear-gradient(135deg, #D2001F, #FF94A3);
+            border-radius: 10px;
+            margin: 10px;
+            padding: 15px;
+            color: white;
+        }
+        
+        .copy-btn {
+            background: white;
+            color: #D2001F;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Outros estilos existentes mantidos */
+        .top1 {
+            position: fixed;
+            background: #fff;
+            z-index: 10000;
+            width: 100%;
+            height: 30px;
+            top: -30px;
+        }
+        
+        .nav {
+            background-size:100% 100%; 
+            height:60px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .navtab {
+            cursor: pointer;
+        }
+        
+        .gray {
+            filter: grayscale(100%);
+        }
+    </style>
+</head>
+<body>
+    <input id="site_http" type="hidden" value="" />
+    
+    <div style="max-width:450px; margin:0 auto; padding-bottom: 70px;">
+        <div class="top1"></div>
+        
+        <!-- Cabeçalho -->
+        <div class="team-header">
+            <div style="font-size: 18px; font-weight: bold;">Minha Equipe</div>
+            <div style="font-size: 12px; margin-top: 5px;">Convide amigos para ganhar dinheiro</div>
+            <div id="teamdetails" style="position:absolute; right:15px; top:15px; background: white; color: #D2001F; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
+                Detalhes da equipe >>
+            </div>
+        </div>
+        
+        <!-- Níveis da Equipe -->
+        <div style="margin-top: 10px;">
+            <div class="team-level">
+                <div style="font-weight: bold; font-size: 18px; color: #D2001F;">Nível 1</div>
+                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Taxa de comissão</div>
+                        <div id="P1" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Membros</div>
+                        <div id="task1_count" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Comissão</div>
+                        <div id="lv1_team_income" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-level">
+                <div style="font-weight: bold; font-size: 18px; color: #D2001F;">Nível 2</div>
+                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Taxa de comissão</div>
+                        <div id="P2" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Membros</div>
+                        <div id="task2_count" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Comissão</div>
+                        <div id="lv2_team_income" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-level">
+                <div style="font-weight: bold; font-size: 18px; color: #D2001F;">Nível 3</div>
+                <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Taxa de comissão</div>
+                        <div id="P3" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Membros</div>
+                        <div id="task3_count" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #666;">Comissão</div>
+                        <div id="lv3_team_income" class="currency-value"><span class="loading"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Convite -->
+        <div class="invite-section">
+            <div style="font-weight: bold; margin-bottom: 10px;">Convite</div>
+            
+            <div style="margin-bottom: 15px;">
+                <div style="font-size: 12px;">Código de convite</div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div id="invitation" style="font-weight: bold; font-size: 18px;"><span class="loading"></span></div>
+                    <button id="copy1" class="copy-btn">Copiar</button>
+                </div>
+            </div>
+            
+            <div>
+                <div style="font-size: 12px;">Link de convite</div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div id="link" style="font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 70%;"><span class="loading"></span></div>
+                    <button id="copy" class="copy-btn">Copiar</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estatísticas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+            <div class="stats-card" style="width: 48%;">
+                <div style="font-size: 12px; color: #666;">Total de Membros</div>
+                <div id="t1" style="font-weight: bold; font-size: 18px; margin-top: 5px;"><span class="loading"></span></div>
+            </div>
+            <div class="stats-card" style="width: 48%;">
+                <div style="font-size: 12px; color: #666;">Comissão Total</div>
+                <div id="t2" style="font-weight: bold; font-size: 18px; margin-top: 5px;"><span class="loading"></span></div>
+            </div>
+        </div>
+        
+        <!-- Regras -->
+        <div class="team-level" style="margin-top: 15px;">
+            <div style="font-weight: bold; margin-bottom: 10px;">Regras da Equipe</div>
+            <div style="font-size: 12px; color: #666; line-height: 1.5;">
+                <p>Quando seus amigos convidados se cadastrarem e investirem:</p>
+                <ul>
+                    <li>Você recebe 35% de cashback dos membros do Nível 1</li>
+                    <li>Você recebe 3% de cashback dos membros do Nível 2</li>
+                    <li>Você recebe 2% de cashback dos membros do Nível 3</li>
+                </ul>
+                <p>As recompensas são creditadas imediatamente e podem ser sacadas a qualquer momento.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navegação -->
+    <nav class="nav">
+        <div url="meu.html" class="navtab">
+            <img src="https://popmbbb.cc/ui2/nav/11.png" class="gray" style="height: 32px;" /><br>
+            <span>Lar</span>
+        </div>
+        <div url="produto.html" class="navtab">
+            <img src="https://popmbbb.cc/ui2/nav/22.png" class="gray" style="height: 28px;" /><br>
+            <span>Produto</span>
+        </div>
+        <div style="color: #000 !important; font-weight: bold;">
+            <img src="https://popmbbb.cc/ui2/nav/3.png" style="height:28px;" /><br>
+            <span>Equipe</span>
+        </div>
+        <div url="meu.html" class="navtab">
+            <img src="https://popmbbb.cc/ui2/nav/44.png" class="gray" style="height: 28px;" /><br>
+            <span>Meu</span>
+        </div>
+    </nav>
+
+    <script>
+    // Função para formatar valores em KZ (Kwanza Angolano)
+    function formatCurrency(value) {
+        if (isNaN(value)) value = 0;
+        return 'KZ ' + parseFloat(value).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Função para buscar dados da equipe
+    async function fetchTeamData() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/index.html';
+            return;
+        }
+
+        // Mostrar loading
+        document.querySelectorAll('.currency-value').forEach(el => {
+            el.innerHTML = '<span class="loading"></span>';
+        });
+
+        try {
+            // Buscar dados do usuário
+            const userResponse = await fetch('http://127.0.0.1:3333/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Cache-Control': 'no-cache'
+                }
+            });
+
+            const teamResponse = await fetch('http://127.0.0.1:3333/user/team', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Cache-Control': 'no-cache'
+                }
+            });
+
+            if (!userResponse.ok || !teamResponse.ok) throw new Error('Erro na rede');
+
+            const userData = await userResponse.json();
+            const teamData = await teamResponse.json();
+
+            if (userData.success) {
+                const user = userData.user;
+
+                // Atualizar dados de convite
+                document.getElementById('invitation').textContent = user.codigoConvite || 'N/A';
+                const siteUrl = userData.site_http || 'http://127.0.0.1:5500';
+                document.getElementById('link').textContent = `${siteUrl}/r.html?a=${user.codigoConvite}`;
+
+                // Botões de cópia
+                const clipboard1 = new ClipboardJS('#copy', {
+                    text: () => `${siteUrl}/registro.html?a=${user.codigoConvite}`
+                });
+                clipboard1.on('success', function () {
+                    layer.msg('Link copiado com sucesso!', { icon: 1 });
+                });
+                clipboard1.on('error', function () {
+                    layer.msg('Erro ao copiar link.', { icon: 2 });
+                });
+
+                const clipboard2 = new ClipboardJS('#copy1', {
+                    text: () => user.codigoConvite || ''
+                });
+                clipboard2.on('success', function () {
+                    layer.msg('Código copiado com sucesso!', { icon: 1 });
+                });
+                clipboard2.on('error', function () {
+                    layer.msg('Erro ao copiar código.', { icon: 2 });
+                });
+
+                if (teamData.success) {
+                    const level1 = teamData.level1 || [];
+                    const level2 = teamData.level2 || [];
+                    const level3 = teamData.level3 || [];
+
+                    // Atualizar níveis da equipe
+                    document.getElementById('P1').textContent = '35%';
+                    document.getElementById('P2').textContent = '3%';
+                    document.getElementById('P3').textContent = '2%';
+
+                    document.getElementById('task1_count').textContent = level1.length;
+                    document.getElementById('task2_count').textContent = level2.length;
+                    document.getElementById('task3_count').textContent = level3.length;
+
+                    // Atualizar total de membros
+                    const totalMembers = level1.length + level2.length + level3.length;
+                    document.getElementById('t1').textContent = totalMembers;
+                    document.getElementById('t2').textContent = formatCurrency(userData.totals.teamCommissions || 0);
+
+                    // Calcular comissões com segurança
+                    const sumCommission = (list) =>
+                        list.reduce((sum, u) => {
+                            const valor = Number(u.comissao ?? u.commission ?? 0);
+                            return sum + (isNaN(valor) ? 0 : valor);
+                        }, 0);
+
+                    document.getElementById('lv1_team_income').textContent = formatCurrency(sumCommission(level1));
+                    document.getElementById('lv2_team_income').textContent = formatCurrency(sumCommission(level2));
+                    document.getElementById('lv3_team_income').textContent = formatCurrency(sumCommission(level3));
+                } else {
+                    throw new Error(teamData.mensagem || 'Erro ao carregar equipe');
+                }
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            layer.msg('Erro ao carregar dados da equipe');
+        }
+    }
+
+    // Inicialização quando o DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', function () {
+        if (!localStorage.getItem('token')) {
+            window.location.href = '/index.html';
+            return;
+        }
+
+        fetchTeamData(); // Carregar ao abrir
+        setInterval(fetchTeamData, 30000); // Atualizar a cada 30 segundos
+    });
+
+    // LayUI e event listeners
+    layui.use(['layer', 'jquery'], function () {
+        var layer = layui.layer;
+        var $ = layui.jquery;
+
+        $(document).on("click", '#teamdetails', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                area: ['100%', '100%'],
+                shadeClose: true,
+                content: "/main/teaminfo.html?time=" + Math.random()
+            });
+        });
+
+        $(document).on("click", '.navtab', function () {
+            const url = $(this).attr("url");
+            if (url) location.href = url + "?time=" + Math.random();
+        });
+    });
+</script>
