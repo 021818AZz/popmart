@@ -15,6 +15,13 @@
     <script src="https://popmbbb.cc/js/jquery-1.11.0.min.js"></script>
     <style type="text/css">
         /* Estilos gerais */
+        body {
+            min-height: 100%; 
+            width: 100%; 
+            background: #f5f5f5;
+            font-family: 'HarmonyOS Sans SC', sans-serif;
+        }
+        
         div {
             cursor: pointer;
         }
@@ -26,7 +33,7 @@
             height: 16px;
             border: 2px solid rgba(0,0,0,.3);
             border-radius: 50%;
-            border-top-color: #000;
+            border-top-color: #28a745;
             animation: spin 1s ease-in-out infinite;
         }
         
@@ -37,228 +44,327 @@
         /* Estilo para valores monetários */
         .currency-value {
             font-weight: bold;
-            font-family: 'HarmonyOS Sans SC', sans-serif;
+            color: #28a745;
         }
         
         /* Estilo para cabeçalho */
         .user-header {
             position: relative;
-            height: 210px;
+            height: 180px;
+            background: linear-gradient(135deg, #2e362f, #f1f3f1);
+            border-radius: 0 0 20px 20px;
+            padding: 15px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid white;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .user-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .info-item {
+            flex: 1;
+            padding: 0 10px;
+        }
+        
+        .info-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        /* Botão de logout */
+        .logout-btn {
             position: absolute;
-            left: 0;
+            right: 15px;
+            top: 15px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        /* Cartão de ações */
+        .action-card {
+            background: white;
+            border-radius: 15px;
+            margin: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .action-grid {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .action-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .action-item:hover {
+            background: rgba(40, 167, 69, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .action-icon {
+            width: 36px;
+            height: 36px;
+            margin-bottom: 8px;
+        }
+        
+        .action-label {
+            font-size: 12px;
+            color: #333;
+        }
+        
+        /* Seção de serviços */
+        .services-section {
+            margin: 15px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-divider {
+            border: none;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 10px 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .service-item {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            color: #28a745;
+        }
+        
+        .service-label {
+            font-size: 12px;
+            color: #333;
+        }
+        
+        /* Navegação */
+        .nav {
+            position: fixed;
             bottom: 0;
             width: 100%;
-            text-align: center;
-            background: linear-gradient(0deg,#fff,#D2001F 0%,#FF94A3);
-            color: #fff;
-            height: 70px;
-            z-index: 2;
+            max-width: 450px;
+            height: 60px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px 15px 0 0;
         }
         
-        /* Estilos existentes mantidos */
-        .top1 {
-            position: fixed;
-            background: #fff;
-            z-index: 10000;
-            width: 100%;
-            height: 30px;
-            top: -30px;
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 12px;
         }
         
-        .nav {
-            background-size:100% 100%; 
-            height:60px;
+        .nav-item.active {
+            color: #28a745;
+            font-weight: bold;
         }
         
-        .navtab {
-            cursor: pointer;
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 3px;
         }
         
         .gray {
-            -webkit-filter: grayscale(100%);
-            -moz-filter: grayscale(100%);
-            -ms-filter: grayscale(100%);
-            -o-filter: grayscale(100%);
             filter: grayscale(100%);
-        }
-        
-        /* Outros estilos específicos */
-        .logout-btn {
-            height: 30px; 
-            line-height:30px; 
-            color:#fff; 
-            width: 110px; 
-            cursor: pointer; 
-            text-align: center; 
-            background: #D2001F; 
-            font-size: 12px; 
-            border-radius: 100px;
         }
     </style>
 </head>
-<body style="min-height: 100%; width: 100%; background:url(/ui2/bg.png) no-repeat; background-size: 100% auto;">
+<body>
     <input type="hidden" id="telegram" value="" />
     <input type="hidden" id="androidurl" value="" />
 
-    <div style="max-width:450px; margin:0 auto;">
+    <div style="max-width:450px; margin:0 auto; padding-bottom: 70px;">
         <div class="top1"></div>
         
         <!-- Cabeçalho do usuário -->
-        <div style="background: none; height: auto; overflow: hidden; position: relative;">
-            <div class="user-header">
-                <!-- Botão de logout -->
-                <div style="position: absolute; right: 10px; top: 10px; z-index: 11111;">
-                    <div id="outlogin" class="logout-btn">Saída segura</div>
-                </div>
+        <div class="user-header">
+            <!-- Botão de logout -->
+            <button id="outlogin" class="logout-btn">
+                <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="white">
+                    <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
+                </svg>
+                Sair
+            </button>
 
-                <!-- Avatar -->
-                <div style="width: 40%; position: absolute; text-align: left; color: #fff; padding-bottom: 10px;">
-                    <div style="height: 70px; line-height: 70px; margin: 0 auto; margin-top: 20px; width: 80px; border-radius: 100px;">
-                        <img src="https://popmbbb.cc/ui2/lo.jpg" style="height: 70px; border-radius: 80px;" />
-                    </div>
-                </div>
+            <!-- Avatar -->
+            <div class="user-avatar">
+                <img src="https://greenflowmz.com/static/base_head.png" style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
 
-                <!-- Informações do usuário -->
-                <div class="user-info">
-                    <div style="width:50%; float:left; text-align:center; line-height:25px; margin-top:10px; height:50px;">
-                        <div id="uid"><span class="loading"></span></div>
-                        <div>Número de telefone</div>
-                    </div>
-                    <div style="width: 50%; float: left; text-align: center; line-height: 25px; margin-top: 10px; height: 50px;">
-                        <div id="useramount" class="currency-value"><span class="loading"></span></div>
-                        <div>Saldo da conta</div>
-                    </div>
+            <!-- Informações do usuário -->
+            <div class="user-info">
+                <div class="info-item">
+                    <div id="uid" style="font-size: 14px; font-weight: bold;"><span class="loading"></span></div>
+                    <div class="info-label">Número de telefone</div>
+                </div>
+                <div class="info-item">
+                    <div id="useramount" class="currency-value" style="font-size: 16px;"><span class="loading"></span></div>
+                    <div class="info-label">Saldo da conta</div>
                 </div>
             </div>
         </div>
 
-        <!-- Conteúdo principal -->
-        <div style="text-align: center; overflow: hidden; height: auto; margin-top:5px; margin-bottom:10px; position: relative; border-radius: 5px;">
-            <div style="width:98%; margin:0 auto;">
-                <img src="https://popmbbb.cc/ui2/88.jpg" style="width: 100%; border-radius: 5px;" class="tabs" url="/main/myd.html" />
-            </div>
-        </div>
-
-        <!-- Menu de ações -->
-        <div style="text-align: center; width: 100%; margin: 0 auto; background: #fff; height: auto; overflow: hidden; margin-top:5px;">
-            <div style="width: 30%; float: left; text-align: left;" id="Recharge">
-                <div style="padding-right:0px; width:95%; margin-left:5%;">
-                    <div style="padding: 0px;">
-                        <div style="padding: 5px; padding-top:10px;">
-                            <div style="text-align: center; height: 35px;">
-                                <img src="https://popmbbb.cc/ui2/m/1.png" style="width: 28px; margin-top: 2px;" />
-                            </div>
-                            <div style="text-align: center; line-height: 30px;">Recarregar</div>
-                        </div>
-                    </div>
+        <!-- Cartão de ações principais -->
+        <div class="action-card">
+            <div style="font-weight: bold; color: #333;">Ações rápidas</div>
+            <div class="action-grid">
+                <div class="action-item" id="Recharge">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="#28a745">
+                        <path d="M12,15A2,2 0 0,1 14,17C14,18.11 13.1,19 12,19C10.89,19 10,18.11 10,17A2,2 0 0,1 12,15M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M16,14H15.5A1.5,1.5 0 0,1 14,12.5V10H10V12.5C10,13.88 11.12,15 12.5,15H16V18L19,15L16,12V14Z" />
+                    </svg>
+                    <div class="action-label">Recarregar</div>
                 </div>
-            </div>
-            
-            <div style="width: 5%; float: left;padding-bottom: 10px; height: 73px;"></div>
-            
-            <div style="width: 30%; float: left; text-align: left;" id="Withdraw">
-                <div style="padding-left:0px; margin-left:5%; padding-right: 0px; width: 95%;">
-                    <div style="padding: 0px;">
-                        <div style="padding: 5px; padding-top:10px;">
-                            <div style="text-align: center; height: 35px;">
-                                <img src="https://popmbbb.cc/ui2/m/2.png" style="width: 28px;" />
-                            </div>
-                            <div style="text-align: center; line-height: 30px;">Retirada</div>
-                        </div>
-                    </div>
+                
+                <div class="action-item" id="Withdraw">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="#28a745">
+                        <path d="M14,12H10V10H14M14,16H10V14H14M20,8H17.19C16.74,7.22 16.12,6.55 15.37,6.04L17,4.41L15.59,3L13.42,5.17C12.96,5.06 12.5,5 12,5C11.5,5 11.04,5.06 10.59,5.17L8.41,3L7,4.41L8.62,6.04C7.88,6.55 7.26,7.22 6.81,8H4V10H6.09C6.04,10.33 6,10.66 6,11V12H4V14H6V15C6,15.34 6.04,15.67 6.09,16H4V18H6.81C8.47,20.87 12.14,21.84 15,20.18C15.91,19.66 16.67,18.9 17.19,18H20V16H17.91C17.96,15.67 18,15.34 18,15V14H20V12H18V11C18,10.66 17.96,10.33 17.91,10H20V8Z" />
+                    </svg>
+                    <div class="action-label">Retirada</div>
                 </div>
-            </div>
-            
-            <div style="width: 5%; float: left; padding-bottom: 10px; height: 73px;"></div>
-            
-            <div style="width: 30%; float: left; text-align: left;" id="Record">
-                <div style="padding-left:0px; margin-left:5%; padding-right: 0px; width: 95%;">
-                    <div style="padding: 0px;">
-                        <div style="padding: 5px; padding-top:10px;">
-                            <div style="text-align: center; height: 35px;">
-                                <img src="https://popmbbb.cc/ui2/m/5.png" style="width: 24px;" />
-                            </div>
-                            <div style="text-align: center; line-height: 30px;">Registro de conta</div>
-                        </div>
-                    </div>
+                
+                <div class="action-item" id="Record">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="#28a745">
+                        <path d="M12,3C16.97,3 21,7.03 21,12H19C19,8.14 15.86,5 12,5C8.14,5 5,8.14 5,12C5,15.86 8.14,19 12,19C14.39,19 16.53,17.77 17.86,15.86L19.26,17.26C17.53,19.69 14.96,21 12,21C7.03,21 3,16.97 3,12C3,7.03 7.03,3 12,3M11,8H13V16H11V8M15,1H9V3H15V1Z" />
+                    </svg>
+                    <div class="action-label">Registros</div>
                 </div>
             </div>
         </div>
 
         <!-- Seção de serviços -->
-        <div style="font-family: DinC; font-size:20px; margin-left:2%; height:35px; line-height:35px; text-align:left; font-weight:bold;">
-            Outros serviços
-        </div>
-        <hr style="margin:0 auto; width:93%; color:#000;border:1px groove #000; margin-bottom:15px; margin-top:5px;" />
-        
-        <div style="text-align: center; overflow: hidden; height: auto; margin-bottom:70px; position: relative; border-radius: 5px;">
-            <div style="text-align: center; width: 98%; margin: 0 auto; height: auto; overflow: hidden; position: relative; border-radius: 5px;">
-                <div style="padding: 15px; padding-left:0; padding-right:0; padding-top: 0; padding-bottom: 10px;">
-                    <!-- Linha 1 de serviços -->
-                    <div style="width:100%; margin-bottom:5px; height:60px;">
-                        <div style="width:50%; float:left;" class="tabs1" url="/main/helpinfo.html?id=1">
-                            <div style="padding: 10px; height: 40px; margin: 0 auto;border: 1px groove #eee; line-height: 40px; position: relative; background: #fff; border-radius: 5px">
-                                <div style="float: left; width: 20%;">
-                                    <img src="https://popmbbb.cc/ui2/po/2.png" style="height:28px;" />
-                                </div>
-                                <div style="float: left; width: 80%; text-align: center; font-size: 12px;">Sobre nós</div>
-                            </div>
-                        </div>
-                        <div style="width:50%; float:left;" class="tabs1" url="/main/helpinfo.html?id=2">
-                            <div style="padding: 10px; height: 40px; margin: 0 auto; margin-left: 5px; border: 1px groove #eee; line-height: 40px; position: relative; background: #fff; border-radius: 5px">
-                                <div style="float: left; width: 20%;">
-                                    <img src="https://popmbbb.cc/ui2/po/3.png" style="height:28px;" />
-                                </div>
-                                <div style="float: left; width: 80%; text-align: center; font-size: 12px;">Regras da plataforma</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Linha 2 de serviços -->
-                    <div style="width: 100%; margin-bottom: 5px; height: 60px;">
-                        <div style="width: 50%; float: left;" class="tabs" url="/main/cs.html">
-                            <div style="padding: 10px; height: 40px; margin: 0 auto;border: 1px groove #eee; line-height: 40px; position: relative; background: #fff; border-radius: 5px">
-                                <div style="float: left; width: 20%;">
-                                    <img src="https://popmbbb.cc/ui2/po/4.png" style="height:28px;" />
-                                </div>
-                                <div style="float: left; width: 80%; text-align: center; font-size: 12px;">Serviço ao cliente</div>
-                            </div>
-                        </div>
-                        <div style="width:50%; float:left;" id="down">
-                            <div style="padding: 10px; height: 40px; margin: 0 auto; margin-left: 5px; border: 1px groove #eee; line-height: 40px; position: relative; background: #fff; border-radius: 5px">
-                                <div style="float: left; width: 20%;">
-                                    <img src="https://popmbbb.cc/ui2/po/5.png" style="height:28px;" />
-                                </div>
-                                <div style="float: left; width: 80%; text-align: center; font-size: 12px;">Baixe o aplicativo</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mais linhas de serviços... -->
+        <div class="services-section">
+            <div class="section-title">
+                <svg style="width: 20px; height: 20px; margin-right: 8px;" viewBox="0 0 24 24" fill="#28a745">
+                    <path d="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19M17,17H7V7H17V17M14,14H10V10H14V14Z" />
+                </svg>
+                Outros serviços
+            </div>
+            <hr class="section-divider" />
+            
+            <div class="services-grid">
+                <div class="service-item tabs1" url="/main/helpinfo.html?id=1">
+                    <svg class="service-icon" viewBox="0 0 24 24">
+                        <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+                    </svg>
+                    <div class="service-label">Sobre nós</div>
+                </div>
+                
+                <div class="service-item tabs1" url="/main/helpinfo.html?id=2">
+                    <svg class="service-icon" viewBox="0 0 24 24">
+                        <path d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,10A1.5,1.5 0 0,0 10.5,11.5A1.5,1.5 0 0,0 12,13A1.5,1.5 0 0,0 13.5,11.5A1.5,1.5 0 0,0 12,10Z" />
+                    </svg>
+                    <div class="service-label">Regras</div>
+                </div>
+                
+                <div class="service-item tabs" url="/main/cs.html">
+                    <svg class="service-icon" viewBox="0 0 24 24">
+                        <path d="M12,3C6.5,3 2,6.58 2,11C2.05,13.15 3.06,15.17 4.75,16.5C4.75,17.1 4.33,18.67 2,21C4.37,20.89 6.64,20 8.47,18.5C9.61,18.83 10.81,19 12,19C17.5,19 22,15.42 22,11C22,6.58 17.5,3 12,3M12,17C7.58,17 4,14.31 4,11C4,7.69 7.58,5 12,5C16.42,5 20,7.69 20,11C20,14.31 16.42,17 12,17Z" />
+                    </svg>
+                    <div class="service-label">Suporte</div>
+                </div>
+                
+                <div class="service-item" id="down">
+                    <svg class="service-icon" viewBox="0 0 24 24">
+                        <path d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M18,5H15.5A3.5,3.5 0 0,0 12,8.5V11H10V14H12V21H15V14H18V11H15V9A1,1 0 0,1 16,8H18V5Z" />
+                    </svg>
+                    <div class="service-label">Baixar App</div>
                 </div>
             </div>
         </div>
 
         <!-- Navegação inferior -->
         <nav class="nav">
-            <div url="dashboard.html" class="navtab">
-                <img src="https://popmbbb.cc/ui2/nav/11.png" class="gray" style="height: 32px;" /> <br />
-                <span id="nav_btn1">Lar</span>
+            <div url="dashboard.html" class="nav-item">
+                <svg class="nav-icon gray" viewBox="0 0 24 24">
+                    <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+                </svg>
+                <span><br>Lar</span>
             </div>
-            <div url="produto.html" class="navtab">
-                <img src="https://popmbbb.cc/ui2/nav/22.png" class="gray" style="height: 28px;" /> <br />
-                <span id="nav_btn2">Produto</span>
+            <div url="produto.html" class="nav-item">
+                <svg class="nav-icon gray" viewBox="0 0 24 24">
+                    <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z" />
+                </svg>
+                <span><br>Produto</span>
             </div>
-            <div url="team.html" class="navtab">
-                <img src="https://popmbbb.cc/ui2/nav/33.png" class="gray" style="height:28px;" /> <br />
-                <span id="nav_btn3">Equipe</span>
+            <div url="team.html" class="nav-item">
+                <svg class="nav-icon gray" viewBox="0 0 24 24">
+                    <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                </svg>
+                <span><br>Equipe</span>
             </div>
-            <div style="color: #000 !important; font-weight: bold;">
-                <img src="https://popmbbb.cc/ui2/nav/4.png" style="height: 28px;" /> <br />
-                <span id="nav_btn4">Meu</span>
+            <div class="nav-item active">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="#28a745">
+                    <path d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+                </svg>
+                <span><br>Meu</span>
             </div>
         </nav>
     </div>
@@ -378,7 +484,9 @@
             // Logout
             $(document).on("click", '#outlogin', function() {
                 layer.confirm('Tem certeza que deseja sair?', {
-                    btn: ['Sim', 'Não']
+                    btn: ['Sim', 'Não'],
+                    title: 'Confirmação',
+                    skin: 'layui-layer-molv'
                 }, function() {
                     // Limpar cache e redirecionar
                     sessionStorage.removeItem('userDataCache');
@@ -447,12 +555,14 @@
             });
 
             $(document).on("click", '#down', function() {
-                layer.msg("O aplicativo está em desenvolvimento.");
+                layer.msg("O aplicativo está em desenvolvimento.", {icon: 1});
             });
 
-            $(document).on("click", '.navtab', function() {
+            $(document).on("click", '.nav-item:not(.active)', function() {
                 const url = $(this).attr("url");
-                location.href = url + "?time=" + Math.random();
+                if (url) {
+                    location.href = url + "?time=" + Math.random();
+                }
             });
         });
     </script>
