@@ -49,7 +49,7 @@
             top: 15px;
             width: 95px;
             color: #fff;
-            background: linear-gradient(180deg,#D2001F,#D2001F);
+            background: linear-gradient(180deg,#4CAF50,#4CAF50);
             height: 25px;
             line-height: 25px;
             border-radius: 5px;
@@ -64,7 +64,7 @@
             line-height: 35px;
             margin-left: 3%;
             font-size: 16px;
-            color: #303353;
+            color: #3F51B5;
             text-align: left;
             margin-top: 10px;
             font-weight: bold;
@@ -90,7 +90,7 @@
         
         .detail-value {
             float: left;
-            color: #D2001F;
+            color: #4CAF50;
             margin-left: 5px;
         }
         
@@ -98,7 +98,7 @@
             height: 25px;
             line-height: 25px;
             width: 100%;
-            color: #D2001F;
+            color: #4CAF50;
             font-size: 12px;
             border-radius: 5px;
         }
@@ -136,7 +136,7 @@
         
         .nav-item.active span,
         .nav-item:not(.navtab) span {
-            color: #000;
+            color: #2E7D32;
             font-weight: bold;
         }
         
@@ -226,7 +226,7 @@
         }
         
         .confirm-btn {
-            background: linear-gradient(180deg,#000,#D2001F);
+            background: linear-gradient(180deg,#2E7D32,#4CAF50);
             color: #fff;
             border: none;
             height: 40px;
@@ -264,7 +264,7 @@
     <div class="container">
         <!-- Cabeçalho -->
         <div style="position: relative;">
-            <img src="https://popmbbb.cc/ui2/p/1.png" class="header-img">
+            <img src="https://greenflowmz.com/static/img/share_header_bg.285fc2f1.jpg" class="header-img">
             
             <div id="in1" style="position: absolute; top: 20px; right:5px; width: 150px; padding: 10px; border-radius: 5px;">
                 <div style="color: #fff; font-size: 16px;">
@@ -290,17 +290,17 @@
         <div id="noctie1" class="modal">
             <div class="modal-content">
                 <input type="hidden" id="proid" value="">
-                <img src="https://popmbbb.cc/ui2/logo.png" class="modal-logo">
-                <img src="https://popmbbb.cc/ui2/logo.png" id="imgurlss" class="modal-product-image">
+                <img src="https://greenflowmz.com/static/base_head.png" class="modal-logo">
+                <img src="https://greenflowmz.com/static/base_head.png" id="imgurlss" class="modal-product-image">
                 <div id="pname" class="modal-product-name">&nbsp;</div>
                 <div class="modal-disclaimer" id="tishi">
                     A renda será liquidada dentro de 24 horas após a compra.
                 </div>
                 <div class="modal-details">
-                    <div class="modal-detail">Preço: <span id="price" style="color: #D2001F"></span></div>
-                    <div class="modal-detail">Renda diária: <span id="hour_income" style="color: #D2001F"></span></div>
-                    <div class="modal-detail">Renda total: <span id="total_income" style="color: #D2001F"></span></div>
-                    <div class="modal-detail">Período de validade: <span id="dayss" style="color: #D2001F"></span> dias</div>
+                    <div class="modal-detail">Preço: <span id="price" style="color: #4CAF50"></span></div>
+                    <div class="modal-detail">Renda diária: <span id="hour_income" style="color: #4CAF50"></span></div>
+                    <div class="modal-detail">Renda total: <span id="total_income" style="color: #4CAF50"></span></div>
+                    <div class="modal-detail">Período de validade: <span id="dayss" style="color: #4CAF50"></span> dias</div>
                 </div>
                 <div class="modal-buttons">
                     <div class="modal-button">
@@ -319,7 +319,7 @@
                 <img src="https://popmbbb.cc/ui2/nav/11.png" class="gray" style="height: 28px;"><br>
                 <span>Lar</span>
             </div>
-            <div class="nav-item" style="color: #000 !important; font-weight: bold;">
+            <div class="nav-item" style="color: #2E7D32 !important; font-weight: bold;">
                 <img src="https://popmbbb.cc/ui2/nav/2.png" style="height: 28px;"><br>
                 <span>Produto</span>
             </div>
@@ -409,7 +409,7 @@
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.setAttribute('value', product.id);
-                productCard.setAttribute('imgurl', 'https://popmbbb.cc/ui2/logo.png');
+                productCard.setAttribute('imgurl', 'https://greenflowmz.com/static/base_head.png');
                 productCard.setAttribute('day', product.days);
                 productCard.setAttribute('price', product.price);
                 productCard.setAttribute('hour_income', product.day_income);
@@ -420,7 +420,7 @@
                 
                 productCard.innerHTML = `
                     <div class="product-image">
-                        <img src="https://popmbbb.cc//ui2/pro/1.jpg">
+                        <img src="https://greenflowmz.com/static/base_head.png">
                     </div>
                     <div class="buy-button">Comprar</div>
                     <div class="product-name">${product.name}</div>
