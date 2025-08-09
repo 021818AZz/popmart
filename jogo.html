@@ -6,7 +6,6 @@
     <title>BIGBOX - Caça-Níqueis</title>
     <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQklHQk9YIC0gQ2HDp2EtTsOtcXVlaXMiLCJzaG9ydF9uYW1lIjoiQklHQk9YIiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxNjIxM2UiLCJ0aGVtZV9jb2xvciI6IiMxNjIxM2UiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTVRJNElpQm9aV2xuYUhROUlqRXlPQ0lpSUhacFpYZENiM2c5SWpBZ01DQXhNamd1TURBd01EQXhNamd1TURBd01EQWlJSGh0Ykc1elBTSm9kSFJ3T2k4dmQzZDNMbmN6TG05eVp5OHlNREF3TDNOMlp5SStQSEpsWTNRZ2QybGtkR2c5SWpFeU9DSWdhR1ZwWjJoMFBTSXhNamdpSUdacGJHdzlJaU0wTmpjNVpXRWlMejQ4ZEdWNGRDQjRQU0kyTkNJZ2VUMGlOalFpSUdacGJHdzlJaU0zTmpSaVlUSWlJR1p2Ym5RdGMybDZaVDBpTXpKd2VDSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0krUGpjOEwzUmxlSFErUEM5emRtYysiLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
     <meta name="theme-color" content="#16213e">
-    <link rel="icon" href="https://i.postimg.cc/VNvXp179/image.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -40,19 +39,9 @@
         .logo {
             font-size: 32px;
             font-weight: bold;
-            color: #2ecc71;
+            color: #d4af37;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
         }
 
         .flag {
@@ -61,7 +50,7 @@
             right: 10px;
             width: 30px;
             height: 20px;
-            background: linear-gradient(to bottom, #ff0000 33%, #000000 33% 66%, #ffeb00 66%);
+            background: linear-gradient(to bottom, #009739 33%, #fedd00 33% 66%, #009739 66%);
             border-radius: 3px;
         }
 
@@ -100,7 +89,7 @@
         .balance {
             font-size: 18px;
             font-weight: bold;
-            color: #2ecc71;
+            color: #d4af37;
         }
 
         .slot-machine {
@@ -108,7 +97,7 @@
             border-radius: 20px;
             padding: 20px;
             margin: 20px 0;
-            border: 3px solid #2ecc71;
+            border: 3px solid #d4af37;
         }
 
         .reels {
@@ -130,7 +119,7 @@
             padding: 15px;
             text-align: center;
             font-size: 24px;
-            border: 2px solid #2ecc71;
+            border: 2px solid #d4af37;
             transition: all 0.3s ease;
         }
 
@@ -152,8 +141,25 @@
 
         .bet-controls {
             display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bet-input {
+            display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .bet-input input {
+            width: 100px;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            color: #333;
+            text-align: center;
         }
 
         .bet-btn {
@@ -161,7 +167,7 @@
             height: 40px;
             border: none;
             border-radius: 50%;
-            background: #2ecc71;
+            background: #d4af37;
             color: #333;
             font-weight: bold;
             cursor: pointer;
@@ -170,14 +176,36 @@
         .bet-amount {
             font-size: 16px;
             font-weight: bold;
-            color: #2ecc71;
+            color: #d4af37;
             min-width: 80px;
             text-align: center;
         }
 
+        .quick-bets {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .quick-bet-btn {
+            padding: 8px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-bet-btn:hover {
+            background: rgba(212, 175, 55, 0.5);
+        }
+
         .spin-btn {
             padding: 15px 30px;
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
             border: none;
             border-radius: 25px;
@@ -189,7 +217,7 @@
 
         .spin-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
         }
 
         .spin-btn:disabled {
@@ -214,7 +242,7 @@
         .stat-value {
             font-size: 20px;
             font-weight: bold;
-            color: #2ecc71;
+            color: #d4af37;
         }
 
         .stat-label {
@@ -232,21 +260,21 @@
         }
 
         .message.success {
-            background: rgba(46, 204, 113, 0.2);
-            border: 1px solid #2ecc71;
-            color: #2ecc71;
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            color: #28a745;
         }
 
         .message.error {
-            background: rgba(231, 76, 60, 0.2);
-            border: 1px solid #e74c3c;
-            color: #e74c3c;
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #dc3545;
         }
 
         .message.info {
-            background: rgba(52, 152, 219, 0.2);
-            border: 1px solid #3498db;
-            color: #3498db;
+            background: rgba(23, 162, 184, 0.2);
+            border: 1px solid #17a2b8;
+            color: #17a2b8;
         }
 
         .loading {
@@ -266,7 +294,7 @@
             transform: translate(-50%, -50%);
             font-size: 48px;
             font-weight: bold;
-            color: #2ecc71;
+            color: #d4af37;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
             z-index: 1000;
             animation: winPulse 2s ease-in-out;
@@ -282,7 +310,7 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(231, 76, 60, 0.8);
+            background: rgba(220, 53, 69, 0.8);
             color: white;
             border: none;
             border-radius: 20px;
@@ -306,14 +334,11 @@
     <div class="container">
         <!-- Tela do Jogo -->
         <div id="gameScreen" class="screen active">
-            <button class="logout-btn" onclick="logout()">Sair</button>
+            <button class="logout-btn" onclick="window.location.href='meu.html'">Sair</button>
             
             <div class="header">
                 <div class="flag"></div>
-                <div class="logo">
-                    <img src="https://i.postimg.cc/VNvXp179/image.png" alt="Logo" class="logo-icon">
-                    BIGBOX
-                </div>
+                <div class="logo">BIGBOX</div>
             </div>
             
             <div class="user-info">
@@ -351,9 +376,19 @@
                     
                     <div class="controls">
                         <div class="bet-controls">
-                            <button class="bet-btn" onclick="adjustBet(-10)">-</button>
-                            <div class="bet-amount" id="betAmount">KZ 2</div>
-                            <button class="bet-btn" onclick="adjustBet(10)">+</button>
+                            <div class="bet-input">
+                                <button class="bet-btn" onclick="adjustBet(-50)">-</button>
+                                <input type="number" id="betInput" value="50" min="50" max="100000" onchange="validateBet()">
+                                <button class="bet-btn" onclick="adjustBet(50)">+</button>
+                            </div>
+                            <div class="quick-bets">
+                                <button class="quick-bet-btn" onclick="setBet(100)">100</button>
+                                <button class="quick-bet-btn" onclick="setBet(500)">500</button>
+                                <button class="quick-bet-btn" onclick="setBet(1000)">1.000</button>
+                                <button class="quick-bet-btn" onclick="setBet(5000)">5.000</button>
+                                <button class="quick-bet-btn" onclick="setBet(10000)">10.000</button>
+                                <button class="quick-bet-btn" onclick="setBet(50000)">50.000</button>
+                            </div>
                         </div>
                         
                         <button class="spin-btn" onclick="spin()" id="spinBtn">
@@ -385,330 +420,364 @@
     </div>
 
     <script>
-        // Configuração da API
-        const API_BASE = 'https://bd-1-tile.onrender.com'; // Altere para o endereço da sua API
+    // Configuração da API
+    const API_BASE = 'http://localhost:3333'; // Altere para o endereço da sua API
+    
+    // Estado da aplicação
+    let currentUser = null;
+    let userBalance = 0;
+    let currentBet = 50; // Aposta mínima definida para 50 KZ
+    let isSpinning = false;
+    let gameStats = {
+        totalWins: 0,
+        gamesPlayed: 0,
+        lastWin: 0,
+        wins: 0
+    };
+
+    // Símbolos do caça-níqueis
+    const SYMBOLS = ['🍒', '🍋', '🍊', '🍇', '🔔', '💎', '7️⃣', '⭐'];
+    const SYMBOL_VALUES = {
+        '🍒': 2, '🍋': 3, '🍊': 4, '🍇': 5,
+        '🔔': 10, '💎': 20, '7️⃣': 50, '⭐': 100
+    };
+
+    // Utilitários
+    function formatCurrency(value) {
+        return `KZ ${value.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+    }
+
+    function showMessage(elementId, message, type = 'info') {
+        const element = document.getElementById(elementId);
+        element.innerHTML = `<div class="message ${type}">${message}</div>`;
+        setTimeout(() => {
+            element.innerHTML = '';
+        }, 5000);
+    }
+
+    function validateBet() {
+        const betInput = document.getElementById('betInput');
+        let value = parseInt(betInput.value);
         
-        // Estado da aplicação
-        let currentUser = null;
-        let userBalance = 0;
-        let currentBet = 2; // Aposta mínima definida para 2 KZ
-        let isSpinning = false;
-        let gameStats = {
-            totalWins: 0,
-            gamesPlayed: 0,
-            lastWin: 0,
-            wins: 0
+        if (isNaN(value)) {
+            value = currentBet;
+        } else if (value < 50) {
+            value = 50;
+            showMessage("gameMessage", "A aposta mínima é de 50 KZ!", "info");
+        } else if (value > 100000) {
+            value = 100000;
+            showMessage("gameMessage", "A aposta máxima é de 100.000 KZ!", "info");
+        }
+        
+        currentBet = value;
+        betInput.value = value;
+    }
+
+    function setBet(amount) {
+        currentBet = amount;
+        document.getElementById('betInput').value = amount;
+    }
+
+    function adjustBet(amount) {
+        const newBet = currentBet + amount;
+        if (newBet >= 50 && newBet <= 100000) {
+            currentBet = newBet;
+            document.getElementById("betInput").value = currentBet;
+        } else if (newBet < 50) {
+            showMessage("gameMessage", "A aposta mínima é de 50 KZ!", "info");
+        } else if (newBet > 100000) {
+            showMessage("gameMessage", "A aposta máxima é de 100.000 KZ!", "info");
+        }
+    }
+
+    // Funções de API
+    async function apiCall(endpoint, method = 'GET', data = null) {
+        const config = {
+            method,
+            headers: {
+                'Content-Type': 'application/json',
+            }
         };
 
-        // Símbolos do caça-níqueis
-        const SYMBOLS = ['🍒', '🍋', '🍊', '🍇', '🔔', '💎', '7️⃣', '⭐'];
-        const SYMBOL_VALUES = {
-            '🍒': 2, '🍋': 3, '🍊': 4, '🍇': 5,
-            '🔔': 10, '💎': 20, '7️⃣': 50, '⭐': 100
-        };
-
-        // Utilitários
-        function formatCurrency(value) {
-            return `KZ ${value.toFixed(0)}`;
+        if (currentUser && currentUser.token) {
+            config.headers.Authorization = `Bearer ${currentUser.token}`;
         }
 
-        function showMessage(elementId, message, type = 'info') {
-            const element = document.getElementById(elementId);
-            element.innerHTML = `<div class="message ${type}">${message}</div>`;
-            setTimeout(() => {
-                element.innerHTML = '';
-            }, 5000);
+        if (data) {
+            config.body = JSON.stringify(data);
         }
 
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-        }
+        try {
+            // Garante que a URL seja construída corretamente
+            const url = new URL(endpoint, API_BASE).href;
 
-        // Funções de API
-        async function apiCall(endpoint, method = 'GET', data = null) {
-            const config = {
-                method,
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            };
-
-            if (currentUser && currentUser.token) {
-                config.headers.Authorization = `Bearer ${currentUser.token}`;
-            }
-
-            if (data) {
-                config.body = JSON.stringify(data);
-            }
-
-            try {
-                let url = API_BASE;
-                if (!url.endsWith('/') && !endpoint.startsWith('/')) {
-                    url += '/';
-                } else if (url.endsWith('/') && endpoint.startsWith('/')) {
-                    endpoint = endpoint.substring(1);
-                }
-                url += endpoint;
-
-                console.log('Fazendo requisição para:', url);
-                
-                const response = await fetch(url, config);
-                const result = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(result.mensagem || 'Erro na requisição');
-                }
-                
-                return result;
-            } catch (error) {
-                console.error('Erro na API:', error);
-                throw error;
-            }
-        }
-
-        function logout() {
-            currentUser = null;
-            userBalance = 0;
-            gameStats = { totalWins: 0, gamesPlayed: 0, lastWin: 0, wins: 0 };
-            localStorage.removeItem('bigbox_user');
-            showMessage('gameMessage', 'Sessão terminada!', 'success');
-        }
-
-        // Funções do jogo
-        function updateUserInfo() {
-            if (currentUser) {
-                document.getElementById('userBalance').textContent = formatCurrency(userBalance);
-                document.getElementById('userPhone').textContent = currentUser.telefone || 'Visitante';
-            }
-        }
-
-        function updateGameStats() {
-            document.getElementById('totalWins').textContent = formatCurrency(gameStats.totalWins);
-            document.getElementById('gamesPlayed').textContent = gameStats.gamesPlayed;
-            document.getElementById('lastWin').textContent = formatCurrency(gameStats.lastWin);
+            console.log('Fazendo requisição para:', url);
             
-            const winRate = gameStats.gamesPlayed > 0 ? 
-                Math.round((gameStats.wins / gameStats.gamesPlayed) * 100) : 0;
-            document.getElementById('winRate').textContent = `${winRate}%`;
-        }
-
-        function adjustBet(amount) {
-            const newBet = currentBet + amount;
-            if (newBet >= 2 && newBet <= userBalance && newBet <= 1000) {
-                currentBet = newBet;
-                document.getElementById("betAmount").textContent = formatCurrency(currentBet);
-            } else if (newBet < 2) {
-                showMessage("gameMessage", "A aposta mínima é de 2 KZ!", "info");
-            } else if (newBet > userBalance) {
-                showMessage("gameMessage", "Você não tem saldo suficiente para esta aposta!", "error");
-            }
-        }
-
-        function generateRandomSymbol() {
-            return SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
-        }
-
-        function checkWin(reels) {
-            let winAmount = 0;
+            const response = await fetch(url, config);
+            const result = await response.json();
             
-            // Verifica linhas horizontais
-            for (let row = 0; row < 3; row++) {
-                const line = [reels[0][row], reels[1][row], reels[2][row]];
-                if (line[0] === line[1] && line[1] === line[2]) {
-                    const symbolValue = SYMBOL_VALUES[line[0]];
-                    winAmount += symbolValue * (currentBet / 10);
-                }
+            if (!response.ok) {
+                throw new Error(result.message || result.mensagem || 'Erro na requisição');
             }
+            
+            return result;
+        } catch (error) {
+            console.error('Erro na API:', error);
+            throw error;
+        }
+    }
 
-            // Verifica diagonais
-            const diagonal1 = [reels[0][0], reels[1][1], reels[2][2]];
-            const diagonal2 = [reels[0][2], reels[1][1], reels[2][0]];
+    // Funções do jogo
+    function updateUserInfo() {
+        if (currentUser) {
+            document.getElementById('userBalance').textContent = formatCurrency(userBalance);
+            document.getElementById('userPhone').textContent = currentUser.telefone;
+        }
+    }
 
-            if (diagonal1[0] === diagonal1[1] && diagonal1[1] === diagonal1[2]) {
-                const symbolValue = SYMBOL_VALUES[diagonal1[0]];
-                winAmount += symbolValue * (currentBet / 10) * 1.5;
+    function updateGameStats() {
+        document.getElementById('totalWins').textContent = formatCurrency(gameStats.totalWins);
+        document.getElementById('gamesPlayed').textContent = gameStats.gamesPlayed;
+        document.getElementById('lastWin').textContent = formatCurrency(gameStats.lastWin);
+        
+        const winRate = gameStats.gamesPlayed > 0 ? 
+            Math.round((gameStats.wins / gameStats.gamesPlayed) * 100) : 0;
+        document.getElementById('winRate').textContent = `${winRate}%`;
+    }
+
+    function generateRandomSymbol() {
+        return SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+    }
+
+    function checkWin(reels) {
+        let winAmount = 0;
+        
+        // Verifica linhas horizontais
+        for (let row = 0; row < 3; row++) {
+            const line = [reels[0][row], reels[1][row], reels[2][row]];
+            if (line[0] === line[1] && line[1] === line[2]) {
+                const symbolValue = SYMBOL_VALUES[line[0]];
+                winAmount += symbolValue * (currentBet / 10);
             }
-
-            if (diagonal2[0] === diagonal2[1] && diagonal2[1] === diagonal2[2]) {
-                const symbolValue = SYMBOL_VALUES[diagonal2[0]];
-                winAmount += symbolValue * (currentBet / 10) * 1.5;
-            }
-
-            return Math.floor(winAmount);
         }
 
-        async function updateBalance(amount) {
-            try {
-                userBalance += amount;
+        // Verifica diagonais
+        const diagonal1 = [reels[0][0], reels[1][1], reels[2][2]];
+        const diagonal2 = [reels[0][2], reels[1][1], reels[2][0]];
+
+        if (diagonal1[0] === diagonal1[1] && diagonal1[1] === diagonal1[2]) {
+            const symbolValue = SYMBOL_VALUES[diagonal1[0]];
+            winAmount += symbolValue * (currentBet / 10) * 1.5;
+        }
+
+        if (diagonal2[0] === diagonal2[1] && diagonal2[1] === diagonal2[2]) {
+            const symbolValue = SYMBOL_VALUES[diagonal2[0]];
+            winAmount += symbolValue * (currentBet / 10) * 1.5;
+        }
+
+        return Math.floor(winAmount);
+    }
+
+    async function updateBalance(amount) {
+        try {
+            // Atualiza localmente primeiro para responsividade
+            userBalance += amount;
+            updateUserInfo();
+            
+            // Sincroniza com a API
+            const result = await apiCall("/user/balance");
+            if (result && result.success) {
+                userBalance = result.saldo;
                 updateUserInfo();
-                
-                const result = await apiCall('/user/balance');
-                if (result.success) {
-                    userBalance = result.saldo;
-                    updateUserInfo();
-                }
-            } catch (error) {
-                console.error('Erro ao atualizar saldo:', error);
+            } else {
+                // Se a API falhar, reverte a mudança local e mostra mensagem de erro
                 userBalance -= amount;
                 updateUserInfo();
+                showMessage("gameMessage", "Erro ao sincronizar saldo com o servidor.", "error");
             }
+        } catch (error) {
+            console.error("Erro ao atualizar saldo:", error);
+            // Em caso de erro, reverte a mudança local
+            userBalance -= amount;
+            updateUserInfo();
+        }
+    }
+
+    async function placeBet(betAmount, gameResult) {
+        try {
+            const result = await apiCall('/game/bet', 'POST', {
+                amount: betAmount,
+                gameType: 'slot_machine',
+                result: gameResult
+            });
+            
+            if (result && result.success) {
+                userBalance = result.newBalance;
+                updateUserInfo();
+                return result;
+            }
+        } catch (error) {
+            console.error('Erro ao processar aposta:', error);
+            throw error;
+        }
+    }
+
+    async function spin() {
+        validateBet(); // Valida a aposta antes de girar
+        
+        if (isSpinning || userBalance < currentBet) {
+            if (userBalance < currentBet) {
+                showMessage('gameMessage', 'Saldo insuficiente!', 'error');
+            }
+            return;
         }
 
-        async function placeBet(betAmount, gameResult) {
-            try {
-                const result = await apiCall('/game/bet', 'POST', {
-                    amount: betAmount,
-                    gameType: 'slot_machine',
-                    result: gameResult
-                });
-                
-                if (result.success) {
-                    userBalance = result.newBalance;
-                    updateUserInfo();
-                    return result;
-                }
-            } catch (error) {
-                console.error('Erro ao processar aposta:', error);
-                throw error;
-            }
-        }
+        isSpinning = true;
+        const spinBtn = document.getElementById('spinBtn');
+        spinBtn.disabled = true;
+        spinBtn.textContent = 'GIRANDO...';
 
-        async function spin() {
-            if (isSpinning || userBalance < currentBet) {
-                if (userBalance < currentBet) {
-                    showMessage('gameMessage', 'Saldo insuficiente!', 'error');
-                }
-                return;
-            }
+        try {
+            // Gera resultado final primeiro
+            const finalReels = [
+                [generateRandomSymbol(), generateRandomSymbol(), generateRandomSymbol()],
+                [generateRandomSymbol(), generateRandomSymbol(), generateRandomSymbol()],
+                [generateRandomSymbol(), generateRandomSymbol(), generateRandomSymbol()]
+            ];
 
-            isSpinning = true;
-            const spinBtn = document.getElementById('spinBtn');
-            spinBtn.disabled = true;
-            spinBtn.textContent = 'GIRANDO...';
+            // Verifica vitória
+            const winAmount = checkWin(finalReels);
+            
+            // Processa a aposta na API
+            const betResult = await placeBet(currentBet, {
+                reels: finalReels,
+                winAmount: winAmount,
+                symbols: finalReels.flat()
+            });
 
-            try {
-                const finalReels = [
-                    [generateRandomSymbol(), generateRandomSymbol(), generateRandomSymbol()],
-                    [generateRandomSymbol(), generateRandomSymbol(), generateRandomSymbol()],
-                    [generateRandomSymbol(), generateRandomSymbol(), generateRandomSymbol()]
-                ];
+            gameStats.gamesPlayed++;
 
-                const winAmount = checkWin(finalReels);
-                
-                const betResult = await placeBet(currentBet, {
-                    reels: finalReels,
-                    winAmount: winAmount,
-                    symbols: finalReels.flat()
-                });
+            // Animação de giro
+            const symbols = document.querySelectorAll('.symbol');
+            symbols.forEach(symbol => symbol.classList.add('spinning'));
 
-                gameStats.gamesPlayed++;
+            // Simula o giro por 2 segundos
+            const spinDuration = 2000;
+            const spinInterval = 100;
+            const spinSteps = spinDuration / spinInterval;
 
-                const symbols = document.querySelectorAll('.symbol');
-                symbols.forEach(symbol => symbol.classList.add('spinning'));
-
-                const spinDuration = 2000;
-                const spinInterval = 100;
-
-                for (let i = 0; i < spinDuration / spinInterval; i++) {
-                    setTimeout(() => {
-                        symbols.forEach(symbol => {
-                            symbol.textContent = generateRandomSymbol();
-                        });
-                    }, i * spinInterval);
-                }
-
+            for (let i = 0; i < spinSteps; i++) {
                 setTimeout(() => {
-                    symbols.forEach(symbol => symbol.classList.remove('spinning'));
+                    symbols.forEach(symbol => {
+                        symbol.textContent = generateRandomSymbol();
+                    });
+                }, i * spinInterval);
+            }
 
-                    let symbolIndex = 0;
-                    for (let col = 0; col < 3; col++) {
-                        for (let row = 0; row < 3; row++) {
-                            symbols[symbolIndex].textContent = finalReels[col][row];
-                            symbolIndex++;
-                        }
+            // Resultado final após animação
+            setTimeout(() => {
+                symbols.forEach(symbol => symbol.classList.remove('spinning'));
+
+                // Atualiza a exibição com o resultado real
+                let symbolIndex = 0;
+                for (let col = 0; col < 3; col++) {
+                    for (let row = 0; row < 3; row++) {
+                        symbols[symbolIndex].textContent = finalReels[col][row];
+                        symbolIndex++;
                     }
+                }
 
-                    if (winAmount > 0) {
-                        gameStats.wins++;
-                        gameStats.totalWins += winAmount;
-                        gameStats.lastWin = winAmount;
-                        
-                        const winDiv = document.createElement('div');
-                        winDiv.className = 'win-animation';
-                        winDiv.textContent = `🎉 GANHOU ${formatCurrency(winAmount)}! 🎉`;
-                        document.body.appendChild(winDiv);
-                        
-                        setTimeout(() => {
-                            document.body.removeChild(winDiv);
-                        }, 2000);
-                        
-                        showMessage('gameMessage', `Parabéns! Você ganhou ${formatCurrency(winAmount)}!`, 'success');
-                    } else {
-                        gameStats.lastWin = 0;
-                    }
-
-                    updateGameStats();
+                if (winAmount > 0) {
+                    gameStats.wins++;
+                    gameStats.totalWins += winAmount;
+                    gameStats.lastWin = winAmount;
                     
-                    isSpinning = false;
-                    spinBtn.disabled = false;
-                    spinBtn.textContent = 'GIRAR';
-                }, spinDuration);
+                    // Animação de vitória
+                    const winDiv = document.createElement('div');
+                    winDiv.className = 'win-animation';
+                    winDiv.textContent = `🎉 GANHOU ${formatCurrency(winAmount)}! 🎉`;
+                    document.body.appendChild(winDiv);
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(winDiv);
+                    }, 2000);
+                    
+                    showMessage('gameMessage', `Parabéns! Você ganhou ${formatCurrency(winAmount)}!`, 'success');
+                } else {
+                    gameStats.lastWin = 0;
+                }
 
-            } catch (error) {
-                console.error('Erro ao processar aposta:', error);
-                showMessage('gameMessage', 'Erro ao processar aposta. Tente novamente.', 'error');
+                updateGameStats();
                 
                 isSpinning = false;
                 spinBtn.disabled = false;
                 spinBtn.textContent = 'GIRAR';
-            }
-        }
+            }, spinDuration);
 
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedUser = localStorage.getItem('bigbox_user');
-            if (savedUser) {
-                try {
-                    currentUser = JSON.parse(savedUser);
-                    userBalance = currentUser.saldo || 0;
-                    updateUserInfo();
-                    refreshUserData();
-                } catch (error) {
-                    localStorage.removeItem('bigbox_user');
-                    showMessage('gameMessage', 'Sessão expirada. Faça login novamente.', 'error');
-                }
-            } else {
-                showMessage('gameMessage', 'Nenhum usuário autenticado. Faça login para jogar.', 'error');
-            }
-
-            updateGameStats();
-        });
-
-        async function refreshUserData() {
-            if (!currentUser || !currentUser.token) return;
+        } catch (error) {
+            console.error('Erro ao processar aposta:', error);
+            showMessage('gameMessage', 'Erro ao processar aposta. Tente novamente.', 'error');
             
+            isSpinning = false;
+            spinBtn.disabled = false;
+            spinBtn.textContent = 'GIRAR';
+        }
+    }
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verifica se há usuário logado
+        const savedUser = localStorage.getItem('bigbox_user');
+        if (savedUser) {
             try {
-                const result = await apiCall('/user/balance');
-                if (result.success) {
-                    userBalance = result.saldo;
-                    updateUserInfo();
-                }
+                currentUser = JSON.parse(savedUser);
+                userBalance = currentUser.saldo || 0;
+                updateUserInfo();
+                
+                // Busca dados atualizados da API
+                refreshUserData();
             } catch (error) {
-                console.error('Erro ao buscar dados do usuário:', error);
-                if (error.message.includes('403') || error.message.includes('401')) {
-                    logout();
-                }
+                console.error('Erro ao analisar usuário do localStorage:', error);
+                localStorage.removeItem('bigbox_user');
+                window.location.href = 'meu.html';
             }
+        } else {
+            // Se não houver usuário, redireciona para a página de login
+            window.location.href = 'meu.html';
         }
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4gewogIGNvbnNvbGUubG9nKCdTZXJ2aWNlIFdvcmtlciBpbnN0YWxhZG8nKTsKfSk7CgpzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgZXZlbnQgPT4gewogIGV2ZW50LnJlc3BvbmRXaXRoKGZldGNoKGV2ZW50LnJlcXVlc3QpKTsKfSk7')
-                .then(registration => console.log('Service Worker registrado'))
-                .catch(error => console.log('Erro ao registrar Service Worker:', error));
+        // Atualiza estatísticas iniciais
+        updateGameStats();
+        
+        // Configura o input de aposta
+        document.getElementById('betInput').addEventListener('change', validateBet);
+    });
+
+    // Função para buscar dados atualizados do usuário
+    async function refreshUserData() {
+        if (!currentUser || !currentUser.token) return;
+        
+        try {
+            const result = await apiCall('/user/balance');
+            if (result && result.success) {
+                userBalance = result.saldo;
+                updateUserInfo();
+            }
+        } catch (error) {
+            console.error('Erro ao buscar dados do usuário:', error);
+            // Se o token expirou, redireciona para a página de login
+            if (error.message.includes('403') || error.message.includes('401')) {
+                localStorage.removeItem('bigbox_user');
+                window.location.href = 'meu.html';
+            }
         }
-    </script>
-</body>
-</html>
+    }
+
+    // Registra Service Worker para PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+            .then(registration => console.log('Service Worker registrado com sucesso:', registration.scope))
+            .catch(error => console.log('Erro ao registrar Service Worker:', error));
+    }
+</script>
+
