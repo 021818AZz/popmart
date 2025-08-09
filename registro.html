@@ -91,7 +91,31 @@
             </div>
         </div>
     </div>
+      <script>
+$(document).ready(function() {
+    // Extrair parâmetro 'a' da URL
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
 
+    // Obter código de convite da URL
+    var invitationCode = getUrlParameter('a');
+    if (invitationCode) {
+        $('#invitation').val(invitationCode);
+    }
+
+    // Restante do seu código existente...
+    layui.use(['layer', 'form'], function(){
+        var layer = layui.layer;
+        var form = layui.form;
+        
+        // ... (seu código existente permanece o mesmo)
+    });
+});
+</script>
     <script>
        $(document).ready(function() {
     // Configuração do LayUI
