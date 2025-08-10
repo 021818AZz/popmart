@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta -equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit">
+    <meta -equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>icarda Recarga</title>
+
+    <style type="text/css">
+        /* Payment voucher page CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .payment-voucher-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Top navigation bar styles - consistent with the password page */
+        .header {
+            height: 130px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-image: url('https://greenflowmz.com/static/img/withdraw_header_bg.7d2dd339.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 0 15px;
+            color: #000000;
+            position: relative;
+        }
+
+        .header-container {
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .back-button {
+            width: 60px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .back-arrow {
+            font-size: 18px;
+        }
+
+        .header-title {
+            font-size: 16px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .placeholder {
+            width: 60px;
+        }
+
+        .placeholder img {
+            width: 60%;
+            height: 60%;
+        }
+
+        /* Balance information styles */
+        .balance-info {
+            display: flex;
+            padding: 15px 20px;
+            align-items: center;
+        }
+
+        .balance-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .balance-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        /* Payment amount input area styles */
+        .payment-amount-container {
+            padding: 0 20px;
+        }
+
+        .amount-label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .amount-input-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .amount-input {
+            width: 100%;
+            height: 44px;
+            padding: 0 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #eee;
+            box-sizing: border-box;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #09ff00;
+            font-weight: bold;
+        }
+
+        /* Quick amount selection styles */
+        .amount-options-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 0 20px 20px;
+        }
+
+        .amount-option {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .amount-option.active {
+            border-color: #0066cc;
+            color: #0066cc;
+            background-color: #f0f7ff;
+        }
+
+        /* Payment method selection styles */
+        .payment-method-container {
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method-select {
+            width: 100%;
+            height: 44px;
+            padding: 0 15px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background-color: #fff;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="https://greenflowmz.com/static/img/withdraw_header_bg.7d2dd339.jpg" width="12" height="6"><path d="M0 0h12L6 6z" fill="%23666"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px 6px;
+        }
+
+        /* Continue button styles */
+        .continue-button {
+            width: calc(100% - 40px);
+            margin: 0 20px 20px;
+            height: 44px;
+            background: linear-gradient(180deg, #459a57, #00ff40);
+            color: white;
+            border: none;
+            border-radius: 22px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Recharge instructions styles */
+        .recharge-instructions {
+            padding: 0 20px 30px;
+        }
+
+        .recharge-instructions ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .recharge-instructions li {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .recharge-instructions li:first-child {
+            font-weight: bold;
+            color: #333;
+            list-style-type: none;
+            margin-left: -20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 380px) {
+            .amount-options-container {
+                gap: 8px;
+            }
+
+            .amount-option {
+                height: 36px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Estrutura HTML da página de voucher de pagamento -->
+    <div class="payment-voucher-container">
+        <!-- Barra de navegação superior -->
+        <div class="header">
+            <div class="header-container">
+                <div class="back-button" onclick="
+    if (document.referrer && document.referrer !== location.href) {
+        history.back();
+    } else {
+        window.location.href = 'meu.html';
+    }
+">
+    ←
+</div>
+
+                <div class="header-title">Voucher de Pagamento</div>
+                <div class="placeholder" onclick="location.href='https://ic-arda.shop/recharge/list'"><img src="https://greenflowmz.com/static/img/withdraw_header_bg.7d2dd339.jpg" alt="Ícone" class="level-icon"></div>
+            </div>
+        </div>
+
+        <!-- Informações de saldo -->
+        <div class="balance-info">
+            <div class="balance-label">Meu Saldo:</div>
+            <div class="balance-value">KZ 0.00</div>
+        </div>
+
+        <!-- Área de entrada do valor do pagamento -->
+        <div class="payment-amount-container">
+            <div class="amount-label">Valor do pagamento</div>
+            <div class="amount-input-container">
+                <input type="number" name="amount" class="amount-input" value="" placeholder="Valor do pagamento">
+                <span class="currency-symbol">KZ</span>
+            </div>
+        </div>
+
+        <!-- Seleção rápida de valores -->
+        <div class="amount-options-container">
+            <div class="amount-option">5000</div>
+            <div class="amount-option active">10000</div>
+            <div class="amount-option">30000</div>
+            <div class="amount-option">50000</div>
+            <div class="amount-option">100000</div>
+            <div class="amount-option">150000</div>
+            <div class="amount-option">300000</div>
+            <div class="amount-option">600000</div>
+        </div>
+
+        <!-- Seleção do método de pagamento -->
+        <div class="payment-method-container">
+            <select name="payType" class="payment-method-select">
+                                <option value="shpay">Canal 1</option>
+                                <option value="qePay-620">Canal 2</option>
+                                <option value="HaPay">Canal 3</option>
+                                <!-- Outras opções de método de pagamento -->
+            </select>
+        </div>
+
+        <!-- Botão continuar -->
+        <button class="continue-button rechargeBtn">Continuar</button>
+
+        <!-- Instruções de recarga -->
+        <div class="recharge-instructions">
+         
+    <p><strong>Instruções de Recarga</strong></p>
+    <p>1. O valor mínimo de recarga é de <span style="color: red;">KZ 5000</span>.</p>
+    <p>2. Após a recarga ser concluída com sucesso, caso o dinheiro não seja recebido em até 30 minutos, entre em contato com o atendimento ao cliente para verificar a situação.</p>
+    <p>3. O valor da recarga deve ser compatível com o valor do pagamento atual.</p>
+    <p><span style="color: red;">4. O processo de recarga só pode ser realizado na plataforma.</span></p>
+    <p><span style="color: red;">Não transfira o dinheiro para terceiros para evitar perdas.</span></p>
+</div>
+
+
+    <div style="display: none" class="recharging"></div>
+    
+    <!-- <div class="kefu">
+    <a href="https://ic-arda.shop/user/service"><img src="/static/home/img/custemService2.png" alt=""></a>
+</div>
+ -->
+    <style>
+    .game1 {
+        border-radius: 50%;
+        animation: rotate1 2s linear infinite;
+    }
+
+    @keyframes  rotate1 {
+        0% {
+            transform: rotateZ(0deg);
+        }
+
+        100% {
+            transform: rotateZ(360deg);
+        }
+    }
+</style>
+
+   </body>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const userId = localStorage.getItem("user_id");
+
+    if (!userId) {
+        console.error("ID do usuário não encontrado no localStorage.");
+        return;
+    }
+
+    fetch(`https://api-wped.onrender.com/user/${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.saldo !== undefined) {
+                const saldoElement = document.querySelector(".tixianlog-index-top-mull");
+                if (saldoElement) {
+                    saldoElement.textContent = `AOA ${parseFloat(data.saldo).toLocaleString('pt-AO')}`;
+                }
+            } else {
+                console.error("Resposta da API inválida:", data);
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao buscar o saldo:", error);
+        });
+});
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Selecionar opções de valor pré-definido
+    const amountOptions = document.querySelectorAll('.amount-option');
+    const amountInput = document.querySelector('.amount-input');
+    
+    // Adicionar evento de clique para cada opção de valor
+    amountOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            // Remover a classe 'active' de todas as opções
+            amountOptions.forEach(opt => opt.classList.remove('active'));
+            
+            // Adicionar a classe 'active' à opção clicada
+            this.classList.add('active');
+            
+            // Definir o valor no campo de entrada
+            amountInput.value = this.textContent;
+        });
+    });
+    
+    // Adicionar evento de clique para o botão Continuar
+    document.querySelector('.rechargeBtn').addEventListener('click', function() {
+        // Obter o valor do campo de entrada ou da opção selecionada
+        let valor = amountInput.value;
+        
+        // Se o campo estiver vazio, verificar se há uma opção ativa
+        if (!valor && document.querySelector('.amount-option.active')) {
+            valor = document.querySelector('.amount-option.active').textContent;
+        }
+        
+        // Validar o valor
+        valor = parseInt(valor);
+        if (!valor || valor <= 0) {
+            alert("Por favor, insira um valor válido.");
+            return;
+        }
+        
+        // Armazenar o valor no localStorage
+        localStorage.setItem("valor_recarga", valor);
+        
+        // Redirecionar para recarregar2.html
+        window.location.href = "recarregar2.html";
+    });
+    
+    // Se houver uma opção ativa por padrão, definir seu valor no campo de entrada
+    const activeOption = document.querySelector('.amount-option.active');
+    if (activeOption) {
+        amountInput.value = activeOption.textContent;
+    }
+});
+</script>
+
+
+    <script>
+    // Quando o usuário clica em um valor pré-definido
+    document.querySelectorAll('.recharge-price-list li').forEach(item => {
+        item.addEventListener('click', function () {
+            // Remove a classe cur de todos
+            document.querySelectorAll('.recharge-price-list li').forEach(li => li.classList.remove('cur'));
+            // Adiciona a classe cur ao item clicado
+            this.classList.add('cur');
+
+            // Extrai o número do valor (removendo "AOA")
+            const valueText = this.querySelector('.amount-value').textContent.replace('AOA', '').trim();
+            const valueNumber = parseInt(valueText);
+
+            // Define esse valor no input e no slider
+            document.querySelector('.amount-input').value = valueNumber;
+            document.getElementById('amountSlider').value = valueNumber;
+        });
+    });
+
+    // Quando o input for alterado manualmente, atualiza o slider
+    document.querySelector('.amount-input').addEventListener('input', function () {
+        const value = parseInt(this.value);
+        document.getElementById('amountSlider').value = value;
+        // Remove seleção ativa dos valores da lista
+        document.querySelectorAll('.recharge-price-list li').forEach(li => li.classList.remove('cur'));
+    });
+
+    // Quando o slider for alterado, atualiza o input
+    document.getElementById('amountSlider').addEventListener('input', function () {
+        document.querySelector('.amount-input').value = this.value;
+        // Remove seleção ativa dos valores da lista
+        document.querySelectorAll('.recharge-price-list li').forEach(li => li.classList.remove('cur'));
+    });
+    
+</script>
+
+
+</html>
+

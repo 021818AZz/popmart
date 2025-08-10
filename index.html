@@ -243,6 +243,7 @@
                                 // Armazenar token e redirecionar
                                 localStorage.setItem('token', response.token);
                                 
+                                
                                 // Buscar e armazenar dados da equipe
                                 try {
                                     await fetchTeamData(response.token);
