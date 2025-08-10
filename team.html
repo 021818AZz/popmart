@@ -229,7 +229,7 @@
                             </svg>
                             Taxa de comissão
                         </div>
-                        <div id="P1" class="currency-value"><span class="loading"></span></div>
+                        <div id="P1" class="currency-value">20%</div>
                     </div>
                     <div>
                         <div style="font-size: 12px; color: #666; display: flex; align-items: center;">
@@ -247,7 +247,7 @@
                             </svg>
                             Comissão
                         </div>
-                        <div id="lv1_team_income" class="currency-value"><span class="loading"></span></div>
+                        <div id="lv1_team_income" class="currency-value">KZ 0,00</div>
                     </div>
                 </div>
             </div>
@@ -267,7 +267,7 @@
                             </svg>
                             Taxa de comissão
                         </div>
-                        <div id="P2" class="currency-value"><span class="loading"></span></div>
+                        <div id="P2" class="currency-value">8%</div>
                     </div>
                     <div>
                         <div style="font-size: 12px; color: #666; display: flex; align-items: center;">
@@ -285,7 +285,7 @@
                             </svg>
                             Comissão
                         </div>
-                        <div id="lv2_team_income" class="currency-value"><span class="loading"></span></div>
+                        <div id="lv2_team_income" class="currency-value">KZ 0,00</div>
                     </div>
                 </div>
             </div>
@@ -305,7 +305,7 @@
                             </svg>
                             Taxa de comissão
                         </div>
-                        <div id="P3" class="currency-value"><span class="loading"></span></div>
+                        <div id="P3" class="currency-value">2%</div>
                     </div>
                     <div>
                         <div style="font-size: 12px; color: #666; display: flex; align-items: center;">
@@ -323,7 +323,7 @@
                             </svg>
                             Comissão
                         </div>
-                        <div id="lv3_team_income" class="currency-value"><span class="loading"></span></div>
+                        <div id="lv3_team_income" class="currency-value">KZ 0,00</div>
                     </div>
                 </div>
             </div>
@@ -389,7 +389,7 @@
                     <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.1 14.8,9.5V11C15.4,11 16,11.6 16,12.3V15.8C16,16.4 15.4,17 14.7,17H9.2C8.6,17 8,16.4 8,15.7V12.2C8,11.6 8.6,11 9.2,11V9.5C9.2,8.1 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,9.5V11H13.5V9.5C13.5,8.7 12.8,8.2 12,8.2Z" />
                 </svg>
                 <div style="font-size: 12px; color: #666;">Comissão Total</div>
-                <div id="t2" style="font-weight: bold; font-size: 18px; margin-top: 5px;"><span class="loading"></span></div>
+                <div id="t2" style="font-weight: bold; font-size: 18px; margin-top: 5px;">KZ 0,00</div>
             </div>
         </div>
         
@@ -460,8 +460,8 @@
             return;
         }
 
-        // Mostrar loading
-        document.querySelectorAll('.currency-value').forEach(el => {
+        // Mostrar loading apenas para os campos que serão atualizados
+        document.querySelectorAll('#task1_count, #task2_count, #task3_count, #t1, #invitation, #link').forEach(el => {
             el.innerHTML = '<span class="loading"></span>';
         });
 
@@ -494,11 +494,12 @@
                 // Atualizar dados de convite
                 document.getElementById('invitation').textContent = user.codigoConvite || 'N/A';
                 const siteUrl = userData.site_http || 'http://popmtr.org';
-                document.getElementById('link').textContent = `${siteUrl}/registro.html?a=${user.codigoConvite}`;
+                const inviteLink = `${siteUrl}/registro.html?a=${user.codigoConvite}`;
+                document.getElementById('link').textContent = inviteLink;
 
                 // Botões de cópia
                 const clipboard1 = new ClipboardJS('#copy', {
-                    text: () => `${siteUrl}/registro.html?a=${user.codigoConvite}`
+                    text: () => inviteLink
                 });
                 clipboard1.on('success', function () {
                     layer.msg('Link copiado com sucesso!', { icon: 1 });
@@ -522,11 +523,7 @@
                     const level2 = teamData.level2 || [];
                     const level3 = teamData.level3 || [];
 
-                    // Atualizar níveis da equipe
-                    document.getElementById('P1').textContent = '20%';
-                    document.getElementById('P2').textContent = '8%';
-                    document.getElementById('P3').textContent = '2%';
-
+                    // Atualizar contagem de membros
                     document.getElementById('task1_count').textContent = level1.length;
                     document.getElementById('task2_count').textContent = level2.length;
                     document.getElementById('task3_count').textContent = level3.length;
@@ -534,7 +531,6 @@
                     // Atualizar total de membros
                     const totalMembers = level1.length + level2.length + level3.length;
                     document.getElementById('t1').textContent = totalMembers;
-                    document.getElementById('t2').textContent = formatCurrency(userData.totals.teamCommissions || 0);
 
                     // Calcular comissões com segurança
                     const sumCommission = (list) =>
@@ -543,9 +539,18 @@
                             return sum + (isNaN(valor) ? 0 : valor);
                         }, 0);
 
-                    document.getElementById('lv1_team_income').textContent = formatCurrency(sumCommission(level1));
-                    document.getElementById('lv2_team_income').textContent = formatCurrency(sumCommission(level2));
-                    document.getElementById('lv3_team_income').textContent = formatCurrency(sumCommission(level3));
+                    // Atualizar comissões apenas se houver valores
+                    const lv1Income = sumCommission(level1);
+                    const lv2Income = sumCommission(level2);
+                    const lv3Income = sumCommission(level3);
+                    
+                    if (lv1Income > 0) document.getElementById('lv1_team_income').textContent = formatCurrency(lv1Income);
+                    if (lv2Income > 0) document.getElementById('lv2_team_income').textContent = formatCurrency(lv2Income);
+                    if (lv3Income > 0) document.getElementById('lv3_team_income').textContent = formatCurrency(lv3Income);
+                    
+                    // Atualizar comissão total apenas se houver valor
+                    const totalCommissions = userData.totals?.teamCommissions || (lv1Income + lv2Income + lv3Income);
+                    if (totalCommissions > 0) document.getElementById('t2').textContent = formatCurrency(totalCommissions);
                 } else {
                     throw new Error(teamData.mensagem || 'Erro ao carregar equipe');
                 }
@@ -553,6 +558,15 @@
         } catch (error) {
             console.error('Erro:', error);
             layer.msg('Erro ao carregar dados da equipe');
+            
+            // Manter os valores padrão em caso de erro
+            document.getElementById('P1').textContent = '20%';
+            document.getElementById('P2').textContent = '8%';
+            document.getElementById('P3').textContent = '2%';
+            document.getElementById('lv1_team_income').textContent = 'KZ 0,00';
+            document.getElementById('lv2_team_income').textContent = 'KZ 0,00';
+            document.getElementById('lv3_team_income').textContent = 'KZ 0,00';
+            document.getElementById('t2').textContent = 'KZ 0,00';
         }
     }
 
@@ -562,6 +576,15 @@
             window.location.href = '/index.html';
             return;
         }
+
+        // Definir valores iniciais fictícios
+        document.getElementById('P1').textContent = '20%';
+        document.getElementById('P2').textContent = '8%';
+        document.getElementById('P3').textContent = '2%';
+        document.getElementById('lv1_team_income').textContent = 'KZ 0,00';
+        document.getElementById('lv2_team_income').textContent = 'KZ 0,00';
+        document.getElementById('lv3_team_income').textContent = 'KZ 0,00';
+        document.getElementById('t2').textContent = 'KZ 0,00';
 
         fetchTeamData(); // Carregar ao abrir
         setInterval(fetchTeamData, 30000); // Atualizar a cada 30 segundos
