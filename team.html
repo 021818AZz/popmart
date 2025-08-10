@@ -445,187 +445,134 @@
         </div>
     </nav>
 
-    <script>// Função para formatar valores em KZ (Kwanza Angolano)
-function formatCurrency(value) {
-    if (isNaN(value)) value = 0;
-    return 'KZ ' + parseFloat(value).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-// Função para mostrar/ocultar o loading overlay
-function toggleLoading(show) {
-    const overlay = document.getElementById('loading-overlay');
-    if (overlay) {
-        overlay.style.display = show ? 'flex' : 'none';
-    }
-}
-
-// Função principal para buscar dados da equipe
-async function fetchTeamData() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = '/index.html';
-        return;
+    <script>
+    // Função para formatar valores em KZ (Kwanza Angolano)
+    function formatCurrency(value) {
+        if (isNaN(value)) value = 0;
+        return 'KZ ' + parseFloat(value).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    // Mostrar loading states
-    document.querySelectorAll('.currency-value').forEach(el => {
-        el.innerHTML = '<span class="loading"></span>';
-    });
-    toggleLoading(true);
-
-    try {
-        // Fazer requisições em paralelo
-        const [userResponse, teamResponse] = await Promise.all([
-            fetch('https://bd-1-tile.onrender.com/me', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Cache-Control': 'no-cache'
-                }
-            }),
-            fetch('https://bd-uopv.onrender.com/user/team', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Cache-Control': 'no-cache'
-                }
-            })
-        ]);
-
-        if (!userResponse.ok || !teamResponse.ok) {
-            throw new Error('Erro na rede');
+    // Função para buscar dados da equipe
+    async function fetchTeamData() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/index.html';
+            return;
         }
 
-        const [userData, teamData] = await Promise.all([
-            userResponse.json(),
-            teamResponse.json()
-        ]);
+        // Mostrar loading
+        document.querySelectorAll('.currency-value').forEach(el => {
+            el.innerHTML = '<span class="loading"></span>';
+        });
 
-        if (userData.success) {
-            const user = userData.user;
+        try {
+            // Buscar dados do usuário
+            const userResponse = await fetch('https://bd-1-tile.onrender.com/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Cache-Control': 'no-cache'
+                }
+            });
 
-            // Atualizar dados de convite
-            document.getElementById('invitation').textContent = user.codigoConvite || 'N/A';
-            const siteUrl = userData.site_http || 'http://popmtr.org';
-            const inviteLink = `${siteUrl}/registro.html?a=${user.codigoConvite}`;
-            document.getElementById('link').textContent = inviteLink;
+            const teamResponse = await fetch('https://bd-uopv.onrender.com/user/team', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Cache-Control': 'no-cache'
+                }
+            });
 
-            // Configurar botões de cópia
-            setupClipboardButtons(user.codigoConvite, inviteLink);
+            if (!userResponse.ok || !teamResponse.ok) throw new Error('Erro na rede');
 
-            if (teamData.success) {
-                updateTeamData(teamData, userData);
-            } else {
-                throw new Error(teamData.mensagem || 'Erro ao carregar equipe');
+            const userData = await userResponse.json();
+            const teamData = await teamResponse.json();
+
+            if (userData.success) {
+                const user = userData.user;
+
+                // Atualizar dados de convite
+                document.getElementById('invitation').textContent = user.codigoConvite || 'N/A';
+                const siteUrl = userData.site_http || 'http://popmtr.org';
+                document.getElementById('link').textContent = `${siteUrl}/registro.html?a=${user.codigoConvite}`;
+
+                // Botões de cópia
+                const clipboard1 = new ClipboardJS('#copy', {
+                    text: () => `${siteUrl}/registro.html?a=${user.codigoConvite}`
+                });
+                clipboard1.on('success', function () {
+                    layer.msg('Link copiado com sucesso!', { icon: 1 });
+                });
+                clipboard1.on('error', function () {
+                    layer.msg('Erro ao copiar link.', { icon: 2 });
+                });
+
+                const clipboard2 = new ClipboardJS('#copy1', {
+                    text: () => user.codigoConvite || ''
+                });
+                clipboard2.on('success', function () {
+                    layer.msg('Código copiado com sucesso!', { icon: 1 });
+                });
+                clipboard2.on('error', function () {
+                    layer.msg('Erro ao copiar código.', { icon: 2 });
+                });
+
+                if (teamData.success) {
+                    const level1 = teamData.level1 || [];
+                    const level2 = teamData.level2 || [];
+                    const level3 = teamData.level3 || [];
+
+                    // Atualizar níveis da equipe
+                    document.getElementById('P1').textContent = '20%';
+                    document.getElementById('P2').textContent = '8%';
+                    document.getElementById('P3').textContent = '2%';
+
+                    document.getElementById('task1_count').textContent = level1.length;
+                    document.getElementById('task2_count').textContent = level2.length;
+                    document.getElementById('task3_count').textContent = level3.length;
+
+                    // Atualizar total de membros
+                    const totalMembers = level1.length + level2.length + level3.length;
+                    document.getElementById('t1').textContent = totalMembers;
+                    document.getElementById('t2').textContent = formatCurrency(userData.totals.teamCommissions || 0);
+
+                    // Calcular comissões com segurança
+                    const sumCommission = (list) =>
+                        list.reduce((sum, u) => {
+                            const valor = Number(u.comissao ?? u.commission ?? 0);
+                            return sum + (isNaN(valor) ? 0 : valor);
+                        }, 0);
+
+                    document.getElementById('lv1_team_income').textContent = formatCurrency(sumCommission(level1));
+                    document.getElementById('lv2_team_income').textContent = formatCurrency(sumCommission(level2));
+                    document.getElementById('lv3_team_income').textContent = formatCurrency(sumCommission(level3));
+                } else {
+                    throw new Error(teamData.mensagem || 'Erro ao carregar equipe');
+                }
             }
+        } catch (error) {
+            console.error('Erro:', error);
+            layer.msg('Erro ao carregar dados da equipe');
         }
-    } catch (error) {
-        console.error('Erro:', error);
-        showErrorToast('Erro ao carregar dados da equipe');
-    } finally {
-        toggleLoading(false);
     }
-}
 
-// Configurar botões de cópia
-function setupClipboardButtons(inviteCode, inviteLink) {
-    // Botão de copiar link
-    const clipboard1 = new ClipboardJS('#copy', {
-        text: () => inviteLink
+    // Inicialização quando o DOM estiver pronto
+    document.addEventListener('DOMContentLoaded', function () {
+        if (!localStorage.getItem('token')) {
+            window.location.href = '/index.html';
+            return;
+        }
+
+        fetchTeamData(); // Carregar ao abrir
+        setInterval(fetchTeamData, 30000); // Atualizar a cada 30 segundos
     });
-    
-    clipboard1.on('success', () => showSuccessToast('Link copiado com sucesso!'));
-    clipboard1.on('error', () => showErrorToast('Erro ao copiar link.'));
 
-    // Botão de copiar código
-    const clipboard2 = new ClipboardJS('#copy1', {
-        text: () => inviteCode || ''
-    });
-    
-    clipboard2.on('success', () => showSuccessToast('Código copiado com sucesso!'));
-    clipboard2.on('error', () => showErrorToast('Erro ao copiar código.'));
-}
+    // LayUI e event listeners
+    layui.use(['layer', 'jquery'], function () {
+        var layer = layui.layer;
+        var $ = layui.jquery;
 
-// Atualizar os dados da equipe na interface
-function updateTeamData(teamData, userData) {
-    const level1 = teamData.level1 || [];
-    const level2 = teamData.level2 || [];
-    const level3 = teamData.level3 || [];
-
-    // Atualizar taxas de comissão
-    document.getElementById('P1').textContent = '20%';
-    document.getElementById('P2').textContent = '8%';
-    document.getElementById('P3').textContent = '2%';
-
-    // Atualizar contagem de membros
-    document.getElementById('task1_count').textContent = level1.length;
-    document.getElementById('task2_count').textContent = level2.length;
-    document.getElementById('task3_count').textContent = level3.length;
-
-    // Atualizar totais
-    const totalMembers = level1.length + level2.length + level3.length;
-    document.getElementById('t1').textContent = totalMembers;
-    document.getElementById('t2').textContent = formatCurrency(userData.totals?.teamCommissions || 0);
-
-    // Calcular e atualizar comissões
-    document.getElementById('lv1_team_income').textContent = formatCurrency(
-        teamData.commissions?.level1 || sumCommission(level1)
-    );
-    document.getElementById('lv2_team_income').textContent = formatCurrency(
-        teamData.commissions?.level2 || sumCommission(level2)
-    );
-    document.getElementById('lv3_team_income').textContent = formatCurrency(
-        teamData.commissions?.level3 || sumCommission(level3)
-    );
-}
-
-// Função auxiliar para somar comissões
-function sumCommission(list) {
-    return list.reduce((sum, u) => {
-        const valor = Number(u.comissao ?? u.commission ?? 0);
-        return sum + (isNaN(valor) ? 0 : valor);
-    }, 0);
-}
-
-// Funções de feedback para o usuário
-function showSuccessToast(message) {
-    if (typeof layer !== 'undefined') {
-        layer.msg(message, { icon: 1 });
-    } else {
-        alert(message);
-    }
-}
-
-function showErrorToast(message) {
-    if (typeof layer !== 'undefined') {
-        layer.msg(message, { icon: 2 });
-    } else {
-        alert(message);
-    }
-}
-
-// Inicialização quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', function() {
-    // Verificar autenticação
-    if (!localStorage.getItem('token')) {
-        window.location.href = '/index.html';
-        return;
-    }
-
-    // Configurar navegação
-    setupNavigation();
-
-    // Carregar dados inicialmente
-    fetchTeamData();
-    
-    // Atualizar a cada 30 segundos
-    setInterval(fetchTeamData, 30000);
-});
-
-// Configurar eventos de navegação
-function setupNavigation() {
-    if (typeof $ !== 'undefined') {
-        $(document).on("click", '#teamdetails', function() {
+        $(document).on("click", '#teamdetails', function () {
             layer.open({
                 type: 2,
                 title: false,
@@ -635,26 +582,11 @@ function setupNavigation() {
             });
         });
 
-        $(document).on("click", '.navtab', function() {
+        $(document).on("click", '.navtab', function () {
             const url = $(this).attr("url");
             if (url) location.href = url + "?time=" + Math.random();
         });
-    }
-}
-
-// Adicionar overlay de loading dinamicamente se não existir
-if (!document.getElementById('loading-overlay')) {
-    const overlay = document.createElement('div');
-    overlay.id = 'loading-overlay';
-    overlay.style.cssText = 'display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 10000; justify-content: center; align-items: center;';
-    overlay.innerHTML = `
-        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center;">
-            <div class="loading" style="width: 40px; height: 40px; border-width: 4px;"></div>
-            <div style="margin-top: 10px;">Carregando dados da equipe...</div>
-        </div>
-    `;
-    document.body.appendChild(overlay);
-}
+    });
 </script>
 </body>
 </html>
