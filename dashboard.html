@@ -581,10 +581,10 @@
                     banner();
                     getcsinfo();
                     Textgpt();
-                    getUserData(); // Substitui getuserinfo()
+                    getUserData();
                 }
                 
-                // Manter todos os outros event listeners originais
+                // Event listeners modificados para redirecionar diretamente
                 $(document).on("click", '#close', function() {
                     $('.indexdiv').hide();
                     $("#noctie").hide();
@@ -709,7 +709,7 @@
                         });
                 }
 
-                // Manter todos os outros event listeners originais
+                // Event listeners modificados para redirecionar diretamente
                 $(document).on("click", '#Join', function() {
                     var url2 = document.getElementById("techannel").value;
                     if (window.android) {
@@ -724,88 +724,28 @@
                 });
 
                 $(document).on("click", '#Recharge', function() {
-                    var url1 = "deposito.html?time=" + Math.random();
-                    layer.open({
-                        type: 2,
-                        title: false,
-                        area: ['100%', '100%'],
-                        shadeClose: true,
-                        isOutAnim: false,
-                        closeBtn: 0,
-                        anim: 5,
-                        shade: [0.8, '#393D49'],
-                        maxmin: false,
-                        content: url1
-                    });
+                    window.location.href = "deposito.html?time=" + Math.random();
                 });
 
                 $(document).on("click", '#help', function() {
-                    var url1 = "deposito.html?time=" + Math.random();
-                    layer.open({
-                        type: 2,
-                        title: false,
-                        area: ['100%', '100%'],
-                        shadeClose: true,
-                        isOutAnim: false,
-                        closeBtn: 0,
-                        anim: 5,
-                        shade: [0.8, '#393D49'],
-                        maxmin: false,
-                        content: url1
-                    });
+                    window.location.href = "deposito.html?time=" + Math.random();
                 });
 
                 $(document).on("click", '#task', function() {
-                    var url1 = "serviço.html?time=" + Math.random();
-                    layer.open({
-                        type: 2,
-                        title: false,
-                        area: ['100%', '100%'],
-                        shadeClose: true,
-                        isOutAnim: false,
-                        closeBtn: 0,
-                        anim: 5,
-                        shade: [0.8, '#393D49'],
-                        maxmin: false,
-                        content: url1
-                    });
+                    window.location.href = "servico.html?time=" + Math.random();
                 });
 
                 $(document).on("click", '#Withdraw', function() {
-                    var url1 = "retirada.html?time=" + Math.random();
-                    layer.open({
-                        type: 2,
-                        title: false,
-                        area: ['100%', '100%'],
-                        shadeClose: true,
-                        isOutAnim: false,
-                        closeBtn: 0,
-                        anim: 5,
-                        shade: [0.8, '#393D49'],
-                        maxmin: false,
-                        content: url1
-                    });
+                    window.location.href = "retirada.html?time=" + Math.random();
                 });
 
                 $(document).on("click", '#down', function() {
-                    var url1 = "serviço.html?time=" + Math.random();
-                    layer.open({
-                        type: 2,
-                        title: false,
-                        area: ['100%', '100%'],
-                        shadeClose: true,
-                        isOutAnim: false,
-                        closeBtn: 0,
-                        anim: 5,
-                        shade: [0.8, '#393D49'],
-                        maxmin: false,
-                        content: url1
-                    });
+                    window.location.href = "servico.html?time=" + Math.random();
                 });
 
                 $(document).on("click", '.navtab', function() {
                     var urlx = $(this).attr("url");
-                    location.href = urlx + "?time=" + Math.random();
+                    window.location.href = urlx + "?time=" + Math.random();
                 });
             });
         });
