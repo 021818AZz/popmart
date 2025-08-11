@@ -1,0 +1,154 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>About us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="https://popmbbb.cc/Lay/layui.js?v1.0"></script>
+    <link href="https://popmbbb.cc/Lay/css/layui.css?v1.0" rel="stylesheet" />
+    <script src="https://popmbbb.cc/js/comm.js?v1.0"></script>
+    <script src="https://popmbbb.cc/js/jquery-1.11.0.min.js"></script>
+    <script src="https://popmbbb.cc/Lay/lay/modules/i18n.js"></script>
+    <link href="https://popmbbb.cc/css/main.css?v1.3" rel="stylesheet" />
+    <style type="text/css">
+        .topname {
+            line-height: 46px;
+            font-weight: bold;
+            font-size: 14px;
+            width: 75%;
+            text-align: center;
+            color: #000;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .typeitem {
+            float: left;
+            width: 50%;
+            height: auto;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .over {
+            border-bottom: 2px solid #00ff00;
+        }
+        
+        .bonus-card {
+            background: linear-gradient(135deg, #00ff0d, #ff6a00);
+            color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px auto;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .bonus-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .bonus-amount {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .transaction-item {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body style="background: #f1f1f1;">
+    <div style="width: 100%; margin: 0 auto; background: #fff; border-bottom: 1px solid #eee; position: fixed; top: 0; z-index: 100;">
+        <div style="float:left; text-align:left; line-height:46px;width:20%;">
+            <a href="meu.html" style="display: block; padding-left: 15px;">Voltar
+                <i class="layui-icon" style="color: #000; font-size: 18px;">&#xe603;</i>
+            </a>
+        </div>
+        <font class="topname" style="color: #000;">
+            Detalhes do saldo
+        </font>
+        <div style="float:right; text-align:right; line-height:46px;width:20%;">
+            <!-- Espaço reservado para alinhamento -->
+        </div>
+    </div>
+
+    <div style="max-width:450px; margin:0 auto; padding-top: 60px;">
+        <div style="background: #fff; margin: 10px; border-radius: 5px; overflow: hidden;">
+            <div class="typeitem over" id="incomeTab" onclick="showTab('income')">
+                <div style="padding: 15px; text-align: center;">Registro de renda</div>
+            </div>
+            <div class="typeitem" id="withdrawalTab" onclick="showTab('withdrawal')">
+                <div style="padding: 15px; text-align: center;">Registro de Retirada</div>
+            </div>
+        </div>
+
+        <!-- Conteúdo do Registro de Renda -->
+        <div id="incomeContent">
+            <div class="bonus-card">
+                <div class="bonus-title">BÔNUS DE INSCRIÇÃO</div>
+                <div class="bonus-amount">300KZ</div>
+                <div style="margin-top:10px;font-size:14px;">Parabéns! Você ganhou um bônus de inscrição</div>
+            </div>
+            
+            <div class="transaction-item">
+                <div style="display: flex; justify-content: space-between;">
+                    <div>
+                        <div style="font-weight: bold; color: #333;">Bônus de Cadastro</div>
+                        <div style="font-size: 12px; color: #999;">Hoje, 10:30</div>
+                    </div>
+                    <div style="font-weight: bold; color: #15ff00;">+300KZ</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo do Registro de Retirada -->
+        <div id="withdrawalContent" style="display: none;">
+            <div class="no-data">
+                <img src="https://cdn-icons-png.flaticon.com/512/4076/4076478.png" style="width: 80px; opacity: 0.5;">
+                <div style="margin-top: 15px;">Nenhum dado de retirada disponível</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Atualiza a aparência das abas
+            document.getElementById('incomeTab').classList.remove('over');
+            document.getElementById('withdrawalTab').classList.remove('over');
+            
+            // Esconde todos os conteúdos
+            document.getElementById('incomeContent').style.display = 'none';
+            document.getElementById('withdrawalContent').style.display = 'none';
+            
+            // Mostra o conteúdo selecionado e destaca a aba
+            if(tabName === 'income') {
+                document.getElementById('incomeTab').classList.add('over');
+                document.getElementById('incomeContent').style.display = 'block';
+            } else {
+                document.getElementById('withdrawalTab').classList.add('over');
+                document.getElementById('withdrawalContent').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
