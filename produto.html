@@ -257,7 +257,6 @@
             90% { opacity: 1; }
             100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
         }
-
     </style>
 </head>
 <body>
@@ -502,7 +501,8 @@
                 }
                 
                 try {
-                    const response = await fetch('https://bd-1-tile.onrender.com/products/purchase', {
+                    // 1. Primeiro fazemos a compra
+                    const purchaseResponse = await fetch('https://bd-1-tile.onrender.com/products/purchase', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -511,17 +511,52 @@
                         body: JSON.stringify({ productId })
                     });
                     
-                    const data = await response.json();
+                    const purchaseData = await purchaseResponse.json();
                     
-                    if (data.success) {
+                    if (purchaseData.success) {
                         showToast('Compra realizada com sucesso!');
                         // Atualizar saldo exibido
-                        document.getElementById('number1').textContent = data.saldoAtualizado.toLocaleString('pt-PT');
+                        document.getElementById('number1').textContent = purchaseData.saldoAtualizado.toLocaleString('pt-PT');
+                        
+                        // 2. Depois registramos o produto
+                        try {
+                            const productCard = document.querySelector(`.product-card[value="${productId}"]`);
+                            
+                            const productData = {
+                                productId: productId,
+                                name: productCard.getAttribute('pname'),
+                                price: productCard.getAttribute('price'),
+                                dayIncome: productCard.getAttribute('day_income'),
+                                totalIncome: productCard.getAttribute('total_income'),
+                                days: productCard.getAttribute('day'),
+                                purchaseDate: new Date().toISOString(),
+                                status: 'active'
+                            };
+                            
+                            const registerResponse = await fetch('https://bd-1-tile.onrender.com/registroproduto', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`
+                                },
+                                body: JSON.stringify(productData)
+                            });
+                            
+                            const registerData = await registerResponse.json();
+                            
+                            if (!registerData.success) {
+                                console.error('Erro ao registrar produto:', registerData.message);
+                                showToast('Produto comprado, mas houve um erro no registro');
+                            }
+                        } catch (registerError) {
+                            console.error('Erro ao registrar produto:', registerError);
+                            showToast('Produto comprado, mas houve um erro no registro');
+                        }
                     } else {
-                        if (data.redirectTo) {
-                            window.location.href = data.redirectTo;
+                        if (purchaseData.redirectTo) {
+                            window.location.href = purchaseData.redirectTo;
                         } else {
-                            showToast(data.mensagem || 'Erro ao processar compra');
+                            showToast(purchaseData.mensagem || 'Erro ao processar compra');
                         }
                     }
                 } catch (error) {
