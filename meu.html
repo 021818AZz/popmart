@@ -1,512 +1,583 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1, minimum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>Minha Conta</title>
-    <link href="https://popmbbb.cc/Lay/css/layui.css?v1.6" rel="stylesheet" />
-    <link href="https://popmbbb.cc/css/main.css?v2.7" rel="stylesheet" />
-    <link href="https://popmbbb.cc/layer_mobile/need/layer.css?v1.6" rel="stylesheet" />
-    <script src="https://popmbbb.cc/Lay/layui.js?v1.7"></script>
-    <script src="https://popmbbb.cc/js/comm.js?v1.7"></script>
-    <script src="https://popmbbb.cc/js/jquery-1.11.0.min.js"></script>
-    <style type="text/css">
-        /* Estilos gerais */
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamster Minha conta</title>
+    <link href="https://hamstermine-br.vip/static/home/js/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/app.css?v=1.0">
+    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/layer.js"></script>
+    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/qrcode.min.js"></script>
+    <script src="https://hamstermine-br.vip/static/home/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/iconfont.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            min-height: 100%; 
-            width: 100%; 
-            background: #f5f5f5;
-            font-family: 'HarmonyOS Sans SC', sans-serif;
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background: #c2ffdd !important;
+            min-height: 100vh;
+            padding-bottom: 70px;
         }
-        
-        div {
-            cursor: pointer;
-        }
-        
-        /* Estilo para loading */
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(0,0,0,.3);
-            border-radius: 50%;
-            border-top-color: #28a745;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Estilo para valores monetários */
-        .currency-value {
-            font-weight: bold;
-            color: #28a745;
-        }
-        
-        /* Estilo para cabeçalho */
-        .user-header {
+
+        .container {
+            /* max-width: 414px; */
+            margin: 0 auto;
+
+            min-height: 100vh;
             position: relative;
-            height: 180px;
-            background: linear-gradient(135deg, #2e362f, #f1f3f1);
-            border-radius: 0 0 20px 20px;
-            padding: 15px;
-            color: white;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+            padding: 0;
         }
-        
-        .user-avatar {
+
+        /* User profile card */
+        .profile-card {
+            background: linear-gradient(313deg, #104728 0%, #1a8755 100%);
+            padding: 10px 20px;
+            border-radius: 0 0 35px 35px;
+            text-align: center;
+            color: white;
+        }
+
+        .avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 3px solid white;
-            margin: 0 auto;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 0 auto 15px;
+            display: block;
         }
-        
-        .user-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            text-align: center;
+
+        .username {
+            font-size: 18px;
+            margin-bottom: 5px;
         }
-        
-        .info-item {
-            flex: 1;
-            padding: 0 10px;
-        }
-        
-        .info-label {
-            font-size: 12px;
-            opacity: 0.8;
-            margin-top: 5px;
-        }
-        
-        /* Botão de logout */
-        .logout-btn {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 5px 15px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            z-index: 10;
-        }
-        
-        /* Cartão de ações */
-        .action-card {
-            background: white;
+
+        .user-level {
+            display: inline-block;
+            background: linear-gradient(90deg, #41ff97 0%, #29c770 100%);
             border-radius: 15px;
-            margin: 15px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            text-align: center;
+            padding: 3px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #104728;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
-        
-        .action-grid {
+
+        .balance-section {
+            margin-bottom: 20px;
+        }
+
+        .balance-title {
+            font-size: 14px;
+        }
+
+        .balance-amount {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .earnings-row {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
+            gap: 20px;
         }
-        
-        .action-item {
+
+        .earnings-item {
             flex: 1;
             text-align: center;
-            padding: 10px;
-            border-radius: 10px;
-            transition: all 0.3s;
         }
-        
-        .action-item:hover {
-            background: rgba(40, 167, 69, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        .action-icon {
-            width: 36px;
-            height: 36px;
-            margin-bottom: 8px;
-        }
-        
-        .action-label {
-            font-size: 12px;
-            color: #333;
-        }
-        
-        /* Seção de serviços */
-        .services-section {
-            margin: 15px;
-        }
-        
-        .section-title {
-            font-size: 16px;
+
+        .earnings-amount {
+            font-size: 18px;
             font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
         }
-        
-        .section-divider {
-            border: none;
-            height: 1px;
-            background: #e0e0e0;
-            margin: 10px 0;
+
+        .earnings-label {
+            font-size: 12px;
         }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        .service-item {
-            background: white;
+
+        /* Invitation link card */
+        .invite-card {
+            margin: 15px 15px;
+            padding: 10px;
+            border: 2px solid #29c770;
             border-radius: 10px;
-            padding: 12px;
+            background: #fff;
+        }
+
+        .invite-title {
+            color: #198754;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .invite-input-group {
+            display: flex;
+            border: 2px solid #29c770;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .invite-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            background: #fff;
+        }
+
+        .copy-btn {
+            background: linear-gradient(313deg, #41ff97 0%, #29c770 100%);
+            border: none;
+            padding: 10px 15px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .copy-btn img {
+            width: 30px;
+            height: 30px;
+        }
+
+
+        /* Function button area */
+        .functions-section {
+            padding: 0px 15px;
+        }
+
+        .functions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            /* margin-bottom: 20px; */
+        }
+
+        .function-item {
+            text-align: center;
+        }
+
+        .function-btn {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #29c770;
+            border-radius: 10px;
+            background: transparent;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: all 0.3s;
+            justify-content: center;
+            margin: 0 auto 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
-        
-        .service-item:hover {
+
+        .function-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 208, 148, 0.3);
         }
-        
-        .service-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
-            color: #28a745;
+
+        .function-icon {
+            width: 35px;
+            height: 35px;
+            filter: brightness(0) saturate(100%) invert(75%) sepia(44%) saturate(827%) hue-rotate(85deg) brightness(85%) contrast(80%);
         }
-        
-        .service-label {
+
+        .function-label {
             font-size: 12px;
             color: #333;
         }
-        
-        /* Navegação */
-        .nav {
+
+        /* Decorative elements */
+        .decoration {
+            background: #c3ffdd;
+            height: 30px;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+        }
+
+        .bottom-image {
+            width: 100%;
+            margin-top: -26px;
+        }
+
+        /* Footer fixed at the bottom */
+        footer {
             position: fixed;
             bottom: 0;
-            width: 100%;
-            max-width: 450px;
+            left: 0;
+            right: 0;
             height: 60px;
-            background: white;
+            background: linear-gradient(270deg, #28c76f 11.2%, #198754 78.9%);
+            border-radius: 30px 30px 0 0;
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            border-radius: 15px 15px 0 0;
+            z-index: 1000;
         }
-        
-        .nav-item {
+
+        .footer-item {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #666;
+            text-decoration: none;
+            color: #4f5b6d;
+            transition: color 0.3s;
+        }
+
+        .footer-item.active {
+            color: #419CEE;
+        }
+
+        .footer-icon {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 2px;
+        }
+
+        .footer-text {
             font-size: 12px;
+            line-height: 1;
         }
-        
-        .nav-item.active {
-            color: #28a745;
-            font-weight: bold;
+
+        .footer-center {
+            position: relative;
         }
-        
-        .nav-icon {
-            width: 24px;
-            height: 24px;
-            margin-bottom: 3px;
+
+        .footer-center .footer-icon {
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            top: -58px;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        
-        .gray {
-            filter: grayscale(100%);
+
+        /* Responsive */
+        @media (max-width: 414px) {
+            .container {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
+
 <body>
-    <input type="hidden" id="telegram" value="" />
-    <input type="hidden" id="androidurl" value="" />
-
-    <div style="max-width:450px; margin:0 auto; padding-bottom: 70px;">
-        <div class="top1"></div>
-        
-        <!-- Cabeçalho do usuário -->
-        <div class="user-header">
-            <!-- Botão de logout -->
-            <button id="outlogin" class="logout-btn">
-                <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="white">
-                    <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
-                </svg>
-                Sair
-            </button>
-
-            <!-- Avatar -->
-            <div class="user-avatar">
-                <img src="https://greenflowmz.com/static/base_head.png" style="width: 100%; height: 100%; object-fit: cover;" />
+    <div class="container">
+        <!-- Cartão de perfil do usuário -->
+        <div class="profile-card">
+            <img src="https://hamstermine-br.vip/static/home/img/mb/0027.png" alt="Avatar do Usuário" class="avatar">
+            <div class="username" id="userMobile"></div>
+            <div class="user-level">
+                <i class="fas fa-crown" style="margin-right: 3px;"></i>
+                VIP1
             </div>
-
-            <!-- Informações do usuário -->
-            <div class="user-info">
-                <div class="info-item">
-                    <div id="uid" style="font-size: 14px; font-weight: bold;"><span class="loading"></span></div>
-                    <div class="info-label">Número de telefone</div>
+            <div class="earnings-row">
+                <div class="earnings-item">
+                    <div class="earnings-amount" id="currentBalance">KZ0.00</div>
+                    <div class="earnings-label">Saldo Atual</div>
                 </div>
-                <div class="info-item">
-                    <div id="useramount" class="currency-value" style="font-size: 16px;"><span class="loading"></span></div>
-                    <div class="info-label">Saldo da conta</div>
+                <div class="earnings-item">
+                    <div class="earnings-amount" id="totalEarnings">KZ0.00</div>
+                    <div class="earnings-label">Renda Total</div>
                 </div>
             </div>
         </div>
 
-        <!-- Cartão de ações principais -->
-        <div class="action-card">
-            <div style="font-weight: bold; color: #333;">Ações rápidas</div>
-            <div class="action-grid">
-                <div class="action-item" onclick="window.location.href='deposito.html'">
-                    <svg class="action-icon" viewBox="0 0 24 24" fill="#28a745">
-                        <path d="M12,15A2,2 0 0,1 14,17C14,18.11 13.1,19 12,19C10.89,19 10,18.11 10,17A2,2 0 0,1 12,15M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M16,14H15.5A1.5,1.5 0 0,1 14,12.5V10H10V12.5C10,13.88 11.12,15 12.5,15H16V18L19,15L16,12V14Z" />
-                    </svg>
-                    <div class="action-label">Recarregar</div>
+        <!-- Cartão de link de convite -->
+        <div class="invite-card">
+            <div class="invite-title">Link de Convite</div>
+            <div class="invite-input-group">
+                <input type="text" value="" class="invite-input" id="referralURL" readonly>
+                <button class="copy-btn" onclick="copyToClipboard('referralURL')">
+                    <img src="https://hamstermine-br.vip/static/home/img/mb/0040.png" alt="Copiar">
+                </button>
+            </div>
+        </div>
+
+        <!-- Área de botões de função -->
+        <div class="functions-section">
+            <div class="functions-grid">
+                <!-- <div class="function-item">
+                    <a href="https://hamstermine-br.vip" class="function-btn">
+                        <img src="/static/home/img/mb/0050.png" alt="Tarefa de Equipe" class="function-icon">
+                    </a>
+                    <div class="function-label">Tarefa de Equipe</div>
+                </div> -->
+                <div class="function-item">
+                    <a href="/tesouro" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0049.png" alt="Tesouro" class="function-icon">
+                    </a>
+                    <div class="function-label">Tesouro</div>
                 </div>
-                
-                <div class="action-item" onclick="window.location.href='retirada.html'">
-                    <svg class="action-icon" viewBox="0 0 24 24" fill="#28a745">
-                        <path d="M14,12H10V10H14M14,16H10V14H14M20,8H17.19C16.74,7.22 16.12,6.55 15.37,6.04L17,4.41L15.59,3L13.42,5.17C12.96,5.06 12.5,5 12,5C11.5,5 11.04,5.06 10.59,5.17L8.41,3L7,4.41L8.62,6.04C7.88,6.55 7.26,7.22 6.81,8H4V10H6.09C6.04,10.33 6,10.66 6,11V12H4V14H6V15C6,15.34 6.04,15.67 6.09,16H4V18H6.81C8.47,20.87 12.14,21.84 15,20.18C15.91,19.66 16.67,18.9 17.19,18H20V16H17.91C17.96,15.67 18,15.34 18,15V14H20V12H18V11C18,10.66 17.96,10.33 17.91,10H20V8Z" />
-                    </svg>
-                    <div class="action-label">Retirada</div>
+                <div class="function-item">
+                    <a href="/deposito" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0029.png" alt="Depositar" class="function-icon">
+                    </a>
+                    <div class="function-label">Depositar</div>
                 </div>
-                
-                <div class="action-item" onclick="window.location.href='/registros'">
-                    <svg class="action-icon" viewBox="0 0 24 24" fill="#28a745">
-                        <path d="M12,3C16.97,3 21,7.03 21,12H19C19,8.14 15.86,5 12,5C8.14,5 5,8.14 5,12C5,15.86 8.14,19 12,19C14.39,19 16.53,17.77 17.86,15.86L19.26,17.26C17.53,19.69 14.96,21 12,21C7.03,21 3,16.97 3,12C3,7.03 7.03,3 12,3M11,8H13V16H11V8M15,1H9V3H15V1Z" />
-                    </svg>
-                    <div class="action-label">Registros</div>
+                <div class="function-item">
+                    <a href="/retirada" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0030.png" alt="Sacar" class="function-icon">
+                    </a>
+                    <div class="function-label">Sacar</div>
+                </div>
+                <div class="function-item">
+                    <a href="/bank-account" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0048.png" alt="Cartão Bancário" class="function-icon">
+                    </a>
+                    <div class="function-label">Cartão Bancário</div>
+                </div>
+                <div class="function-item">
+                    <a href="/senha.html" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0031.png" alt="Senha" class="function-icon">
+                    </a>
+                    <div class="function-label">Senha</div>
+                </div>
+                <div class="function-item">
+                    <a href="/historicosaldo" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0032.png" alt="Histórico de Depósitos" class="function-icon">
+                    </a>
+                    <div class="function-label">Histórico de Depósitos</div>
+                </div>
+                <div class="function-item">
+                    <a href="/historico" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0033.png" alt="Histórico de Saques" class="function-icon">
+                    </a>
+                    <div class="function-label">Histórico de Saques</div>
+                </div>
+                <div class="function-item">
+                    <a href="/historicosaldo.html" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0034.png" alt="Histórico de Saldo" class="function-icon">
+                    </a>
+                    <div class="function-label">Histórico de Saldo</div>
+                </div>
+                <div class="function-item">
+                    <a href="https://hamstermine-br.vip/static/app/app.apk" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0035.png" alt="Baixar App" class="function-icon">
+                    </a>
+                    <div class="function-label">Baixar App</div>
+                </div>
+                <div class="function-item">
+                    <a href="/index" class="function-btn">
+                        <img src="https://hamstermine-br.vip/static/home/img/mb/0036.png" alt="Sair" class="function-icon">
+                    </a>
+                    <div class="function-label">Sair</div>
                 </div>
             </div>
         </div>
 
-        <!-- Seção de serviços -->
-        <div class="services-section">
-            <div class="section-title">
-                <svg style="width: 20px; height: 20px; margin-right: 8px;" viewBox="0 0 24 24" fill="#28a745">
-                    <path d="M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19M17,17H7V7H17V17M14,14H10V10H14V14Z" />
-                </svg>
-                Outros serviços
-            </div>
-            <hr class="section-divider" />
-            
-            <div class="services-grid">
-                <div class="service-item" onclick="window.location.href='sobre.html?id=1'">
-                    <svg class="service-icon" viewBox="0 0 24 24">
-                        <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
-                    </svg>
-                    <div class="service-label">Sobre nós</div>
-                </div>
-                
-                <div class="service-item" onclick="window.location.href='sobre.html?id=2'">
-                    <svg class="service-icon" viewBox="0 0 24 24">
-                        <path d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,10A1.5,1.5 0 0,0 10.5,11.5A1.5,1.5 0 0,0 12,13A1.5,1.5 0 0,0 13.5,11.5A1.5,1.5 0 0,0 12,10Z" />
-                    </svg>
-                    <div class="service-label">Regras</div>
-                </div>
-                
-                <div class="service-item" onclick="window.location.href='servico.html'">
-                    <svg class="service-icon" viewBox="0 0 24 24">
-                        <path d="M12,3C6.5,3 2,6.58 2,11C2.05,13.15 3.06,15.17 4.75,16.5C4.75,17.1 4.33,18.67 2,21C4.37,20.89 6.64,20 8.47,18.5C9.61,18.83 10.81,19 12,19C17.5,19 22,15.42 22,11C22,6.58 17.5,3 12,3M12,17C7.58,17 4,14.31 4,11C4,7.69 7.58,5 12,5C16.42,5 20,7.69 20,11C20,14.31 16.42,17 12,17Z" />
-                    </svg>
-                    <div class="service-label">Suporte</div>
-                </div>
-                
-                <div class="service-item" id="down">
-                    <svg class="service-icon" viewBox="0 0 24 24">
-                        <path d="M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3M18,5H15.5A3.5,3.5 0 0,0 12,8.5V11H10V14H12V21H15V14H18V11H15V9A1,1 0 0,1 16,8H18V5Z" />
-                    </svg>
-                    <div class="service-label">Baixar App</div>
-                </div>
-            </div>
-        </div>
-               
-        <div class="service-item" onclick="window.location.href='jogo.html'">
-            <svg class="service-icon" viewBox="0 0 24 24">
-                <path d="M5,8C3.9,8 3,8.9 3,10V14C3,15.1 3.9,16 5,16H8L11,19H13L16,16H19C20.1,16 21,15.1 21,14V10C21,8.9 20.1,8 19,8H5M8,12.5C7.17,12.5 6.5,11.83 6.5,11C6.5,10.17 7.17,9.5 8,9.5C8.83,9.5 9.5,10.17 9.5,11C9.5,11.83 8.83,12.5 8,12.5M16,12.5C15.17,12.5 14.5,11.83 14.5,11C14.5,10.17 15.17,9.5 16,9.5C16.83,9.5 17.5,10.17 17.5,11C17.5,11.83 16.83,12.5 16,12.5Z" />
-            </svg>
-            <div class="service-label">Jogar</div>
-        </div>
-
-        <!-- Navegação inferior -->
-        <nav class="nav">
-            <div onclick="window.location.href='dashboard.html'" class="nav-item">
-                <svg class="nav-icon gray" viewBox="0 0 24 24">
-                    <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
-                </svg>
-                <span><br>Lar</span>
-            </div>
-            <div onclick="window.location.href='produto.html'" class="nav-item">
-                <svg class="nav-icon gray" viewBox="0 0 24 24">
-                    <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z" />
-                </svg>
-                <span><br>Produto</span>
-            </div>
-            <div onclick="window.location.href='team.html'" class="nav-item">
-                <svg class="nav-icon gray" viewBox="0 0 24 24">
-                    <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
-                </svg>
-                <span><br>Equipe</span>
-            </div>
-            <div class="nav-item active">
-                <svg class="nav-icon" viewBox="0 0 24 24" fill="#28a745">
-                    <path d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
-                </svg>
-                <span><br>Meu</span>
-            </div>
-        </nav>
+        <!-- Elementos decorativos -->
+        <div class="decoration"></div>
+        <img src="https://hamstermine-br.vip/static/home/img/mb/0028.png" alt="Mineração de Hamster" class="bottom-image">
     </div>
 
+
+    <style>
+    .game1 {
+        border-radius: 50%;
+        animation: rotate1 2s linear infinite;
+    }
+
+    @keyframes  rotate1 {
+        0% {
+            transform: rotateZ(0deg);
+        }
+
+        100% {
+            transform: rotateZ(360deg);
+        }
+    }
+
+    .foot_bo div div {
+        text-align: center;
+    }
+
+    .active_footer {
+        font-size: 14px !important;
+        filter: brightness(0) saturate(100%) invert(77%) sepia(30%) saturate(717%) hue-rotate(106deg) brightness(105%) contrast(106%);
+    }
+
+
+    .disactive {
+        font-size: 14px !important;
+        filter: invert(100%);
+    }
+
+    .height_16 {
+        color: #000000;
+        height: 16px !important;
+        line-height: 16px !important;
+        font-weight: 600;
+    }
+
+    .zhongjian img {
+        width: 70px !important;
+        height: 70px !important;
+        position: absolute;
+        top: -58px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .zhongjian {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+</style>
+<footer>
+        <div class="foot_bo">
+        <div onclick="window.location.href='/dashboard'">
+            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0018.png" />
+            <div class="disactive height_16">Início</div>
+        </div>
+    </div>
+            <div class="foot_bo">
+        <div onclick="window.location.href='/produto'">
+            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0019.png" />
+            <div class="disactive height_16">Ganhos</div>
+        </div>
+    </div>
+    
+
+    <div class="foot_bo zhongjian">
+        <div href="/nos">
+            <img src="https://hamstermine-br.vip/static/home/img/mb/0022.png" onclick="window.location.href='/nos'" />
+        </div>
+    </div>
+        <div class="foot_bo">
+        <div onclick="window.location.href='/equipe'">
+            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0020.png" />
+            <div class="disactive height_16">Compartilhar</div>
+        </div>
+    </div>
+    
+        <div class="foot_bo">
+        <div onclick="window.location.href='/meu'">
+            <img class="active_footer" src="https://hamstermine-br.vip/static/home/img/mb/0021.png" />
+            <div class="xz active_footer height_16">Meu</div>
+        </div>
+    </div>
+    </footer>   
     <script>
-        // Função para formatar valores em KZ (Kwanza Angolano)
-        function formatCurrency(value) {
-            if (isNaN(value)) value = 0;
-            return 'KZ ' + parseFloat(value).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        }
-
-        // Função para formatar número de telefone
-        function formatPhoneNumber(phone) {
-            if (!phone) return '';
-            
-            // Formatar números brasileiros (assumindo formato 55XXXXXXXXXXX)
-            if (phone.startsWith('55') && phone.length >= 12) {
-                return phone.replace(/(\d{2})(\d{2})(\d{5})(\d{4})/, '+$1 ($2) $3-$4');
-            }
-            // Formatar números angolanos (assumindo formato 244XXXXXXXXX)
-            else if (phone.startsWith('244') && phone.length >= 12) {
-                return phone.replace(/(\d{3})(\d{3})(\d{3})(\d{3})/, '+$1 $2 $3 $4');
-            }
-            // Formato internacional padrão
-            else if (phone.startsWith('+')) {
-                return phone.replace(/(\+\d{3})(\d{3})(\d{3})(\d{3})/, '$1 $2 $3 $4');
-            }
-            
-            return phone;
-        }
-
-        // Função para buscar dados do usuário
-        async function fetchUserData() {
+        // Função para carregar os dados do usuário
+        async function loadUserData() {
             const token = localStorage.getItem('token');
+            
             if (!token) {
-                window.location.href = '/index.html';
+                showToast('Por favor, faça login primeiro');
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 2000);
                 return;
             }
 
-            // Mostrar loading
-            document.getElementById('uid').innerHTML = '<span class="loading"></span>';
-            document.getElementById('useramount').innerHTML = '<span class="loading"></span>';
-
             try {
-                // Verificar cache primeiro (válido por 30 segundos)
-                const cachedData = sessionStorage.getItem('userDataCache');
-                const cacheTime = sessionStorage.getItem('userDataCacheTime');
-                
-                if (cachedData && cacheTime && (Date.now() - cacheTime < 30000)) {
-                    updateUserUI(JSON.parse(cachedData));
-                }
+                // Mostra loading
+                const loading = layer.open({
+                    type: 2,
+                    content: "Carregando dados..."
+                });
 
-                // Buscar dados atualizados
-                const response = await fetch('https://bd-1-tile.onrender.com/me', {
+                // Faz a requisição para a rota /me
+                const response = await fetch('http://127.0.0.1:3000/me', {
                     method: 'GET',
                     headers: {
-                        'Authorization': 'Bearer ' + token,
-                        'Cache-Control': 'no-cache'
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
                     }
                 });
 
-                if (!response.ok) throw new Error('Erro na rede');
+                layer.close(loading);
 
-                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar dados');
+                }
+
+                const userData = await response.json();
+
+                // Atualiza a interface com os dados do usuário
+                document.getElementById('userMobile').textContent = userData.mobile.replace('+244', '');
+                document.getElementById('currentBalance').textContent = `KZ${userData.saldo.toFixed(2)}`;
+                document.getElementById('totalEarnings').textContent = `KZ${userData.saldo.toFixed(2)}`;
                 
-                if (data.success) {
-                    // Armazenar em cache
-                    sessionStorage.setItem('userDataCache', JSON.stringify(data));
-                    sessionStorage.setItem('userDataCacheTime', Date.now());
-                    updateUserUI(data);
-                } else {
-                    throw new Error(data.mensagem || 'Erro ao buscar dados');
+                // Atualiza o link de convite
+                const referralLink = `http://127.0.0.1:5501/register?invite=${userData.codigoConvite}`;
+                document.getElementById('referralURL').value = referralLink;
+
+                // Atualiza o nível VIP (se disponível nos dados)
+                if (userData.nivel) {
+                    document.getElementById('userLevel').textContent = `VIP${userData.nivel}`;
                 }
+
             } catch (error) {
-                console.error('Erro:', error);
-                // Tentar usar dados em cache se disponível
-                const cachedData = sessionStorage.getItem('userDataCache');
-                if (cachedData) {
-                    updateUserUI(JSON.parse(cachedData));
-                } else {
-                    document.getElementById('uid').textContent = 'Erro ao carregar';
-                    document.getElementById('useramount').textContent = 'Erro ao carregar';
+                console.error('Erro ao carregar dados:', error);
+                showToast('Erro ao carregar dados do usuário');
+                
+                // Se o token for inválido, redireciona para login
+                if (error.message.includes('Token inválido') || error.message.includes('401')) {
+                    localStorage.removeItem('token');
+                    setTimeout(() => {
+                        window.location.href = '/index';
+                    }, 2000);
                 }
             }
         }
 
-        // Atualizar a interface com os dados do usuário
-        function updateUserUI(data) {
-            // Formatar e exibir telefone
-            const phone = data.user.telefone || '';
-            document.getElementById('uid').textContent = formatPhoneNumber(phone);
-            
-            // Formatar e exibir saldo
-            document.getElementById('useramount').textContent = formatCurrency(data.user.saldo);
+        // Função para copiar para a área de transferência
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            element.select();
+            element.setSelectionRange(0, 99999);
+
+            try {
+                document.execCommand('copy');
+                showToast('Link copiado com sucesso!');
+            } catch (err) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(element.value).then(function() {
+                        showToast('Link copiado com sucesso!');
+                    }, function() {
+                        showToast('Falha ao copiar o link');
+                    });
+                } else {
+                    showToast('Falha ao copiar o link');
+                }
+            }
         }
 
-        // Inicialização quando o DOM estiver pronto
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verificar autenticação
-            if (!localStorage.getItem('token')) {
-                window.location.href = '/index.html';
-                return;
+        // Mostrar mensagem toast
+        function showToast(message) {
+            layer.open({
+                content: message,
+                skin: 'msg',
+                time: 2
+            });
+        }
+
+        // Carrega os dados quando a página é aberta
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verifica se há token no localStorage
+            const token = localStorage.getItem('token');
+            
+            if (token) {
+                loadUserData();
+            } else {
+                showToast('Por favor, faça login primeiro');
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 2000);
             }
-
-            // Carregar dados imediatamente
-            fetchUserData();
-
-            // Atualizar a cada 30 segundos
-            setInterval(fetchUserData, 30000);
-        });
-
-        // Configuração do LayUI e event listeners
-        layui.use(['layer', 'jquery'], function() {
-            var layer = layui.layer;
-            var $ = layui.jquery;
-
-            // Logout
-            $(document).on("click", '#outlogin', function() {
-                layer.confirm('Tem certeza que deseja sair?', {
-                    btn: ['Sim', 'Não'],
-                    title: 'Confirmação',
-                    skin: 'layui-layer-molv'
-                }, function() {
-                    // Limpar cache e redirecionar
-                    sessionStorage.removeItem('userDataCache');
-                    sessionStorage.removeItem('userDataCacheTime');
-                    localStorage.removeItem('token');
-                    window.location.href = "/index.html?time=" + Math.random();
-                });
-            });
-
-            // Download App
-            $(document).on("click", '#down', function() {
-                layer.msg("O aplicativo está em desenvolvimento.", {icon: 1});
-            });
         });
     </script>
 </body>

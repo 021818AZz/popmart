@@ -1,754 +1,1259 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html class="pixel-ratio-3 retina android android-5 android-5-0 watch-active-state">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1, minimum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>Finance App</title>
-    <link href="https://popmbbb.cc/Lay/css/layui.css?v1.6" rel="stylesheet" />
-    <link href="https://popmbbb.cc/css/main.css?v2.7" rel="stylesheet" />
-    <link href="https://popmbbb.cc/layer_mobile/need/layer.css?v1.6" rel="stylesheet" />
-    <script src="https://popmbbb.cc/Lay/layui.js?v1.6"></script>
-    <script src="https://popmbbb.cc/js/comm.js?v1.6"></script>
-    <link href="https://popmbbb.cc/css/video-js.min.css" rel="stylesheet" />
-    <script src="https://popmbbb.cc/js/video.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>Hamster</title>
+    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/app.css?v=5.8">
+    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/iconfont.css">
+    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/style.css?v=1">
+    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/TouchSlide.1.1.js"></script>
+    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/layer.js"></script>
+    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/js/bootstrap.min.css">
+    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/js/swiper-bundle.min.css">
+    <script src="https://hamstermine-br.vip/static/home/js/bootstrap.bundle.min.js"></script>
+    <script src="https://hamstermine-br.vip/static/home/js/swiper-bundle.min.js"></script>
     <style type="text/css">
-        /* Manter todos os estilos originais */
-        .small-font {
-            font-size: 12px;
-            -webkit-transform-origin-x: 0;
-            -webkit-transform: scale(0.80);
+        html {
+            scroll-behavior: smooth;
         }
 
-        .smallsize-font {
-            font-size: 9.6px;
-        }
-
-        .tblue {
-            background: #1476ff !important;
-        }
-
-        .tgreen {
-            background: #4caf50 !important;
-        }
-
-        .tred {
-            background: #f44336 !important;
-        }
-
-        .tzs {
-            background: #6739b6 !important;
-        }
-
-        .tss {
-            font-weight: bold;
-            font-size: 17px;
-            text-align: center;
-            border: 0px;
-            color: #fff;
-            height: 45px;
-            line-height: 45px;
-            border-radius: 10px;
-            border-bottom-left-radius: 0px;
-            border-bottom-right-radius: 0px;
-        }
-
-        .typeitem {
-            color: #999;
-            float: left;
-            margin-left: 2.5%;
-            cursor: pointer;
-            margin-bottom: 2px;
-        }
-
-        .layui-carousel > [carousel-item] > * {
-            display: none;
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f1f1f1;
-            transition-duration: .3s;
-            -webkit-transition-duration: .3s;
-        }
-
-        .typeitemover {
-            color: #fff;
-            border-bottom: 1px solid #fff;
-            float: left;
-            margin-left: 2.5%;
-            cursor: pointer;
-            margin-bottom: 1px;
-        }
-
-        .top1 {
-            position: fixed;
-            background: #fff;
-            z-index: 10000;
-            width: 100%;
-            height: 30px;
-            top: -30px;
-        }
-
-        .aui {
-            overflow: hidden;
-            background: #fff;
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            font-weight: 400;
+            position: relative;
             display: flex;
-            flex-wrap: wrap;
+            flex-flow: column;
+            min-height: 100vh;
+            background-color: #c2ffdd !important;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ul,
+        ol {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .mt-15 {
+            margin-top: 15px;
+        }
+
+        .mt-20 {
             margin-top: 20px;
         }
 
-        .scroll-wrapper {
-            -webkit-overflow-scrolling: touch;
-            overflow-y: scroll;
+        .mt-30 {
+            margin-top: 30px;
         }
 
-        .aui li {
-            width: 33.33%;
-            float: left;
-            padding: 5px 0;
+        .mt-40 {
+            margin-top: 40px;
         }
 
-        .aui li img {
-            display: block;
-            margin: 0 auto;
-            width: auto;
-            height: 45px;
+        .mt-50 {
+            margin-top: 50px;
         }
 
-        .aui li p {
-            text-align: center;
+        .mt-80 {
+            margin-top: 80px;
+        }
+
+        .mt-100 {
+            margin-top: 100px;
+        }
+
+        .mb-15 {
+            margin-bottom: 15px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+
+        .mb-50 {
+            margin-bottom: 50px;
+        }
+
+        .pt-90 {
+            padding-top: 90px;
+        }
+
+        .pb-90 {
+            padding-bottom: 90px;
+        }
+
+        .pt-120 {
+            padding-top: 120px;
+        }
+
+        .pb-120 {
+            padding-bottom: 120px;
+        }
+
+        .pt-150 {
+            padding-top: 150px;
+        }
+
+        .pb-150 {
+            padding-bottom: 150px;
+        }
+
+        .ptb-150 {
+            padding: 150px 0px;
+        }
+
+        @media (max-width: 991px) {
+            .pt-120 {
+                padding-top: 90px;
+            }
+
+            .pb-120 {
+                padding-bottom: 90px;
+            }
+
+            .pt-150 {
+                padding-top: 90px;
+            }
+
+            .pb-150 {
+                padding-bottom: 90px;
+            }
+
+            .ptb-150 {
+                padding: 90px 0px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .pt-120 {
+                padding-top: 80px;
+            }
+
+            .pb-120 {
+                padding-bottom: 80px;
+            }
+
+            .pt-150 {
+                padding-top: 80px;
+            }
+
+            .pb-150 {
+                padding-bottom: 80px;
+            }
+
+            .ptb-150 {
+                padding: 80px 0px;
+            }
+        }
+
+        @media (min-width: 1360px) {
+            .container {
+                max-width: 1240px;
+            }
+        }
+
+        .bg_img {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .bg--one {
+            background-color: #001d4a !important;
+        }
+
+        .bg--two {
+            background-color: #02014a !important;
+        }
+
+        .bg--base {
+            background-color: #0056fb;
+        }
+
+        #appCapsule {
+            padding-top: 47px;
+        }
+
+        .navbar-top {
+            height: 47px;
+            background: linear-gradient(90deg, #28c76f 11.2%, #198754 78.9%) !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar-top p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .small-font {
             font-size: 14px;
             margin-top: 5px;
-            color: #566172;
-            font-family: MicrosoftYaHei;
         }
 
-        .announcement-title {
-            text-align: left;
-            font-size: 20px;
-            font-weight: 600;
-            color: #434343;
-            margin-left: 5%;
+        .small-font-sm {
+            font-size: 12px;
         }
 
-        .layui-m-layercont {
-            padding: 30px 15px;
-            padding-top: 10px;
-            line-height: 22px;
-            text-align: center;
-        }
-
-        .layui-m-layerbtn span[yes] {
-            color: rgb(58,114,198) !important
-        }
-
-        .layui-m-layerchild {
-            box-shadow: 8px 8px 8px rgb(0 0 0 / 60%);
-        }
-
-        .navtab {
-            cursor: pointer;
-        }
-
-        .gray {
-            -webkit-filter: grayscale(100%);
-            -moz-filter: grayscale(100%);
-            -ms-filter: grayscale(100%);
-            -o-filter: grayscale(100%);
-            filter: grayscale(100%);
-            filter: gray;
-        }
-
-        layer-page .layui-layer-btn {
-            padding-top: 0px !important;
-        }
-
-        .layui-layer-btn {
-            text-align: center !important;
-            padding: 0 0px 12px;
-            pointer-events: auto;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .layui-layer-btn a {
-            margin: 5px 5px 0;
-            padding: 0 0px !important;
-            height: 28px;
-            line-height: 28px;
-            text-align: center;
-            width: 50%;
-            border: 1px solid #dedede;
-            background-color: #fff;
-            color: #333;
-            border-radius: 2px;
-            font-weight: 400;
-            cursor: pointer;
-            text-decoration: none;
-            border-radius: 20px !important;
-        }
-
-        .layui-layer-page {
-            border-radius: 20px !important;
-        }
-
-        .layui-layer-btn .layui-layer-btn0 {
-            border-color: #e7d1a6 !important;
-            background-image: linear-gradient(6deg, #ccaa78 21%, #e7d1a6 77%) !important;
-            color: #fff;
-        }
-
-        .navtab {
-            cursor: pointer;
-        }
-
-        .topname {
-            line-height: 46px;
-            font-weight: 700;
+        .small-font-lg {
             font-size: 16px;
+        }
+
+        .bg-dark-alt {
+            background: linear-gradient(270deg, #28c76f 11.2%, #198754 78.9%) !important;
+        }
+
+        .home-icon {
+            border-radius: 10px;
+        }
+
+        .btm-nav {
+            border-radius: 30px 30px 0 0;
+        }
+
+        .bottom-nav-icon {
+            height: 30px;
+            width: 30px;
+            filter: invert(100);
+        }
+
+        .active>.bottom-nav-icon,
+        .active>p {
+            filter: brightness(0) saturate(100%) invert(77%) sepia(30%) saturate(717%) hue-rotate(106deg) brightness(105%) contrast(106%);
+        }
+
+        :root {
+            --main-color: #198754;
+        }
+
+        .pricingTable {
+            color: var(--main-color);
+            font-family: 'Raleway', sans-serif;
+            text-align: center;
+            padding: 40px 25px 110px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricingTable:before,
+        .pricingTable:after {
+            content: '';
+            background-color: var(--main-color);
+            height: 100%;
             width: 50%;
-            text-align: center;
-            color: #fff;
             position: absolute;
-            top: 0;
             right: 0;
-            left: 0;
             bottom: 0;
-            margin: auto;
-        }
-
-        div#div1 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
             z-index: -1;
+            clip-path: polygon(0 0, 100% 13%, 100% 100%, 0 85%);
         }
 
-        div#div1 > img {
-            height: 100%;
+        .pricingTable:after {
+            background-color: #fff;
             width: 100%;
-            border: 0;
+            height: calc(100% - 30px);
+            clip-path: polygon(0 0, 100% 26%, 100% 100%, 0 80%);
         }
 
-        .cmbtn {
-            width: 60%;
-            cursor: pointer;
-            font-size: 14px;
-            height: 40px;
-            line-height: 40px;
-            margin-top: 20px;
-            border-radius: 5px !important;
+        .pricingTable .pricingTable-header {
+            margin: 0 0 15px;
+        }
+
+        .pricingTable .price-value {
             color: #fff;
-            margin: 0 auto;
-            background: #D2001F;
+            background-color: var(--main-color);
+            width: 130px;
+            height: 130px;
+            padding: 29px 0;
+            margin: 0 auto 8px;
+            border-radius: 50%;
+            border: 5px solid #fff;
         }
 
-        .topname {
-            line-height: 46px;
-            font-weight: bold;
-            font-size: 14px;
-            width: 75%;
-            text-align: center;
-            color: #000;
+        .pricingTable .price-value .amount {
+            font-size: 33px;
+            font-weight: 800;
+            line-height: 38px;
+            display: block;
+        }
+
+        .pricingTable .price-value .duration {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .pricingTable .title {
+            color: #333;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: capitalize;
+            padding: 0 20px 10px;
+            margin: 0;
+            border-bottom: 3px dashed var(--main-color);
+            display: inline-block;
+        }
+
+        .pricingTable .pricingTable-signup div {
+            color: #fff;
+            background-color: #333;
+            font-size: 19px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 5px 20px;
+            margin: 0 0 10px;
+            border-radius: 30px;
+            display: inline-block;
+            transition: all 0.3s ease 0s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .buyBtn {
+            position: relative;
+            overflow: hidden !important;
+            background: linear-gradient(135deg, #28c76f, #198754, #155e3e) !important;
+            background-size: 200% 100%;
+            animation: gradientShift 4s ease-in-out infinite;
+            box-shadow: 0 4px 15px rgba(40, 199, 111, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1;
+            border-radius: 30px;
+            clip-path: inset(0);
+        }
+
+        .buyBtn::before {
+            content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            margin: auto;
-        }
-
-        .indexdiv {
-            background: #000000;
-            position: fixed;
-            left: 0px;
-            top: 0px;
-            bottom: 0px;
-            width: 100%;
+            left: -100%;
+            width: 50%;
             height: 100%;
-            z-index: 101;
-            filter: alpha(opacity=90);
-            opacity: 0.90 !important;
-            display: none;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.6),
+                    rgba(255, 255, 255, 0.8),
+                    rgba(255, 255, 255, 0.6),
+                    transparent);
+            transform: skewX(-15deg);
+            transition: left 0.8s ease-in-out;
+            z-index: 2;
+            animation: autoSweep 3s infinite;
         }
 
-        .divWrap {
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .div {
-            display: inline-block;
-            white-space: nowrap;
-            animation: 5s div linear infinite normal;
-        }
-
-        div {
-            cursor: pointer;
-        }
-
-        @keyframes marqueeAnim {
+        @keyframes  autoSweep {
             0% {
-                transform: translateX(100vw);
+                left: -100%;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            50% {
+                left: 100%;
+                opacity: 1;
             }
 
             100% {
-                transform: translateX(-100%);
+                left: 100%;
+                opacity: 0;
             }
         }
 
-        .marquee-content {
-            white-space: nowrap;
-            display: inline-block;
-            animation: marqueeAnim 5s linear 0s infinite;
+        .buyBtn:hover::before {
+            animation: none;
+            left: 100%;
+            opacity: 1;
         }
 
-        .marquee-root {
-            width: 100%;
-            text-align: left;
-            overflow: hidden;
+        .buyBtn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(40, 199, 111, 0.5);
+            background-position: 100% 0;
         }
 
-        /* Novos estilos para loading e formatação */
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(0,0,0,.3);
+        @keyframes  gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 25% 25%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            75% {
+                background-position: 75% 75%;
+            }
+        }
+
+        .buyBtn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
             border-radius: 50%;
-            border-top-color: #000;
-            animation: spin 1s ease-in-out infinite;
+            animation: pulse 3s infinite;
+            z-index: 1;
         }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+
+        @keyframes  pulse {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.8;
+            }
+
+            50% {
+                width: 60px;
+                height: 60px;
+                opacity: 0.3;
+            }
+
+            100% {
+                width: 120px;
+                height: 120px;
+                opacity: 0;
+            }
         }
-        
-        .currency-value {
-            font-family: 'HarmonyOS Sans SC', sans-serif;
+
+        .buyBtn[style*="background-color:#8a8888"] {
+            background: #8a8888 !important;
+            animation: none !important;
+            box-shadow: 0 4px 15px rgba(138, 136, 136, 0.3);
+            cursor: not-allowed;
+        }
+
+        .buyBtn[style*="background-color:#8a8888"]:hover {
+            transform: none !important;
+            box-shadow: 0 4px 15px rgba(138, 136, 136, 0.3) !important;
+        }
+
+        .buyBtn[style*="background-color:#8a8888"]::before,
+        .buyBtn[style*="background-color:#8a8888"]::after {
+            display: none;
+        }
+
+        .pricingTable .pricingTable-signup div:hover {
+            color: #fff;
+            background-color: var(--main-color);
+        }
+
+        .pricingTable .pricing-content {
+            text-align: left;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: inline-block;
+        }
+
+        .pricingTable .pricing-content li {
+
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: left;
+            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 35px;
+            letter-spacing: .5px;
+            padding: 0 0 0 28px;
+            margin: 0 0 3px;
+            position: relative;
+        }
+
+        .pricingTable .pricing-content li img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .pricingTable .pricing-content li:last-child {
+            margin: 0;
+        }
+
+        .pricingTable .pricing-content li.disable:before {
+            content: "\f00d";
+        }
+
+        /* VIP等级标签样式 */
+        .vip-level-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #ffd700, #ff9000);
+            color: #104728;
+            font-size: 12px;
             font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vip-level-badge i {
+            margin-right: 3px;
+            font-size: 10px;
+        }
+
+        .pricingTable.magenta {
+            --main-color: #e02040;
+        }
+
+        .pricingTable.blue {
+            --main-color: #1f5ebd;
+        }
+
+        @media  only screen and (max-width: 990px) {
+            .pricingTable {
+                margin: 0 0 40px;
+            }
+        }
+
+        .price-circle-1 {
+            background: url("/static/home/img/mb/0014.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        /* .price-circle-2 {
+            background: url("/static/home/img/mb/0015.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        .price-circle-3 {
+            background: url("/static/home/img/mb/0016.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        } */
+
+        .text-primary {
+            color: #00d094 !important;
+        }
+
+        .popup-bg {
+            background: url("/static/home/img/mb/0017.png");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .glass-bg {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .naba {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Tab样式优化 */
+        .product-tab {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 10px 5px;
+        }
+
+        .product-tab.active {
+            background: linear-gradient(90deg, #28c76f 11.2%, #198754 78.9%) !important;
+            box-shadow: 0 4px 15px rgba(40, 199, 111, 0.5) !important;
+            transform: none !important;
+            color: white !important;
+        }
+
+        .product-tab:not(.active) {
+            background: rgba(255, 255, 255, 0.2) !important;
+            backdrop-filter: blur(5px);
+            color: #198754 !important;
+            border: 1px solid rgba(40, 199, 111, 0.3);
+        }
+
+        .product-tab:not(.active):hover {
+            background: rgba(40, 199, 111, 0.2) !important;
+            transform: none;
+            box-shadow: 0 2px 8px rgba(40, 199, 111, 0.3);
+        }
+
+        .product-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .product-tab.active:hover::before {
+            left: 100%;
+        }
+
+        .product-tab i {
+            margin-right: 5px;
+            font-size: 16px;
+        }
+
+        .product-tab.active i {
+            animation: pulse-icon 1.5s infinite;
+        }
+
+        @keyframes  pulse-icon {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Tab内容区域过渡效果 */
+        .tab-pane {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .tab-pane.show {
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes  fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body style="min-height: 100%; width: 100%; background-size: 100% auto; background: #fff; ">
-    <input type="hidden" id="techannel" value="" />
-    <input type="hidden" id="androidurl" value="" />
-    <div class="indexdiv"></div>
-    <div style=" position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; margin: 0 auto; z-index: 102; height:510px; width: 100%; max-width:450px; display: none; " id="noctie">
-        <div style="position: relative; width: 100%; text-align: center; background: none; height: auto; margin: 0 auto; width: 92%; background: #fff; background-size: 100% 100%; height: 500px; border-radius: 5px; color: #000; margin-top: 10px; ">
-            <div style="height: 40px; line-height: 40px; font-weight: bold; font-size: 22px; padding-top: 20px; padding-bottom: 20px; background: #D2001F; color: #fff; ">
-                Perceber
-            </div>
 
-            <div style="width:88%;position:relative; margin:0 auto;  height:auto; overflow:hidden;border:0px;  padding-top:20px; font-size:12px;line-height:19px; text-align:left; ">
-                <div style="max-height: 300px; height: 280px; overflow: scroll; font-size: 12px !important; margin-top: 20px;" id="notice_info">
+<body>
+    <nav class="navbar-top">
+        <p class="text-light fw-bold">Hamster Mining</p>
+    </nav>
 
+    <div id="appCapsule">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img width="100%" style="height: auto;"
+                        src="https://hamstermine-br.vip/static/home/img/mb/0006.png" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img width="100%" style="height: auto;"
+                        src="https://hamstermine-br.vip/static/home/img/mb/0007.png" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img width="100%" style="height: auto;"
+                        src="https://hamstermine-br.vip/static/home/img/mb/0008.png" alt="">
                 </div>
             </div>
-
-            <div style='line-height: 24px; color: #000; font-size: 12px; width: 100%; position: absolute; bottom: 60px; margin-top: 5px; text-align: center;'>
-                <button id="Join" style="height: 40px; width: 40px; font-weight: bold; border: 0px; width: 90%; border-radius: 5px; ">
-                    <img src="https://i.postimg.cc/Y9BSXkXM/image.png" style="height:22px; margin-bottom:3px; margin-right:5px;" />Clique para entrar no canal oficial no Telegram
-                </button>
-            </div>
-
-            <div style="width:100%; position:absolute; bottom:10px; text-align:center;">
-                <button class="cmbtn" id="close" style="height: 40px; width: 40px; border: 0px; width: 90%; border-radius: 5px; ">
-                    Eu entendo
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div style=" max-width:450px; margin:0 auto;">
-        <div class="top1">
+            <div class="swiper-pagination"></div>
         </div>
 
-        <div style="  text-align: center; margin-bottom: 60px;  ">
-            <div style="width: 100%; margin: 0 auto; background: #fff !important; border-bottom: 1px solid #fff; " class="top">
-                <div style="float:left; text-align:left; line-height:46px;width:50%;">
-
-                </div>
-                <font class="topname" style="color: #000;">
-                    <img src="https://i.postimg.cc/Y9BSXkXM/image.png" style="height:30px; margin-left:5px;" />
-                </font>
-                <div style="float:right; text-align:right; line-height:46px;width:50%;">
-
-                </div>
-            </div>
-            <div style=" width: 100%; margin: 0 auto; background: none;  margin-top:50px; border-radius: 9px !important; position:relative; ">
-                <img src="https://i.postimg.cc/6QpV9knr/image.png" style="width:100%;" />
-            </div>
-
-            <div style="height: auto; overflow: hidden; margin-top:5px; font-size:12px; background:#fff; padding-top:10px; padding-bottom:10px;">
-                <div style="float:left;width: 25%; text-align:center;" id="Recharge">
-                    <div style="height:45px;">
-                        <img src="https://i.postimg.cc/qvXQBcYT/image.png" style="width:32px;" />
+        <div class="container">
+            <div class="bg-dark-alt rounded-pill p-1 mt-2">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <div class="naba">
+                            <img src="https://hamstermine-br.vip/static/home/img/mb/0037.png" alt="">
+                        </div>
                     </div>
-                    <div>
-                        Recarregar
-                    </div>
-                </div>
-                <div style="float: left; width: 25%; text-align: center;" id="Withdraw">
-                    <div style="height:45px;">
-                        <img src="https://i.postimg.cc/ncfvsjqc/image.png" style="width: 32px;" />
-                    </div>
-                    <div>
-                        Retirada
-                    </div>
-                </div>
-                <div style="float: left; width: 25%; text-align: center;" id="task">
-                    <div style="height:45px;">
-                        <img src="https://i.postimg.cc/Vsntcf2y/image.png" style="width: 32px;" />
-                    </div>
-                    <div>
-                        Ajudas
-                    </div>
-                </div>
-                 <div style="float: left; width: 25%; text-align: center;" id="cs">
-                    <div style="height:45px;">
-                        <img src="https://i.postimg.cc/QCJVKtrH/image.png" style="width: 32px;" />
-                    </div>
-                    <div>
-                        Bonús
+                    <div class="col ps-0">
+                        <marquee class="small-font text-light" behavior="scroll" direction="left">
+                            999****983 Recarga KZ50, 149****384 Saque KZ200, 849****960 Saque KZ50, 629****844 Recarga KZ50, 749****878 Saque KZ50, 829****220 Saque KZ50, 119****427 Saque KZ50, 929****200 Saque KZ200, 759****191 Recarga R$50, 229****524 Saque KZ50, 339****884 Saque KZ50, 119****207 Recarga KZ50, 319****828 Saque KZ50, 139****753 Saque KZZ500, 419****369 Recarga KZ50, 919****034 Recarga KZ500, 929****579 Recarga KZ50, 929****357 Saque KZ50, 129****090 Saque KZ200, 249****114 Recarga KZ50, 349****874 Saque KZ50, 219****417 Saque KZ50, 489****677 Saque R$50, 939****874 Recarga R$50, 519****778 Saque R$50, 219****255 Recarga R$50, 319****559 Recarga R$50, 819****179 Saque R$50, 669****623 Recarga R$50, 219****143 Recarga R$50, 229****719 Recarga R$50, 969****776 Recarga R$50, 129****139 Recarga R$50, 689****419 Recarga R$50, 719****326 Saque R$50, 199****292 Recarga R$50, 919****366 Saque R$50, 119****700 Recarga R$50, 629****502 Recarga R$500, 699****023 Recarga R$50, 349****229 Saque R$50, 889****240 Recarga R$50, 699****681 Recarga R$50, 739****774 Saque R$50, 119****445 Saque R$50, 689****315 Recarga R$50, 349****215 Saque R$50, 249****521 Recarga R$50, 639****750 Saque R$50, 119****327 Saque R$50, 629****271 Recarga R$50, 929****351 Saque R$200, 119****341 Saque R$50, 499****727 Recarga R$50, 669****702 Saque R$50, 689****944 Recarga R$50, 329****746 Recarga R$50, 839****090 Saque R$50, 829****369 Recarga R$50, 949****686 Recarga R$50, 679****221 Recarga R$50, 111****515 Recarga R$50, 829****366 Saque R$50, 479****163 Recarga R$50, 149****908 Saque R$200, 989****881 Recarga R$50, 889****438 Saque R$50, 699****438 Recarga R$50, 249****722 Saque R$50, 819****457 Recarga R$200, 719****089 Recarga R$50, 949****955 Saque R$200, 319****385 Saque R$50, 739****472 Saque R$50, 859****937 Recarga R$50, 454****651 Recarga R$50, 199****678 Recarga R$50, 329****660 Saque R$50, 489****939 Saque R$50, 939****962 Recarga R$50, 119****930 Recarga R$200, 859****829 Saque R$50, 
+                        </marquee>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div style="text-align: center; background: #DBDBDB; width: 98%; margin: 0 auto; margin-top: 5px; padding-top: 5px; padding-bottom: 5px; border-radius: 5px !important; height: auto; margin-bottom:10px; overflow: hidden; position: relative; ">
-                <div class='divWrap' style="padding: 10px; padding-top: 5px; padding-bottom: 5px;">
-                    <div style="float: left; width: 10%; font-size: 12px; color: #1476ff;">
-                        <img src="https://popmbbb.cc/ui2/5.png" style="height:17px;margin-right:5px;" />
-                    </div>
-                    <div class='div' style="float:left; width:80%; color:#000;">
-                        <div class="marquee-root">
-                            <div class="marquee-content" id="intext">
+        <div class="container-fluid mt-2 bg-dark-alt">
+            <div class="row py-0">
+                <div class="py-3 col-3 px-0 text-center" onclick="location.href='/deposito'">
+                    <img class="home-icon" width="35px" src="https://hamstermine-br.vip/static/home/img/mb/0009.png" alt="">
+                    <p class="mb-0 small-font-sm mt-1 text-light">Recarga</p>
+                </div>
+                <div class="py-3 col-3 px-0 text-center" onclick="location.href='/retirada'">
+                    <img class="home-icon" width="35px" src="https://hamstermine-br.vip/static/home/img/mb/0010.png" alt="">
+                    <p class="mb-0 small-font-sm mt-1 text-light">Retirada</p>
+                </div>
+                <div class="py-3 col-3 px-0 text-center" onclick="handleSignIn()">
+                    <img class="home-icon" width="35px" src="https://hamstermine-br.vip/static/home/img/mb/0011.png" alt="">
+                    <p class="mb-0 small-font-sm mt-1 text-light">Entrar</p>
+                </div>
+                <div class="py-3 col-3 px-0 text-center" onclick="location.href='/servico'">
+                    <img class="home-icon" width="35px" src="https://hamstermine-br.vip/static/home/img/mb/0012.png" alt="">
+                    <p class="mb-0 small-font-sm mt-1 text-light">Atendimento Online</p>
+                </div>
+            </div>
+        </div>
 
+        <div class="container">
+            <section class="pricing padding-top padding-bottom mt-3 mb-2">
+                <div class="pricing__wrapper">
+                    <div class="row g-2 align-items-center">
+                        <!-- Adicionar navegação por abas -->
+                        <div class="container mb-3">
+                            <ul class="nav nav-pills nav-justified" id="productTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active product-tab" id="tab1-tab" data-bs-toggle="pill" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">
+                                        <i class="fas fa-star"></i> VIP1
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link product-tab" id="tab2-tab" data-bs-toggle="pill" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                                        <i class="fas fa-fire"></i> VIP2
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link product-tab" id="tab3-tab" data-bs-toggle="pill" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">
+                                        <i class="fas fa-crown"></i> VIP3
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Área de conteúdo das abas -->
+                        <div class="tab-content" id="productTabsContent">
+                            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                                <div class="demo">
+                                    <div class="container">
+                                        <div class="row">
+                                                                                                                                    <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP1
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/22380f65af9088b707db775540950e74.png)"></div>
+                                                        <h3 class="title">hamster 01</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ6000.00</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('1');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ780.00</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ124.000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP1</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                                                                <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP1
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/5a18cf11789ef3448925de91092d09a0.png)"></div>
+                                                        <h3 class="title">hamster 02</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ15.000</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('2');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ1.950</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ312.000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP1</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                                                                <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP1
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/fc9e69593be4e57154197721e291a752.png)"></div>
+                                                        <h3 class="title">hamster 03</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ35.000.00</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('3');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ4.550</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ728.0000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP1</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                                <!-- Conteúdo da máquina de mineração intermediária -->
+                                <div class="demo">
+                                    <div class="container">
+                                        <div class="row">
+                                                                                                                                    <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP2
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/ab2dd8421dcb96564f30d3ae46c41ba6.png)"></div>
+                                                        <h3 class="title">hamster 04</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ50.000</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('4');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ6.500</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ1.040.000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                                                                <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP2
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/95abcaa55dd082e8ee4de9e0adf016d9.png)"></div>
+                                                        <h3 class="title">hamster 05</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ70.000</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('5');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ9.100</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ1.456.000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                                                                <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP2
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/821ac09a13c6155d706736df9700b089.png)"></div>
+                                                        <h3 class="title">hamster 06</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ130.000</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('6');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ16.900</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ2.704.000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP02</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+                                <!-- Conteúdo da máquina de mineração avançada -->
+                                <div class="demo">
+                                    <div class="container">
+                                        <div class="row">
+                                                                                                                                    <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP3
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/bbe7e630a40568b48786d648b55971af.png)"></div>
+                                                        <h3 class="title">hamster 07</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ200.000</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('7');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ26.000</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ4.160.000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                                                                <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP3
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/092b9d55d319a1f2070e40441d198e25.png)"></div>
+                                                        <h3 class="title">hamster 08</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ600.000</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('8');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ26.000</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ12.480.000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                                                                <div class="col-md-4 col-sm-6">
+                                                <div class="pricingTable">
+                                                                                                        <div class="vip-level-badge">
+                                                        <i class="fas fa-crown"></i> VIP3
+                                                    </div>
+                                                                                                        <div class="pricingTable-header">
+                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250723/f59c6903695ad8a962402a2e227e7963.png)"></div>
+                                                        <h3 class="title">hamster 09</h3>
+                                                    </div>
+                                                    <h3 class="title text-primary" style="border: 0px">KZ1200.000.00</h3>
+                                                    <div class="pricingTable-signup">
+                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('9');">Compre Agora</div>
+                                                    </div>
+                                                    <ul class="pricing-content">
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ156.000.00</li>
+                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ24.960.000</li>
+                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
+                                                                                                            </ul>
+                                                </div>
+                                            </div>
+                                                                                                                                </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div style="font-family: DinC; font-size:20px; margin-left:2%; height:35px; line-height:35px; text-align:left; font-weight:bold;">
-                Minha renda
-            </div>
-            <hr style="margin:0 auto; width:98%; color:#000;border:1px groove #000 !important; margin-bottom:5px; margin-top:5px;" />
-            <div style="height: auto; overflow: hidden; font-size: 12px; background: #fff; color: #303030; text-align:center; padding-bottom: 25px; padding-top:5px;">
-                <div style="float: left; background: url(https://greenflowmz.com/static/img/home_banner.41734765.png); background-size: 100% 100%; width: 48%; margin-left: 1%; height: 100px; position: relative;">
-                    <div style="position:absolute; left:80px; top:20px; font-weight: bold; font-family: HarmonyOS Sans SC; color: #484848; font-size: 16px; " id="amount"><span class="loading"></span></div>
-                    <div style="position: absolute; left: 80px; top: 50px; font-family: HarmonyOS Sans SC; font-size: 12px; color: #484848; ">Saldo da conta</div>
-                </div>
-                <div style="float: left; background: url(https://greenflowmz.com/static/img/home_banner.41734765.png); background-size: 100% 100%; width: 48%; margin-left: 2%; height: 100px; position: relative; ">
-                    <div style="position:absolute; left:100px; top:20px; font-weight: bold; font-family: HarmonyOS Sans SC; color: #484848; font-size: 16px; " id="all_income"><span class="loading"></span></div>
-                    <div style="position: absolute; left: 100px; top: 50px; font-family: HarmonyOS Sans SC; font-size: 12px; color: #484848; ">Receita total</div>
-                </div>
-            </div>
-
-            <div style="font-family: DinC; font-size:20px; margin-left:2%; height:35px; line-height:35px; text-align:left; font-weight:bold;">
-                Mais
-            </div>
-            <hr style="margin:0 auto; width:98%; color:#000;border:1px groove #000 !important; margin-bottom:5px; margin-top:5px;" />
-            <div style="height: auto; overflow: hidden; font-size: 12px; background: #fff; color: #303030; text-align:center; padding-bottom: 5px; padding-top:5px;">
-                <div style="float: left; background: url(https://greenflowmz.com/static/img/share_header_bg.285fc2f1.jpg); background-size: 100% 100%; width: 48%; margin-left: 1%; height: 100px; position: relative;" id="help">
-                    <div style="position: absolute; left: 10px; top: 15px; font-family: HarmonyOS Sans SC; font-size: 18px; color: #000; width: 90px; text-align: left; font-weight: bold;">Código de presente</div>
-                </div>
-                <div style="float: left; background: url(https://greenflowmz.com/static/img/share_header_bg.285fc2f1.jpg); background-size: 100% 100%; width: 48%; margin-left: 2%; height: 100px; position: relative; " id="down">
-                    <div style="position: absolute; left: 10px; top: 15px; font-family: HarmonyOS Sans SC; font-size: 18px; color: #000; width: 90px; text-align: left; font-weight: bold; ">Atendimento ao Cliente</div>Atendimento ao Cliente
-                </div>
-            </div>
+            </section>
         </div>
-
-        <nav class="nav" style="background-size:100% 100%; height:60px; ">
-            <div style="color: #000 !important; font-weight: bold; ">
-                <img src="https://popmbbb.cc/ui2/nav/1.png" style="height: 28px;" /> <br />
-                <span id="nav_btn1">Lar</span>
-            </div>
-            <div url="/produto" class="navtab ">
-                <img src="https://popmbbb.cc/ui2/nav/22.png" class="gray" style="height: 28px;" /> <br />
-                <span id="nav_btn2">Produto</span>
-            </div>
-            <div url="/team" class="navtab">
-                <img src="https://popmbbb.cc/ui2/nav/33.png" class="gray" style="height:28px;" /> <br />
-                <span id="nav_btn3">Equipe</span>
-            </div>
-            <div url="/meu" class="navtab">
-                <img src="https://popmbbb.cc/ui2/nav/44.png" class="gray" style="height: 28px;" /> <br />
-                <span id="nav_btn4">Meu</span>
-            </div>
-        </nav>
     </div>
+    <div style="height: 30px;"></div>
+    <style>
+    .game1 {
+        border-radius: 50%;
+        animation: rotate1 2s linear infinite;
+    }
 
-    <script type="text/javascript">
-        // Função para formatar valores em KZ
-        function formatCurrency(value) {
-            if (isNaN(value)) value = 0;
-            return 'KZ ' + parseFloat(value).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    @keyframes  rotate1 {
+        0% {
+            transform: rotateZ(0deg);
         }
 
-        // Função otimizada para buscar dados do usuário
-        function getUserData() {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                window.location.href = '/index.html';
-                return;
-            }
-
-            // Mostrar loading
-            document.getElementById('amount').innerHTML = '<span class="loading"></span>';
-            document.getElementById('all_income').innerHTML = '<span class="loading"></span>';
-
-            // Verificar cache primeiro
-            const cachedData = sessionStorage.getItem('userFinancialData');
-            if (cachedData) {
-                const data = JSON.parse(cachedData);
-                updateUI(data);
-            }
-
-            // Buscar dados atualizados
-            fetch('https://bd-1-tile.onrender.com/me', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + token,
-                    'Cache-Control': 'no-cache'
-                }
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Erro na rede');
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    // Armazenar em cache por 30 segundos
-                    sessionStorage.setItem('userFinancialData', JSON.stringify(data));
-                    sessionStorage.setItem('lastUpdate', new Date().getTime());
-                    updateUI(data);
-                } else {
-                    throw new Error(data.mensagem || 'Erro ao buscar dados');
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                if (!cachedData) {
-                    document.getElementById('amount').textContent = 'Erro ao carregar';
-                    document.getElementById('all_income').textContent = 'Erro ao carregar';
-                }
-            });
+        100% {
+            transform: rotateZ(360deg);
         }
+    }
 
-        // Atualizar a interface com os dados
-        function updateUI(data) {
-            document.getElementById('amount').textContent = formatCurrency(data.user.saldo);
-            document.getElementById('all_income').textContent = formatCurrency(data.totals.withdrawals || 0);
-        }
+    .foot_bo div div {
+        text-align: center;
+    }
 
-        // Verificar autenticação e carregar dados ao iniciar
+    .active_footer {
+        font-size: 14px !important;
+        filter: brightness(0) saturate(100%) invert(77%) sepia(30%) saturate(717%) hue-rotate(106deg) brightness(105%) contrast(106%);
+    }
+
+
+    .disactive {
+        font-size: 14px !important;
+        filter: invert(100%);
+    }
+
+    .height_16 {
+        color: #000000;
+        height: 16px !important;
+        line-height: 16px !important;
+        font-weight: 600;
+    }
+
+    .zhongjian img {
+        width: 70px !important;
+        height: 70px !important;
+        position: absolute;
+        top: -58px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .zhongjian {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+</style>
+<footer>
+        <div class="foot_bo">
+        <div onclick="window.location.href='/dashboard'">
+            <img class="active_footer" src="https://hamstermine-br.vip/static/home/img/mb/0018.png" />
+            <div class="xz active_footer height_16">Início</div>
+        </div>
+    </div>
+            <div class="foot_bo">
+        <div onclick="window.location.href='/produto'">
+            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0019.png" />
+            <div class="disactive height_16">Ganhos</div>
+        </div>
+    </div>
+    
+
+    <div class="foot_bo zhongjian">
+        <div href="/produto.html">
+            <img src="https://hamstermine-br.vip/static/home/img/mb/0022.png" onclick="window.location.href='/nos'" />
+        </div>
+    </div>
+        <div class="foot_bo">
+        <div onclick="window.location.href='/equipe'">
+            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0020.png" />
+            <div class="disactive height_16">Compartilhar</div>
+        </div>
+    </div>
+    
+        <div class="foot_bo">
+        <div onclick="window.location.href='/meu'">
+            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0021.png" />
+            <div class="disactive height_16">Meu</div>
+        </div>
+    </div>
+    </footer>    <script type="text/javascript">
+        TouchSlide({
+            slideCell: "#slideBox",
+            titCell: "#slideBox .hd ul",
+            mainCell: "#slideBox .bd ul",
+            effect: "leftLoop",
+            autoPage: true,
+            autoPlay: true,
+            interTime: 3000
+        });
+        // Inicialize o slider
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Otimize o estilo de troca de abas
         document.addEventListener('DOMContentLoaded', function() {
-            // Verificar token
-            if (!localStorage.getItem('token')) {
-                window.location.href = '/index.html';
-                return;
+            // Inicialize o ícone FontAwesome (se necessário)
+            if (typeof FontAwesome !== 'undefined') {
+                FontAwesome.dom.i2svg();
             }
 
-            // Carregar dados imediatamente
-            getUserData();
+            // Manipule o evento de troca de abas
+            const tabs = document.querySelectorAll('.product-tab');
 
-            // Atualizar a cada 30 segundos
-            setInterval(getUserData, 30000);
-        });
+            // Defina o estado inicial
+            updateTabStyles();
 
-        // Manter outras funções do LayUI conforme original
-        layui.use(['form', 'layedit', 'laydate', 'layer', 'carousel', 'flow', 'element', 'cookie', 'mobile'], function() {
-            var form = layui.form;
-            var element = layui.element;
-            var $ = layui.jquery, layer = layui.layer;
-            var carousel = layui.carousel;
-            var mobile = layui.mobile;
-            var mobilelayer = mobile.layer;
-            var flow = layui.flow;
-            var cookie = layui.cookie;
-
-            $().ready(function() {
-                onloads();
-                function onloads() {
-                    indexdata();
-                    banner();
-                    getcsinfo();
-                    Textgpt();
-                    getUserData();
-                }
-                
-                // Event listeners modificados para redirecionar diretamente
-                $(document).on("click", '#close', function() {
-                    $('.indexdiv').hide();
-                    $("#noctie").hide();
-                });
-
-                function banner() {
-                    var url = "http://127.0.0.1:3333/ashx/SiteServer.ashx";
-                    var pm = {
-                        action: "selectbanner",
-                        time: Math.random()
-                    };
-                    $.ajaxSettings.async = false;
-                    $.getJSON(url, pm,
-                        function(json) {
-                            if (json.State == "200") {
-                                var html = "";
-                                html += "<div carousel-item=\"\" style=\"text-align:center;width:100%;margin:0 auto;background: rgb(0,203,227);border-radius: 10px !important;\">";
-                                for (var i = 0; i < json.JsonResult.length; i++) {
-
-                                    html += "<div>";
-                                    if (json.JsonResult[i].jumpurl == "") {
-                                        html += "<div style=\"height:170px; width:100%; background-image:url('" + json.JsonResult[i].imgurl + "'); background-repeat:no-repeat;background-size:cover;background-position: 50%;border-radius: 10px !important;\" />";
-                                    } else {
-                                        html += "<img src=\"" + json.JsonResult[i].imgurl + "\" style=\"height:170px; width:100%;border-radius: 10px !important;\" class='jump' url='" + json.JsonResult[i].jumpurl + "' />";
-                                    }
-                                    html += "</div>";
-
-                                }
-                                html += "</div>";
-                                $("#test2").html(html);
-                            }
-                        });
-
-                    var ins = carousel.render({
-                        elem: '#test2'
-                        , interval: 5000
-                        , anim: 'default'
-                        , height: '170px'
-                        , width: '98%'
-                        , arrow: 'none'
-                        , backgroundcolor: '#000'
-                    });
-
-                    $("#test2").on("touchstart", function(e) {
-                        var startX = e.originalEvent.targetTouches[0].pageX;
-                        $(this).on('touchmove', function(e) {
-                            arguments[0].preventDefault();
-                        });
-                        $(this).on('touchend', function(e) {
-                            var endX = e.originalEvent.changedTouches[0].pageX;
-                            e.stopPropagation();
-                            if (endX - startX > 30) {
-                                ins.slide("sub");
-                            }
-                            else if (startX - endX > 30) {
-                                ins.slide("add");
-                            }
-                            $(this).off('touchmove touchend');
-                        });
-                    });
-                }
-
-                function indexdata() {
-                    var url = "http://127.0.0.1:3333/ashx/BusServer.ashx";
-                    var pm = {
-                        action: "indexdata",
-                        time: Math.random()
-                    };
-                    $.ajaxSettings.async = false;
-                    $.getJSON(url, pm,
-                        function(json) {
-                            if (json.State == "200") {
-                                var html = "";
-                                for (var i = 0; i < json.JsonResult.length; i++) {
-                                    html += json.JsonResult[i].context + "&nbsp;&nbsp;";
-                                }
-                                $("#intext").html(html);
-                                var ss = html.length * 0.05 + 5
-                                $(".marquee-content").css("animation", "marqueeAnim " + ss + "s linear 0s infinite");
-                            }
-                        });
-                }
-
-                function Textgpt() {
-                    var url = "/ashx/BusServer.ashx";
-                    var pm = {
-                        action: "Textgpt",
-                        time: Math.random()
-                    };
-                    $.ajaxSettings.async = false;
-                    $.getJSON(url, pm,
-                        function(json) {
-                            if (json.State == "200") {
-                                if (json.JsonResult.notice != "") {
-                                    var main_prop_txt1 = "Notice";
-                                    var main_prop_txt2 = json.JsonResult.notice;
-                                    var main_prop_txt3 = "OK";
-                                    var xkefu = "";
-                                    $('.indexdiv').show();
-                                    $("#noctie").show();
-                                    $("#notices").html(xkefu);
-                                    $("#notice_info").html(main_prop_txt2);
-                                    $("#notice_btn").html(main_prop_txt3);
-                                    $("#notice_title").html(main_prop_txt1);
-                                }
-                            }
-                        });
-                }
-
-                function getcsinfo() {
-                    var url = "/ashx/BusServer.ashx";
-                    var pm = {
-                        action: "getcsinfo",
-                        time: Math.random()
-                    };
-                    $.getJSON(url, pm,
-                        function(json) {
-                            if (json.State == "200") {
-                                $("#techannel").val(json.JsonResult.techannel);
-                                $("#androidurl").val(json.JsonResult.androidurl);
-                            }
-                        });
-                }
-
-                // Event listeners modificados para redirecionar diretamente
-                $(document).on("click", '#Join', function() {
-                    var url2 = document.getElementById("techannel").value;
-                    if (window.android) {
-                        window.android.callAndroid("open," + url2);
-                        return;
-                    }
-                    if (window.webkit && window.webkit.messageHandlers) {
-                        window.webkit.messageHandlers.nativeExt.postMessage({ msg: 'open,' + url2 });
-                        return;
-                    }
-                    window.open(url2, "_blank");
-                });
-
-                $(document).on("click", '#Recharge', function() {
-                    window.location.href = "deposito.html?time=" + Math.random();
-                });
-
-                $(document).on("click", '#help', function() {
-                    window.location.href = "deposito.html?time=" + Math.random();
-                });
-
-                $(document).on("click", '#task', function() {
-                    window.location.href = "servico.html?time=" + Math.random();
-                });
-
-                $(document).on("click", '#Withdraw', function() {
-                    window.location.href = "retirada.html?time=" + Math.random();
-                });
-
-                $(document).on("click", '#down', function() {
-                    window.location.href = "servico.html?time=" + Math.random();
-                });
-
-                $(document).on("click", '.navtab', function() {
-                    var urlx = $(this).attr("url");
-                    window.location.href = urlx + "?time=" + Math.random();
+            // Evento de clique
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    setTimeout(updateTabStyles, 50);
                 });
             });
+
+            function updateTabStyles() {
+                tabs.forEach(tab => {
+                    if (tab.classList.contains('active')) {
+                        tab.setAttribute('aria-selected', 'true');
+                    } else {
+                        tab.setAttribute('aria-selected', 'false');
+                    }
+                });
+            }
         });
+
+        var _submit = true;
+
+        function redirectToProductPage(productId) {
+            // Redireciona para a página correspondente ao produto (1.html, 2.html, etc.)
+            window.location.href = productId + '.html';
+        }
+
+        // Função de entrada (sign in)
+        function handleSignIn() {
+            if (_submit == true) {
+                _submit = false;
+                var loading = layer.open({
+                    type: 2,
+                    content: "Carregando..."
+                });
+            } else {
+                return false;
+            }
+
+            var _token = "FKrNHgitgKq2S3x9TpEMJZrDfo06PAnoUMrl01D8";
+            var data = {
+                _token: _token
+            };
+
+            $.post("https://hamstermine-br.vip/index/signin", data, function(result) {
+                layer.close(loading);
+                _submit = true;
+
+                switch (result.code) {
+                    case 200:
+                        layer.open({
+                            skin: 'msg',
+                            content: "Parabéns! Você entrou com sucesso. Você recebeu " + result.amount + " " + "R$",
+                            time: 3
+                        });
+                        break;
+                    case 201:
+                        layer.open({
+                            skin: 'msg',
+                            content: result.msg,
+                            time: 3
+                        });
+                        break;
+                    default:
+                        layer.open({
+                            skin: 'msg',
+                            content: "messagesmessages.failed",
+                            time: 3
+                        });
+                }
+            }).error(function() {
+                layer.close(loading);
+                _submit = true;
+                layer.open({
+                    skin: 'msg',
+                    content: "messagesmessages.network_error",
+                    time: 2
+                });
+            });
+        }
     </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
 </body>
+
 </html>

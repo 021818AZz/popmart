@@ -1,468 +1,499 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Retirada</title>
-    <link href="https://popmbbb.cc/Lay/css/layui.css?v1.2" rel="stylesheet" />
-    <link href="https://popmbbb.cc/css/style.css?v1.2" rel="stylesheet" />
-    <link href="https://popmbbb.cc/css/main.css?v1.3" rel="stylesheet" />
-    <link href="https://popmbbb.cc/css/meun.css?v1.2" rel="stylesheet" />
-    <script src="https://popmbbb.cc/Lay/layui.js?v1.2"></script>
-    <script src="https://popmbbb.cc/js/comm.js?v1.2"></script>
-    <script src="https://popmbbb.cc/js/jquery-1.11.0.min.js"></script>
-    <script src="https://popmbbb.cc/Lay/lay/modules/i18n.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamster Saque</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/css/layui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/layui.min.js"></script>
     <style type="text/css">
-        input::placeholder {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
             color: #333;
+            position: relative;
+            min-height: 100vh;
+            background: #c2ffdd !important;
+            padding-bottom: 80px;
         }
 
-        .topname {
-            line-height: 46px;
-            font-weight: bold;
-            font-size: 14px;
-            width: 50%;
-            text-align: center;
-            color: #fff;
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            margin: auto;
-        }
-
-        layer-page .layui-layer-btn {
-            padding-top: 0px !important;
-        }
-
-        .layui-layer-btn {
-            text-align: center !important;
-            padding: 0 0px 12px;
-            pointer-events: auto;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-            .layui-layer-btn a {
-                margin: 5px 5px 0;
-                padding: 0 0px !important;
-                height: 28px;
-                line-height: 28px;
-                text-align: center;
-                width: 50%;
-                border: 1px solid #dedede;
-                background-color: #fff;
-                color: #333;
-                border-radius: 2px;
-                font-weight: 400;
-                cursor: pointer;
-                text-decoration: none;
-                border-radius: 20px !important;
-            }
-
-        .layui-layer-page {
-            border-radius: 20px !important;
-        }
-
-        .layui-layer-setwin .layui-layer-close2 {
-            background-position: -179px -31px;
-            cursor: pointer
-        }
-
-        .layui-layer-setwin a {
-            position: absolute;
-            width: 32px;
-            height: 40px;
-            _overflow: hidden;
-            top: -28px;
-        }
-
-        .payitem {
-            border: 1px solid #fff !important;
-            border-radius: 25px;
-            background: rgb(53,82,255);
-        }
-
-            .payitem:before {
-                content: '';
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                background: rgb(53,82,255);
-            }
-
-            .payitem:after {
-                content: '';
-                width: 5px;
-                height: 12px;
-                position: absolute;
-                right: 6px;
-                bottom: 6px;
-                background: rgb(53,82,255);
-            }
-
-        div#div1 {
+        .navbar-top {
             position: fixed;
             top: 0;
             left: 0;
-            bottom: 0;
             right: 0;
-            z-index: -1;
-        }
-
-            div#div1 > img {
-                height: 100%;
-                width: 100%;
-                border: 0;
-            }
-
-        .inputdiv {
+            height: 56px;
+            background: linear-gradient(90deg, #28c76f 11.2%, #198754 78.9%) !important;
+            color: white;
+            z-index: 1000;
             display: flex;
-            border-bottom: 1px solid #ccc !important;
-            background-color: none;
-            height: 38px;
-            line-height: 38px;
-            padding: 0px 0px;
-            color: #000;
+            align-items: center;
+            padding: 0 15px;
         }
 
-        .layui-input {
-            border-style: none;
-            background-color: none;
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
         }
 
-        .small-font {
-            font-size: 12px;
-            -webkit-transform-origin-x: 0;
-            -webkit-transform: scale(0.80);
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
         }
 
-        .smallsize-font {
-            font-size: 9.6px;
+        .nav-icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Estilos adicionados para o formulário de retirada */
-        .withdrawal-info {
-            font-size: 12px;
-            color: #666;
-            margin-top: 10px;
+        .nav-title {
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            flex: 1;
         }
-        
-        .error-message {
-            color: red;
-            font-size: 12px;
-            margin-top: 5px;
+
+        .app-capsule {
+            padding-top: 56px;
+            min-height: 100vh;
         }
-        
-        #withdrawalForm {
+
+        .content-area {
+            padding: 12px;
+        }
+
+        .balance-card,
+        .amount-input-card,
+        .account-info-card {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 12px;
             padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 12px rgba(46, 125, 50, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 208, 148, 0.2);
+        }
+
+        .balance-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .balance-amount {
+            font-size: 22px;
+            font-weight: 700;
+            color: #198754;
+        }
+
+        .amount-input-label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .amount-input-wrapper {
+            display: flex;
+            align-items: center;
+            border: 2px solid #198754;
+            border-radius: 8px;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .currency-symbol {
+            padding: 0 15px;
+            color: #198754;
+            font-size: 18px;
+            font-weight: 600;
+            background: rgba(25, 135, 84, 0.05);
+            border-right: 1px solid rgba(25, 135, 84, 0.2);
+        }
+
+        .amount-input {
+            flex: 1;
+            height: 45px;
+            padding: 0 12px;
+            font-size: 16px;
+            color: #333;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .account-info-label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .account-info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: rgba(25, 135, 84, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #198754;
+        }
+
+        .account-label {
+            font-size: 14px;
+            color: #666;
+            min-width: 80px;
+            margin-right: 10px;
+        }
+
+        .account-value {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .withdrawal-button {
+            width: 100%;
+            height: 45px;
+            background: linear-gradient(90deg, #28c76f 11.2%, #198754 78.9%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 12px rgba(46, 125, 50, 0.25);
+            margin-bottom: 12px;
+        }
+
+        .withdrawal-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .rules-card {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 12px rgba(46, 125, 50, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 208, 148, 0.2);
+        }
+
+        .rules-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #198754;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .rules-content {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .rules-content p {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .balance-amount {
+                font-size: 20px;
+            }
+            .content-area {
+                padding: 10px;
+            }
         }
     </style>
-    <script type="text/javascript">
-        layui.config({
-            base: 'https://popmbbb.cc/Lay/lay/modules/'
-        }).use(['form', 'layedit', 'laydate', 'layer', 'carousel', 'flow', 'element', 'cookie'], function () {
-            var form = layui.form;
-            var element = layui.element;
-            var $ = layui.jquery, layer = layui.layer;
-            var carousel = layui.carousel;
-            var cookie = layui.cookie;
-            var topindex = parent.layer.getFrameIndex(window.name);
-            
-            $().ready(function () {
-                checklanguage();
-                getuserinfo();
+</head>
+<body>
+    <div class="navbar-top">
+        <div class="navbar-content">
+            <div class="nav-icon" id="backButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </div>
+            <div class="nav-title">Saque</div>
+            <div class="nav-icon" id="historyButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M11 7h2v7h-2zm0 8h2v2h-2zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-capsule">
+        <div class="content-area">
+            <div class="balance-card">
+                <div class="balance-title">Saldo atual</div>
+                <div class="balance-amount" id="userBalance">KZ 0.00</div>
+            </div>
+
+            <div class="amount-input-card">
+                <div class="amount-input-label">Valor do Saque</div>
+                <div class="amount-input-wrapper">
+                    <div class="currency-symbol">KZ</div>
+                    <input type="number" id="amount" class="amount-input" placeholder="Digite o valor do saque">
+                </div>
+            </div>
+
+            <div class="account-info-card">
+                <div class="account-info-label">Informações da Conta</div>
+                <div class="account-info-row">
+                    <div class="account-label">Nome real:</div>
+                    <div class="account-value" id="accountName">Carregando...</div>
+                </div>
+                <div class="account-info-row">
+                    <div class="account-label">Conta:</div>
+                    <div class="account-value" id="accountNumber">Carregando...</div>
+                </div>
+                <div class="account-info-row">
+                    <div class="account-label">Banco:</div>
+                    <div class="account-value" id="accountBank">Carregando...</div>
+                </div>
+            </div>
+
+            <button type="button" class="withdrawal-button" id="withdrawButton">Sacar agora</button>
+
+            <div class="rules-card">
+                <div class="rules-title">Regras de Saque</div>
+                <div class="rules-content">
+                    <p>1. O valor mínimo para saque é de KZ 2000</p>
+                    <p>2. Será cobrada uma taxa de saque de 15%</p>
+                    <p>3. Horário de saque: 09h às 21h, de segunda a sábado</p>
+                    <p>4. Você precisa comprar um produto para ativar a função de saque</p>
+                    <p>Em caso de dúvidas, entre em contato com o Atendimento ao Cliente</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Elementos da página
+        const $balance = $('#userBalance');
+        const $amountInput = $('#amount');
+        const $withdrawButton = $('#withdrawButton');
+        const $accountName = $('#accountName');
+        const $accountNumber = $('#accountNumber');
+        const $accountBank = $('#accountBank');
+        const $backButton = $('#backButton');
+        const $historyButton = $('#historyButton');
+
+        // Variáveis globais
+        let userBalance = 0;
+        let bankAccount = null;
+        const WITHDRAWAL_FEE = 0.15; // 15% de taxa
+        const MIN_WITHDRAWAL = 2000; // Mínimo de 2000 KZ
+
+        // Função para carregar dados do usuário
+        async function loadUserData() {
+            try {
+                // Carrega saldo do usuário
+                const balanceResponse = await fetch('http://localhost:3000/me', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 
-                // Verificar se o usuário está logado
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    error("Por favor, faça login novamente");
+                if (!balanceResponse.ok) {
+                    throw new Error('Erro ao carregar saldo');
+                }
+                
+                const balanceData = await balanceResponse.json();
+                userBalance = balanceData.saldo || 0;
+                $balance.text(`KZ ${userBalance.toFixed(2)}`);
+
+                // Carrega informações da conta bancária
+                const accountResponse = await fetch('http://localhost:3000/user/bank-account', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (accountResponse.ok) {
+                    const accountData = await accountResponse.json();
+                    bankAccount = accountData;
+                    
+                    $accountName.text(accountData.nomeTitular || 'Não informado');
+                    $accountNumber.text(accountData.numeroConta ? `•••• ${accountData.numeroConta.slice(-4)}` : 'Não informado');
+                    $accountBank.text(getBankName(accountData.banco));
+                } else {
+                    throw new Error('Conta bancária não cadastrada');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                layer.msg(error.message, {icon: 2});
+                
+                if (error.message.includes('Conta bancária')) {
                     setTimeout(() => {
-                        window.location.href = "/index.html";
-                    }, 2000);
-                    return;
+                        window.location.href = 'bank-account.html';
+                    }, 1500);
                 }
+            }
+        }
 
-                function checklanguage() {
-                    var language = "en";
-                    language = $.cookie('language');
-                    if (language == "" || language == null) {
-                        $.cookie('language', "en", { path: '/', expires: 180 });
-                        language = "en";
-                    }
-                    $.i18n.properties({
-                        name: 'strings',
-                        path: 'https://popmbbb.cc/Languages/',
-                        mode: 'map',
-                        language: language,
-                        cache: false,
-                        encoding: 'UTF-8',
-                        callback: function () {
-                            document.title = $.i18n.prop('_withdrawal_title');
-                            $('#topname1').html($.i18n.prop('_withdrawal_title'));
-                            $('#_withdrawal_t1').html($.i18n.prop('_withdrawal_t1'));
-                            $('#_withdrawal_t2').html($.i18n.prop('_withdrawal_t2'));
-                            $('#_withdrawal_t3').html($.i18n.prop('_withdrawal_t3'));
-                            $('#_withdrawal_t4').html($.i18n.prop('_withdrawal_t4'));
-                            $('#select_card').html($.i18n.prop('_withdrawal_t5'));
-                            $('#_withdrawal_t10').html($.i18n.prop('_withdrawal_t10'));
-                            $('#_withdrawal_t5').val($.i18n.prop('_withdrawal_t5'));
-                            $('#_withdrawal_t6').val($.i18n.prop('_withdrawal_t6'));
-                            $('#_withdrawal_t11').val($.i18n.prop('_withdrawal_t11'));
-                        }
-                    });
-                }
+        // Mapeamento de códigos de banco para nomes
+        function getBankName(bankCode) {
+            const banks = {
+                'BFA': 'Banco de Fomento Angola (BFA)',
+                'BAI': 'Banco Angolano de Investimentos (BAI)',
+                'BIC': 'Banco BIC',
+                'ATL': 'Banco Atlântico'
+            };
+            return banks[bankCode] || bankCode;
+        }
 
-                function getuserinfo() {
-                    const token = localStorage.getItem('token');
-                    if (!token) return;
+        // Verifica se é dia útil (segunda a sábado)
+        function isBusinessDay() {
+            const now = new Date();
+            const day = now.getDay(); // 0=Domingo, 1=Segunda, ..., 6=Sábado
+            return day >= 1 && day <= 6;
+        }
+
+        // Verifica se está no horário de saque (09h às 21h)
+        function isWithdrawalTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            return hours >= 9 && hours < 21;
+        }
+
+        // Botão de voltar
+        $backButton.click(function() {
+            window.history.back();
+        });
+
+        // Botão de histórico
+        $historyButton.click(function() {
+            window.location.href = 'historico.html';
+        });
+
+        // Botão de saque
+        $withdrawButton.click(async function() {
+            const amount = parseFloat($amountInput.val());
+            
+            // Validações
+            if (isNaN(amount) || amount <= 0) {
+                layer.msg('Por favor, insira um valor válido', {icon: 2});
+                return;
+            }
+            
+            if (amount < MIN_WITHDRAWAL) {
+                layer.msg(`O valor mínimo para saque é KZ ${MIN_WITHDRAWAL}`, {icon: 2});
+                return;
+            }
+            
+            if (amount > userBalance) {
+                layer.msg('Saldo insuficiente para esta retirada', {icon: 2});
+                return;
+            }
+            
+            if (!isBusinessDay()) {
+                layer.msg('Saque disponível apenas de segunda a sábado', {icon: 2});
+                return;
+            }
+            
+            if (!isWithdrawalTime()) {
+                layer.msg('Horário de saque: 09h às 21h', {icon: 2});
+                return;
+            }
+            
+            if (!bankAccount) {
+                layer.msg('Conta bancária não cadastrada', {icon: 2});
+                setTimeout(() => {
+                    window.location.href = 'iban.html';
+                }, 1500);
+                return;
+            }
+
+            // Calcula valor líquido após taxa
+            const netAmount = amount * (1 - WITHDRAWAL_FEE);
+            
+            // Confirmação
+            layer.open({
+                title: 'Confirmar Saque',
+                content: `Você está solicitando um saque de KZ ${amount.toFixed(2)}.<br>Valor líquido após taxa de ${WITHDRAWAL_FEE*100}%: KZ ${netAmount.toFixed(2)}`,
+                btn: ['Confirmar', 'Cancelar'],
+                yes: async function(index) {
+                    layer.close(index);
                     
-                    $.ajax({
-                        url: 'http://127.0.0.1:3333/user/balance',
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + token
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                $("#useramount").html(response.saldo.toFixed(2) + " KZ");
-                            } else {
-                                error("Erro ao obter saldo: " + response.mensagem);
-                            }
-                        },
-                        error: function() {
-                            error("Erro ao conectar com o servidor");
-                        }
+                    // Mostra loading
+                    const loading = layer.load(1, {
+                        shade: [0.1, '#fff']
                     });
-                }
-
-                // Configurar eventos do formulário
-                $("#Amount").on('input', function() {
-                    calculateWithdrawal();
-                });
-
-                function calculateWithdrawal() {
-                    const amount = parseFloat($("#Amount").val()) || 0;
-                    const fee = amount * 0.1; // Taxa de 10%
-                    const netAmount = amount - fee;
                     
-                    $("#jieguo1").html(netAmount.toFixed(2) + " KZ");
-                    $("#free").html("10%");
-                }
-
-                $(document).on("click", '#Submit', function () {
-                    processWithdrawal();
-                });
-
-                function processWithdrawal() {
-                    const token = localStorage.getItem('token');
-                    if (!token) {
-                        error("Por favor, faça login novamente");
-                        return;
-                    }
-
-                    // Validar horário (9h-21h)
-                    const now = new Date();
-                    const hours = now.getHours();
-                    if (hours < 9 || hours >= 21) {
-                        error("As retiradas só estão disponíveis das 9h às 21h");
-                        return;
-                    }
-
-                    // Obter dados do formulário
-                    const amount = parseFloat($("#Amount").val());
-                    const iban = $("#ibanNumber").val();
-                    const accountName = $("#accountName").val();
-
-                    // Validações
-                    if (!amount || amount < 1800) {
-                        error("Valor mínimo de retirada é 1800 KZ");
-                        return;
-                    }
-
-                    if (!iban || !/^\d{21}$/.test(iban)) {
-                        error("IBAN deve conter exatamente 21 dígitos");
-                        return;
-                    }
-
-                    if (!accountName || accountName.length < 3) {
-                        error("Nome do titular é obrigatório");
-                        return;
-                    }
-
-                    // Calcular valores
-                    const fee = amount * 0.1;
-                    const netAmount = amount - fee;
-
-                    // Mostrar confirmação
-                    layer.confirm(
-                        `Confirme os detalhes da retirada:<br><br>
-                        Valor solicitado: ${amount} KZ<br>
-                        Taxa (10%): ${fee.toFixed(2)} KZ<br>
-                        Valor a receber: ${netAmount.toFixed(2)} KZ<br>
-                        IBAN: ${iban}<br>
-                        Nome: ${accountName}`,
-                        {title: 'Confirmar Retirada', btn: ['Confirmar', 'Cancelar']},
-                        function(index) {
-                            // Enviar solicitação para o servidor
-                            $.ajax({
-                                url: 'http://127.0.0.1:3333/withdraw',
-                                method: 'POST',
-                                headers: {
-                                    'Authorization': 'Bearer ' + token
-                                },
-                                data: {
-                                    amount: amount,
-                                    iban: iban,
-                                    accountName: accountName
-                                },
-                                success: function(response) {
-                                    if (response.success) {
-                                        success("Solicitação de retirada enviada com sucesso! Status: " + response.status);
-                                        // Limpar formulário
-                                        $("#Amount").val("");
-                                        $("#ibanNumber").val("");
-                                        $("#accountName").val("");
-                                        // Atualizar saldo
-                                        getuserinfo();
-                                    } else {
-                                        error("Erro na retirada: " + response.mensagem);
-                                    }
-                                    layer.close(index);
-                                },
-                                error: function() {
-                                    error("Erro ao processar retirada");
-                                    layer.close(index);
-                                }
-                            });
+                    try {
+                        // Envia solicitação de saque
+                        const response = await fetch('http://localhost:3000/withdraw', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({
+                                amount: amount,
+                                fee: WITHDRAWAL_FEE,
+                                netAmount: netAmount,
+                                bankAccount: bankAccount
+                            })
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (!response.ok) {
+                            throw new Error(data.msg || 'Erro ao processar saque');
                         }
-                    );
+                        
+                        // Atualiza saldo localmente
+                        userBalance -= amount;
+                        $balance.text(`KZ ${userBalance.toFixed(2)}`);
+                        
+                        // Mostra mensagem de sucesso
+                        layer.msg('Saque solicitado com sucesso!', {icon: 1}, function() {
+                            window.location.href = 'historico.html';
+                        });
+                        
+                    } catch (error) {
+                        console.error('Erro no saque:', error);
+                        layer.msg(error.message, {icon: 2});
+                    } finally {
+                        layer.close(loading);
+                    }
                 }
-
-                $(document).on("click", '#log', function () {
-                    var url = "https://popmbbb.cc/main/prop/widetails.html?time=" + Math.random();
-                    layer.open({
-                        type: 2,
-                        title: false,
-                        area: ['100%', '100%'],
-                        offset: 'b',
-                        shadeClose: true,
-                        isOutAnim: false,
-                        closeBtn: 0,
-                        anim: 5,
-                        shade: [0.8, '#393D49'],
-                        maxmin: false,
-                        content: url
-                    });
-                });
-
-                $(document).on("click", '#btnClose', function () {
-                    parent.layer.close(topindex);
-                });
             });
         });
+
+        // Inicializa a página
+        loadUserData();
+    });
     </script>
-</head>
-<body style="background-size: 100% auto; background: #fff;">
-    <input id="_withdrawal_t5" type="hidden" value="" />
-    <input id="_withdrawal_t6" type="hidden" value="" />
-    <input id="_withdrawal_t11" type="hidden" value="" />
-
-    <div class="top" style="background: #fff; border: 1px groove #fff;">
-        <div style="float:left; line-height:46px;width:50%; height:46px;cursor:pointer;" id="btnClose">
-            <i class="layui-icon" style="color:#000; margin-left:12px; font-size:18px;font-weight:bold;">&#xe603;</i>
-        </div>
-        <div class="topname" style="line-height: 50px; font-weight: bold; color: #000;">
-            Retirada
-        </div>
-        <div style="float:right; text-align:right; line-height:46px;width:50%;" id="log">
-            <div style="height: 30px; line-height: 30px; width: 30px; border-radius: 100px; background: #000; position: absolute; right: 10px; top: 8px; text-align:center; margin: 0 auto;">
-                <img src="https://popmbbb.cc/ui1/p1/6.png" style="height: 27px; margin-right: 10px; margin-bottom: 2px; border-radius: 50px;">
-            </div>
-        </div>
-    </div>
-
-    <div style="max-width:450px; margin:0 auto;">
-        <div style="height:auto; overflow:hidden; margin-top:46px;">
-            <div style="position:relative;">
-                <img src="https://popmbbb.cc/ui2/wi.jpg" style="width:100%;" />
-                <div style="position: absolute; left: 20px; width:130px; bottom: 20px; background: #00000095; padding: 10px; border-radius: 5px;">
-                    <div style="color: #fff; font-size: 16px;">
-                        KZ <font id="useramount" style="padding-left: 5px; font-weight: bold; font-size: 16px; margin-top: 15px; font-family: HarmonyOS Sans SC;">0.00</font>
-                    </div>
-                    <div style="margin-top: 5px; font-weight: bold; color: #fff; font-size: 12px;">Saldo da conta</div>
-                </div>
-            </div>
-
-            <div style="width: 100%; margin: 0 auto; background: #fff; padding-bottom: 3px;">
-                <div style="width:95%; margin:0 auto; padding-bottom:3px;border-radius:2px; overflow:hidden;">
-                    <div id="withdrawalForm">
-                        <div class="inputdiv">
-                            <div style="width:30px;color:#000;">
-                                KZ
-                            </div>
-                            <input type="number" id="Amount" oninput="if(value.length>10)value=value.slice(0,10)" 
-                                   style="font-size: 12px; color: #000; background-color: #fff; padding-left: 10px;" 
-                                   placeholder="Valor mínimo: 1800 KZ" class="layui-input" autocomplete="off">
-                        </div>
-                        <div class="error-message" id="amountError"></div>
-
-                        <div class="inputdiv" style="margin-top: 15px;">
-                            <input type="text" id="ibanNumber" maxlength="21" 
-                                   style="font-size: 12px; color: #000; background-color: #fff; padding-left: 10px;" 
-                                   placeholder="IBAN (21 dígitos)" class="layui-input" autocomplete="off">
-                        </div>
-                        <div class="error-message" id="ibanError"></div>
-
-                        <div class="inputdiv" style="margin-top: 15px;">
-                            <input type="text" id="accountName" 
-                                   style="font-size: 12px; color: #000; background-color: #fff; padding-left: 10px;" 
-                                   placeholder="Nome do titular da conta" class="layui-input" autocomplete="off">
-                        </div>
-                        <div class="error-message" id="nameError"></div>
-
-                        <div class="withdrawal-info">
-                            <p>Taxa de retirada: 10%</p>
-                            <p>Valor mínimo: 1800 KZ</p>
-                            <p>Horário de retirada: 9h às 21h</p>
-                        </div>
-
-                        <div style="width: 100%; height: 25px; line-height: 30px; margin-top:10px; text-align: left;">
-                            <span style="float:left;font-size:12px; color:#000;">
-                                <font>Valor recebido</font>:
-                                <font id="jieguo1">KZ 0.00</font>
-                            </span>
-                            <span style="color: #000; float: right; font-size: 12px;">
-                                <font>Taxa</font>: <font id="free">10%</font>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align: center;width:98%; margin:0 auto; margin-bottom:15px;">
-                <input class="layui-btn" id="Submit" value="Retirar agora" 
-                       style="width: 80%; margin-top: 15px; height: 45px; line-height: 45px; 
-                       font-weight: bold; color: #fff; font-size: 14px; border-radius: 5px; 
-                       border: 0px; background:#000;" type="button" />
-            </div>
-            
-            <div style="width:98%; margin:0 auto; background:#fff; margin-top:2px;">
-                <div style="height: 35px; line-height: 35px; text-align: left;">
-                    <span style="margin-left:3%; color:#000; font-weight:bold;">Notas sobre retirada</span>
-                </div>
-                <div style="text-align: left; padding:20px; padding-top:0px; height:auto; overflow:hidden;color:#999;" id="wiinfo">
-                    <p>1. As retiradas estão disponíveis apenas das 9h às 21h.</p>
-                    <p>2. Taxa de retirada de 10% será aplicada.</p>
-                    <p>3. O valor mínimo para retirada é de 1800 KZ.</p>
-                    <p>4. Por favor, verifique cuidadosamente as informações da conta antes de confirmar.</p>
-                    <p>5. As retiradas podem levar até 24 horas para serem processadas.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

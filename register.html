@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <title>Hamster Entrar</title>
+    <title>Hamster Registrar</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -153,19 +153,29 @@
             height: 100%;
         }
 
-        .remember-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            color: white;
-            font-size: 14px;
+        .country-code {
+            position: absolute;
+            left: 40px;
+            top: 46%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: rgb(255, 165, 0);
+            font-size: 16px;
+            font-weight: 500;
+            z-index: 2;
         }
 
-        .remember-container input[type="checkbox"] {
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            accent-color: #FFD700;
+        .input-group.mobile-input input {
+            padding: 0 20px 0 80px;
+        }
+
+        .input-group.mobile-input input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            padding-left: 5px;
+        }
+
+        .input-group:not(.mobile-input) input {
+            padding: 0 20px 0 45px;
         }
 
         .button-group {
@@ -212,40 +222,20 @@
             border-color: rgba(255, 255, 255, 0.6);
         }
 
-        .country-code {
+        .mobile-status {
             position: absolute;
-            left: 40px;
-            top: 46%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: rgb(255, 196, 0);
-            font-size: 16px;
-            font-weight: 500;
-            z-index: 2;
-        }
-
-        .separator {
-            position: absolute;
-            left: 88px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            pointer-events: none;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 16px;
-            z-index: 2;
+            font-size: 14px;
         }
 
-        .input-group.mobile-input input {
-            padding: 0 20px 0 80px;
+        .mobile-available {
+            color: #4CAF50;
         }
 
-        .input-group.mobile-input input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-            padding-left: 5px;
-        }
-
-        .input-group:not(.mobile-input) input {
-            padding: 0 20px 0 45px;
+        .mobile-taken {
+            color: #FF4500;
         }
 
         @media (max-width: 480px) {
@@ -269,7 +259,7 @@
     <!-- Fundo -->
     <div class="login-background"></div>
 
-    <!-- Container de Login -->
+    <!-- Container de Registro -->
     <div class="login-container">
         <!-- Avatar -->
         <div class="login-avatar">
@@ -277,7 +267,7 @@
         </div>
 
         <!-- Título -->
-        <div class="login-title">Entrar</div>
+        <div class="login-title">Registrar-se</div>
 
         <!-- Container do Formulário -->
         <div class="login-form-container">
@@ -286,46 +276,134 @@
                     <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0004.png" /></div>
                     <span class="country-code">+244</span>
                     <input type="text" id="mobile" name="mobile" minlength="7" maxlength="9"
-                        placeholder="Digite seu número de celular">
+                        placeholder="Digite seu número de celular" oninput="value=value.replace(/[^\d]/g,'')">
+                    <span id="mobileStatus" class="mobile-status"></span>
                 </div>
 
                 <div class="input-group">
                     <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0005.png" /></div>
-                    <input type="password" id="password" name="password" maxlength="32"
+                    <input type="password" id="password" name="password" maxlength="16"
                         placeholder="Digite sua senha">
                 </div>
 
-                <div class="remember-container">
-                    <input type="checkbox" id="remember_password">
-                    <label for="remember_password">Lembrar senha</label>
+                <div class="input-group">
+                    <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0005.png" /></div>
+                    <input type="password" id="confirm_password" name="confirm_password"
+                        placeholder="Confirme sua senha">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0003.png" /></div>
+                    <input type="text" id="inviteCode" name="inviteCode"
+                        placeholder="Código de convite" value="">
                 </div>
 
                 <div class="button-group">
-                    <a href="https://hamstermine-br.vip/login/register" class="btn-register">Registrar</a>
-                    <button type="button" class="btn-login btn_submit_my">Entrar</button>
+                    <a href="/index" class="btn-register">Já tem uma conta?</a>
+                    <button type="button" class="btn-login btn_submit_my">Registrar</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <script>
+    // Função para extrair parâmetros da URL
+    function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Quando o documento estiver carregado
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verifica se há um parâmetro 'invite' na URL
+        const inviteCode = getQueryParam('invite');
+        
+        // Se existir, preenche o campo de código de convite
+        if (inviteCode) {
+            document.getElementById('inviteCode').value = inviteCode;
+            
+            // Opcional: desabilita o campo se quiser impedir edição
+            // document.getElementById('inviteCode').disabled = true;
+        }
+    });
+</script>
+
     <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/layer.js"></script>
     <script type="text/javascript">
+        // Desabilita o campo de inviteCode se já tiver valor
+        if ('' != '') {
+            $('#inviteCode').attr("disabled", "disabled");
+        }
+
+        // Variável para controlar o timeout da verificação
+        var mobileCheckTimeout;
+        var lastCheckedMobile = '';
+
+        // Verifica em tempo real se o número já existe
+        $('#mobile').on('input', function() {
+            var mobile = $(this).val();
+            
+            // Limpa o status anterior
+            $('#mobileStatus').removeClass('mobile-available mobile-taken').text('');
+            
+            // Verifica se o número tem o comprimento mínimo
+            if (mobile.length >= 7) {
+                clearTimeout(mobileCheckTimeout);
+                
+                // Adiciona delay para evitar muitas requisições
+                mobileCheckTimeout = setTimeout(function() {
+                    checkMobileAvailability(mobile);
+                }, 500);
+            }
+        });
+
+        // Função para verificar disponibilidade do número
+        function checkMobileAvailability(mobile) {
+            // Se já verificamos este número, não verifica novamente
+            if (lastCheckedMobile === mobile) return;
+            
+            lastCheckedMobile = mobile;
+            
+            $.ajax({
+                url: "http://127.0.0.1:3000/check-mobile/+244" + mobile,
+                type: "GET",
+                dataType: "json",
+                beforeSend: function() {
+                    $('#mobileStatus').text('Verificando...');
+                },
+                success: function(response) {
+                    if (response.available) {
+                        $('#mobileStatus').addClass('mobile-available').text('Disponível');
+                    } else {
+                        $('#mobileStatus').addClass('mobile-taken').text('Já cadastrado');
+                    }
+                },
+                error: function() {
+                    $('#mobileStatus').text('Erro ao verificar');
+                }
+            });
+        }
+
         var _submit = true;
         $(".btn_submit_my").click(function() {
             if (_submit == true) {
                 _submit = false;
                 var loading = layer.open({
                     type: 2,
-                    content: "Carregando"
+                    content: "Carregando..."
                 });
             } else {
                 return false;
             }
             
-            var mobile = $("input[name='mobile']").val();
+            var mobile = $.trim($("input[name='mobile']").val());
             var password = $("input[name='password']").val();
-            
+            var confirm_password = $("input[name='confirm_password']").val();
+            var inviteCode = $("input[name='inviteCode']").val();
+            var _token = "";
+
+            // Validações do formulário
             if (mobile.length == 0) {
                 layer.close(loading);
                 layer.open({
@@ -336,131 +414,129 @@
                 _submit = true;
                 return false;
             }
-            
-            if (password.length == 0) {
+
+            if (password.length < 6) {
                 layer.close(loading);
                 layer.open({
-                    content: "Por favor, insira a senha...",
+                    content: "A senha deve ter pelo menos 6 caracteres...",
                     skin: 'msg',
                     time: 2
                 });
                 _submit = true;
                 return false;
             }
-            
-            var isSave = document.getElementById('remember_password').checked;
-            if (isSave) {
-                if (mobile != "" && password != "") {
-                    setCookie('mobile', mobile, 7);
-                    setCookie('password', password, 7);
-                }
-            } else {
-                clearAllCookie();
+
+            if (password != confirm_password) {
+                layer.close(loading);
+                layer.open({
+                    content: "As senhas não coincidem",
+                    skin: 'msg',
+                    time: 2
+                });
+                _submit = true;
+                return false;
             }
-            
-            var _token = "";
+
+            if (inviteCode.length == 0) {
+                layer.close(loading);
+                layer.open({
+                    content: "Por favor, insira o código de convite...",
+                    skin: 'msg',
+                    time: 2
+                });
+                _submit = true;
+                return false;
+            }
+
+            // Verifica se o número já está marcado como cadastrado
+            if ($('#mobileStatus').hasClass('mobile-taken')) {
+                layer.close(loading);
+                layer.open({
+                    content: "Este número já está cadastrado!",
+                    skin: 'msg',
+                    time: 3,
+                    style: 'background-color: #FF4500; color: white;'
+                });
+                _submit = true;
+                return false;
+            }
+
             var data = {
-                mobile: "+244" + mobile,  // Adiciona prefixo +244
+                mobile: "+244" + mobile,  // Adiciona o prefixo +244
                 password: password,
+                inviteCode: inviteCode,
                 _token: _token
             };
-            
+
+            // Envia a requisição AJAX
             $.ajax({
-                url: "http://127.0.0.1:3000/login",
+                url: "http://127.0.0.1:3000/usuarios",
                 type: "POST",
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
                 success: function(result) {
-    layer.close(loading);
-
-    if (result.code == 200) {
-        // Salva o token no localStorage
-        localStorage.setItem('token', result.token);
-
-        layer.open({
-            content: "Login realizado com sucesso...",
-            skin: 'msg',
-            time: 2
-        });
-        setTimeout(function() {
-            window.location.href = "/dashboard";
-        }, 2000);
-    } else {
-        if (result.code === 401 && result.msg === "Senha incorreta") {
-            layer.open({
-                content: "Senha incorreta. Por favor, tente novamente.",
-                skin: 'msg',
-                time: 2
-            });
-        } else {
-            layer.open({
-                content: result.msg || "Erro ao fazer login",
-                skin: 'msg',
-                time: 2
-            });
-        }
-        _submit = true;
-    }
-},
-
+                    layer.close(loading);
+                    
+                    if (result.code == 200) {
+                        layer.open({
+                            content: "Registro realizado com sucesso!",
+                            skin: 'msg',
+                            time: 2
+                        });
+                        setTimeout(function() {
+                            window.location.href = result.redirect || "/index";
+                        }, 2000);
+                    } else {
+                        showErrorMessage(result);
+                    }
+                },
                 error: function(xhr) {
                     layer.close(loading);
                     var response = xhr.responseJSON;
                     
-                    if (xhr.status === 401) {
-                        layer.open({
-                            content: "Senha incorreta. Por favor, tente novamente.",
-                            skin: 'msg',
-                            time: 2
+                    if (xhr.status == 400 || xhr.status == 409) {
+                        showErrorMessage(response || {
+                            msg: "Erro ao processar sua solicitação"
                         });
                     } else {
                         layer.open({
-                            content: "Telefone incorreto.",
+                            content: "Erro de conexão com o servidor",
                             skin: 'msg',
                             time: 2
                         });
                     }
+                },
+                complete: function() {
                     _submit = true;
                 }
             });
-        });
 
-        function clearAllCookie() {
-            var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
-            if (keys) {
-                for (var i = keys.length; i--;)
-                    document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
-            }
-        }
-
-        function setCookie(name, value, day) {
-            var date = new Date();
-            date.setDate(date.getDate() + day);
-            document.cookie = name + '=' + value + ';expires=' + date;
-        }
-
-        function getCookie(name) {
-            var reg = RegExp(name + '=([^;]+)');
-            var arr = document.cookie.match(reg);
-            if (arr) {
-                return arr[1];
-            } else {
-                return '';
-            }
-        }
-
-        $(function() {
-            var oUser = getCookie('mobile');
-            var oPswd = getCookie('password');
-            if (oUser && oPswd) {
-                $("input[name='mobile']").val(oUser);
-                $("#password").val(oPswd);
-                document.getElementById('remember_password').checked = true;
+            // Função para mostrar mensagens de erro
+            function showErrorMessage(error) {
+                var errorMessage = "Erro ao cadastrar";
+                
+                if (error.code === 'P2002' || 
+                    error.message?.includes('Unique constraint') || 
+                    error.msg?.includes('já cadastrado') ||
+                    error.error?.includes('mobile')) {
+                    errorMessage = "Este número de celular já está cadastrado!";
+                } else if (error.msg) {
+                    errorMessage = error.msg;
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                
+                layer.open({
+                    content: errorMessage,
+                    skin: 'msg',
+                    time: 3,
+                    style: 'background-color: #FF4500; color: white;'
+                });
             }
         });
 
-        // Melhorar a visibilidade dos botões
+        // Melhora a visibilidade dos botões
         $(document).ready(function() {
             $('.btn-login').css({
                 'background': 'linear-gradient(135deg, #FFD700, #FFA500)',

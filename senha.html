@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trocar Senha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/css/layui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/layui.min.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            position: relative;
+            min-height: 100vh;
+            background: #c2ffdd !important;
+            padding-bottom: 80px;
+        }
+
+        .navbar-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: linear-gradient(90deg, #28c76f 11.2%, #198754 78.9%) !important;
+            color: white;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .nav-icon:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-title {
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            flex: 1;
+        }
+
+        .app-capsule {
+            padding-top: 56px;
+            min-height: 100vh;
+        }
+
+        .content-area {
+            padding: 12px;
+        }
+
+        .password-card {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 12px rgba(46, 125, 50, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 208, 148, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #198754;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #28c76f;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(40, 199, 111, 0.2);
+        }
+
+        .change-password-btn {
+            width: 100%;
+            height: 45px;
+            background: linear-gradient(90deg, #28c76f 11.2%, #198754 78.9%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 12px rgba(46, 125, 50, 0.25);
+            margin-top: 20px;
+        }
+
+        .change-password-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(46, 125, 50, 0.35);
+        }
+
+        .change-password-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .password-strength {
+            margin-top: 5px;
+            height: 5px;
+            border-radius: 5px;
+            background: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background 0.3s;
+        }
+
+        .password-rules {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .password-rules ul {
+            padding-left: 20px;
+        }
+
+        .password-rules li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar-top">
+        <div class="navbar-content">
+            <div class="nav-icon" id="backButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </div>
+            <div class="nav-title">Trocar Senha</div>
+            <div class="nav-icon" style="visibility: hidden;">
+                <!-- Espaço vazio para alinhamento -->
+            </div>
+        </div>
+    </div>
+
+    <div class="app-capsule">
+        <div class="content-area">
+            <div class="password-card">
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="currentPassword" class="form-label">Senha Atual</label>
+                        <input type="password" id="currentPassword" class="form-input" placeholder="Digite sua senha atual" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newPassword" class="form-label">Nova Senha</label>
+                        <input type="password" id="newPassword" class="form-input" placeholder="Digite sua nova senha" required>
+                        <div class="password-strength">
+                            <div class="strength-bar" id="strengthBar"></div>
+                        </div>
+                        <div class="password-rules">
+                            <p>A senha deve conter:</p>
+                            <ul>
+                                <li>Pelo menos 6 caracteres</li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword" class="form-label">Confirmar Nova Senha</label>
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="Confirme sua nova senha" required>
+                    </div>
+                    
+                    <button type="submit" class="change-password-btn" id="changePasswordBtn">Alterar Senha</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Elementos da página
+        const $form = $('#changePasswordForm');
+        const $currentPassword = $('#currentPassword');
+        const $newPassword = $('#newPassword');
+        const $confirmPassword = $('#confirmPassword');
+        const $changePasswordBtn = $('#changePasswordBtn');
+        const $backButton = $('#backButton');
+
+        // Validação do formulário
+        $form.submit(async function(e) {
+            e.preventDefault();
+            
+            const currentPassword = $currentPassword.val();
+            const newPassword = $newPassword.val();
+            const confirmPassword = $confirmPassword.val();
+            
+            // Validações básicas
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                layer.msg('Preencha todos os campos', {icon: 2});
+                return;
+            }
+            
+            if (newPassword.length < 6 || newPassword.length > 32) {
+                layer.msg('A senha deve ter entre 6 e 32 caracteres', {icon: 2});
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                layer.msg('As senhas não coincidem', {icon: 2});
+                return;
+            }
+            
+            // Mostra loading
+            $changePasswordBtn.prop('disabled', true);
+            const loading = layer.load(1, {
+                shade: [0.1, '#fff']
+            });
+            
+            try {
+                // Envia solicitação para trocar senha
+                const response = await fetch('http://localhost:3000/user/change-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        currentPassword,
+                        newPassword
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.msg || 'Erro ao alterar senha');
+                }
+                
+                // Sucesso
+                layer.msg('Senha alterada com sucesso!', {icon: 1}, function() {
+                    // Limpa o formulário
+                    $form[0].reset();
+                    
+                    // Redireciona ou faz outra ação
+                    window.history.back();
+                });
+                
+            } catch (error) {
+                console.error('Erro ao alterar senha:', error);
+                layer.msg(error.message, {icon: 2});
+            } finally {
+                layer.close(loading);
+                $changePasswordBtn.prop('disabled', false);
+            }
+        });
+
+        // Botão de voltar
+        $backButton.click(function() {
+            window.history.back();
+        });
+    });
+    </script>
+</body>
+</html>

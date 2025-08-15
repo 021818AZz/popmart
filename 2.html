@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra Automática</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #mensagem {
+            display: none;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .sucesso {
+            color: green;
+            border: 1px solid green;
+        }
+        .erro {
+            color: red;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="mensagem"></div>
+
+<script>
+(async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Você precisa estar logado!");
+        window.location.href = "index.html";
+        return;
+    }
+
+    const produto = {
+        nome: "Hamister02",
+        preco: 15000,
+        rendaDiaria: 1950,
+        validadeDias: 160
+    };
+
+    try {
+        const response = await fetch("http://127.0.0.1:3000/investir", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(produto)
+        });
+
+        const data = await response.json();
+        const mensagemEl = document.getElementById("mensagem");
+
+        if (data.code === 200) {
+    const investimento = data.investimento;
+    const dataCompraFormatada = new Date(investimento.dataCompra).toLocaleDateString();
+    const dataExpiracaoFormatada = new Date(investimento.dataExpiracao).toLocaleDateString();
+
+    mensagemEl.className = "sucesso";
+    mensagemEl.innerHTML = `
+        <h2>Compra efetuada com sucesso!</h2>
+        <p><strong>Produto:</strong> ${investimento.nome}</p>
+        <p><strong>Preço:</strong> ${investimento.preco}</p>
+        <p><strong>Data da compra:</strong> ${dataCompraFormatada}</p>
+        <p><strong>Renda diária:</strong> ${investimento.rendaDiaria}</p>
+        <p><strong>Data de expiração:</strong> ${dataExpiracaoFormatada}</p>
+        <p><strong>Validade:</strong> ${investimento.validadeDias} dias</p>
+    `;
+}
+ else {
+            mensagemEl.className = "erro";
+            mensagemEl.innerHTML = `<h2>Saldo insuficiente!</h2>`;
+        }
+
+        mensagemEl.style.display = "block";
+
+        // Espera 2 segundos e volta para o dashboard
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 2000);
+
+    } catch (error) {
+        console.error("Erro ao processar compra:", error);
+    }
+})();
+</script>
+
+</body>
+</html>

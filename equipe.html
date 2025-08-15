@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamster Minha Conta</title>
+    <link href="https://hamstermine-br.vip/static/home/js/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/app.css?v=1.0">
+    <script src="https://hamstermine-br.vip/static/home/js/jquery-1.11.3.min.js"></script>
+    <script src="https://hamstermine-br.vip/static/home/js/layer.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+
+        body {
+            background: #c2ffdd;
+            min-height: 100vh;
+            padding-bottom: 120px;
+        }
+
+        .container {
+            margin: 0 auto;
+            min-height: 100vh;
+            position: relative;
+            padding: 0;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .profile-card {
+            background: linear-gradient(313deg, #104728 0%, #1a8755 100%);
+            padding: 15px 20px;
+            border-radius: 0 0 35px 35px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+
+        .user-level {
+            display: inline-block;
+            background: linear-gradient(90deg, #41ff97 0%, #29c770 100%);
+            border-radius: 15px;
+            padding: 3px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #104728;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .earnings-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .earnings-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .earnings-amount {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .earnings-label {
+            font-size: 12px;
+        }
+
+        .team-stats {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 15px 0;
+        }
+
+        .team-stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .team-members {
+            background: white;
+            margin: 15px;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .team-level {
+            margin-bottom: 15px;
+        }
+
+        .team-level-title {
+            font-weight: bold;
+            color: #198754;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .member-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .member-phone {
+            color: #333;
+        }
+
+        .member-investment {
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .invite-card {
+            margin: 15px;
+            padding: 15px;
+            border: 2px solid #29c770;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .invite-code {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #198754;
+        }
+
+        .invite-code strong {
+            font-size: 18px;
+            color: #104728;
+        }
+
+        .invite-input-group {
+            display: flex;
+            border: 2px solid #29c770;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .invite-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(313deg, #41ff97 0%, #29c770 100%);
+            border: none;
+            padding: 0 15px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .functions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 0 15px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(270deg, #28c76f 11.2%, #198754 78.9%);
+            border-radius: 30px 30px 0 0;
+            display: flex;
+            z-index: 1000;
+        }
+
+        .foot_bo {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+    <style>
+    .member-status {
+        padding: 3px 8px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .status-ativo {
+        background-color: #28a745;
+        color: white;
+    }
+    .status-inativo {
+        background-color: #dc3545;
+        color: white;
+    }
+    .products-list {
+        font-size: 12px;
+        color: #666;
+        margin-top: 3px;
+    }
+</style>
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- Botão de voltar adicionado aqui -->
+        <div class="back-button" onclick="window.history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+        </div>
+        
+        <div class="profile-card">
+            <img src="https://hamstermine-br.vip/static/home/img/mb/0027.png" alt="Avatar" class="avatar">
+            <div class="username" id="userMobile">Carregando...</div>
+            <div class="user-level">
+                <i class="fas fa-crown" style="margin-right: 3px;"></i>
+                <span id="userLevel">VIP0</span>
+            </div>
+            
+            <div class="earnings-row">
+                <div class="earnings-item">
+                    <div class="earnings-amount" id="currentBalance">KZ0.00</div>
+                    <div class="earnings-label">Saldo Atual</div>
+                </div>
+                <div class="earnings-item">
+                    <div class="earnings-amount" id="totalEarnings">KZ0.00</div>
+                    <div class="earnings-label">Renda Total</div>
+                </div>
+            </div>
+            
+            <div class="team-stats">
+                <div class="team-stat-item">
+                    <span>Equipe Nível 1:</span>
+                    <span id="teamLevel1Count">0 membros</span>
+                </div>
+                <div class="team-stat-item">
+                    <span>Equipe Nível 2:</span>
+                    <span id="teamLevel2Count">0 membros</span>
+                </div>
+                <div class="team-stat-item">
+                    <span>Equipe Nível 3:</span>
+                    <span id="teamLevel3Count">0 membros</span>
+                </div>
+                <div class="team-stat-item" style="font-weight:bold;margin-top:8px;">
+                    <span>Total da Equipe:</span>
+                    <span id="teamTotalCount">0 membros</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="invite-card">
+            <div class="invite-code">
+                Meu Código: <strong id="inviteCode">----</strong>
+            </div>
+            <div class="invite-input-group">
+                <input type="text" class="invite-input" id="referralURL" readonly>
+                <button class="copy-btn" onclick="copyToClipboard()">
+                    <img src="https://hamstermine-br.vip/static/home/img/mb/0040.png" alt="Copiar" width="20">
+                </button>
+            </div>
+        </div>
+
+        <div class="team-members" id="teamMembersList">
+            <!-- Lista de membros será inserida aqui via JavaScript -->
+        </div>
+
+        <div class="functions-grid">
+            <!-- Seus botões de função aqui -->
+        </div>
+    </div>
+
+    <footer>
+        <!-- Seu footer aqui -->
+    </footer>
+
+    <script>
+        // Cache de dados
+        let userDataCache = null;
+        let teamDataCache = null;
+        
+        // Carrega todos os dados
+        async function loadAllData() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                redirectToLogin();
+                return;
+            }
+
+            const loading = layer.open({ type: 2, content: "Carregando dados da equipe..." });
+            
+            try {
+                const [userResponse, teamResponse] = await Promise.all([
+                    fetch('http://127.0.0.1:3000/me', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    }),
+                    fetch('http://127.0.0.1:3000/team', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    })
+                ]);
+
+                if (!userResponse.ok || !teamResponse.ok) {
+                    throw new Error('Erro ao carregar dados');
+                }
+
+                userDataCache = await userResponse.json();
+                teamDataCache = await teamResponse.json();
+                
+                updateUI();
+            } catch (error) {
+                console.error('Erro:', error);
+                handleLoadError(error);
+            } finally {
+                layer.close(loading);
+            }
+        }
+
+        // Atualiza a interface
+        function updateUI() {
+    if (!userDataCache || !teamDataCache) return;
+    
+    try {
+        // Dados do usuário
+        document.getElementById('userMobile').textContent = 
+            formatPhone(userDataCache.mobile) || 'Não informado';
+        
+        // Garante que saldo seja um número
+        const saldoAtual = Number(userDataCache.saldo) || 0;
+        document.getElementById('currentBalance').textContent = 
+            `KZ${saldoAtual.toFixed(2)}`;
+        
+        // Garante que totalGeral seja um número
+        const totalGeral = Number(teamDataCache.totalGeral) || 0;
+        document.getElementById('totalEarnings').textContent = 
+            `KZ${totalGeral.toFixed(2)}`;
+        
+        document.getElementById('userLevel').textContent = 
+            `VIP${userDataCache.nivel || 0}`;
+        document.getElementById('inviteCode').textContent = 
+            userDataCache.codigoConvite || '----';
+        document.getElementById('referralURL').value = 
+            `http://127.0.0.1:5501/register?invite=${userDataCache.codigoConvite || ''}`;
+        
+        // Atualiza contagens com fallback para array vazio
+        const nivel1 = teamDataCache.nivel1 || [];
+        const nivel2 = teamDataCache.nivel2 || [];
+        const nivel3 = teamDataCache.nivel3 || [];
+        
+        document.getElementById('teamLevel1Count').textContent = 
+            `${nivel1.length} membros`;
+        document.getElementById('teamLevel2Count').textContent = 
+            `${nivel2.length} membros`;
+        document.getElementById('teamLevel3Count').textContent = 
+            `${nivel3.length} membros`;
+        document.getElementById('teamTotalCount').textContent = 
+            `${nivel1.length + nivel2.length + nivel3.length} membros`;
+        
+        // Renderiza membros
+        renderTeamMembers(nivel1, nivel2, nivel3);
+        
+    } catch (error) {
+        console.error('Erro ao atualizar UI:', error);
+        showToast('Erro ao carregar dados');
+    }
+}
+
+function renderTeamMembers(level1, level2, level3) {
+    const container = document.getElementById('teamMembersList');
+    if (!container) return;
+    
+    try {
+        container.innerHTML = '';
+        
+        const createMemberItem = (member) => {
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'member-item';
+            
+            // Garante valores padrão
+            const status = member.status || 'inativo';
+            const produtos = member.produtos || [];
+            const totalInvestido = Number(member.totalInvestido) || 0;
+            
+            const statusClass = status === 'ativo' ? 'status-ativo' : 'status-inativo';
+            const productsText = produtos.length > 0 
+                ? `<div class="products-list">Produtos: ${produtos.join(', ')}</div>` 
+                : '';
+            
+            memberDiv.innerHTML = `
+                <div>
+                    <span class="member-phone">${formatPhone(member.mobile) || 'Número não disponível'}</span>
+                    ${productsText}
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="member-investment">KZ${totalInvestido.toFixed(2)}</span>
+                    <span class="member-status ${statusClass}">${status.toUpperCase()}</span>
+                </div>
+            `;
+            
+            return memberDiv;
+        };
+        
+        const createLevelSection = (title, members) => {
+            if (!members || members.length === 0) return null;
+            
+            const section = document.createElement('div');
+            section.className = 'team-level';
+            
+            // Calcula total do nível
+            const totalNivel = members.reduce((sum, m) => sum + (Number(m.totalInvestido) || 0), 0);
+            
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'team-level-title';
+            titleDiv.innerHTML = `
+                <span>${title}</span>
+                <span>${members.length} membros (KZ${totalNivel.toFixed(2)})</span>
+            `;
+            
+            section.appendChild(titleDiv);
+            members.forEach(member => section.appendChild(createMemberItem(member)));
+            return section;
+        };
+        
+        // Cria seções para cada nível
+        [createLevelSection('Nível 1 - Diretos', level1),
+         createLevelSection('Nível 2', level2),
+         createLevelSection('Nível 3', level3)]
+         .filter(section => section !== null)
+         .forEach(section => container.appendChild(section));
+        
+        // Mensagem se não houver membros
+        if (container.children.length === 0) {
+            const emptyMsg = document.createElement('div');
+            emptyMsg.textContent = 'Você ainda não tem membros na sua equipe';
+            emptyMsg.style.textAlign = 'center';
+            emptyMsg.style.padding = '20px';
+            emptyMsg.style.color = '#666';
+            container.appendChild(emptyMsg);
+        }
+        
+    } catch (error) {
+        console.error('Erro ao renderizar membros:', error);
+        container.innerHTML = '<div style="color: red; text-align: center;">Erro ao carregar membros da equipe</div>';
+    }
+}
+        // Formata o número de telefone
+        function formatPhone(phone) {
+            if (!phone) return '';
+            // Remove +244 se existir
+            return phone.replace('+244', '').replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+        }
+
+        function copyToClipboard() {
+            const element = document.getElementById('referralURL');
+            element.select();
+            
+            navigator.clipboard.writeText(element.value)
+                .then(() => showToast('Link copiado!'))
+                .catch(() => {
+                    document.execCommand('copy');
+                    showToast('Link copiado!');
+                });
+        }
+
+        function showToast(message) {
+            layer.open({ content: message, skin: 'msg', time: 2 });
+        }
+
+        function redirectToLogin() {
+            showToast('Sessão expirada');
+            setTimeout(() => window.location.href = '/index.html', 1500);
+        }
+
+        function handleLoadError(error) {
+            if (error.message.includes('401')) {
+                localStorage.removeItem('token');
+                redirectToLogin();
+            } else {
+                showToast('Erro ao carregar dados da equipe');
+            }
+        }
+
+        // Inicia o carregamento quando a página é aberta
+        document.addEventListener('DOMContentLoaded', loadAllData);
+    </script>
+</body>
+</html>

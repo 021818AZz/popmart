@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Investimentos</title>
+    <title>Histórico Completo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/css/layui.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/layui.min.js"></script>
@@ -77,7 +77,7 @@
             padding: 12px;
         }
 
-        .investment-card {
+        .transaction-card {
             background: rgba(255, 255, 255, 0.95) !important;
             border-radius: 12px;
             padding: 15px;
@@ -93,7 +93,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .investment-header {
+        .transaction-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -102,29 +102,34 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        .investment-date {
+        .transaction-date {
             font-size: 14px;
             color: #666;
         }
 
-        .investment-status {
+        .transaction-type {
             padding: 4px 10px;
             border-radius: 12px;
             font-size: 12px;
             font-weight: 600;
         }
 
-        .status-active {
+        .type-bonus {
             background-color: #D4EDDA;
             color: #155724;
         }
 
-        .status-expired {
+        .type-purchase {
             background-color: #F8D7DA;
             color: #721C24;
         }
 
-        .investment-details {
+        .type-withdrawal {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+
+        .transaction-details {
             margin-top: 10px;
         }
 
@@ -142,55 +147,22 @@
         .detail-value {
             font-size: 14px;
             font-weight: 600;
-            color: #333;
         }
 
-        .investment-progress {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            height: 8px;
-            background-color: #e9ecef;
-            border-radius: 4px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #28c76f 0%, #198754 100%);
-            border-radius: 4px;
-            transition: width 0.3s ease;
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 5px;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .investment-amount {
-            font-size: 18px;
-            font-weight: 700;
-            color: #198754;
-        }
-
-        .daily-income {
+        .value-positive {
             color: #28A745;
         }
 
-        .total-income {
-            color: #FFC107;
+        .value-negative {
+            color: #DC3545;
         }
 
-        .days-left {
-            color: #DC3545;
+        .transaction-description {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 13px;
+            color: #666;
         }
 
         .loading-more {
@@ -200,16 +172,15 @@
             display: none;
         }
 
-        .no-investments {
+        .no-transactions {
             text-align: center;
             padding: 30px;
             color: #666;
         }
 
-        .investment-name {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 5px;
+        .transaction-amount {
+            font-size: 18px;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -221,7 +192,7 @@
                     <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
                 </svg>
             </div>
-            <div class="nav-title">Meus Investimentos</div>
+            <div class="nav-title">Histórico Completo</div>
             <div class="nav-icon" style="visibility: hidden;">
                 <!-- Espaço vazio para alinhamento -->
             </div>
@@ -229,8 +200,8 @@
     </div>
 
     <div class="app-capsule">
-        <div class="content-area" id="investmentsContainer">
-            <!-- Os cartões de investimento serão inseridos aqui via JavaScript -->
+        <div class="content-area" id="transactionsContainer">
+            <!-- Os cartões de transação serão inseridos aqui via JavaScript -->
         </div>
         
         <div class="loading-more" id="loadingMore">
@@ -239,14 +210,14 @@
                     <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
                 </svg>
             </div>
-            Carregando mais investimentos...
+            Carregando mais transações...
         </div>
         
-        <div class="no-investments" id="noInvestments" style="display: none;">
+        <div class="no-transactions" id="noTransactions" style="display: none;">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#666">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
             </svg>
-            <p style="margin-top: 15px;">Nenhum investimento encontrado</p>
+            <p>Nenhuma transação encontrada</p>
         </div>
     </div>
 
@@ -259,9 +230,9 @@
         }
 
         // Elementos da página
-        const $container = $('#investmentsContainer');
+        const $container = $('#transactionsContainer');
         const $loadingMore = $('#loadingMore');
-        const $noInvestments = $('#noInvestments');
+        const $noTransactions = $('#noTransactions');
         const $backButton = $('#backButton');
 
         // Variáveis para controle do scroll infinito
@@ -282,133 +253,120 @@
             return new Date(dateString).toLocaleDateString('pt-BR', options);
         }
 
-        // Função para calcular dias restantes
-        function calculateDaysLeft(expirationDate) {
-            const now = new Date();
-            const expDate = new Date(expirationDate);
-            const diffTime = expDate - now;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            return diffDays > 0 ? diffDays : 0;
-        }
-
-        // Função para calcular progresso
-        function calculateProgress(createdAt, expirationDate) {
-            const now = new Date();
-            const start = new Date(createdAt);
-            const end = new Date(expirationDate);
-            
-            const totalDuration = end - start;
-            const elapsed = now - start;
-            
-            if (now >= end) return 100;
-            if (now <= start) return 0;
-            
-            return (elapsed / totalDuration) * 100;
-        }
-
-        // Função para calcular renda total recebida
-        function calculateTotalIncome(dailyIncome, createdAt, expirationDate) {
-            const now = new Date();
-            const start = new Date(createdAt);
-            const end = new Date(expirationDate);
-            
-            // Verifica se o investimento ainda está ativo
-            if (now < start) return 0;
-            
-            // Se já expirou, calcula todos os dias
-            if (now >= end) {
-                const totalDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-                return dailyIncome * totalDays;
+         // Função para determinar o tipo e estilo da transação automaticamente
+        function getTransactionType(transaction) {
+            // Se existir um tipo definido, usa ele
+            if (transaction.tipo) {
+                if (transaction.tipo.includes('BONUS')) {
+                    return {
+                        class: 'type-bonus',
+                        text: 'BÔNUS',
+                        valueClass: 'value-positive'
+                    };
+                } else if (transaction.tipo.includes('SAQUE')) {
+                    return {
+                        class: 'type-withdrawal',
+                        text: 'SAQUE',
+                        valueClass: 'value-negative'
+                    };
+                } else if (transaction.tipo.includes('COMPRA')) {
+                    return {
+                        class: 'type-purchase',
+                        text: 'COMPRA',
+                        valueClass: 'value-negative'
+                    };
+                }
             }
             
-            // Se está ativo, calcula dias até agora
-            const daysPassed = Math.ceil((now - start) / (1000 * 60 * 60 * 24));
-            return dailyIncome * daysPassed;
+            // Se não tiver tipo definido, determina automaticamente
+            if (transaction.valor > 0) {
+                // Se for positivo, assume que é bônus
+                return {
+                    class: 'type-bonus',
+                    text: 'CRÉDITO',
+                    valueClass: 'value-positive'
+                };
+            } else {
+                // Se for negativo, verifica pela descrição
+                if (transaction.descricao.toLowerCase().includes('saque')) {
+                    return {
+                        class: 'type-withdrawal',
+                        text: 'SAQUE',
+                        valueClass: 'value-negative'
+                    };
+                } else if (transaction.descricao.toLowerCase().includes('compra')) {
+                    return {
+                        class: 'type-purchase',
+                        text: 'COMPRA',
+                        valueClass: 'value-negative'
+                    };
+                } else {
+                    // Tipo genérico para transações não identificadas
+                    return {
+                        class: 'type-transfer',
+                        text: 'TRANSAÇÃO',
+                        valueClass: transaction.valor >= 0 ? 'value-positive' : 'value-negative'
+                    };
+                }
+            }
         }
 
-        // Função para carregar investimentos
-        async function loadInvestments(page) {
+        // Função para carregar transações
+        async function loadTransactions(page) {
             if (isLoading || !hasMore) return;
             
             isLoading = true;
             $loadingMore.show();
             
             try {
-                const response = await fetch(`http://localhost:3000/investimentos?page=${page}&limit=${itemsPerPage}`, {
+                const response = await fetch(`http://localhost:3000/historico?page=${page}&limit=${itemsPerPage}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Erro ao carregar investimentos');
+                    throw new Error('Erro ao carregar histórico');
                 }
                 
                 const data = await response.json();
                 
-                if (data.data.length === 0) {
+                if (data.historico.length === 0) {
                     hasMore = false;
                     if (page === 1) {
-                        $noInvestments.show();
+                        $noTransactions.show();
                     }
                 } else {
                     // Se for a primeira página e tiver menos de 10 itens, não mostra o "Carregando mais"
-                    if (page === 1 && data.data.length < itemsPerPage) {
+                    if (page === 1 && data.historico.length < itemsPerPage) {
                         hasMore = false;
                     }
                     
-                    data.data.forEach(investment => {
-                        const daysLeft = calculateDaysLeft(investment.dataExpiracao);
-                        const isActive = daysLeft > 0;
-                        const progress = calculateProgress(investment.dataCompra, investment.dataExpiracao);
-                        const totalIncome = calculateTotalIncome(
-                            investment.rendaDiaria, 
-                            investment.dataCompra, 
-                            investment.dataExpiracao
-                        );
+                    data.historico.forEach(transaction => {
+                        const type = getTransactionType(transaction);
+                        const isPositive = type.valueClass === 'value-positive';
+                        const valuePrefix = isPositive ? '+' : '-';
                         
                         const card = `
-                            <div class="investment-card">
-                                <div class="investment-header">
-                                    <div class="investment-date">${formatDate(investment.dataCompra)}</div>
-                                    <div class="investment-status ${isActive ? 'status-active' : 'status-expired'}">
-                                        ${isActive ? 'ATIVO' : 'EXPIRADO'}
+                            <div class="transaction-card">
+                                <div class="transaction-header">
+                                    <div class="transaction-date">${formatDate(transaction.data)}</div>
+                                    <div class="transaction-type ${type.class}">
+                                        ${type.text}
                                     </div>
                                 </div>
                                 
-                                <div class="investment-name">${investment.nome}</div>
-                                
-                                <div class="investment-details">
+                                <div class="transaction-details">
                                     <div class="detail-row">
-                                        <span class="detail-label">Valor investido:</span>
-                                        <span class="detail-value investment-amount">KZ ${investment.preco.toFixed(2)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Renda diária:</span>
-                                        <span class="detail-value daily-income">KZ ${investment.rendaDiaria.toFixed(2)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Total recebido:</span>
-                                        <span class="detail-value total-income">KZ ${totalIncome.toFixed(2)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Dias restantes:</span>
-                                        <span class="detail-value days-left">${daysLeft} dias</span>
+                                        <span class="detail-label">Valor:</span>
+                                        <span class="detail-value ${type.valueClass} transaction-amount">
+                                            ${valuePrefix} KZ ${Math.abs(transaction.valor).toFixed(2)}
+                                        </span>
                                     </div>
                                 </div>
                                 
-                                <div class="investment-progress">
-                                    <div class="progress-info">
-                                        <span>Início: ${formatDate(investment.dataCompra)}</span>
-                                        <span>Fim: ${formatDate(investment.dataExpiracao)}</span>
-                                    </div>
-                                    <div class="progress-bar-container">
-                                        <div class="progress-bar" style="width: ${progress}%"></div>
-                                    </div>
-                                    <div class="progress-info">
-                                        <span>${progress.toFixed(1)}% concluído</span>
-                                        <span>${investment.validadeDias} dias totais</span>
-                                    </div>
+                                <div class="transaction-description">
+                                    ${transaction.descricao}
                                 </div>
                             </div>
                         `;
@@ -436,7 +394,7 @@
             
             // Carrega mais itens quando estiver perto do final
             if (scrollPosition + windowHeight > documentHeight - 200 && hasMore) {
-                loadInvestments(currentPage);
+                loadTransactions(currentPage);
             }
         }
 
@@ -449,7 +407,7 @@
         $(window).scroll(checkScroll);
 
         // Carrega os primeiros itens
-        loadInvestments(1);
+        loadTransactions(1);
     });
     </script>
 </body>
