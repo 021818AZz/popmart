@@ -290,210 +290,222 @@
         </div>
     </div>
 
-    <script>
-    $(document).ready(function() {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = 'index.html';
+    <script>$(document).ready(function() {
+    // Verifica autenticação
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = 'index.html';
+        return;
+    }
+
+    // Elementos da página
+    const $balance = $('#userBalance');
+    const $amountInput = $('#amount');
+    const $withdrawButton = $('#withdrawButton');
+    const $accountName = $('#accountName');
+    const $accountNumber = $('#accountNumber');
+    const $accountBank = $('#accountBank');
+    const $backButton = $('#backButton');
+    const $historyButton = $('#historyButton');
+
+    // Variáveis globais
+    let userBalance = 0;
+    let bankAccount = null;
+    let hasActiveInvestments = false; // Flag para investimentos
+    const WITHDRAWAL_FEE = 0.15;
+    const MIN_WITHDRAWAL = 2000;
+    const MAX_WITHDRAWAL = 500000;
+
+    // Funções auxiliares
+    function formatCurrency(value) {
+        return value.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+    }
+
+    function showError(message) {
+        layer.msg(message, {icon: 2, time: 3000});
+    }
+
+    // Verifica investimentos ativos
+    async function checkActiveInvestments() {
+        try {
+            const response = await fetch('https://bd-1-tile.onrender.com/investimentos', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (!response.ok) throw new Error();
+            
+            const { data } = await response.json();
+            return data.some(inv => new Date(inv.dataExpiracao) > new Date());
+        } catch (error) {
+            console.error('Erro ao verificar investimentos:', error);
+            return false;
+        }
+    }
+
+    // Carrega dados do usuário
+    async function loadUserData() {
+        try {
+            // Dados básicos
+            const [balanceRes, accountRes] = await Promise.all([
+                fetch('https://bd-1-tile.onrender.com/me', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                }),
+                fetch('https://bd-1-tile.onrender.com/user/bank-account', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                })
+            ]);
+
+            if (!balanceRes.ok) throw new Error('Erro ao carregar saldo');
+            if (!accountRes.ok) throw new Error('Erro ao carregar conta bancária');
+
+            const balanceData = await balanceRes.json();
+            userBalance = balanceData.saldo || 0;
+            $balance.text(`KZ ${formatCurrency(userBalance)}`);
+
+            const accountData = await accountRes.json();
+            bankAccount = accountData;
+            $accountName.text(accountData.nomeTitular || 'Não informado');
+            $accountNumber.text(accountData.numeroConta ? `•••• ${accountData.numeroConta.slice(-4)}` : 'Não informado');
+            $accountBank.text({
+                'BFA': 'Banco de Fomento Angola',
+                'BAI': 'Banco Angolano de Investimentos',
+                'BIC': 'Banco BIC',
+                'ATL': 'Banco Atlântico'
+            }[accountData.banco] || accountData.banco);
+
+            // Verifica investimentos
+            hasActiveInvestments = await checkActiveInvestments();
+            if (!hasActiveInvestments) {
+                $('.balance-card').after(`
+                    <div class="layui-card" style="margin: 0 0 15px; border-left: 3px solid #FFB800; background: #FFF8E6;">
+                        <div class="layui-card-body" style="padding: 10px 15px; color: #FFB800;">
+                            <i class="layui-icon layui-icon-face-cry" style="margin-right: 5px;"></i>
+                            Você precisa comprar um produto para habilitar saques
+                        </div>
+                    </div>
+                `);
+                $('#withdrawButton').prop('disabled', true)
+                                  .css('background', '#ccc')
+                                  .text('Saque bloqueado');
+            }
+
+        } catch (error) {
+            console.error('Erro:', error.message);
+            showError(error.message);
+            if (error.message.includes('conta bancária')) {
+                setTimeout(() => window.location.href = 'bank-account.html', 1500);
+            }
+        }
+    }
+
+    // Validações
+    function validateAmount(amount) {
+        if (isNaN(amount) {
+            showError('Digite um valor válido');
+            return false;
+        }
+
+        if (amount < MIN_WITHDRAWAL) {
+            showError(`Valor mínimo: KZ ${formatCurrency(MIN_WITHDRAWAL)}`);
+            return false;
+        }
+
+        if (amount > MAX_WITHDRAWAL) {
+            showError(`Valor máximo: KZ ${formatCurrency(MAX_WITHDRAWAL)}`);
+            return false;
+        }
+
+        if (amount > userBalance) {
+            showError('Saldo insuficiente');
+            return false;
+        }
+
+        const now = new Date();
+        if (now.getDay() === 0) { // Domingo
+            showError('Saque indisponível aos domingos');
+            return false;
+        }
+
+        const hours = now.getHours();
+        if (hours < 9 || hours >= 21) {
+            showError('Horário: 09h às 21h');
+            return false;
+        }
+
+        return true;
+    }
+
+    // Eventos
+    $backButton.click(() => window.history.back());
+    $historyButton.click(() => window.location.href = 'historico.html');
+
+    $amountInput.on('input', function() {
+        const value = $(this).val().replace(/[^\d,]/g, '');
+        $(this).val(value);
+    });
+
+    $('#withdrawButton').click(async function() {
+        if (!hasActiveInvestments) {
+            showError('Compre um produto para habilitar saques');
             return;
         }
 
-        // Elementos da página
-        const $balance = $('#userBalance');
-        const $amountInput = $('#amount');
-        const $withdrawButton = $('#withdrawButton');
-        const $accountName = $('#accountName');
-        const $accountNumber = $('#accountNumber');
-        const $accountBank = $('#accountBank');
-        const $backButton = $('#backButton');
-        const $historyButton = $('#historyButton');
+        const amount = parseFloat($amountInput.val().replace(/\./g, '').replace(',', '.'));
+        if (!validateAmount(amount)) return;
 
-        // Variáveis globais
-        let userBalance = 0;
-        let bankAccount = null;
-        const WITHDRAWAL_FEE = 0.15; // 15% de taxa
-        const MIN_WITHDRAWAL = 2000; // Mínimo de 2000 KZ
-
-        // Função para carregar dados do usuário
-        async function loadUserData() {
-            try {
-                // Carrega saldo do usuário
-                const balanceResponse = await fetch('https://bd-1-tile.onrender.com/me', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+        const netAmount = amount * (1 - WITHDRAWAL_FEE);
+        
+        layer.open({
+            title: 'Confirmar Saque',
+            content: `
+                <div style="padding: 15px; line-height: 1.6;">
+                    <p><strong>Valor do saque:</strong> KZ ${formatCurrency(amount)}</p>
+                    <p><strong>Taxa (15%):</strong> KZ ${formatCurrency(amount * WITHDRAWAL_FEE)}</p>
+                    <p><strong>Valor líquido:</strong> KZ ${formatCurrency(netAmount)}</p>
+                    <p><strong>Conta destino:</strong> ${$accountBank.text()} (${$accountNumber.text()})</p>
+                </div>
+            `,
+            btn: ['Confirmar', 'Cancelar'],
+            area: ['90%', 'auto'],
+            yes: async function() {
+                const loading = layer.load(1, { shade: [0.5, '#fff'] });
                 
-                if (!balanceResponse.ok) {
-                    throw new Error('Erro ao carregar saldo');
-                }
-                
-                const balanceData = await balanceResponse.json();
-                userBalance = balanceData.saldo || 0;
-                $balance.text(`KZ ${userBalance.toFixed(2)}`);
-
-                // Carrega informações da conta bancária
-                const accountResponse = await fetch('https://bd-1-tile.onrender.com/user/bank-account', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                
-                if (accountResponse.ok) {
-                    const accountData = await accountResponse.json();
-                    bankAccount = accountData;
-                    
-                    $accountName.text(accountData.nomeTitular || 'Não informado');
-                    $accountNumber.text(accountData.numeroConta ? `•••• ${accountData.numeroConta.slice(-4)}` : 'Não informado');
-                    $accountBank.text(getBankName(accountData.banco));
-                } else {
-                    throw new Error('Conta bancária não cadastrada');
-                }
-            } catch (error) {
-                console.error('Erro ao carregar dados:', error);
-                layer.msg(error.message, {icon: 2});
-                
-                if (error.message.includes('Conta bancária')) {
-                    setTimeout(() => {
-                        window.location.href = 'bank-account.html';
-                    }, 1500);
-                }
-            }
-        }
-
-        // Mapeamento de códigos de banco para nomes
-        function getBankName(bankCode) {
-            const banks = {
-                'BFA': 'Banco de Fomento Angola (BFA)',
-                'BAI': 'Banco Angolano de Investimentos (BAI)',
-                'BIC': 'Banco BIC',
-                'ATL': 'Banco Atlântico'
-            };
-            return banks[bankCode] || bankCode;
-        }
-
-        // Verifica se é dia útil (segunda a sábado)
-        function isBusinessDay() {
-            const now = new Date();
-            const day = now.getDay(); // 0=Domingo, 1=Segunda, ..., 6=Sábado
-            return day >= 1 && day <= 6;
-        }
-
-        // Verifica se está no horário de saque (09h às 21h)
-        function isWithdrawalTime() {
-            const now = new Date();
-            const hours = now.getHours();
-            return hours >= 9 && hours < 21;
-        }
-
-        // Botão de voltar
-        $backButton.click(function() {
-            window.history.back();
-        });
-
-        // Botão de histórico
-        $historyButton.click(function() {
-            window.location.href = 'historico.html';
-        });
-
-        // Botão de saque
-        $withdrawButton.click(async function() {
-            const amount = parseFloat($amountInput.val());
-            
-            // Validações
-            if (isNaN(amount) || amount <= 0) {
-                layer.msg('Por favor, insira um valor válido', {icon: 2});
-                return;
-            }
-            
-            if (amount < MIN_WITHDRAWAL) {
-                layer.msg(`O valor mínimo para saque é KZ ${MIN_WITHDRAWAL}`, {icon: 2});
-                return;
-            }
-            
-            if (amount > userBalance) {
-                layer.msg('Saldo insuficiente para esta retirada', {icon: 2});
-                return;
-            }
-            
-            if (!isBusinessDay()) {
-                layer.msg('Saque disponível apenas de segunda a sábado', {icon: 2});
-                return;
-            }
-            
-            if (!isWithdrawalTime()) {
-                layer.msg('Horário de saque: 09h às 21h', {icon: 2});
-                return;
-            }
-            
-            if (!bankAccount) {
-                layer.msg('Conta bancária não cadastrada', {icon: 2});
-                setTimeout(() => {
-                    window.location.href = 'iban.html';
-                }, 1500);
-                return;
-            }
-
-            // Calcula valor líquido após taxa
-            const netAmount = amount * (1 - WITHDRAWAL_FEE);
-            
-            // Confirmação
-            layer.open({
-                title: 'Confirmar Saque',
-                content: `Você está solicitando um saque de KZ ${amount.toFixed(2)}.<br>Valor líquido após taxa de ${WITHDRAWAL_FEE*100}%: KZ ${netAmount.toFixed(2)}`,
-                btn: ['Confirmar', 'Cancelar'],
-                yes: async function(index) {
-                    layer.close(index);
-                    
-                    // Mostra loading
-                    const loading = layer.load(1, {
-                        shade: [0.1, '#fff']
+                try {
+                    const response = await fetch('https://bd-1-tile.onrender.com/withdraw', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            amount,
+                            fee: WITHDRAWAL_FEE,
+                            netAmount,
+                            bankAccount
+                        })
                     });
-                    
-                    try {
-                        // Envia solicitação de saque
-                        const response = await fetch('https://bd-1-tile.onrender.com/withdraw', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}`
-                            },
-                            body: JSON.stringify({
-                                amount: amount,
-                                fee: WITHDRAWAL_FEE,
-                                netAmount: netAmount,
-                                bankAccount: bankAccount
-                            })
-                        });
-                        
-                        const data = await response.json();
-                        
-                        if (!response.ok) {
-                            throw new Error(data.msg || 'Erro ao processar saque');
-                        }
-                        
-                        // Atualiza saldo localmente
-                        userBalance -= amount;
-                        $balance.text(`KZ ${userBalance.toFixed(2)}`);
-                        
-                        // Mostra mensagem de sucesso
-                        layer.msg('Saque solicitado com sucesso!', {icon: 1}, function() {
-                            window.location.href = 'historico.html';
-                        });
-                        
-                    } catch (error) {
-                        console.error('Erro no saque:', error);
-                        layer.msg(error.message, {icon: 2});
-                    } finally {
-                        layer.close(loading);
-                    }
-                }
-            });
-        });
 
-        // Inicializa a página
-        loadUserData();
+                    if (!response.ok) {
+                        const { msg } = await response.json();
+                        throw new Error(msg || 'Erro no saque');
+                    }
+
+                    layer.msg('Saque solicitado!', { icon: 1 }, () => {
+                        window.location.reload();
+                    });
+
+                } catch (error) {
+                    showError(error.message);
+                } finally {
+                    layer.close(loading);
+                }
+            }
+        });
     });
+
+    // Inicialização
+    loadUserData();
+});
     </script>
 </body>
 </html>
