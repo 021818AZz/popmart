@@ -366,7 +366,7 @@
             lastCheckedMobile = mobile;
             
             $.ajax({
-                url: "http://127.0.0.1:3000/check-mobile/+244" + mobile,
+                url: "https://bd-1-tile.onrender.com/check-mobile/+244" + mobile,
                 type: "GET",
                 dataType: "json",
                 beforeSend: function() {
@@ -470,7 +470,7 @@
 
             // Envia a requisição AJAX
             $.ajax({
-                url: "http://127.0.0.1:3000/usuarios",
+                url: "https://bd-1-tile.onrender.com/usuarios",
                 type: "POST",
                 data: JSON.stringify(data),
                 contentType: "application/json",

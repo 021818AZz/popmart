@@ -340,10 +340,10 @@
             
             try {
                 const [userResponse, teamResponse] = await Promise.all([
-                    fetch('http://127.0.0.1:3000/me', {
+                    fetch('https://bd-1-tile.onrender.com/me', {
                         headers: { 'Authorization': `Bearer ${token}` }
                     }),
-                    fetch('http://127.0.0.1:3000/team', {
+                    fetch('https://bd-1-tile.onrender.com/team', {
                         headers: { 'Authorization': `Bearer ${token}` }
                     })
                 ]);
@@ -388,7 +388,7 @@
         document.getElementById('inviteCode').textContent = 
             userDataCache.codigoConvite || '----';
         document.getElementById('referralURL').value = 
-            `http://127.0.0.1:5501/register?invite=${userDataCache.codigoConvite || ''}`;
+            `https://hamister203.com/register?invite=${userDataCache.codigoConvite || ''}`;
         
         // Atualiza contagens com fallback para array vazio
         const nivel1 = teamDataCache.nivel1 || [];

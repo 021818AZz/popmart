@@ -490,7 +490,7 @@
                 });
 
                 // Faz a requisição para a rota /me
-                const response = await fetch('http://127.0.0.1:3000/me', {
+                const response = await fetch('https://bd-1-tile.onrender.com/me', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -512,7 +512,7 @@
                 document.getElementById('totalEarnings').textContent = `KZ${userData.saldo.toFixed(2)}`;
                 
                 // Atualiza o link de convite
-                const referralLink = `http://127.0.0.1:5501/register?invite=${userData.codigoConvite}`;
+                const referralLink = `https://hamister203.com/register?invite=${userData.codigoConvite}`;
                 document.getElementById('referralURL').value = referralLink;
 
                 // Atualiza o nível VIP (se disponível nos dados)
