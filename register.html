@@ -155,7 +155,7 @@
 
 <script>
 // URL da API de registro - ajuste conforme necessário
-const API_URL = 'http://localhost:3000/register';
+const API_URL = 'https://bd-1-tile.onrender.com/register';
 
 // Função para seleção de código de país
 function quhao_select() {
@@ -284,7 +284,7 @@ function dosubmit() {
     
     // Enviar para a API
     $.ajax({
-    url: API_URL, // ex: "http://localhost:3000/register"
+    url: API_URL, // ex: "https://bd-1-tile.onrender.com/register"
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify(formData),
