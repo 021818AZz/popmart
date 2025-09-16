@@ -1,559 +1,385 @@
-<!doctype html>
-<html lang="pt">
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <title>Hamster Registrar</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="wap-font-scale" content="no">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8" />
+<title>Cadastrar-se</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="https://www.adabr.com/css/antui-all.css"/>
+<link rel="stylesheet" href="https://www.adabr.com/css/mobile/style.css"/>
+<script type="text/javascript" src="https://www.adabr.com/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.adabr.com/js/layer/mobile/layer.js"></script>
+<script type="text/javascript" src="https://www.adabr.com/js/common.js"></script>
+<script type="text/javascript" src="https://www.adabr.com/js/mobile/public.js"></script>
 
-        body {
-            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        .login-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('/static/home/img/mb/0001.png');
-            background-size: 100% 100%;
-            z-index: -2;
-        }
-
-        .login-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(255, 165, 0, 0.5) 0%, transparent 60%),
-                radial-gradient(circle at 40% 70%, rgba(255, 140, 0, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.3) 0%, transparent 60%),
-                radial-gradient(circle at 10% 90%, rgba(255, 165, 0, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 70% 60%, rgba(255, 140, 0, 0.3) 0%, transparent 60%),
-                radial-gradient(circle at 30% 10%, rgba(255, 215, 0, 0.2) 0%, transparent 60%),
-                radial-gradient(circle at 60% 40%, rgba(255, 165, 0, 0.3) 0%, transparent 60%);
-            animation: bokeh 15s ease-in-out infinite;
-        }
-
-        @keyframes  bokeh {
-            0%, 100% {
-                opacity: 0.7;
-                transform: scale(1) rotate(0deg);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2) rotate(180deg);
-            }
-        }
-
-        .login-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4A90E2, #7B68EE);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .login-avatar img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .login-title {
-            color: white;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .login-form-container {
-            width: 100%;
-            max-width: 350px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .input-group input {
-            width: 100%;
-            height: 50px;
-            padding: 0 20px 0 85px;
-            border: none;
-            border-radius: 25px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            font-size: 16px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: rgba(255, 215, 0, 0.5);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .input-icon {
-            width: 21px;
-            height: 24px;
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 18px;
-            z-index: 1;
-        }
-
-        .input-icon img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .country-code {
-            position: absolute;
-            left: 40px;
-            top: 46%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: rgb(255, 165, 0);
-            font-size: 16px;
-            font-weight: 500;
-            z-index: 2;
-        }
-
-        .input-group.mobile-input input {
-            padding: 0 20px 0 80px;
-        }
-
-        .input-group.mobile-input input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-            padding-left: 5px;
-        }
-
-        .input-group:not(.mobile-input) input {
-            padding: 0 20px 0 45px;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .btn-login,
-        .btn-register {
-            flex: 1;
-            height: 50px;
-            border: none;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-login {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #8B4513;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-        }
-
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
-        }
-
-        .btn-register {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .btn-register:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        .mobile-status {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 14px;
-        }
-
-        .mobile-available {
-            color: #4CAF50;
-        }
-
-        .mobile-taken {
-            color: #FF4500;
-        }
-
-        @media (max-width: 480px) {
-            .login-avatar {
-                width: 100px;
-                height: 100px;
-            }
-
-            .login-title {
-                font-size: 24px;
-            }
-
-            .login-form-container {
-                max-width: 300px;
-            }
-        }
-    </style>
 </head>
+<body ontouchstart="" style="background-color:#fff;background-image:url(https://www.adabr.com/images/mobile/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
 
-<body>
-    <!-- Fundo -->
-    <div class="login-background"></div>
+<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;"><!-- <a href="/mobile" style="color:#fff;font-weight:700;font-size:18px;margin-left:12px;">Ada</a> --><span style="position:absolute;right:10px;font-size:14px;color:#f73131;letter-spacing:1px;"><!-- <a href="https://www.adabr.com/mobile/login/change_lang" style="border: 1px solid #00e763;border-radius: 13px;padding: 5px 10px;font-size:14px;background-color:#fff;color:#00e763;margin-right:10px;">Português</a> --><a target="_blank" href=" https://t.me/Ada8860"><img src="https://www.adabr.com/images/mobile/icon_kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
 
-    <!-- Container de Registro -->
-    <div class="login-container">
-        <!-- Avatar -->
-        <div class="login-avatar">
-            <img src="https://hamstermine-br.vip/static/home/img/mb/0002.png" />
-        </div>
+<div style="margin-top:45px;text-align:center;"><img src="https://www.adabr.com/images/mobile/logo.png" alt="logo" style="width:110px;height:110px;"></div>
 
-        <!-- Título -->
-        <div class="login-title">Registrar-se</div>
+<style>
+.container .auth_bg{margin-top:33px;text-align:center;font-size:22px;font-weight:700}
+.container .form{position:relative;top:28px;border-radius:20px 20px 0 0;width:100%;background-color:#fff}
+.u-form-item{padding:5px 30px}
+::placeholder{color: rgb(192, 196, 204);font-size:14px;}
+.u-form-item .u-form-item__body,#register .u-form-item .u-form-item__body{padding:10px!important;background:#f2f7fb;border-radius:24px}
+.u-form-item__body{display:flex;flex-direction:row;padding:10px 0}
+.u-form-item__body__left{display:flex;flex-direction:row;align-items:center}
+.u-form-item__body__left__content{position:relative;display:flex;flex-direction:row;align-items:center;padding-right:8px;flex:1}
+.u-form-item__body__left__content__icon{margin-right:3px}
+.u-form-item__body__right input{background-color:transparent;height:31px;display: block;width: 100%;outline: none;border: none;padding: 0;margin: 0;text-decoration: inherit;}
+.container .btn{display:block;text-align:center;margin:10px 30px 10px 30px;color: #fff;background: linear-gradient(90deg,#05cda7,#00e763)!important;font-weight: 700;border-radius: 22px;padding:12px 0;font-size:16px;}
+.container .forget{display:block;text-align:center;font-weight:500;color: #00e763;font-size: 14px;text-align: center;margin-bottom: 20px;}
+.container .form .btn-bottom{display:block;text-align:center;font-weight: 700;width: 100%;text-align: center;margin-bottom: 134px;color: #00e763;font-size:16px;}
+.guojia-list-item{padding:10px 0;border-bottom:1px #ddd dashed;}
+</style>
+<form id="myform" method="post" action="" class="ajax_post_submit" role="form">
+<div class="container">
+	<!-- <div class="auth_bg">
+		Cadastrar-se	</div> -->
+	<div class="form" style="margin-top:50px;">
+		<div class="u-form">
+			<div class="u-form-item">
+				<div class="u-form-item__body" style="flex-direction: row;">
+					<div class="u-form-item__body__left">
+						<div class="u-form-item__body__left__content">
+							<div class="u-form-item__body__left__content__icon">
+								<div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
+									<div class="u-icon__img" style="width:22px; height:22px;">
+										<img src="https://www.adabr.com/images/mobile/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
+									</div>
+									<input id="area_codei" name="area_code" type="text" value="55" style="display:none;" required><div style="width:40px;height:22px;" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>								</div>
+							</div>
+						</div>
+					</div>
+					<div class="u-form-item__body__right">
+						<input id="mobile" name="mobile" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
+					</div>
+				</div>
+			</div>
+						<div class="u-form-item">
+				<div class="u-form-item__body" style="flex-direction: row;">
+					<div class="u-form-item__body__left">
+						<div class="u-form-item__body__left__content">
+							<div class="u-form-item__body__left__content__icon">
+								<div class="u-icon u-icon--right">
+									<div class="u-icon__img" style="width:22px; height:22px;">
+										<img src="https://www.adabr.com/images/mobile/mima.d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="u-form-item__body__right">
+						<input value="" type="password" name="password" id="password" placeholder="Senha" required>
+					</div>
+				</div>
+			</div>
+			<div class="u-form-item">
+				<div class="u-form-item__body" style="flex-direction: row;">
+					<div class="u-form-item__body__left">
+						<div class="u-form-item__body__left__content">
+							<div class="u-form-item__body__left__content__icon">
+								<div class="u-icon u-icon--right">
+									<div class="u-icon__img" style="width:22px; height:22px;">
+										<img src="https://www.adabr.com/images/mobile/mima.d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="u-form-item__body__right">
+						<input id="re_password" name="re_password" autocomplete="off" type="password" class="" placeholder="Digite a senha novamente" value="" required>
+					</div>
+				</div>
+			</div>
+			<div class="u-form-item">
+				<div class="u-form-item__body" style="flex-direction: row;">
+					<div class="u-form-item__body__left">
+						<div class="u-form-item__body__left__content">
+							<div class="u-form-item__body__left__content__icon">
+								<div class="u-icon u-icon--right">
+									<div class="u-icon__img" style="width:22px; height:22px;">
+										<img src="https://www.adabr.com/images/mobile/mima.d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="u-form-item__body__right">
+						<input value="" type="password" name="pay_password" id="pay_password" placeholder="Senha de pagamento" required>
+					</div>
+				</div>
+			</div>
+			<div class="u-form-item">
+				<div class="u-form-item__body" style="flex-direction: row;">
+					<div class="u-form-item__body__left">
+						<div class="u-form-item__body__left__content">
+							<div class="u-form-item__body__left__content__icon">
+								<div class="u-icon u-icon--right">
+									<div class="u-icon__img" style="width:22px; height:22px;">
+										<img src="https://www.adabr.com/images/mobile/yaoqing.3a93cc26.png" style="display:block;width: 100%; height: 100%;">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="u-form-item__body__right">
+						<input id="invitation_code" name="invitation_code" type="text" placeholder="Código de convite" value="2OG9G" required>
+					</div>
+				</div>
+			</div>
+			<a href="javascript:dosubmit();" class="btn">
+				Cadastrar-se			</a>
+			<a href="/index" class="btn-bottom">
+				Login			</a>
+		</div>
+	</div>
+</div>
+</form>
 
-        <!-- Container do Formulário -->
-        <div class="login-form-container">
-            <form name="form" method="post" id="form">
-                <div class="input-group mobile-input">
-                    <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0004.png" /></div>
-                    <span class="country-code">+244</span>
-                    <input type="text" id="mobile" name="mobile" minlength="7" maxlength="9"
-                        placeholder="Digite seu número de celular" oninput="value=value.replace(/[^\d]/g,'')">
-                    <span id="mobileStatus" class="mobile-status"></span>
-                </div>
+<script>
+//区号选择，印度91马来西亚60印尼62菲律宾63新加坡65
+function quhao_select()
+{
+	layer.open({
+		type: 1
+		,content: '<div style="padding:0 10px;"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>'
+		,anim: 'up'
+		,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
+    });
+}
+function qhselect(quhao)
+{
+	quhao = quhao || $("#quhaose").val();
+	$("#area_code").html(quhao);
+	$("#area_codei").val(quhao);
+	layer.closeAll();
+}
 
-                <div class="input-group">
-                    <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0005.png" /></div>
-                    <input type="password" id="password" name="password" maxlength="16"
-                        placeholder="Digite sua senha">
-                </div>
+//获取验证码
+function getSmsCode()
+{
+    var obj = $("#getsmscode");
+	var area_code = $("#area_code").html();
 
-                <div class="input-group">
-                    <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0005.png" /></div>
-                    <input type="password" id="confirm_password" name="confirm_password"
-                        placeholder="Confirme sua senha">
-                </div>
+	// 验证手机号码
+	var mobile = $("#mobile").val();
+    if (mobile == '') {
+        layer.open({
+            content: 'Digite o número de telefone'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+		$('#mobile').focus();
+        return false;
+    }
+    var myreg=/^[0-9]{6,16}$/;
+	if (!myreg.test(mobile)) {
+		layer.open({
+            content: 'O formato do número de telefone não está correto'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+		$('#mobile').focus();
+        return false;
+	}
+	
+	if (area_code == '90' && mobile.length != 10) {
+		layer.open({
+            content: 'O formato do número de telefone não está correto'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+		$('#mobile').focus();
+        return false;
+	}
+	
+	mobile = '' + area_code + mobile;
+	
+    /* var captcha = $("#captcha").val();
+    if (captcha == '') {
+		layer.open({
+            content: 'Digite o código'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+		$('#captcha').focus();
+        return false;
+	}
+    if (captcha.length != 4) {
+		layer.open({
+            content: 'Código incorreto'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+		$('#captcha').focus();
+        return false;
+	} */
+    // 验证手机号码
+    $.ajax({
+		type: "GET",
+		url: 'https://www.adabr.com/mobile/login/getsmscode',
+		data: { mobile: mobile, type: 1 },
+		dataType:"json",
+		success: function (res) {
+			settime(obj); //倒计时
+			console.log(res);
+			if (res.code == 0) {
+				layer.open({
+					content: 'O código de verificação foi enviado, verifique'
+					,skin: 'msg'
+					,time: 2 //2秒后自动关闭
+				});
+			} else {
+                layer.open({
+					content: res.msg
+					,skin: 'msg'
+					,time: 2 //2秒后自动关闭
+				});
+				return;
+			}
+		},
+		error: function (res) {
+			alert('Request failed, please try again later');
+		}
+	});
+}
 
-                <div class="input-group">
-                    <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0003.png" /></div>
-                    <input type="text" id="inviteCode" name="inviteCode"
-                        placeholder="Código de convite" value="">
-                </div>
-
-                <div class="button-group">
-                    <a href="/index" class="btn-register">Já tem uma conta?</a>
-                    <button type="button" class="btn-login btn_submit_my">Registrar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-    // Função para extrair parâmetros da URL
-    function getQueryParam(name) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(name);
+var countdown = 120;
+function settime(obj)
+{
+    if (countdown == 0) {
+        obj.attr('disabled',false);
+        obj.text("Obter código");
+        countdown = 120;
+        return;
+    } else {
+        obj.attr('disabled',true);
+        obj.text("" + countdown + "S");
+        countdown--;
     }
 
-    // Quando o documento estiver carregado
-    document.addEventListener('DOMContentLoaded', function() {
-        // Verifica se há um parâmetro 'invite' na URL
-        const inviteCode = getQueryParam('invite');
+    setTimeout(function () {
+        settime(obj);
+    }, 1000);
+}
+
+function dosubmit()
+{
+    var password = $("#password").val();
+    var re_password = $("#re_password").val();
+    var pay_password = $("#pay_password").val();
+    var parent_id = $("#parent_id").val();
+    var smscode = $("#smscode").val();
+    
+    var mobile = $("#mobile").val();
+    if (mobile == '') {
+        //提示
+        layer.open({
+            content: 'Digite o e-mail'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
         
-        // Se existir, preenche o campo de código de convite
-        if (inviteCode) {
-            document.getElementById('inviteCode').value = inviteCode;
-            
-            // Opcional: desabilita o campo se quiser impedir edição
-            // document.getElementById('inviteCode').disabled = true;
-        }
-    });
+        return false;
+    }
+    
+	/* var email = $("#email").val();
+    if (email == '') {
+        //提示
+        layer.open({
+            content: 'Digite o e-mail'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+        
+        return false;
+    }
+	
+    if (is_email(email) != true) {
+        //提示
+        layer.open({
+            content: 'user_youxianggeshicuowu'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+        
+        return false;
+    } */
+	
+    if (password == '') {
+        layer.open({
+            content: 'Digite a senha'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+        return false;
+    }
+    if (password.length < 6 || password.length > 16) {
+		layer.open({
+            content: 'Senha de 6 a 16 dígitos'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+		return false;
+	}
+    /* if (pay_password == '') {
+        layer.open({
+            content: 'Please enter the security password'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+        return false;
+    }
+    if (pay_password.length < 6 || pay_password.length > 16) {
+		layer.open({
+            content: 'Security password 6 to 16 digits'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+		return false;
+	} */
+    if (re_password == '') {
+        layer.open({
+            content: 'Por favor, confirme a senha'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+        return false;
+    }
+    if (password != re_password) {
+        layer.open({
+            content: 'Duas senhas são inconsistentes'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+        return false;
+    }
+    
+    $("#myform").submit();
+}
+//判断是否为邮箱的正则表达式
+function is_email(email) {
+	var myreg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+	if (!myreg.test(email)) {
+		console.log('邮箱格式不正确');
+        return false;
+	} else {
+        return true;
+	}
+}
 </script>
 
-    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/layer.js"></script>
-    <script type="text/javascript">
-        // Desabilita o campo de inviteCode se já tiver valor
-        if ('' != '') {
-            $('#inviteCode').attr("disabled", "disabled");
-        }
-
-        // Variável para controlar o timeout da verificação
-        var mobileCheckTimeout;
-        var lastCheckedMobile = '';
-
-        // Verifica em tempo real se o número já existe
-        $('#mobile').on('input', function() {
-            var mobile = $(this).val();
-            
-            // Limpa o status anterior
-            $('#mobileStatus').removeClass('mobile-available mobile-taken').text('');
-            
-            // Verifica se o número tem o comprimento mínimo
-            if (mobile.length >= 7) {
-                clearTimeout(mobileCheckTimeout);
-                
-                // Adiciona delay para evitar muitas requisições
-                mobileCheckTimeout = setTimeout(function() {
-                    checkMobileAvailability(mobile);
-                }, 500);
-            }
-        });
-
-        // Função para verificar disponibilidade do número
-        function checkMobileAvailability(mobile) {
-            // Se já verificamos este número, não verifica novamente
-            if (lastCheckedMobile === mobile) return;
-            
-            lastCheckedMobile = mobile;
-            
-            $.ajax({
-                url: "https://bd-1-tile.onrender.com/check-mobile/+244" + mobile,
-                type: "GET",
-                dataType: "json",
-                beforeSend: function() {
-                    $('#mobileStatus').text('Verificando...');
-                },
-                success: function(response) {
-                    if (response.available) {
-                        $('#mobileStatus').addClass('mobile-available').text('Disponível');
-                    } else {
-                        $('#mobileStatus').addClass('mobile-taken').text('Já cadastrado');
-                    }
-                },
-                error: function() {
-                    $('#mobileStatus').text('Erro ao verificar');
-                }
-            });
-        }
-
-        var _submit = true;
-        $(".btn_submit_my").click(function() {
-            if (_submit == true) {
-                _submit = false;
-                var loading = layer.open({
-                    type: 2,
-                    content: "Carregando..."
-                });
-            } else {
-                return false;
-            }
-            
-            var mobile = $.trim($("input[name='mobile']").val());
-            var password = $("input[name='password']").val();
-            var confirm_password = $("input[name='confirm_password']").val();
-            var inviteCode = $("input[name='inviteCode']").val();
-            var _token = "";
-
-            // Validações do formulário
-            if (mobile.length == 0) {
-                layer.close(loading);
-                layer.open({
-                    content: "Por favor, insira o número de telefone...",
-                    skin: 'msg',
-                    time: 2
-                });
-                _submit = true;
-                return false;
-            }
-
-            if (password.length < 6) {
-                layer.close(loading);
-                layer.open({
-                    content: "A senha deve ter pelo menos 6 caracteres...",
-                    skin: 'msg',
-                    time: 2
-                });
-                _submit = true;
-                return false;
-            }
-
-            if (password != confirm_password) {
-                layer.close(loading);
-                layer.open({
-                    content: "As senhas não coincidem",
-                    skin: 'msg',
-                    time: 2
-                });
-                _submit = true;
-                return false;
-            }
-
-            if (inviteCode.length == 0) {
-                layer.close(loading);
-                layer.open({
-                    content: "Por favor, insira o código de convite...",
-                    skin: 'msg',
-                    time: 2
-                });
-                _submit = true;
-                return false;
-            }
-
-            // Verifica se o número já está marcado como cadastrado
-            if ($('#mobileStatus').hasClass('mobile-taken')) {
-                layer.close(loading);
-                layer.open({
-                    content: "Este número já está cadastrado!",
-                    skin: 'msg',
-                    time: 3,
-                    style: 'background-color: #FF4500; color: white;'
-                });
-                _submit = true;
-                return false;
-            }
-
-            var data = {
-                mobile: "+244" + mobile,  // Adiciona o prefixo +244
-                password: password,
-                inviteCode: inviteCode,
-                _token: _token
-            };
-
-            // Envia a requisição AJAX
-            $.ajax({
-                url: "https://bd-1-tile.onrender.com/usuarios",
-                type: "POST",
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                dataType: "json",
-                success: function(result) {
-                    layer.close(loading);
-                    
-                    if (result.code == 200) {
-                        layer.open({
-                            content: "Registro realizado com sucesso!",
-                            skin: 'msg',
-                            time: 2
-                        });
-                        setTimeout(function() {
-                            window.location.href = result.redirect || "/index";
-                        }, 2000);
-                    } else {
-                        showErrorMessage(result);
-                    }
-                },
-                error: function(xhr) {
-                    layer.close(loading);
-                    var response = xhr.responseJSON;
-                    
-                    if (xhr.status == 400 || xhr.status == 409) {
-                        showErrorMessage(response || {
-                            msg: "Erro ao processar sua solicitação"
-                        });
-                    } else {
-                        layer.open({
-                            content: "Erro de conexão com o servidor",
-                            skin: 'msg',
-                            time: 2
-                        });
-                    }
-                },
-                complete: function() {
-                    _submit = true;
-                }
-            });
-
-            // Função para mostrar mensagens de erro
-            function showErrorMessage(error) {
-                var errorMessage = "Erro ao cadastrar";
-                
-                if (error.code === 'P2002' || 
-                    error.message?.includes('Unique constraint') || 
-                    error.msg?.includes('já cadastrado') ||
-                    error.error?.includes('mobile')) {
-                    errorMessage = "Este número de celular já está cadastrado!";
-                } else if (error.msg) {
-                    errorMessage = error.msg;
-                } else if (error.message) {
-                    errorMessage = error.message;
-                }
-                
-                layer.open({
-                    content: errorMessage,
-                    skin: 'msg',
-                    time: 3,
-                    style: 'background-color: #FF4500; color: white;'
-                });
-            }
-        });
-
-        // Melhora a visibilidade dos botões
-        $(document).ready(function() {
-            $('.btn-login').css({
-                'background': 'linear-gradient(135deg, #FFD700, #FFA500)',
-                'color': '#8B4513',
-                'box-shadow': '0 8px 25px rgba(255, 215, 0, 0.8), 0 4px 15px rgba(0, 0, 0, 0.5)',
-                'border': '3px solid rgba(255, 255, 255, 0.9)',
-                'font-weight': '700'
-            });
-
-            $('.btn-register').css({
-                'background': 'rgba(255, 255, 255, 0.95)',
-                'color': '#8B4513',
-                'border': '3px solid rgba(255, 255, 255, 0.95)',
-                'box-shadow': '0 8px 25px rgba(0, 0, 0, 0.5)',
-                'font-weight': '700'
-            });
-        });
-    </script>
-</body>
-</html>
+<div style="display:none;"></div>
+</body></html>

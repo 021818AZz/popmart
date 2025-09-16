@@ -1,483 +1,215 @@
-<!doctype html>
-<html lang="pt">
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <title>Hamster Entrar</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="wap-font-scale" content="no">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8" />
+<title>Login</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="all.css"/>
+<link rel="stylesheet" href="style.css"/>
+<script type="text/javascript" src="min.js"></script>
+<script type="text/javascript" src="layer.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript" src="public.js"></script>
 
-        body {
-            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        .login-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('/static/home/img/mb/0001.png');
-            background-size: 100% 100%;
-            z-index: -2;
-        }
-
-        .login-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(255, 165, 0, 0.5) 0%, transparent 60%),
-                radial-gradient(circle at 40% 70%, rgba(255, 140, 0, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.3) 0%, transparent 60%),
-                radial-gradient(circle at 10% 90%, rgba(255, 165, 0, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 70% 60%, rgba(255, 140, 0, 0.3) 0%, transparent 60%),
-                radial-gradient(circle at 30% 10%, rgba(255, 215, 0, 0.2) 0%, transparent 60%),
-                radial-gradient(circle at 60% 40%, rgba(255, 165, 0, 0.3) 0%, transparent 60%);
-            animation: bokeh 15s ease-in-out infinite;
-        }
-
-        @keyframes  bokeh {
-            0%, 100% {
-                opacity: 0.7;
-                transform: scale(1) rotate(0deg);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2) rotate(180deg);
-            }
-        }
-
-        .login-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4A90E2, #7B68EE);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .login-avatar img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .login-title {
-            color: white;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .login-form-container {
-            width: 100%;
-            max-width: 350px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .input-group input {
-            width: 100%;
-            height: 50px;
-            padding: 0 20px 0 85px;
-            border: none;
-            border-radius: 25px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            font-size: 16px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: rgba(255, 215, 0, 0.5);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .input-icon {
-            width: 21px;
-            height: 24px;
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 18px;
-            z-index: 1;
-        }
-
-        .input-icon img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .remember-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            color: white;
-            font-size: 14px;
-        }
-
-        .remember-container input[type="checkbox"] {
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            accent-color: #FFD700;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .btn-login,
-        .btn-register {
-            flex: 1;
-            height: 50px;
-            border: none;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-login {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #8B4513;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-        }
-
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
-        }
-
-        .btn-register {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .btn-register:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        .country-code {
-            position: absolute;
-            left: 40px;
-            top: 46%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: rgb(255, 196, 0);
-            font-size: 16px;
-            font-weight: 500;
-            z-index: 2;
-        }
-
-        .separator {
-            position: absolute;
-            left: 88px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 16px;
-            z-index: 2;
-        }
-
-        .input-group.mobile-input input {
-            padding: 0 20px 0 80px;
-        }
-
-        .input-group.mobile-input input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-            padding-left: 5px;
-        }
-
-        .input-group:not(.mobile-input) input {
-            padding: 0 20px 0 45px;
-        }
-
-        @media (max-width: 480px) {
-            .login-avatar {
-                width: 100px;
-                height: 100px;
-            }
-
-            .login-title {
-                font-size: 24px;
-            }
-
-            .login-form-container {
-                max-width: 300px;
-            }
-        }
-    </style>
 </head>
+<body ontouchstart="" style="background-color:#fff;background-image:url(https://i.postimg.cc/zDb2Jhw2/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
 
-<body>
-    <!-- Fundo -->
-    <div class="login-background"></div>
+<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;"><!-- <a href="/mobile" style="color:#fff;font-weight:700;font-size:18px;margin-left:12px;">Ada</a> --><span style="position:absolute;right:10px;font-size:14px;color:#f73131;letter-spacing:1px;"><!-- <a href="https://www.adabr.com/mobile/login/change_lang" style="border: 1px solid #00e763;border-radius: 13px;padding: 5px 10px;font-size:14px;background-color:#fff;color:#00e763;margin-right:10px;">Português</a> --><a target="_blank" href=" https://t.me/Ada8860"><img src="https://i.postimg.cc/CLvcSTY3/icon-kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
 
-    <!-- Container de Login -->
-    <div class="login-container">
-        <!-- Avatar -->
-        <div class="login-avatar">
-            <img src="https://hamstermine-br.vip/static/home/img/mb/0002.png" />
-        </div>
+<div style="margin-top:45px;text-align:center;"><img src="https://i.postimg.cc/4dK8FWjD/logo.png" alt="logo" style="width:110px;height:110px;"></div>
 
-        <!-- Título -->
-        <div class="login-title">Entrar</div>
+<style>
+.container .auth_bg{margin-top:33px;text-align:center;font-size:22px;font-weight:700}
+.container .form{position:relative;top:28px;border-radius:20px 20px 0 0;width:100%;background-color:#fff}
+.u-form-item{padding:5px 30px}
+::placeholder{color: rgb(192, 196, 204);font-size:14px;}
+.u-form-item .u-form-item__body,#register .u-form-item .u-form-item__body{padding:10px!important;background:#f2f7fb;border-radius:24px}
+.u-form-item__body{display:flex;flex-direction:row;padding:10px 0}
+.u-form-item__body__left{display:flex;flex-direction:row;align-items:center}
+.u-form-item__body__left__content{position:relative;display:flex;flex-direction:row;align-items:center;padding-right:8px;flex:1}
+.u-form-item__body__left__content__icon{margin-right:3px}
+.u-form-item__body__right input{background-color:transparent;height:31px;display: block;width: 100%;outline: none;border: none;padding: 0;margin: 0;text-decoration: inherit;}
+.container .btn{display:block;text-align:center;margin:10px 30px 10px 30px;color: #fff;background: linear-gradient(90deg,#05cda7,#00e763)!important;font-weight: 700;border-radius: 22px;padding:12px 0;font-size:16px;}
+.container .forget{display:block;text-align:center;font-weight: 500;color: #00e763;font-size: 14px;text-align: center;margin-bottom: 20px;}
+.container .form .btn-bottom{display:block;text-align:center;font-weight: 700;font-size:16px;width: 100%;text-align: center;margin-bottom:20px;color: #00e763;}
+.guojia-list-item{padding:10px 0;border-bottom:1px #ddd dashed;}
+</style>
+<form id="myform" method="post" action="" class="" role="form" style="margin-top:50px;">
+<div class="container">
+	<div class="form">
+		<div class="u-form">
+			<div class="u-form-item">
+				<div class="u-form-item__body" style="flex-direction: row;">
+					<div class="u-form-item__body__left">
+						<div class="u-form-item__body__left__content">
+							<div class="u-form-item__body__left__content__icon">
+								<div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
+									<div class="u-icon__img" style="width:22px; height:22px;">
+										<img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
+									</div>
+									<input id="area_codei" name="area_code" type="text" value="244" style="display:none;" required><div style="width:40px;height:22px;" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>								</div>
+							</div>
+						</div>
+					</div>
+					<div class="u-form-item__body__right">
+						<input id="user_name" name="user_name" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
+					</div>
+				</div>
+			</div>
+			<div class="u-form-item">
+				<div class="u-form-item__body" style="flex-direction: row;">
+					<div class="u-form-item__body__left">
+						<div class="u-form-item__body__left__content">
+							<div class="u-form-item__body__left__content__icon">
+								<div class="u-icon u-icon--right">
+									<div class="u-icon__img" style="width:22px; height:22px;">
+										<img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="u-form-item__body__right">
+						<input value="" type="password" name="password" id="password" placeholder="Senha" required>
+					</div>
+				</div>
+			</div>
+			<a href="javascript:dosubmit();" class="btn">
+				Login			</a>
+			<a href="/register" class="btn-bottom">
+				Cadastrar-se			</a>
+			<!-- <a class="forget" href="https://www.adabr.com/mobile/login/resetpwd">
+				Esqueceu a senha?			</a> -->
+		</div>
+	</div>
+</div>
+</form>
 
-        <!-- Container do Formulário -->
-        <div class="login-form-container">
-            <form name="form" method="post" id="form">
-                <div class="input-group mobile-input">
-                    <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0004.png" /></div>
-                    <span class="country-code">+244</span>
-                    <input type="text" id="mobile" name="mobile" minlength="7" maxlength="9"
-                        placeholder="Digite seu número de celular">
-                </div>
+<script>
+console.log("%c搭建TG: @xiaoming7366", "color:#fff;background-image:linear-gradient(90deg, rgb(47, 172, 178) 0%, rgb(45, 190, 96) 100%);padding:8px 12px;");
 
-                <div class="input-group">
-                    <div class="input-icon"><img src="https://hamstermine-br.vip/static/home/img/mb/0005.png" /></div>
-                    <input type="password" id="password" name="password" maxlength="32"
-                        placeholder="Digite sua senha">
-                </div>
+//区号选择，印度91马来西亚60印尼62菲律宾63新加坡65
+function quhao_select()
+{
+	layer.open({
+		type: 1
+		,content: '<div style="padding:0 10px;"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>'
+		,anim: 'up'
+		,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
+    });
+}
+function qhselect(quhao)
+{
+	quhao = quhao || $("#quhaose").val();
+	$("#area_code").html(quhao);
+	$("#area_codei").val(quhao);
+	layer.closeAll();
+}
 
-                <div class="remember-container">
-                    <input type="checkbox" id="remember_password">
-                    <label for="remember_password">Lembrar senha</label>
-                </div>
+if (getCookie('mobile_user_name')) {
+	document.getElementById('user_name').value = getCookie('mobile_user_name');
+}
 
-                <div class="button-group">
-                    <a href="/register" class="btn-register">Registrar</a>
-                    <button type="button" class="btn-login btn_submit_my">Entrar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/layer.js"></script>
-    <script type="text/javascript">
-        var _submit = true;
-        $(".btn_submit_my").click(function() {
-            if (_submit == true) {
-                _submit = false;
-                var loading = layer.open({
-                    type: 2,
-                    content: "Carregando"
-                });
-            } else {
-                return false;
-            }
-            
-            var mobile = $("input[name='mobile']").val();
-            var password = $("input[name='password']").val();
-            
-            if (mobile.length == 0) {
-                layer.close(loading);
-                layer.open({
-                    content: "Por favor, insira o número de telefone...",
-                    skin: 'msg',
-                    time: 2
-                });
-                _submit = true;
-                return false;
-            }
-            
-            if (password.length == 0) {
-                layer.close(loading);
-                layer.open({
-                    content: "Por favor, insira a senha...",
-                    skin: 'msg',
-                    time: 2
-                });
-                _submit = true;
-                return false;
-            }
-            
-            var isSave = document.getElementById('remember_password').checked;
-            if (isSave) {
-                if (mobile != "" && password != "") {
-                    setCookie('mobile', mobile, 7);
-                    setCookie('password', password, 7);
-                }
-            } else {
-                clearAllCookie();
-            }
-            
-            var _token = "";
-            var data = {
-                mobile: "+244" + mobile,  // Adiciona prefixo +244
-                password: password,
-                _token: _token
-            };
-            
-            $.ajax({
-                url: "https://bd-1-tile.onrender.com/login",
-                type: "POST",
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                dataType: "json",
-                success: function(result) {
-    layer.close(loading);
-
-    if (result.code == 200) {
-        // Salva o token no localStorage
-        localStorage.setItem('token', result.token);
-
+function lianxikefu()
+{
+	//提示
+	layer.open({
+		content: 'Entre em contato com o atendimento ao cliente on-line'
+		,skin: 'msg'
+		,time: 2 //2秒后自动关闭
+	});
+}
+function dosubmit()
+{
+    var user_name = $("#user_name").val();
+    var password = $("#password").val();
+    
+    if (user_name == '') {
+        //提示
         layer.open({
-            content: "Login realizado com sucesso...",
-            skin: 'msg',
-            time: 2
+            content: 'Digite o número de telefone'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
         });
-        setTimeout(function() {
-            window.location.href = "/dashboard";
-        }, 2000);
-    } else {
-        if (result.code === 401 && result.msg === "Senha incorreta") {
-            layer.open({
-                content: "Senha incorreta. Por favor, tente novamente.",
-                skin: 'msg',
-                time: 2
-            });
-        } else {
-            layer.open({
-                content: result.msg || "Erro ao fazer login",
-                skin: 'msg',
-                time: 2
-            });
-        }
-        _submit = true;
+        
+        return false;
     }
-},
-
-                error: function(xhr) {
-                    layer.close(loading);
-                    var response = xhr.responseJSON;
-                    
-                    if (xhr.status === 401) {
-                        layer.open({
-                            content: "Senha incorreta. Por favor, tente novamente.",
-                            skin: 'msg',
-                            time: 2
-                        });
-                    } else {
-                        layer.open({
-                            content: "Telefone incorreto.",
-                            skin: 'msg',
-                            time: 2
-                        });
-                    }
-                    _submit = true;
-                }
-            });
+    /* if (is_email(user_name) != true) {
+        //提示
+        layer.open({
+            content: 'Email format is incorrect'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
         });
-
-        function clearAllCookie() {
-            var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
-            if (keys) {
-                for (var i = keys.length; i--;)
-                    document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
-            }
-        }
-
-        function setCookie(name, value, day) {
-            var date = new Date();
-            date.setDate(date.getDate() + day);
-            document.cookie = name + '=' + value + ';expires=' + date;
-        }
-
-        function getCookie(name) {
-            var reg = RegExp(name + '=([^;]+)');
-            var arr = document.cookie.match(reg);
-            if (arr) {
-                return arr[1];
-            } else {
-                return '';
-            }
-        }
-
-        $(function() {
-            var oUser = getCookie('mobile');
-            var oPswd = getCookie('password');
-            if (oUser && oPswd) {
-                $("input[name='mobile']").val(oUser);
-                $("#password").val(oPswd);
-                document.getElementById('remember_password').checked = true;
-            }
+        
+        return false;
+    } */
+    if (password == '') {
+        //提示
+        layer.open({
+            content: 'Digite a senha'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
         });
+        
+        return false;
+    }
 
-        // Melhorar a visibilidade dos botões
-        $(document).ready(function() {
-            $('.btn-login').css({
-                'background': 'linear-gradient(135deg, #FFD700, #FFA500)',
-                'color': '#8B4513',
-                'box-shadow': '0 8px 25px rgba(255, 215, 0, 0.8), 0 4px 15px rgba(0, 0, 0, 0.5)',
-                'border': '3px solid rgba(255, 255, 255, 0.9)',
-                'font-weight': '700'
-            });
+    setCookie('mobile_user_name', user_name, 24 * 60 * 60 * 1000);
+    $("#myform").submit();
+}
 
-            $('.btn-register').css({
-                'background': 'rgba(255, 255, 255, 0.95)',
-                'color': '#8B4513',
-                'border': '3px solid rgba(255, 255, 255, 0.95)',
-                'box-shadow': '0 8px 25px rgba(0, 0, 0, 0.5)',
-                'font-weight': '700'
-            });
-        });
-    </script>
-</body>
-</html>
+function setCookie(name, value, expire)
+{
+	expire = expire || 24 * 60 * 60 * 1000; //此 cookie 将被保存 30 天
+	var exp  = new Date(); //new Date("December 31, 9998");
+	exp.setTime(exp.getTime() + expire);
+	document.cookie = name + "="+ escape(value) +";expires="+ exp.toGMTString();
+}
+function getCookie(name)
+{
+	var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+	if(arr != null) return unescape(arr[2]); return null;
+}
+function delCookie(name)
+{
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval=getCookie(name);
+	if(cval!=null) document.cookie=name +"="+cval+";expires="+exp.toGMTString();
+}
+
+//判断是否为手机号的正则表达式
+function is_mobile_number(mobile) {
+	var myreg = /^[0-9]{1,16}$/;
+	if (!myreg.test(mobile)) {
+		console.log('Phone number format is not correct')
+        return false;
+	} else {
+		console.log('Phone number format is not correct')
+        return true;
+	}
+}
+//判断是否为邮箱的正则表达式
+function is_email(email) {
+	var myreg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+	if (!myreg.test(email)) {
+		console.log('邮箱格式不正确');
+        return false;
+	} else {
+        return true;
+	}
+}
+</script>
+
+<div style="display:none;"></div>
+</body></html>

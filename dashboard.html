@@ -1,1259 +1,267 @@
 <!DOCTYPE html>
-<html class="pixel-ratio-3 retina android android-5 android-5-0 watch-active-state">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <title>Hamster</title>
-    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/app.css?v=5.8">
-    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/iconfont.css">
-    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/css/style.css?v=1">
-    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/TouchSlide.1.1.js"></script>
-    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="https://hamstermine-br.vip/static/home/js/layer.js"></script>
-    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/js/bootstrap.min.css">
-    <link rel="stylesheet" href="https://hamstermine-br.vip/static/home/js/swiper-bundle.min.css">
-    <script src="https://hamstermine-br.vip/static/home/js/bootstrap.bundle.min.js"></script>
-    <script src="https://hamstermine-br.vip/static/home/js/swiper-bundle.min.js"></script>
-    <style type="text/css">
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-            font-size: 16px;
-            padding: 0;
-            margin: 0;
-            font-weight: 400;
-            position: relative;
-            display: flex;
-            flex-flow: column;
-            min-height: 100vh;
-            background-color: #c2ffdd !important;
-        }
-
-        footer {
-            margin-top: auto;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        ul,
-        ol {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-
-        button {
-            cursor: pointer;
-            border: none;
-        }
-
-        *:focus {
-            outline: none;
-        }
-
-        button:focus {
-            outline: none;
-        }
-
-        .mt-15 {
-            margin-top: 15px;
-        }
-
-        .mt-20 {
-            margin-top: 20px;
-        }
-
-        .mt-30 {
-            margin-top: 30px;
-        }
-
-        .mt-40 {
-            margin-top: 40px;
-        }
-
-        .mt-50 {
-            margin-top: 50px;
-        }
-
-        .mt-80 {
-            margin-top: 80px;
-        }
-
-        .mt-100 {
-            margin-top: 100px;
-        }
-
-        .mb-15 {
-            margin-bottom: 15px;
-        }
-
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-
-        .mb-30 {
-            margin-bottom: 30px;
-        }
-
-        .mb-50 {
-            margin-bottom: 50px;
-        }
-
-        .pt-90 {
-            padding-top: 90px;
-        }
-
-        .pb-90 {
-            padding-bottom: 90px;
-        }
-
-        .pt-120 {
-            padding-top: 120px;
-        }
-
-        .pb-120 {
-            padding-bottom: 120px;
-        }
-
-        .pt-150 {
-            padding-top: 150px;
-        }
-
-        .pb-150 {
-            padding-bottom: 150px;
-        }
-
-        .ptb-150 {
-            padding: 150px 0px;
-        }
-
-        @media (max-width: 991px) {
-            .pt-120 {
-                padding-top: 90px;
-            }
-
-            .pb-120 {
-                padding-bottom: 90px;
-            }
-
-            .pt-150 {
-                padding-top: 90px;
-            }
-
-            .pb-150 {
-                padding-bottom: 90px;
-            }
-
-            .ptb-150 {
-                padding: 90px 0px;
-            }
-        }
-
-        @media (max-width: 575px) {
-            .pt-120 {
-                padding-top: 80px;
-            }
-
-            .pb-120 {
-                padding-bottom: 80px;
-            }
-
-            .pt-150 {
-                padding-top: 80px;
-            }
-
-            .pb-150 {
-                padding-bottom: 80px;
-            }
-
-            .ptb-150 {
-                padding: 80px 0px;
-            }
-        }
-
-        @media (min-width: 1360px) {
-            .container {
-                max-width: 1240px;
-            }
-        }
-
-        .bg_img {
-            background-size: cover;
-            background-position: center;
-        }
-
-        .bg--one {
-            background-color: #001d4a !important;
-        }
-
-        .bg--two {
-            background-color: #02014a !important;
-        }
-
-        .bg--base {
-            background-color: #0056fb;
-        }
-
-        #appCapsule {
-            padding-top: 47px;
-        }
-
-        .navbar-top {
-            height: 47px;
-            background: linear-gradient(90deg, #28c76f 11.2%, #198754 78.9%) !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .navbar-top p {
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            margin: 0;
-            line-height: 1;
-        }
-
-        .small-font {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .small-font-sm {
-            font-size: 12px;
-        }
-
-        .small-font-lg {
-            font-size: 16px;
-        }
-
-        .bg-dark-alt {
-            background: linear-gradient(270deg, #28c76f 11.2%, #198754 78.9%) !important;
-        }
-
-        .home-icon {
-            border-radius: 10px;
-        }
-
-        .btm-nav {
-            border-radius: 30px 30px 0 0;
-        }
-
-        .bottom-nav-icon {
-            height: 30px;
-            width: 30px;
-            filter: invert(100);
-        }
-
-        .active>.bottom-nav-icon,
-        .active>p {
-            filter: brightness(0) saturate(100%) invert(77%) sepia(30%) saturate(717%) hue-rotate(106deg) brightness(105%) contrast(106%);
-        }
-
-        :root {
-            --main-color: #198754;
-        }
-
-        .pricingTable {
-            color: var(--main-color);
-            font-family: 'Raleway', sans-serif;
-            text-align: center;
-            padding: 40px 25px 110px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pricingTable:before,
-        .pricingTable:after {
-            content: '';
-            background-color: var(--main-color);
-            height: 100%;
-            width: 50%;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            clip-path: polygon(0 0, 100% 13%, 100% 100%, 0 85%);
-        }
-
-        .pricingTable:after {
-            background-color: #fff;
-            width: 100%;
-            height: calc(100% - 30px);
-            clip-path: polygon(0 0, 100% 26%, 100% 100%, 0 80%);
-        }
-
-        .pricingTable .pricingTable-header {
-            margin: 0 0 15px;
-        }
-
-        .pricingTable .price-value {
-            color: #fff;
-            background-color: var(--main-color);
-            width: 130px;
-            height: 130px;
-            padding: 29px 0;
-            margin: 0 auto 8px;
-            border-radius: 50%;
-            border: 5px solid #fff;
-        }
-
-        .pricingTable .price-value .amount {
-            font-size: 33px;
-            font-weight: 800;
-            line-height: 38px;
-            display: block;
-        }
-
-        .pricingTable .price-value .duration {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .pricingTable .title {
-            color: #333;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: capitalize;
-            padding: 0 20px 10px;
-            margin: 0;
-            border-bottom: 3px dashed var(--main-color);
-            display: inline-block;
-        }
-
-        .pricingTable .pricingTable-signup div {
-            color: #fff;
-            background-color: #333;
-            font-size: 19px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            padding: 5px 20px;
-            margin: 0 0 10px;
-            border-radius: 30px;
-            display: inline-block;
-            transition: all 0.3s ease 0s;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .buyBtn {
-            position: relative;
-            overflow: hidden !important;
-            background: linear-gradient(135deg, #28c76f, #198754, #155e3e) !important;
-            background-size: 200% 100%;
-            animation: gradientShift 4s ease-in-out infinite;
-            box-shadow: 0 4px 15px rgba(40, 199, 111, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1;
-            border-radius: 30px;
-            clip-path: inset(0);
-        }
-
-        .buyBtn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.6),
-                    rgba(255, 255, 255, 0.8),
-                    rgba(255, 255, 255, 0.6),
-                    transparent);
-            transform: skewX(-15deg);
-            transition: left 0.8s ease-in-out;
-            z-index: 2;
-            animation: autoSweep 3s infinite;
-        }
-
-        @keyframes  autoSweep {
-            0% {
-                left: -100%;
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            50% {
-                left: 100%;
-                opacity: 1;
-            }
-
-            100% {
-                left: 100%;
-                opacity: 0;
-            }
-        }
-
-        .buyBtn:hover::before {
-            animation: none;
-            left: 100%;
-            opacity: 1;
-        }
-
-        .buyBtn:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(40, 199, 111, 0.5);
-            background-position: 100% 0;
-        }
-
-        @keyframes  gradientShift {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            25% {
-                background-position: 25% 25%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            75% {
-                background-position: 75% 75%;
-            }
-        }
-
-        .buyBtn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            animation: pulse 3s infinite;
-            z-index: 1;
-        }
-
-        @keyframes  pulse {
-            0% {
-                width: 0;
-                height: 0;
-                opacity: 0.8;
-            }
-
-            50% {
-                width: 60px;
-                height: 60px;
-                opacity: 0.3;
-            }
-
-            100% {
-                width: 120px;
-                height: 120px;
-                opacity: 0;
-            }
-        }
-
-        .buyBtn[style*="background-color:#8a8888"] {
-            background: #8a8888 !important;
-            animation: none !important;
-            box-shadow: 0 4px 15px rgba(138, 136, 136, 0.3);
-            cursor: not-allowed;
-        }
-
-        .buyBtn[style*="background-color:#8a8888"]:hover {
-            transform: none !important;
-            box-shadow: 0 4px 15px rgba(138, 136, 136, 0.3) !important;
-        }
-
-        .buyBtn[style*="background-color:#8a8888"]::before,
-        .buyBtn[style*="background-color:#8a8888"]::after {
-            display: none;
-        }
-
-        .pricingTable .pricingTable-signup div:hover {
-            color: #fff;
-            background-color: var(--main-color);
-        }
-
-        .pricingTable .pricing-content {
-            text-align: left;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            display: inline-block;
-        }
-
-        .pricingTable .pricing-content li {
-
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: left;
-            color: #333;
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 35px;
-            letter-spacing: .5px;
-            padding: 0 0 0 28px;
-            margin: 0 0 3px;
-            position: relative;
-        }
-
-        .pricingTable .pricing-content li img {
-            width: 20px;
-            height: 20px;
-        }
-
-        .pricingTable .pricing-content li:last-child {
-            margin: 0;
-        }
-
-        .pricingTable .pricing-content li.disable:before {
-            content: "\f00d";
-        }
-
-        /* VIP等级标签样式 */
-        .vip-level-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(135deg, #ffd700, #ff9000);
-            color: #104728;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 3px 10px;
-            border-radius: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .vip-level-badge i {
-            margin-right: 3px;
-            font-size: 10px;
-        }
-
-        .pricingTable.magenta {
-            --main-color: #e02040;
-        }
-
-        .pricingTable.blue {
-            --main-color: #1f5ebd;
-        }
-
-        @media  only screen and (max-width: 990px) {
-            .pricingTable {
-                margin: 0 0 40px;
-            }
-        }
-
-        .price-circle-1 {
-            background: url("/static/home/img/mb/0014.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-        }
-
-        /* .price-circle-2 {
-            background: url("/static/home/img/mb/0015.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-        }
-
-        .price-circle-3 {
-            background: url("/static/home/img/mb/0016.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-        } */
-
-        .text-primary {
-            color: #00d094 !important;
-        }
-
-        .popup-bg {
-            background: url("/static/home/img/mb/0017.png");
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        .glass-bg {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .naba {
-            width: 30px;
-            height: 30px;
-        }
-
-        /* Tab样式优化 */
-        .product-tab {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            padding: 10px 5px;
-        }
-
-        .product-tab.active {
-            background: linear-gradient(90deg, #28c76f 11.2%, #198754 78.9%) !important;
-            box-shadow: 0 4px 15px rgba(40, 199, 111, 0.5) !important;
-            transform: none !important;
-            color: white !important;
-        }
-
-        .product-tab:not(.active) {
-            background: rgba(255, 255, 255, 0.2) !important;
-            backdrop-filter: blur(5px);
-            color: #198754 !important;
-            border: 1px solid rgba(40, 199, 111, 0.3);
-        }
-
-        .product-tab:not(.active):hover {
-            background: rgba(40, 199, 111, 0.2) !important;
-            transform: none;
-            box-shadow: 0 2px 8px rgba(40, 199, 111, 0.3);
-        }
-
-        .product-tab::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s ease;
-        }
-
-        .product-tab.active:hover::before {
-            left: 100%;
-        }
-
-        .product-tab i {
-            margin-right: 5px;
-            font-size: 16px;
-        }
-
-        .product-tab.active i {
-            animation: pulse-icon 1.5s infinite;
-        }
-
-        @keyframes  pulse-icon {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* Tab内容区域过渡效果 */
-        .tab-pane {
-            transition: all 0.3s ease-in-out;
-        }
-
-        .tab-pane.show {
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes  fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <nav class="navbar-top">
-        <p class="text-light fw-bold">Hamster Mining</p>
-    </nav>
-
-    <div id="appCapsule">
-        <div class="swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img width="100%" style="height: auto;"
-                        src="https://hamstermine-br.vip/static/home/img/mb/0006.png" alt="">
-                </div>
-                <div class="swiper-slide">
-                    <img width="100%" style="height: auto;"
-                        src="https://hamstermine-br.vip/static/home/img/mb/0007.png" alt="">
-                </div>
-                <div class="swiper-slide">
-                    <img width="100%" style="height: auto;"
-                        src="https://hamstermine-br.vip/static/home/img/mb/0008.png" alt="">
-                </div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-
-        <div class="container">
-            <div class="bg-dark-alt rounded-pill p-1 mt-2">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <div class="naba">
-                            <img src="https://hamstermine-br.vip/static/home/img/mb/0037.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col ps-0">
-                        <marquee class="small-font text-light" behavior="scroll" direction="left">
-                            999****983 Recarga KZ50, 149****384 Saque KZ200, 849****960 Saque KZ50, 629****844 Recarga KZ50, 749****878 Saque KZ50, 829****220 Saque KZ50, 119****427 Saque KZ50, 929****200 Saque KZ200, 759****191 Recarga R$50, 229****524 Saque KZ50, 339****884 Saque KZ50, 119****207 Recarga KZ50, 319****828 Saque KZ50, 139****753 Saque KZZ500, 419****369 Recarga KZ50, 919****034 Recarga KZ500, 929****579 Recarga KZ50, 929****357 Saque KZ50, 129****090 Saque KZ200, 249****114 Recarga KZ50, 349****874 Saque KZ50, 219****417 Saque KZ50, 489****677 Saque R$50, 939****874 Recarga R$50, 519****778 Saque R$50, 219****255 Recarga R$50, 319****559 Recarga R$50, 819****179 Saque R$50, 669****623 Recarga R$50, 219****143 Recarga R$50, 229****719 Recarga R$50, 969****776 Recarga R$50, 129****139 Recarga R$50, 689****419 Recarga R$50, 719****326 Saque R$50, 199****292 Recarga R$50, 919****366 Saque R$50, 119****700 Recarga R$50, 629****502 Recarga R$500, 699****023 Recarga R$50, 349****229 Saque R$50, 889****240 Recarga R$50, 699****681 Recarga R$50, 739****774 Saque R$50, 119****445 Saque R$50, 689****315 Recarga R$50, 349****215 Saque R$50, 249****521 Recarga R$50, 639****750 Saque R$50, 119****327 Saque R$50, 629****271 Recarga R$50, 929****351 Saque R$200, 119****341 Saque R$50, 499****727 Recarga R$50, 669****702 Saque R$50, 689****944 Recarga R$50, 329****746 Recarga R$50, 839****090 Saque R$50, 829****369 Recarga R$50, 949****686 Recarga R$50, 679****221 Recarga R$50, 111****515 Recarga R$50, 829****366 Saque R$50, 479****163 Recarga R$50, 149****908 Saque R$200, 989****881 Recarga R$50, 889****438 Saque R$50, 699****438 Recarga R$50, 249****722 Saque R$50, 819****457 Recarga R$200, 719****089 Recarga R$50, 949****955 Saque R$200, 319****385 Saque R$50, 739****472 Saque R$50, 859****937 Recarga R$50, 454****651 Recarga R$50, 199****678 Recarga R$50, 329****660 Saque R$50, 489****939 Saque R$50, 939****962 Recarga R$50, 119****930 Recarga R$200, 859****829 Saque R$50, 
-                        </marquee>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid mt-2 bg-dark-alt">
-            <div class="row py-0">
-                <div class="py-3 col-3 px-0 text-center" onclick="location.href='/deposito'">
-                    <img class="home-icon" width="35px" src="https://hamstermine-br.vip/static/home/img/mb/0009.png" alt="">
-                    <p class="mb-0 small-font-sm mt-1 text-light">Recarga</p>
-                </div>
-                <div class="py-3 col-3 px-0 text-center" onclick="location.href='/retirada'">
-                    <img class="home-icon" width="35px" src="https://hamstermine-br.vip/static/home/img/mb/0010.png" alt="">
-                    <p class="mb-0 small-font-sm mt-1 text-light">Retirada</p>
-                </div>
-                <div class="py-3 col-3 px-0 text-center" onclick="handleSignIn()">
-                    <img class="home-icon" width="35px" src="https://hamstermine-br.vip/static/home/img/mb/0011.png" alt="">
-                    <p class="mb-0 small-font-sm mt-1 text-light">Entrar</p>
-                </div>
-                <div class="py-3 col-3 px-0 text-center" onclick="location.href='/servico'">
-                    <img class="home-icon" width="35px" src="https://hamstermine-br.vip/static/home/img/mb/0012.png" alt="">
-                    <p class="mb-0 small-font-sm mt-1 text-light">Atendimento Online</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <section class="pricing padding-top padding-bottom mt-3 mb-2">
-                <div class="pricing__wrapper">
-                    <div class="row g-2 align-items-center">
-                        <!-- Adicionar navegação por abas -->
-                        <div class="container mb-3">
-                            <ul class="nav nav-pills nav-justified" id="productTabs" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active product-tab" id="tab1-tab" data-bs-toggle="pill" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">
-                                        <i class="fas fa-star"></i> VIP1
-                                    </button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link product-tab" id="tab2-tab" data-bs-toggle="pill" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">
-                                        <i class="fas fa-fire"></i> VIP2
-                                    </button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link product-tab" id="tab3-tab" data-bs-toggle="pill" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">
-                                        <i class="fas fa-crown"></i> VIP3
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Área de conteúdo das abas -->
-                        <div class="tab-content" id="productTabsContent">
-                            <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-                                <div class="demo">
-                                    <div class="container">
-                                        <div class="row">
-                                                                                                                                    <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP1
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/22380f65af9088b707db775540950e74.png)"></div>
-                                                        <h3 class="title">hamster 01</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ6000.00</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('1');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ780.00</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ124.000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP1</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                                                                <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP1
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/5a18cf11789ef3448925de91092d09a0.png)"></div>
-                                                        <h3 class="title">hamster 02</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ15.000</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('2');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ1.950</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ312.000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP1</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                                                                <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP1
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/fc9e69593be4e57154197721e291a752.png)"></div>
-                                                        <h3 class="title">hamster 03</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ35.000.00</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('3');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ4.550</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ728.0000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP1</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                                <!-- Conteúdo da máquina de mineração intermediária -->
-                                <div class="demo">
-                                    <div class="container">
-                                        <div class="row">
-                                                                                                                                    <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP2
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/ab2dd8421dcb96564f30d3ae46c41ba6.png)"></div>
-                                                        <h3 class="title">hamster 04</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ50.000</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('4');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ6.500</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ1.040.000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                                                                <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP2
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/95abcaa55dd082e8ee4de9e0adf016d9.png)"></div>
-                                                        <h3 class="title">hamster 05</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ70.000</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('5');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ9.100</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ1.456.000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                                                                <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP2
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/821ac09a13c6155d706736df9700b089.png)"></div>
-                                                        <h3 class="title">hamster 06</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ130.000</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('6');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ16.900</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ2.704.000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP02</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-                                <!-- Conteúdo da máquina de mineração avançada -->
-                                <div class="demo">
-                                    <div class="container">
-                                        <div class="row">
-                                                                                                                                    <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP3
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/bbe7e630a40568b48786d648b55971af.png)"></div>
-                                                        <h3 class="title">hamster 07</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ200.000</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('7');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ26.000</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ4.160.000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                                                                <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP3
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250612/092b9d55d319a1f2070e40441d198e25.png)"></div>
-                                                        <h3 class="title">hamster 08</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ600.000</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('8');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ26.000</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ12.480.000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                                                                <div class="col-md-4 col-sm-6">
-                                                <div class="pricingTable">
-                                                                                                        <div class="vip-level-badge">
-                                                        <i class="fas fa-crown"></i> VIP3
-                                                    </div>
-                                                                                                        <div class="pricingTable-header">
-                                                        <div class="price-value price-circle-1" style="background-image: url(https://hamstermine-br.vip/uploads/image/20250723/f59c6903695ad8a962402a2e227e7963.png)"></div>
-                                                        <h3 class="title">hamster 09</h3>
-                                                    </div>
-                                                    <h3 class="title text-primary" style="border: 0px">KZ1200.000.00</h3>
-                                                    <div class="pricingTable-signup">
-                                                        <div href="#" class="buyBtn" onclick="redirectToProductPage('9');">Compre Agora</div>
-                                                    </div>
-                                                    <ul class="pricing-content">
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Validade:</span> 160 dias</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Diário:</span> KZ156.000.00</li>
-                                                        <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Rendimento Total:</span> KZ24.960.000</li>
-                                                                                                                <li><img src="https://hamstermine-br.vip/static/home/img/mb/0038.png" alt=""> <span>Nível Necessário:</span> VIP0</li>
-                                                                                                            </ul>
-                                                </div>
-                                            </div>
-                                                                                                                                </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-    <div style="height: 30px;"></div>
-    <style>
-    .game1 {
-        border-radius: 50%;
-        animation: rotate1 2s linear infinite;
-    }
-
-    @keyframes  rotate1 {
-        0% {
-            transform: rotateZ(0deg);
-        }
-
-        100% {
-            transform: rotateZ(360deg);
-        }
-    }
-
-    .foot_bo div div {
-        text-align: center;
-    }
-
-    .active_footer {
-        font-size: 14px !important;
-        filter: brightness(0) saturate(100%) invert(77%) sepia(30%) saturate(717%) hue-rotate(106deg) brightness(105%) contrast(106%);
-    }
-
-
-    .disactive {
-        font-size: 14px !important;
-        filter: invert(100%);
-    }
-
-    .height_16 {
-        color: #000000;
-        height: 16px !important;
-        line-height: 16px !important;
-        font-weight: 600;
-    }
-
-    .zhongjian img {
-        width: 70px !important;
-        height: 70px !important;
-        position: absolute;
-        top: -58px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-    }
-
-    .zhongjian {
-        position: relative !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-</style>
-<footer>
-        <div class="foot_bo">
-        <div onclick="window.location.href='/dashboard'">
-            <img class="active_footer" src="https://hamstermine-br.vip/static/home/img/mb/0018.png" />
-            <div class="xz active_footer height_16">Início</div>
-        </div>
-    </div>
-            <div class="foot_bo">
-        <div onclick="window.location.href='/produto'">
-            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0019.png" />
-            <div class="disactive height_16">Ganhos</div>
-        </div>
-    </div>
-    
-
-    <div class="foot_bo zhongjian">
-        <div href="/produto.html">
-            <img src="https://hamstermine-br.vip/static/home/img/mb/0022.png" onclick="window.location.href='/nos'" />
-        </div>
-    </div>
-        <div class="foot_bo">
-        <div onclick="window.location.href='/equipe'">
-            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0020.png" />
-            <div class="disactive height_16">Compartilhar</div>
-        </div>
-    </div>
-    
-        <div class="foot_bo">
-        <div onclick="window.location.href='/meu'">
-            <img class="disactive" src="https://hamstermine-br.vip/static/home/img/mb/0021.png" />
-            <div class="disactive height_16">Meu</div>
-        </div>
-    </div>
-    </footer>    <script type="text/javascript">
-        TouchSlide({
-            slideCell: "#slideBox",
-            titCell: "#slideBox .hd ul",
-            mainCell: "#slideBox .bd ul",
-            effect: "leftLoop",
-            autoPage: true,
-            autoPlay: true,
-            interTime: 3000
-        });
-        // Inicialize o slider
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            autoplay: {
-                delay: 3000,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
-
-        // Otimize o estilo de troca de abas
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicialize o ícone FontAwesome (se necessário)
-            if (typeof FontAwesome !== 'undefined') {
-                FontAwesome.dom.i2svg();
-            }
-
-            // Manipule o evento de troca de abas
-            const tabs = document.querySelectorAll('.product-tab');
-
-            // Defina o estado inicial
-            updateTabStyles();
-
-            // Evento de clique
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    setTimeout(updateTabStyles, 50);
-                });
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Conta</title>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta name="format-detection" content="telephone=no, email=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+        <script>
+            var docEl = document.documentElement;
+            docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+            window.addEventListener('resize', function() {
+                docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
             });
-
-            function updateTabStyles() {
-                tabs.forEach(tab => {
-                    if (tab.classList.contains('active')) {
-                        tab.setAttribute('aria-selected', 'true');
-                    } else {
-                        tab.setAttribute('aria-selected', 'false');
+        </script>
+        <link rel="stylesheet" href="https://www.adabr.com/css/antui-all.css"/>
+        <link rel="stylesheet" href="https://www.adabr.com/css/mobile/style.css"/>
+        <script type="text/javascript" src="https://www.adabr.com/js/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.adabr.com/js/layer/mobile/layer.js"></script>
+    </head>
+    <body ontouchstart="" style="background-color:#fff;background-image:url(https://www.adabr.com/images/mobile/bg-green.png);background-repeat:no-repeat;background-size:100% 100vh;background-attachment:fixed;">
+        <div style="position:relative;padding:18px 12px 0 12px;display: flex;justify-content: space-between;align-items: center;">
+            <div style="display:flex;align-items: center;font-size:14px;color:#1c1c1c;font-weight:600;">
+                <img style="height:44px;width:44px;border-radius:50%;display:inline-block;margin-right:8px;" src="https://www.adabr.com/images/mobile/avatar/head_6.png" onerror="this.src='https://www.adabr.com/images/mobile/no_user.jpg'">
+                <div style="display:flex;flex-direction:column;">
+                    <div style="display:flex;justify-content: space-between;">
+                        <div style="font-size:16px;max-width:120px;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;">92925013535				</div>
+                        <span style="display:flex;align-items:center;justify-content:center;margin-left:4px;padding:0 10px;background:#c4f2dc;color:#1bbe64;font-size:12px;border-radius:15px;">Estagiário				</span>
+                    </div>
+                    <div style="display:flex;padding-top:2px;color:#fff;">
+                        <div style="font-size:12px;">
+                            <span>Depósito de trabalho					</span>
+                            <span style="margin-left:4px;">0					</span>
+                            <span style="margin-left:4px;">2025-08-24					</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="https://www.adabr.com/mobile/user/setting">
+                    <img style="width:25px;height:25px;display:inline-block;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAS8SURBVHgB7Vo7bxNBEB4/EqG8ZJQUkfLQ0tHFdHSYDipCBxXOLwBXlHZKquCKEqejI/kFOTqocH4Bi5QokdKYPCSivPgmXid769vz3WYdI8QnrXy7O3e73+7M3N6Mif4RZKhPEMDJyUkJlwWun5+fy4uLi+bu7q6kPsA7kZmZmXImk3mFy1JUP5PBT317e7tBHuGNyOzsbAk/VbIQ6Bo4k+EdWtra2grIA25MZHp6WuTz+RVcLpIDQKZxdna2fFOVcyZSAMbGxl7j8g0pO4hAgLKprhcofrdqh4eH9RZADnAiwnaQzWarWE0R1W9bZd69XC5XUzbUPRmoG5zCsov9pCKSwA4ClOVeeq8IbWDiIqqfCcHjPU6jbomIsBqNjo6uYICyRaSFXaikXUneWfxUbYTS2E+ulwB2oTo8PPwJgz2M6GZ9fgfdfrm3t/eVUuLg4KA5OTm5CnU6pohdxphFqHB5YmLizv7+/pe4Z1l3RHmjz7gsWkSC09PTJV8vuCT2E6duGdtDh4aGNqKMmV9oeGjFl/83MTc3t4gdWolStzgyGcvDfkSQYDtgj/KebgE2++GFxBwemPI5ywPKxs2rR0dHT2EHAd0S2H7gYNZhIwLV+512EJseHx//hf6QTXbtSMRurEGNntMAAYfDtqqfHFqY011dJmvcUDJItGDQFRow4HSWqO0hOyiod9oVssY9oU6QWuvXsTsNpJRsn+t6G+ohb5o3OgV0UG/aJHfw+YvVQah6UxVJbghQrlwzbGdB78z3uNnlAMcE+DRctvQ3UJbJnVAksuQXAuU72UmQ6tug653yAp9EBCWfYEe2QJ7gkwifioXRFqDUVZFGH8uukCf4IiKoW53YDh5T+8OLyz3VpoPv8bIrvoiYB0uJUouQ47bAaHP6RDbRLyLrMbKmSxfkAb691sDgi4g06gsxss+MepM8wBeRNaNeorYXMxHl2bwQ6fVmTwo+AaySdoSgtmGX6Zok21HJuK9Bnt7wvogw2MU+ovCKC9UeBUnd7tgZPo2dd4XfGzKBrEwhmwi+vZak9gRXY2QaKA/I86HRp2p1IKltGzVq20VRa2d7cQqJIsJSQFDC2p83hJsQ1s/8rPMNcoOk68nfGAjULejfSvh2+qn3h1QLJEKuEMKLHGWkAYPDUyBhHmUCvRIiomJVoW9jRNw/0oCh0hZXC4oFlmZcrSschFDLMdg/0ZruI2RZHBkZ+YbQqJN+u4K1ASHVD5jPC6OrwuEivSEyQIcIBX/lhQ6CNwn5u2B+fv41xquRcczn3cAc7pny1pCpLezPhDhEtLOz48WITagwD6tSV8yZScDok4dMGb1yGL5SZvp4sAW2x5JlvCbGe24bz5pWYHuAHtZhH0yWV+eO3q9C/m/Qz2568zdADmA7mJqaeotnNEgLjWq4TF1AnV7G2WiiRE+/UmYqlR3ySDp41xFzriTJK6ZKvflKmflK4YXGJge4pszUQlRtKTw2Zvz0PxmqQwhRgPfiI3o1RizApC/9vYrVlixyrDp12MD7W01P6+hlPwmwxu58YH8YMKFSEh9t6haBgFLaQRy8EelAeSL+R4Q1icoZsL/2TzUmVEK1CLcsVFML9QC5Dkn/YccfiXE4rxYXuZwAAAAASUVORK5CYII=">
+                </a>
+            </div>
+        </div>
+        <div style="background:#fff;border-radius:8px;box-shadow: 0 2px 8px rgb(0 40 100 / 8%);border:1px solid #eee;margin:15px 12px 0 12px;padding:10px 20px 12px 20px;display: flex;flex-direction: column;align-items: center;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:10px;width:100%;">
+                <div style="width:50%;display:flex;flex-direction:column;align-items:center;text-align:center;">
+                    <div style="font-size:14px;color: #000;font-weight: 400;">Carteira flexível			</div>
+                    <div style="font-size:16px;color:#ef9833;font-weight:500;margin-top:2px;">0.00 BRL			</div>
+                </div>
+                <div style="width:50%;display:flex;flex-direction:column;align-items:center;text-align:center;">
+                    <div style="font-size:14px;color: #000;font-weight: 400;">Carteira eletrônica			</div>
+                    <div style="font-size:16px;color:#ef9833;font-weight:500;margin-top:2px;">0.00 BRL			</div>
+                </div>
+            </div>
+            <div style="display:flex;justify-content: space-between;width:100%;text-align:center;">
+                <div style="width:50%;display:flex;align-items:center;justify-content:center;">
+                    <a href="https://www.adabr.com/mobile/user_recharge/add" style="width:75%;padding:5px 0;background-color:#1ac479;border-radius:15px;color:#fff;font-size:14px;">
+                        <img style="width:14px;height:14px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHOSURBVHgBxVeLccIwDJV7DJAN6g1ghIzQDZpukE4AG5ROEDoBI9BOQDdINiBM4MrE6QkhO3ZI2ncn8rGk9/xBdhSMhDEmw0vpHhtrSqlP+AsguTYy9mhPMCcC5D3qIRFKSFpdGpR6gTA5HfYlmkZbCa5bzPUKEb2piPIKEuFGY+d6TXF0YoPBGxaULICJ+B8BnlxvY4KmFJCPCao8fnlvgVxbkqeGkaorwecXgTwZ2om4FjCFgBhyIc8BYhESkECesRxZLL9XQCy58z0Q97QSLAlIJKcLr1y47vdlscVS+O0LxraN41i7VwWkoSH3ywX+2O73c7hDu6nppludmiXRkI6WPiwig57RcrgfdJGdH+B6KFYwLzS5b23P6RzbDSHDuW1Z0AfaF9yPJbnveM31FpjDDDC3hw/dN4yrPmnkpcghqMphQrj8NclfcIc9aaxNSvkbJq9obp86uvOM3sNZ3jUb1cLnWDLHuwQIxNuhAF6/a9OvzHjSjE2jxTE2mAu4jIIZWIhu6tZs+i7ERlhDKpDInsmlA18DXYGw17N79whd+dWC/zsWrRJSYeQjcCwOZoq/rPF/DHCcUkgVJAIT281Hw/Um1ICbCmFf8OIHiR3myT7NRZEAAAAASUVORK5CYII=">Recarregar
+                    </a>
+                </div>
+                <div style="width:50%;display:flex;align-items:center;justify-content:center;">
+                    <a href="https://www.adabr.com/mobile/user_withdraw/add" style="width:75%;padding:5px 0;background-color:#1ac479;border-radius:15px;color:#fff;font-size:14px;">
+                        <img style="width:14px;height:14px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHySURBVHgBtVftUcMwDFW4/icjZISOkBG6Ad2AMgHeIGWCwARlg7ABZQKXCdoNhEQUTnHsxDbtu9PlQ5aeJMeWU0ACELGky5qkEoGiKAxkoogZRKQbujwKcTlyQFCBVa5eUKn7I5kcIYK0JrE4A2dsDMxgswqQcvQNydajPop8wz+x8hBXdDlAX+IBF5IXkj2V7BLwxe9PIgNKx08YnLGnzHupRBI4CfRPmQkZHJyBO8jADPFvMj6D7Q2JdVLtkoGBDGA/bZ8O8RbHibVzWVvIQIjY439Cbl2DDHKX2IA/uVYbrZXiDBlghyFi0Veq/LVW7JTROyRiiXjJeK8Mk75wGt9kE4sDvQw2CXbPqcQyxbVIyS865aCGCOQQi92I6w7GDaKCOGibt9yezo1FN4qoPZzIXilytqvpPuU70f4v7tfewo2A/XL7g+/lGTM6WCS53mg6rbBKkdVQIsg1x1YrjFLYa2eP045ZaWUpJR/QwJWA047Z+gbtnOge4ArAccOxo6ydgZ0TQPb8SzVdf5slA+sYtMFow358R24TY+g7BvFzsxSEkHY4hfGNLwJO+Gvng55v3vnMfiL5kud76LflGqY7JO+CT7wjQiqwXyIW83DAxOmaC6KLIOTlyueDqB+FqB9FFcTkLxX60rJ8UHlPkIAffwthM8WSagkAAAAASUVORK5CYII=">Retirar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="margin:10px 12px 0 12px;display:grid;grid-template-columns: 1fr 1fr;grid-gap:10px;text-align:center;">
+            <div style="background:#fff;border-radius:6px;position:relative;padding:8px;">
+                <div style="position:relative;text-align:left;display:flex;flex-direction:column;z-index:1;">
+                    <div style="font-size:14px;color: rgba(28,28,28,.4);font-weight: 500;">Ganhos de ontem			</div>
+                    <div style="margin-top:4px;font-size:16px;color:#1c1c1c;font-weight:500;word-break:break-all;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;">0.00 BRL			</div>
+                </div>
+                <img style="position:absolute;bottom:0;right:6px;width:52px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAAA5CAYAAACoAQxFAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAATgSURBVHgB7VuJUeNAEByZ/6uzIzhfBPgiACI4Z4CJwCYC4wiACLAzMBHARYCJAF0E9vEWUODrFqsqIa8ev9rl3FUqyYusHTW7szO9Y0dGwNPTU/H9/b3U7/eLCwsL22gq8lr9uRi8F+09x3F4uLzGcY3mzsvLS6dQKLjyxeCkvfHu7m4X5P3CZVlCpI0BknyJ8/nGxkZbvgBiCe12u8XV1dV9jMYaRlhepguPXIzchs0jV0soiMwvLy8fg8SKZAAQ27SV2AFCHx8fq3iho7gRqfxiB5fXGL0dHL2lpSV+lrW1NTd0b/7h4YE+No/vlHK5XBHnbXzelXjwOafr6+snYhE+EQoyj3Gq6W5UJLbe3t7am5ubHS40Mibol0FwBc/akWi/fAJSD8U2YBSdgdC+5ri5v7+vcITJFME+2JfOBtomNgFhUF3zEl2cazJjsE/Vd5jYmdsyChyu5CsrKzehdhfTcC/sD2cFxrmYERfy2Q30np+ff5q+UOWwmtdDbZmSSbBv2kC/HWhm5FERw5HDUQo2YMVuZEmmD9oAQhvBNpC8L4bDoX8KNmBaYVYVxl7BJwHGw3BH3WAbVvzU2V0WyMkcE8UAoRgRFTEESBbKYhl0I7TOlV8yBm1A0F8Xy6AjlH7rIktSVSgXDpusQJQP5QtdZRTYVxEeXYmFZBIDq7wGLkMp5O9NmRK4mtNfqilejLvX9FU+DaE+PL0S5La2trYuZUyQxMXFxRJFazy3klZvtZFQKjtVSRgpIOASRFC6+8Mz1afX11c3HMMyjeRZbZnkMQq3KePxcwqJkIH9cbDdOkJpsNozOsoqM0G/TewUHPKfpLNPDIZ2UWLahz0eTsMfGCkt+RB7pwq1gddgn+j/YBJ6axZw0o6A29vbMvxdOUEMHhYujnOK1lF+2bYR6oxiMF0C/CUXFPpB+sQ8t5HVNkfYL7peR9hG5jXI47aJyy2TNCLMf0HoLPElfOgco2OAUMaHYghMsiUt5mrThKEL7I3Yu4kSSNIumlnVXkWlni5I3cuK1Di1KYpQU2qv4nJ5BtaNWVduJFWuBAk1sfbKSrXJ5Nor69QmoGZy7ZV1alPC/ZnXXlmnNmnguSQuGtMUVFh7FeWS6ALQ/wGvY1PPALGTFES0UFUipzC6GZyWUYT6IziDRZMup66ZXYe0xTq1yf+eqbVX1qlNYkDtFaFm71XwfT091za1CS9xMM0QbhjAr9bgooKLpmud2oSZYcyvRWBLM9RUHCAUw/a7GAITKliGxQCh8A3GVApraleNV8O0mRJTOjj9lmQI5vQ46UIio9UwrQ9loMq6e8kIqu+o+NLo2qvIRYn5Mn+VwfRLZgT2BTIv2HfCrcbWXqUSR5i3I35sTSNcoUiCeHYX/qiaQpDQwSg1TEeoG/Ulle5RcTrHxw5FCBkBDIrxD6KBOyQxRiRxJX1WZoQaNkAoKzeGFEZIqisfL/RX5eS9wPMoh31T2ZS3LZHSuDYrSEB+N9RutBoWmSmpjs5GnIbjgO6l4Y8y29SwxNRzFoqTrzTh3A67EdvUsKFyeeSuJZy8zbCkKZFknPLFvzkd43yebWrYWOIIfQ5J5pnKk/dAkEyf6d+jfJjvVzsQYt1hhGDb1LB5bdOYCNs3r22aMKyrbTLdPutqm2xUm4xWc8Rw+/4Bg+Qh3mdoJU8AAAAASUVORK5CYII=">
+            </div>
+            <div style="background:#fff;border-radius:6px;position:relative;padding:8px;">
+                <div style="position:relative;text-align:left;display:flex;flex-direction:column;z-index:1;">
+                    <div style="font-size:14px;color: rgba(28,28,28,.4);font-weight: 500;">Ganhos de hoje			</div>
+                    <div style="margin-top:4px;font-size:16px;color:#1c1c1c;font-weight:500;word-break:break-all;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;">0.00 BRL			</div>
+                </div>
+                <img style="position:absolute;bottom:0;right:6px;width:52px;" src="data:image/png;base64,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">
+            </div>
+            <div style="background:#fff;border-radius:6px;position:relative;padding:8px;">
+                <div style="position:relative;text-align:left;display:flex;flex-direction:column;z-index:1;">
+                    <div style="font-size:14px;color: rgba(28,28,28,.4);font-weight: 500;">Ganhos desta semana			</div>
+                    <div style="margin-top:4px;font-size:16px;color:#1c1c1c;font-weight:500;word-break:break-all;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;">0.00 BRL			</div>
+                </div>
+                <img style="position:absolute;bottom:0;right:6px;width:52px;" src="data:image/png;base64,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">
+            </div>
+            <div style="background:#fff;border-radius:6px;position:relative;padding:8px;">
+                <div style="position:relative;text-align:left;display:flex;flex-direction:column;z-index:1;">
+                    <div style="font-size:14px;color: rgba(28,28,28,.4);font-weight: 500;">Ganhos deste mês			</div>
+                    <div style="margin-top:4px;font-size:16px;color:#1c1c1c;font-weight:500;word-break:break-all;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;">0.00 BRL			</div>
+                </div>
+                <img style="position:absolute;bottom:0;right:6px;width:52px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE8AAAA+CAYAAABqSkbiAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASeSURBVHgB7ZqLUSJBEIYbRC3fmMEagRrBYQRqBGIEYgRgBKcRKBHIRSAXgVwE7kUAvssn9/9XizUMC8fuzLJwzFdFycw+cP7t6e7p2YyA5+fn8ufnZymTyeRlCmm32y2M/WJxcfE4ynWZp6en7/hbEgdFPFlaWqoMe37m8fGxOa0WF0IL1rc+7MlZJ1wXkbTI6R1QPiNTBNxWW2KSFUdsnHgGOPEMcOIZ4MQzICcpgVWN9/HxUVD7kKT67+/vjfX19ZZMACMV7/7+vpDL5Q6wFNyDUPlsttfwZ2ZmmD40cE717e2tBiF9GVMyep6TRJ4XiFaGYAWJCK65eH19PUlKRJPxJ+rzms1mnmtnWNNVHOEIVkDF+fn5Kz4AGTMSszwI52HQl/i6FXY8qGTU8WkF7Tw+Htpb/e6JY5WFhYUTsYjJ+BPxeYFwV/jq6cdY+kFQqK6srNTDru0EEvjDsn49xK1gsLcY4KmMAYlYHgQIm6YNiHLcT7QwUPGpQOyy3o/77ES5zyD08SNQHQ46nxlB57eti8fCKi1Euv+hKupkpc4UjcLd3d0efOa5Vv3xX15etm2kNDELA6csnFoVj9N1bm7uWhtoA/fcFgMoIKL1pdoXtXDZj7hVFbiefavRFsKVdQtBe18MWV1drcF6z9Q+3PeI0VxSAj65YDVgYEAFtY0BnywvL/tiASTMFTycA+Xh5BGUivhrNXgwoIX1MxPAn0KnDVeyZk28IA/zlC4fwl2IJejfEEBofV8BBAPdFcviIRUKDRgPDw9FWpvaZ23aYiB7WrsulsFKo0soRvRUp65YAma8qbYxzX6IZYLo6qt9s7OznqSENfHg37osIE5aMiQN7Xc9SQmb07ZLPPi7G0kATNVbtQ0/NPnTdlTgIa2pbVhearU/m5bnq21EX6PEeMDvjMo9/BObPu+32kYA2ZIE0NfMrDxLSlgTD4Oqd904m/0mluEyTevy0yzZWxOPJXO1TQuxXcBEWnKktpPIJaNgTTxagD4Ylt7FEszw9SmL0tSZpIjVaAv/01Xl5WBZohJDWK0JiqNf8EEhHUrN3xGr4rFIqFsfa3sQ8EBiwuVXUM73tEOHkjJJ5HmH3J9QO7gDFscCg3L+tWj7IKzlYQHvS8pYF4+DQtrSU8ML9h9uhgkitDaKzcKq9FpczUYR1AaJbABx+sLBH8JPnWuHPG5DQkQf32sQ9GdnhcBlFmtmOL6Lvi3upsEF6Ldu9CsZpUFibwywlgcBGxAlzF+xzT2NEt8Q6ECxIJqEiMYk/IwWl+aKQifRtS2jIQa7A0GqEhP6T3z2ca/SOAlHEi8M0AfCYooY+EZEEX0GBmwebeD6mowhI3vRJ4iOTHRLwbsrBQi6qZ3mI/H9hXMatvZlk2Tkr5gFU68WfCYa93KjAU48A5x4BjjxDHDiGdATbbGmPJcpgiuauORCblYUx1Bk0y5ljxNRtaDPY5XCF4cvEQusOS6bMFW3uWQatPvO18fwUSvCLCddyH8C189RCw9/fZ6yZOoLykuiiofvNzZfIZtEXKpigBPPACeeAU48A5x4BjjxDHDiGeDEM8CJZ8AfE7EtbcAZo1AAAAAASUVORK5CYII=">
+            </div>
+            <div style="background:#fff;border-radius:6px;position:relative;padding:8px;">
+                <div style="position:relative;text-align:left;display:flex;flex-direction:column;z-index:1;">
+                    <div style="font-size:14px;color: rgba(28,28,28,.4);font-weight: 500;">Receita total			</div>
+                    <div style="margin-top:4px;font-size:16px;color:#1c1c1c;font-weight:500;word-break:break-all;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;">0.00 BRL			</div>
+                </div>
+                <img style="position:absolute;bottom:0;right:6px;width:52px;" src="data:image/png;base64,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">
+            </div>
+            <div style="background:#fff;border-radius:6px;position:relative;padding:8px;">
+                <div style="position:relative;text-align:left;display:flex;flex-direction:column;z-index:1;">
+                    <div style="font-size:14px;color: rgba(28,28,28,.4);font-weight: 500;">Recompensas por indicação			</div>
+                    <div style="margin-top:4px;font-size:16px;color:#1c1c1c;font-weight:500;word-break:break-all;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;">0.00 BRL			</div>
+                </div>
+                <img style="position:absolute;bottom:0;right:6px;width:52px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD4AAAA5CAYAAABuxJj8AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHzSURBVHgB7ZrtbcIwEIYvIXyDSiaouwEjwAZsUEagE6BOAJ2g6gTtBrBBGcEbQAUIARL0tcSPNj8qY3EV4e6RkCEyDg+25bNzEYHlctlJkmR4PB47lF9m2+22m6bpwqdyvF6ve4VCYZJzaUe7VCoNfCvHeA3pRojj+N67bhRFbRJIkr1Qq9Uiygmr1aqPXn6lAGISiopLQ8WlkfhWnM/nplwuj7D8tehKQNBlMp87m81m8td3DoeD3e12z97iiIpcoNND43TFmOyfkQUd51xS76GO9dLQjQCXO53j54K58oRhNaMcgE2YC8tHP68FizvpZrM5pRyAbbeT/3VN13FpqLg0VFwaKi4NFZeGiktDxaURvC31BWd1rWKx2KMLgyOkBc7OZng6aikAdnEcUH6iMMQA2rYoHigA1qGOZ1vu5MMQH+Z0j7NhFd/v9xaFJT7s6R5nwzrUXXYCzrm7OKYaYE7e0QVBm19oc+ybAZGFfY5Xq1WLwjtT4b/QdVwaKi4NFZeGikuDPYBxKaOIsB45MinwxPalXq9/UACs4m5LCuF3954jk8JlZeIe05CwlXWoVyoV7nwZt9c3FACruIvTMRzfiAnXdqPRCEpOYJ/j+GF97JnHGOoX7f0kSSzathQIu7gjtFc40XVcGiouDRWXhljxb0H/lc0/8cawAAAAAElFTkSuQmCC">
+            </div>
+        </div>
+        <div style="margin:10px 12px 10px 12px;background-color:#fff;border-radius:8px;box-shadow: 0 2px 8px rgb(0 0 0 / 10%);">
+            <a href="https://www.adabr.com/mobile/user/signin" style="display: flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+                <div style="display: flex;align-items: center;">
+                    <img style="width:24px;height:24px;margin-right:8px;" src="https://www.adabr.com/images/mobile/icon_qiandao.png">
+                    <div style="color:#333;">Acesso diário			</div>
+                </div>
+                <span style="display:flex;align-items:center;font-size:12px;color:#888;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none">
+                        <path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </a>
+            <a href="https://www.adabr.com/mobile/user/referral" style="display:flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+                <div style="display: flex;align-items: center;">
+                    <img style="width:24px;height:24px;margin-right:8px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAbBJREFUWEfVV9FxwyAMRSxSZ5K2G2Av0HSSJJMkXSBmg2aTuoug3MuBi6lbQPZdLv5JjAV6epIeQOrOD0n9d123Z+Y3zCeiD+fcyVo71K4nAuCd72JnzAwA74sBxJGFxfq+3+C/MaZRSjVEdMRv4mxgZgAYAhNt237FNmDqfD7vJ2PxizFmi8WJ6BCPY9Jc1H9ECyAXsIE5wcY590REW2Z+tdZewvgkBR7ALkQcjAKwGnpTR5gLRpj5YK09VQGoiH7EiHTEjhYBQO6JaJLPHBvMvEm7QsyAL0DUB9ouLb5fWHz0Y56DwSIAuYhLvj82AK8BJYHebOZUUcxA27Zc7PnHEHqAnh/lWQRA0gEBQ6oFIgChA7TW2eqPWXLOQZJHwVmkAwL6Z6eIGbg7AEgxNpMaIFrr73TnEzFw9yL0AD5LJDhhaEh3VRED0ZZc1QWrClFN7v+zXcTAGiDEAPzZrioFOBuuUgPGmBciQhFWP+mhRMwAzoRKqecaBKvpQI3TnK2YgdzCpd8fAgAK7oizO6q4NLJCu9uNKncxabTWuL1M7n2FDrJmc/dH0eU066nC4AqxLuwwzmRM6QAAAABJRU5ErkJggg==">
+                    <div style="color:#333;">Relatório da equipe			</div>
+                </div>
+                <span style="display:flex;align-items:center;font-size:12px;color:#888;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none">
+                        <path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </a>
+            <!-- <a href="https://www.adabr.com/mobile/user/day_report" style="display: flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+		<div style="display: flex;align-items: center;">
+			<img style="width:24px;height:24px;margin-right:8px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAhxJREFUWEfdl9ttwjAUhn2Q2QOeYyQ2aJmkZBJgEugkpRsg4Tw3nYMIV7/lUxnHjgNJhVQe8eV8/s81JJ78oyfbF1mAoij2QojXvqBEVGutV7335zYWRfFFRDNjzCG3l0Grqpr32Gu33CiwWCzW1+v1xT9MRGshxLHPqzy1jsEd31rrbQzqBkApZRLkvQEccOsarXXU3S0ASF1VVck3OBf08isr4LtAKYWXb4YCzPr61BhTjwqglEIG3JUF5/P5N2AHK9D35al9/w8ALtFa36RZl0qjKqCU+kA8pCI6BvIwwHK5nDVNgypYIqjYuBBiBQVQtGIGkQVSyvp0OtVYfxgAh7kMoxK6TLDGGS4lPUMPBgggrHE26tKzxeC/fhQAXIIXs6S5tASYMeaNiN5ZLZxJnc+W4pxBf92pgkC1PynlPAc+GgAbRxAiBoQQANmluiBDjgaAgLX9naiE9GhMrjN2QnQCwPeXy2WDgSTmCillyRJ7AEhD+78PIaU8xNyRBWiaBiNZ6wepp9Ppji91w4yFdWurAMKq4zcqq1gQRCacB+4JQpe2VnofguGwHo5rowL4WeCC0Q4yfoD+GUBohP0P2Y0x+3BQGTULYi90BQnusDGRmpQHu6BLXqwBIAw8P64GAXBT6nphLohjAGij2YFjMpl8uja99asd146UYT4XjYF7PsNcs2l9bPgpl4A4+mN/9tswJ+HQ9acD/AD52CQ/vO8hjAAAAABJRU5ErkJggg==">
+			<div style="color:#333;">
+				Relatório diário			</div>
+		</div>
+		<span style="display:flex;align-items:center;font-size:12px;color:#888;">
+			<svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none"><path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path></svg>
+		</span>
+	</a> -->
+            <a href="javascript:select_yuejilu();" style="display: flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+                <div style="display: flex;align-items: center;">
+                    <img style="width:24px;height:24px;margin-right:8px;" src="https://www.adabr.com/images/mobile/icon_yuejilu.png">
+                    <div style="color:#333;">Registros de cobrança			</div>
+                </div>
+                <span style="display:flex;align-items:center;font-size:12px;color:#888;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none">
+                        <path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </a>
+            <a href="https://www.adabr.com/mobile/article/index?id=2" style="display: flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+                <div style="display: flex;align-items: center;">
+                    <img style="width:24px;height:24px;margin-right:8px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAATZJREFUWEftl9GNwjAMhu0uwjHJcRu4XQBuEmCSY4LWG8AmVxaJkVEjVVWIDI7Ul/Cc2F9+u/YPwso/XDk/ZAG6rjuFEDYFIM/MPKbivARo2/YKALsCyQERz33fn8wARLRDxKuIXJj591OIGOdtAJVeRI65ixYoN8CUJFk7CwAAfC1jDMOwnd9N9kBUAABu0+EYyJg3eewZQ0S284bMAojIDzNHCE9yiI+qAC4FiEjraJoNzHyZ18xdgvhJWRthOUNKAJhfr5DFFbC+/NU5twIaWIOkEoQQdGRnB5YbINcDlp3hBtCXK0RKAcuwKgLg6YMKUBWoClQF3lKAiA6I+LeaJVPjgYj/ADCKyK1pmrtnCk5m9FvNjMkRxc0nIvuZtfYyPO+bAabloyakhCWP8ONyba/+7/gBYMw2P8EEGJgAAAAASUVORK5CYII=">
+                    <div style="color:#333;">Funcionário Manual			</div>
+                </div>
+                <span style="display:flex;align-items:center;font-size:12px;color:#888;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none">
+                        <path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </a>
+            <a href="https://www.adabr.com/mobile/user/hetong_list" style="display: flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+                <div style="display: flex;align-items: center;">
+                    <img style="width:24px;height:24px;margin-right:8px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfVJREFUWEfFlz1ywjAQhbVqU+QKpE6XLhXQUMvmAMBJgJMAB8BSTQMcIF1ShxwirTfzPBKjCIeMZM2YysPYu9/+vZVI9Pyjnv2LVoCyLFfMvMwId2HmkzFmEdq8AVBKzYloQ0Truq4vOSCklAMExMxjY8zJt3kDYKMfaq3HOZw7G0VRfBLRrqqqVTRAWZYvzPwaCfSutT7nBKgiAWbZACIdt77euQRCiMcYEGaus2XA9sBbDIAQYpQNYDKZPEQ6b14/HA7fWZpwOp0+pwDs9/uPLAC9l0ApNUjJgDHmqqSdpuCe87/gfOf4PguA52wkhLhA1/GflHIeLq9Q9zsD2B0xg57bJTVEZFLKL+i7UgpQ11+4dDoBFEVxJKJzuEi86P9dXskAWM9Yp75zpdTG3+3IDkIPAf2MJAPgQ631kzOGVBPR0a8xMoEzxL0VngzgonVOILEWphkxZl4bY7YoU3YARCulHNkma+v2k3MKUCEEYFpPUUkZCFPr0u/K4ZchLFWoHUkAMOJHZs+LONutiQgj2UyG1Ydl26Gz8y7ws4DnthSj/rYXfh04s0wBjDgRYuaFLzAOjpl3aMR7kp1cAm/8sJCauwIR4RmjB1Xc/tV42TKQsgmTm9B2Oi4mTvM7+4+6mHg1z3o1a7uUNOXsHF5HA70D/ACfJ0Y/3zQLkgAAAABJRU5ErkJggg==">
+                    <div style="color:#333;">Meu contrato			</div>
+                </div>
+                <span style="display:flex;align-items:center;font-size:12px;color:#888;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none">
+                        <path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </a>
+            <a href="https://www.adabr.com/mobile/user/xinyongzhongxin" style="display: flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+                <div style="display: flex;align-items: center;">
+                    <img style="width:24px;height:24px;margin-right:8px;" src="https://www.adabr.com/images/mobile/icon_xinyongzhongxin.png">
+                    <div style="color:#333;">Centro de Crédito			</div>
+                </div>
+                <span style="display:flex;align-items:center;font-size:12px;color:#888;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none">
+                        <path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </a>
+            <a href="https://www.adabr.com/download/" target="_blank" style="display: flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+                <div style="display: flex;align-items: center;">
+                    <img style="width:24px;height:24px;margin-right:8px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAcxJREFUWEftl2FygjAQhXc5iT2JcoPgBVpP0noS8QImNxBPUnqRvM5jQieggEh+dfCP42RhX142+7kqEx9jzElVdyKymYrtrdcAKhE5OufqoWd17KVFUVxFZAegzLLsZ44AAFs+KyIVgMOQiEEBxpidql5V9Xi5XL7i5Pv9vvOba9772jlX9uMAfAYBnbU2blAAk/Bha20nxhizUdXvB27Q8ry/06IosEgAgLc51vdjKfaRi087sCT5X5IHx/i0ANq3RISq8hbd1dHTAvo1MFcMa2AVsDrwfxwgGwAQLlUEKVHVs/e+ZOsOt4Rdsen/yW6BMeaDd5pwsdbmFKOqN+99Fe76OfT9PMsyAmwb4tJcw7BjInnDns+kAGpSEsA7XeA3HRIRklCcc4dkDvBF3D0Ry6IKuKWgOnKCR0BH6EyZ7AiC/e3uSMNPJgZwbhEc8H2y1nbglcQB2i8iNyYLOG6KLRRkw/kggPjO43adRMDc/r8KWB1I6gCv25IiZONaBCPOBEsEqCpb+PqX7HUHOBeMzXZjx9MOMS8dQYvfsalmqjba6SpMTATZ3WdqOOUIRuI1hJtKGK9Hw2ndB1QcNyogQObV8ZywIpJHB5tfQvYXP6BEMFUAAAAASUVORK5CYII=">
+                    <div style="color:#333;">Baixar aplicativo			</div>
+                </div>
+                <span style="display:flex;align-items:center;font-size:12px;color:#888;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none">
+                        <path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </a>
+            <!-- <a href="https://www.adabr.com/mobile/login/logout" style="display: flex;align-items:center;justify-content:space-between;padding:15px;border-bottom:0.5px solid #e0e0e0;">
+		<div style="display: flex;align-items: center;">
+			<img style="width:24px;height:24px;margin-right:8px;" src="/images/mobile/icon_logout.png">
+			<div style="color:#333;">
+				Sair			</div>
+		</div>
+		<span style="display:flex;align-items:center;font-size:12px;color:#888;">
+			<svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none"><path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path></svg>
+		</span>
+	</a> -->
+        </div>
+        <script>
+            function select_yuejilu() {
+                //底部对话框
+                layer.open({
+                    content: '<div style="text-align:center;padding-bottom:20px;border-bottom:1px solid #bbb;"><a style="color:#000;font-size:16px;" href="https://www.adabr.com/mobile/user_money/index">Carteira flexível</a></div><div style="text-align:center;padding-top:20px;"><a style="color:#000;font-size:16px;" href="https://www.adabr.com/mobile/user_money/index?fenlei=1">Carteira eletrônica</a></div>',
+                    btn: ['Cancelar'],
+                    skin: 'footer',
+                    yes: function(index) {
+                        layer.closeAll();
                     }
                 });
             }
-        });
-
-        var _submit = true;
-
-        function redirectToProductPage(productId) {
-            // Redireciona para a página correspondente ao produto (1.html, 2.html, etc.)
-            window.location.href = productId + '.html';
-        }
-
-        // Função de entrada (sign in)
-        function handleSignIn() {
-            if (_submit == true) {
-                _submit = false;
-                var loading = layer.open({
-                    type: 2,
-                    content: "Carregando..."
-                });
-            } else {
-                return false;
-            }
-
-            var _token = "FKrNHgitgKq2S3x9TpEMJZrDfo06PAnoUMrl01D8";
-            var data = {
-                _token: _token
-            };
-
-            $.post("", data, function(result) {
-                layer.close(loading);
-                _submit = true;
-
-                switch (result.code) {
-                    case 200:
-                        layer.open({
-                            skin: 'msg',
-                            content: "Parabéns! Você entrou com sucesso. Você recebeu " + result.amount + " " + "R$",
-                            time: 3
-                        });
-                        break;
-                    case 201:
-                        layer.open({
-                            skin: 'msg',
-                            content: result.msg,
-                            time: 3
-                        });
-                        break;
-                    default:
-                        layer.open({
-                            skin: 'msg',
-                            content: "messagesmessages.failed",
-                            time: 3
-                        });
-                }
-            }).error(function() {
-                layer.close(loading);
-                _submit = true;
-                layer.open({
-                    skin: 'msg',
-                    content: "messagesmessages.network_error",
-                    time: 2
-                });
-            });
-        }
-    </script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
-</body>
-
+        </script>
+        <!--底部导航-start-->
+        <div class="foohi">
+            <div class="footer">
+                <ul>
+                    <li>
+                        <a href="https://www.adabr.com/mobile">
+                            <img src="https://www.adabr.com/images/mobile/icon_home.png">
+                            <p>Página Inicial</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.adabr.com/mobile/index/ai">
+                            <img src="https://www.adabr.com/images/mobile/icon_task.png">
+                            <p>AI</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.adabr.com/mobile/user/vip">
+                            <img src="https://www.adabr.com/images/mobile/icon_vip.png">
+                            <p>VIP</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.adabr.com/mobile/index/lirun">
+                            <img src="https://www.adabr.com/images/mobile/icon_yaoqing.png">
+                            <p>Lucro</p>
+                        </a>
+                    </li>
+                    <li class="on">
+                        <a href="https://www.adabr.com/mobile/user/index">
+                            <img src="https://www.adabr.com/images/mobile/icon_mine2.png">
+                            <p>Conta</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--底部导航-end-->
+    </body>
 </html>
