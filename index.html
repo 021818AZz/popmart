@@ -1,4 +1,7 @@
-<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8" />
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
 <title>Login</title>
 <meta name="description" content="" />
 <meta name="keywords" content="" />
@@ -13,19 +16,12 @@ window.addEventListener('resize', function() {
   docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
 });
 </script>
-<link rel="stylesheet" href="all.css"/>
-<link rel="stylesheet" href="style.css"/>
-<script type="text/javascript" src="min.js"></script>
-<script type="text/javascript" src="layer.js"></script>
-<script type="text/javascript" src="common.js"></script>
-<script type="text/javascript" src="public.js"></script>
-
-</head>
-<body ontouchstart="" style="background-color:#fff;background-image:url(https://i.postimg.cc/zDb2Jhw2/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
-
-<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;"><!-- <a href="/mobile" style="color:#fff;font-weight:700;font-size:18px;margin-left:12px;">Ada</a> --><span style="position:absolute;right:10px;font-size:14px;color:#f73131;letter-spacing:1px;"><!-- <a href="https://www.adabr.com/mobile/login/change_lang" style="border: 1px solid #00e763;border-radius: 13px;padding: 5px 10px;font-size:14px;background-color:#fff;color:#00e763;margin-right:10px;">Português</a> --><a target="_blank" href=" https://t.me/Ada8860"><img src="https://i.postimg.cc/CLvcSTY3/icon-kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
-
-<div style="margin-top:45px;text-align:center;"><img src="https://i.postimg.cc/4dK8FWjD/logo.png" alt="logo" style="width:110px;height:110px;"></div>
+<link rel="stylesheet" href="https://www.adabr.com/css/antui-all.css"/>
+<link rel="stylesheet" href="https://www.adabr.com/css/mobile/style.css"/>
+<script type="text/javascript" src="https://www.adabr.com/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.adabr.com/js/layer/mobile/layer.js"></script>
+<script type="text/javascript" src="https://www.adabr.com/js/common.js"></script>
+<script type="text/javascript" src="https://www.adabr.com/js/mobile/public.js"></script>
 
 <style>
 .container .auth_bg{margin-top:33px;text-align:center;font-size:22px;font-weight:700}
@@ -42,174 +38,251 @@ window.addEventListener('resize', function() {
 .container .forget{display:block;text-align:center;font-weight: 500;color: #00e763;font-size: 14px;text-align: center;margin-bottom: 20px;}
 .container .form .btn-bottom{display:block;text-align:center;font-weight: 700;font-size:16px;width: 100%;text-align: center;margin-bottom:20px;color: #00e763;}
 .guojia-list-item{padding:10px 0;border-bottom:1px #ddd dashed;}
+
+/* Estilos adicionais para loading */
+.loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #00e763;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
-<form id="myform" method="post" action="" class="" role="form" style="margin-top:50px;">
+</head>
+<body ontouchstart="" style="background-color:#fff;background-image:url(https://i.postimg.cc/zDb2Jhw2/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
+
+<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;"><span style="position:absolute;right:10px;font-size:14px;color:#f73131;letter-spacing:1px;"><a target="_blank" href=" https://t.me/Ada8860"><img src="https://i.postimg.cc/CLvcSTY3/icon-kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
+
+<div style="margin-top:45px;text-align:center;"><img src="https://i.postimg.cc/4dK8FWjD/logo.png" alt="logo" style="width:110px;height:110px;"></div>
+
+<!-- Overlay de loading -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+</div>
+
+<form id="myform" method="post" role="form" style="margin-top:50px;">
 <div class="container">
-	<div class="form">
-		<div class="u-form">
-			<div class="u-form-item">
-				<div class="u-form-item__body" style="flex-direction: row;">
-					<div class="u-form-item__body__left">
-						<div class="u-form-item__body__left__content">
-							<div class="u-form-item__body__left__content__icon">
-								<div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
-									<div class="u-icon__img" style="width:22px; height:22px;">
-										<img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
-									</div>
-									<input id="area_codei" name="area_code" type="text" value="244" style="display:none;" required><div style="width:40px;height:22px;" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>								</div>
-							</div>
-						</div>
-					</div>
-					<div class="u-form-item__body__right">
-						<input id="user_name" name="user_name" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
-					</div>
-				</div>
-			</div>
-			<div class="u-form-item">
-				<div class="u-form-item__body" style="flex-direction: row;">
-					<div class="u-form-item__body__left">
-						<div class="u-form-item__body__left__content">
-							<div class="u-form-item__body__left__content__icon">
-								<div class="u-icon u-icon--right">
-									<div class="u-icon__img" style="width:22px; height:22px;">
-										<img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="u-form-item__body__right">
-						<input value="" type="password" name="password" id="password" placeholder="Senha" required>
-					</div>
-				</div>
-			</div>
-			<a href="javascript:dosubmit();" class="btn">
-				Login			</a>
-			<a href="/register" class="btn-bottom">
-				Cadastrar-se			</a>
-			<!-- <a class="forget" href="https://www.adabr.com/mobile/login/resetpwd">
-				Esqueceu a senha?			</a> -->
-		</div>
-	</div>
+    <div class="form">
+        <div class="u-form">
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                    <input id="area_codei" name="area_code" type="text" value="244" style="display:none;" required>
+                                    <div style="width:40px;height:22px;" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input id="user_name" name="user_name" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
+                    </div>
+                </div>
+            </div>
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input value="" type="password" name="password" id="password" placeholder="Senha" required>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:dosubmit();" class="btn" id="loginBtn">
+                Login
+            </a>
+            <a href="/register" class="btn-bottom">
+                Cadastrar-se
+            </a>
+        </div>
+    </div>
 </div>
 </form>
 
 <script>
-console.log("%c搭建TG: @xiaoming7366", "color:#fff;background-image:linear-gradient(90deg, rgb(47, 172, 178) 0%, rgb(45, 190, 96) 100%);padding:8px 12px;");
+// Configuração da API
+const API_BASE_URL = 'http://localhost:3000';
 
 //区号选择，印度91马来西亚60印尼62菲律宾63新加坡65
 function quhao_select()
 {
-	layer.open({
-		type: 1
-		,content: '<div style="padding:0 10px;"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>'
-		,anim: 'up'
-		,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
+    layer.open({
+        type: 1,
+        content: '<div style="padding:0 10px;"><div style="height:200px;overflow-yscroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>',
+        anim: 'up',
+        style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
     });
 }
+
 function qhselect(quhao)
 {
-	quhao = quhao || $("#quhaose").val();
-	$("#area_code").html(quhao);
-	$("#area_codei").val(quhao);
-	layer.closeAll();
+    quhao = quhao || $("#quhaose").val();
+    $("#area_code").html(quhao);
+    $("#area_codei").val(quhao);
+    layer.closeAll();
 }
 
-if (getCookie('mobile_user_name')) {
-	document.getElementById('user_name').value = getCookie('mobile_user_name');
+// Função para mostrar/ocultar loading
+function showLoading(show) {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    loadingOverlay.style.display = show ? 'flex' : 'none';
 }
 
-function lianxikefu()
-{
-	//提示
-	layer.open({
-		content: 'Entre em contato com o atendimento ao cliente on-line'
-		,skin: 'msg'
-		,time: 2 //2秒后自动关闭
-	});
-}
-function dosubmit()
-{
-    var user_name = $("#user_name").val();
-    var password = $("#password").val();
+// Função principal de login
+async function dosubmit() {
+    const areaCode = $("#area_code").html();
+    const user_name = $("#user_name").val();
+    const password = $("#password").val();
     
-    if (user_name == '') {
-        //提示
+    // Validações
+    if (!user_name) {
         layer.open({
-            content: 'Digite o número de telefone'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
+            content: 'Digite o número de telefone',
+            skin: 'msg',
+            time: 2
         });
-        
         return false;
     }
-    /* if (is_email(user_name) != true) {
-        //提示
+    
+    if (!password) {
         layer.open({
-            content: 'Email format is incorrect'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
+            content: 'Digite a senha',
+            skin: 'msg',
+            time: 2
         });
-        
-        return false;
-    } */
-    if (password == '') {
-        //提示
-        layer.open({
-            content: 'Digite a senha'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-        
         return false;
     }
 
-    setCookie('mobile_user_name', user_name, 24 * 60 * 60 * 1000);
-    $("#myform").submit();
+    // Combinar código do país com número de telefone
+    const mobile = areaCode + user_name;
+
+    showLoading(true);
+
+    try {
+        // Fazer requisição para a API de login
+        const response = await fetch(`${API_BASE_URL}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                mobile: mobile,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            // Login bem-sucedido
+            setCookie('mobile_user_name', user_name, 24 * 60 * 60 * 1000);
+            setCookie('user_token', data.data.token, 24 * 60 * 60 * 1000);
+            setCookie('user_id', data.data.user.id, 24 * 60 * 60 * 1000);
+            
+            layer.open({
+                content: 'Login realizado com sucesso!',
+                skin: 'msg',
+                time: 2,
+                end: function() {
+                    // Redirecionar para a página principal/dashboard
+                    window.location.href = '/dashboard.html';
+                }
+            });
+        } else {
+            layer.open({
+                content: data.message || 'Erro ao fazer login',
+                skin: 'msg',
+                time: 3
+            });
+        }
+    } catch (error) {
+        console.error('Erro no login:', error);
+        layer.open({
+            content: 'Erro de conexão com o servidor',
+            skin: 'msg',
+            time: 3
+        });
+    } finally {
+        showLoading(false);
+    }
 }
 
-function setCookie(name, value, expire)
-{
-	expire = expire || 24 * 60 * 60 * 1000; //此 cookie 将被保存 30 天
-	var exp  = new Date(); //new Date("December 31, 9998");
-	exp.setTime(exp.getTime() + expire);
-	document.cookie = name + "="+ escape(value) +";expires="+ exp.toGMTString();
-}
-function getCookie(name)
-{
-	var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
-	if(arr != null) return unescape(arr[2]); return null;
-}
-function delCookie(name)
-{
-	var exp = new Date();
-	exp.setTime(exp.getTime() - 1);
-	var cval=getCookie(name);
-	if(cval!=null) document.cookie=name +"="+cval+";expires="+exp.toGMTString();
+// Carregar número salvo se existir
+if (getCookie('mobile_user_name')) {
+    document.getElementById('user_name').value = getCookie('mobile_user_name');
 }
 
-//判断是否为手机号的正则表达式
-function is_mobile_number(mobile) {
-	var myreg = /^[0-9]{1,16}$/;
-	if (!myreg.test(mobile)) {
-		console.log('Phone number format is not correct')
-        return false;
-	} else {
-		console.log('Phone number format is not correct')
-        return true;
-	}
+// Funções de cookie
+function setCookie(name, value, expire) {
+    expire = expire || 24 * 60 * 60 * 1000;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + expire);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
 }
-//判断是否为邮箱的正则表达式
-function is_email(email) {
-	var myreg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-	if (!myreg.test(email)) {
-		console.log('邮箱格式不正确');
-        return false;
-	} else {
-        return true;
-	}
+
+function getCookie(name) {
+    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+    if (arr != null) return unescape(arr[2]); 
+    return null;
 }
+
+function delCookie(name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+}
+
+// Tecla Enter para submeter o formulário
+document.getElementById('password').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        dosubmit();
+    }
+});
+
+// Verificar se já está logado
+window.addEventListener('load', function() {
+    const token = getCookie('user_token');
+    if (token) {
+        // Se já tem token, redirecionar para dashboard
+        window.location.href = '/dashboard.html';
+    }
+});
 </script>
 
 <div style="display:none;"></div>
-</body></html>
+</body>
+</html>

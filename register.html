@@ -1,385 +1,327 @@
-<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8" />
-<title>Cadastrar-se</title>
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="format-detection" content="telephone=no, email=no" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-<script>
-var docEl = document.documentElement;
-docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
-window.addEventListener('resize', function() {
-  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
-});
-</script>
-<link rel="stylesheet" href="https://www.adabr.com/css/antui-all.css"/>
-<link rel="stylesheet" href="https://www.adabr.com/css/mobile/style.css"/>
-<script type="text/javascript" src="https://www.adabr.com/js/jquery.min.js"></script>
-<script type="text/javascript" src="https://www.adabr.com/js/layer/mobile/layer.js"></script>
-<script type="text/javascript" src="https://www.adabr.com/js/common.js"></script>
-<script type="text/javascript" src="https://www.adabr.com/js/mobile/public.js"></script>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>Cadastrar-se</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <script>
+    var docEl = document.documentElement;
+    docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+    window.addEventListener('resize', function() {
+      docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+    });
+    </script>
+    <link rel="stylesheet" href="all.css"/>
+    <link rel="stylesheet" href="style.css"/>
+    <script type="text/javascript" src="min.js"></script>
+    <script type="text/javascript" src="layer.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="public.js"></script>
 
+    <style>
+    .container .auth_bg{margin-top:33px;text-align:center;font-size:22px;font-weight:700}
+    .container .form{position:relative;top:28px;border-radius:20px 20px 0 0;width:100%;background-color:#fff}
+    .u-form-item{padding:5px 30px}
+    ::placeholder{color: rgb(192, 196, 204);font-size:14px;}
+    .u-form-item .u-form-item__body,#register .u-form-item .u-form-item__body{padding:10px!important;background:#f2f7fb;border-radius:24px}
+    .u-form-item__body{display:flex;flex-direction:row;padding:10px 0}
+    .u-form-item__body__left{display:flex;flex-direction:row;align-items:center}
+    .u-form-item__body__left__content{position:relative;display:flex;flex-direction:row;align-items:center;padding-right:8px;flex:1}
+    .u-form-item__body__left__content__icon{margin-right:3px}
+    .u-form-item__body__right input{background-color:transparent;height:31px;display: block;width: 100%;outline: none;border: none;padding: 0;margin: 0;text-decoration: inherit;}
+    .container .btn{display:block;text-align:center;margin:10px 30px 10px 30px;color: #fff;background: linear-gradient(90deg,#05cda7,#00e763)!important;font-weight: 700;border-radius: 22px;padding:12px 0;font-size:16px;}
+    .container .forget{display:block;text-align:center;font-weight:500;color: #00e763;font-size: 14px;text-align: center;margin-bottom: 20px;}
+    .container .form .btn-bottom{display:block;text-align:center;font-weight: 700;width: 100%;text-align: center;margin-bottom: 134px;color: #00e763;font-size:16px;}
+    .guojia-list-item{padding:10px 0;border-bottom:1px #ddd dashed;}
+    </style>
 </head>
-<body ontouchstart="" style="background-color:#fff;background-image:url(https://www.adabr.com/images/mobile/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
+<body ontouchstart="" style="background-color:#fff;background-image:url(https://i.postimg.cc/3xzDyJxp/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
 
-<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;"><!-- <a href="/mobile" style="color:#fff;font-weight:700;font-size:18px;margin-left:12px;">Ada</a> --><span style="position:absolute;right:10px;font-size:14px;color:#f73131;letter-spacing:1px;"><!-- <a href="https://www.adabr.com/mobile/login/change_lang" style="border: 1px solid #00e763;border-radius: 13px;padding: 5px 10px;font-size:14px;background-color:#fff;color:#00e763;margin-right:10px;">Português</a> --><a target="_blank" href=" https://t.me/Ada8860"><img src="https://www.adabr.com/images/mobile/icon_kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
+<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;"><span style="position:absolute;right:10px;font-size:14px;color:#f73131;letter-spacing:1px;"><a target="_blank" href=" https://t.me/Ada8860"><img src="https://www.adabr.com/images/mobile/icon_kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
 
-<div style="margin-top:45px;text-align:center;"><img src="https://www.adabr.com/images/mobile/logo.png" alt="logo" style="width:110px;height:110px;"></div>
+<div style="margin-top:45px;text-align:center;"><img src="https://i.postimg.cc/4dK8FWjD/logo.png" alt="logo" style="width:110px;height:110px;"></div>
 
-<style>
-.container .auth_bg{margin-top:33px;text-align:center;font-size:22px;font-weight:700}
-.container .form{position:relative;top:28px;border-radius:20px 20px 0 0;width:100%;background-color:#fff}
-.u-form-item{padding:5px 30px}
-::placeholder{color: rgb(192, 196, 204);font-size:14px;}
-.u-form-item .u-form-item__body,#register .u-form-item .u-form-item__body{padding:10px!important;background:#f2f7fb;border-radius:24px}
-.u-form-item__body{display:flex;flex-direction:row;padding:10px 0}
-.u-form-item__body__left{display:flex;flex-direction:row;align-items:center}
-.u-form-item__body__left__content{position:relative;display:flex;flex-direction:row;align-items:center;padding-right:8px;flex:1}
-.u-form-item__body__left__content__icon{margin-right:3px}
-.u-form-item__body__right input{background-color:transparent;height:31px;display: block;width: 100%;outline: none;border: none;padding: 0;margin: 0;text-decoration: inherit;}
-.container .btn{display:block;text-align:center;margin:10px 30px 10px 30px;color: #fff;background: linear-gradient(90deg,#05cda7,#00e763)!important;font-weight: 700;border-radius: 22px;padding:12px 0;font-size:16px;}
-.container .forget{display:block;text-align:center;font-weight:500;color: #00e763;font-size: 14px;text-align: center;margin-bottom: 20px;}
-.container .form .btn-bottom{display:block;text-align:center;font-weight: 700;width: 100%;text-align: center;margin-bottom: 134px;color: #00e763;font-size:16px;}
-.guojia-list-item{padding:10px 0;border-bottom:1px #ddd dashed;}
-</style>
-<form id="myform" method="post" action="" class="ajax_post_submit" role="form">
+<form id="myform" method="post" role="form">
 <div class="container">
-	<!-- <div class="auth_bg">
-		Cadastrar-se	</div> -->
-	<div class="form" style="margin-top:50px;">
-		<div class="u-form">
-			<div class="u-form-item">
-				<div class="u-form-item__body" style="flex-direction: row;">
-					<div class="u-form-item__body__left">
-						<div class="u-form-item__body__left__content">
-							<div class="u-form-item__body__left__content__icon">
-								<div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
-									<div class="u-icon__img" style="width:22px; height:22px;">
-										<img src="https://www.adabr.com/images/mobile/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
-									</div>
-									<input id="area_codei" name="area_code" type="text" value="55" style="display:none;" required><div style="width:40px;height:22px;" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>								</div>
-							</div>
-						</div>
-					</div>
-					<div class="u-form-item__body__right">
-						<input id="mobile" name="mobile" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
-					</div>
-				</div>
-			</div>
-						<div class="u-form-item">
-				<div class="u-form-item__body" style="flex-direction: row;">
-					<div class="u-form-item__body__left">
-						<div class="u-form-item__body__left__content">
-							<div class="u-form-item__body__left__content__icon">
-								<div class="u-icon u-icon--right">
-									<div class="u-icon__img" style="width:22px; height:22px;">
-										<img src="https://www.adabr.com/images/mobile/mima.d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="u-form-item__body__right">
-						<input value="" type="password" name="password" id="password" placeholder="Senha" required>
-					</div>
-				</div>
-			</div>
-			<div class="u-form-item">
-				<div class="u-form-item__body" style="flex-direction: row;">
-					<div class="u-form-item__body__left">
-						<div class="u-form-item__body__left__content">
-							<div class="u-form-item__body__left__content__icon">
-								<div class="u-icon u-icon--right">
-									<div class="u-icon__img" style="width:22px; height:22px;">
-										<img src="https://www.adabr.com/images/mobile/mima.d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="u-form-item__body__right">
-						<input id="re_password" name="re_password" autocomplete="off" type="password" class="" placeholder="Digite a senha novamente" value="" required>
-					</div>
-				</div>
-			</div>
-			<div class="u-form-item">
-				<div class="u-form-item__body" style="flex-direction: row;">
-					<div class="u-form-item__body__left">
-						<div class="u-form-item__body__left__content">
-							<div class="u-form-item__body__left__content__icon">
-								<div class="u-icon u-icon--right">
-									<div class="u-icon__img" style="width:22px; height:22px;">
-										<img src="https://www.adabr.com/images/mobile/mima.d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="u-form-item__body__right">
-						<input value="" type="password" name="pay_password" id="pay_password" placeholder="Senha de pagamento" required>
-					</div>
-				</div>
-			</div>
-			<div class="u-form-item">
-				<div class="u-form-item__body" style="flex-direction: row;">
-					<div class="u-form-item__body__left">
-						<div class="u-form-item__body__left__content">
-							<div class="u-form-item__body__left__content__icon">
-								<div class="u-icon u-icon--right">
-									<div class="u-icon__img" style="width:22px; height:22px;">
-										<img src="https://www.adabr.com/images/mobile/yaoqing.3a93cc26.png" style="display:block;width: 100%; height: 100%;">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="u-form-item__body__right">
-						<input id="invitation_code" name="invitation_code" type="text" placeholder="Código de convite" value="2OG9G" required>
-					</div>
-				</div>
-			</div>
-			<a href="javascript:dosubmit();" class="btn">
-				Cadastrar-se			</a>
-			<a href="/index" class="btn-bottom">
-				Login			</a>
-		</div>
-	</div>
+    <div class="form" style="margin-top:50px;">
+        <div class="u-form">
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                    <input id="area_codei" name="area_code" type="text" value="244" style="display:none;" required><div style="width:40px;height:22px;" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input id="mobile" name="mobile" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
+                    </div>
+                </div>
+            </div>
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input value="" type="password" name="password" id="password" placeholder="Senha" required>
+                    </div>
+                </div>
+            </div>
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input id="re_password" name="re_password" autocomplete="off" type="password" class="" placeholder="Digite a senha novamente" value="" required>
+                    </div>
+                </div>
+            </div>
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input value="" type="password" name="pay_password" id="pay_password" placeholder="Senha de pagamento" required>
+                    </div>
+                </div>
+            </div>
+            <div class="u-form-item">
+                <div class="u-form-item__body" style="flex-direction: row;">
+                    <div class="u-form-item__body__left">
+                        <div class="u-form-item__body__left__content">
+                            <div class="u-form-item__body__left__content__icon">
+                                <div class="u-icon u-icon--right">
+                                    <div class="u-icon__img" style="width:22px; height:22px;">
+                                        <img src="https://i.postimg.cc/FHX41MQz/yaoqing-3a93cc26.png" style="display:block;width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-form-item__body__right">
+                        <input id="invitation_code" name="invitation_code" type="text" placeholder="Código de convite (opcional)" value="2OG9G">
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:dosubmit();" class="btn">
+                Cadastrar-se
+            </a>
+            <a href="/index" class="btn-bottom">
+                Login
+            </a>
+        </div>
+    </div>
 </div>
 </form>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script>
-//区号选择，印度91马来西亚60印尼62菲律宾63新加坡65
-function quhao_select()
-{
-	layer.open({
-		type: 1
-		,content: '<div style="padding:0 10px;"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>'
-		,anim: 'up'
-		,style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
+// URL da API de registro - ajuste conforme necessário
+const API_URL = 'http://localhost:3000/register';
+
+// Função para seleção de código de país
+function quhao_select() {
+    layer.open({
+        type: 1,
+        content: '<div style="padding:0 10px;"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>',
+        anim: 'up',
+        style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
     });
 }
-function qhselect(quhao)
-{
-	quhao = quhao || $("#quhaose").val();
-	$("#area_code").html(quhao);
-	$("#area_codei").val(quhao);
-	layer.closeAll();
+
+function qhselect(quhao) {
+    quhao = quhao || $("#quhaose").val();
+    $("#area_code").html(quhao);
+    $("#area_codei").val(quhao);
+    layer.closeAll();
 }
 
-//获取验证码
-function getSmsCode()
-{
-    var obj = $("#getsmscode");
-	var area_code = $("#area_code").html();
-
-	// 验证手机号码
-	var mobile = $("#mobile").val();
-    if (mobile == '') {
-        layer.open({
-            content: 'Digite o número de telefone'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-		$('#mobile').focus();
-        return false;
-    }
-    var myreg=/^[0-9]{6,16}$/;
-	if (!myreg.test(mobile)) {
-		layer.open({
-            content: 'O formato do número de telefone não está correto'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-		$('#mobile').focus();
-        return false;
-	}
-	
-	if (area_code == '90' && mobile.length != 10) {
-		layer.open({
-            content: 'O formato do número de telefone não está correto'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-		$('#mobile').focus();
-        return false;
-	}
-	
-	mobile = '' + area_code + mobile;
-	
-    /* var captcha = $("#captcha").val();
-    if (captcha == '') {
-		layer.open({
-            content: 'Digite o código'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-		$('#captcha').focus();
-        return false;
-	}
-    if (captcha.length != 4) {
-		layer.open({
-            content: 'Código incorreto'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-		$('#captcha').focus();
-        return false;
-	} */
-    // 验证手机号码
-    $.ajax({
-		type: "GET",
-		url: 'https://www.adabr.com/mobile/login/getsmscode',
-		data: { mobile: mobile, type: 1 },
-		dataType:"json",
-		success: function (res) {
-			settime(obj); //倒计时
-			console.log(res);
-			if (res.code == 0) {
-				layer.open({
-					content: 'O código de verificação foi enviado, verifique'
-					,skin: 'msg'
-					,time: 2 //2秒后自动关闭
-				});
-			} else {
-                layer.open({
-					content: res.msg
-					,skin: 'msg'
-					,time: 2 //2秒后自动关闭
-				});
-				return;
-			}
-		},
-		error: function (res) {
-			alert('Request failed, please try again later');
-		}
-	});
-}
-
-var countdown = 120;
-function settime(obj)
-{
-    if (countdown == 0) {
-        obj.attr('disabled',false);
-        obj.text("Obter código");
-        countdown = 120;
-        return;
-    } else {
-        obj.attr('disabled',true);
-        obj.text("" + countdown + "S");
-        countdown--;
-    }
-
-    setTimeout(function () {
-        settime(obj);
-    }, 1000);
-}
-
-function dosubmit()
-{
+// Função principal de envio do formulário
+function dosubmit() {
     var password = $("#password").val();
     var re_password = $("#re_password").val();
     var pay_password = $("#pay_password").val();
-    var parent_id = $("#parent_id").val();
-    var smscode = $("#smscode").val();
-    
     var mobile = $("#mobile").val();
-    if (mobile == '') {
-        //提示
+    var area_code = $("#area_code").html();
+    
+    // Validações
+    if (!mobile) {
         layer.open({
-            content: 'Digite o e-mail'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
+            content: 'Digite o número de telefone',
+            skin: 'msg',
+            time: 2
         });
-        
         return false;
     }
     
-	/* var email = $("#email").val();
-    if (email == '') {
-        //提示
+    var myreg = /^[0-9]{6,16}$/;
+    if (!myreg.test(mobile)) {
         layer.open({
-            content: 'Digite o e-mail'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
+            content: 'O formato do número de telefone não está correto',
+            skin: 'msg',
+            time: 2
         });
-        
+        $('#mobile').focus();
         return false;
     }
-	
-    if (is_email(email) != true) {
-        //提示
+    
+    if (area_code == '90' && mobile.length != 10) {
         layer.open({
-            content: 'user_youxianggeshicuowu'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
+            content: 'O formato do número de telefone não está correto',
+            skin: 'msg',
+            time: 2
         });
-        
+        $('#mobile').focus();
         return false;
-    } */
-	
-    if (password == '') {
+    }
+    
+    if (!password) {
         layer.open({
-            content: 'Digite a senha'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
+            content: 'Digite a senha',
+            skin: 'msg',
+            time: 2
         });
         return false;
     }
+    
     if (password.length < 6 || password.length > 16) {
-		layer.open({
-            content: 'Senha de 6 a 16 dígitos'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-		return false;
-	}
-    /* if (pay_password == '') {
         layer.open({
-            content: 'Please enter the security password'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-        return false;
-    }
-    if (pay_password.length < 6 || pay_password.length > 16) {
-		layer.open({
-            content: 'Security password 6 to 16 digits'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-		return false;
-	} */
-    if (re_password == '') {
-        layer.open({
-            content: 'Por favor, confirme a senha'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
-        });
-        return false;
-    }
-    if (password != re_password) {
-        layer.open({
-            content: 'Duas senhas são inconsistentes'
-            ,skin: 'msg'
-            ,time: 2 //2秒后自动关闭
+            content: 'Senha de 6 a 16 dígitos',
+            skin: 'msg',
+            time: 2
         });
         return false;
     }
     
-    $("#myform").submit();
-}
-//判断是否为邮箱的正则表达式
-function is_email(email) {
-	var myreg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-	if (!myreg.test(email)) {
-		console.log('邮箱格式不正确');
+    if (!pay_password) {
+        layer.open({
+            content: 'Digite a senha de pagamento',
+            skin: 'msg',
+            time: 2
+        });
         return false;
-	} else {
-        return true;
-	}
+    }
+    
+    if (pay_password.length < 6 || pay_password.length > 16) {
+        layer.open({
+            content: 'Senha de pagamento de 6 a 16 dígitos',
+            skin: 'msg',
+            time: 2
+        });
+        return false;
+    }
+    
+    if (!re_password) {
+        layer.open({
+            content: 'Por favor, confirme a senha',
+            skin: 'msg',
+            time: 2
+        });
+        return false;
+    }
+    
+    if (password !== re_password) {
+        layer.open({
+            content: 'Duas senhas são inconsistentes',
+            skin: 'msg',
+            time: 2
+        });
+        return false;
+    }
+    
+    // Coletar dados do formulário
+    const formData = {
+        mobile: area_code + mobile, // Combinar código do país com número
+        password: password,
+        pay_password: pay_password,
+        invitation_code: $("#invitation_code").val() || null
+    };
+    
+    // Mostrar indicador de carregamento
+    var loadingIndex = layer.open({
+        type: 2,
+        content: 'Processando...',
+        shadeClose: false
+    });
+    
+    // Enviar para a API
+    $.ajax({
+    url: API_URL, // ex: "http://localhost:3000/register"
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(formData),
+    success: function(response) {
+        layer.close(loadingIndex);
+
+        if (response.success) {
+            layer.open({
+                content: 'Cadastro realizado com sucesso!',
+                skin: 'msg',
+                time: 2,
+                end: function() {
+                    window.location.href = '/index';
+                }
+            });
+        } else {
+            layer.open({
+                content: response.message || 'Erro no cadastro',
+                skin: 'msg',
+                time: 3
+            });
+        }
+    },
+    error: function(xhr) {
+        layer.close(loadingIndex);
+        const errorMsg = xhr.responseJSON?.message || 'Erro ao conectar com o servidor';
+        layer.open({
+            content: errorMsg,
+            skin: 'msg',
+            time: 3
+        });
+    }
+});
+	return false;
 }
 </script>
 
 <div style="display:none;"></div>
-</body></html>
+</body>
+</html>

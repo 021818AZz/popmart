@@ -1,46 +1,50 @@
-função count_js () { document.writeln(''); }
+function count_js() { 
+    document.writeln(''); 
+}
 
-$().ready(função(){
-	$("#go_top").css("exibir", "nenhum");
-	$(janela).scroll(função () {
-        se ($(window).scrollTop() > 100) {
+$(document).ready(function() {
+    $("#go_top").css("display", "none");
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 100) {
             $("#go_top").fadeIn(500);
-        } outro {
+        } else {
             $("#go_top").fadeOut(500);
         }
     });
-    //å½“ç‚¹å‡»è·³è½¬é“¾æŽ¥å Žï¼Œå›žåˆ°é¡µé ¢é¡¶éƒ¨ä½ ç½®
-    $("#go_top").click(função () {
-        $('corpo,html').animate({scrollTop: 0}, 300);
-        retornar falso;
+
+    // Quando clicar no botão "voltar ao topo"
+    $("#go_top").click(function() {
+        $('body,html').animate({scrollTop: 0}, 300);
+        return false;
     });
-	
 });
 
-//è§£å†³IOSé¡µé ¢è¿”å›žä¸ åˆ·æ–°çš„é—®é¢˜
-window.onpageshow = função (evento) {
-	//evento.persistedåˆ¤æ–æ˜¯å ¦å Žé€€è¿›å…¥
-	se (evento.persistido || janela.desempenho && janela.desempenho.navegação.tipo == 2) {
-		var u = navigator.userAgent;
-		var is_android = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //androidç»ˆç«¯
-		var is_ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //iosç»ˆç«¯
-		se (is_ios) {
-			janela.localização.recarregar();
-		}
-	}
+// Resolver problema do iOS que não recarrega ao voltar página
+window.onpageshow = function(event) {
+    if (event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        var u = navigator.userAgent;
+        var is_android = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+        var is_ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+
+        if (is_ios) {
+            window.location.reload();
+        }
+    }
 };
 
-//è§£å†³APPé¢'ç¹ å”¤èµ·Safariæµ è§ˆå™¨
-if(("autônomo" em window.navigator) && window.navigator.standalone){
-	var noddy, remotes = falso;
-	document.addEventListener('clique', função(evento) {
-		noddy = evento.alvo;
-		while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
-			noddy = noddy.parentNode;
-		}
-		if('href' em noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotos)){
-			evento.preventDefault();
-			documento.localização.href = noddy.href;
-		}
-	},falso);
+// Resolver problema de abrir no Safari quando é standalone (WebApp)
+if (("standalone" in window.navigator) && window.navigator.standalone) {
+    var noddy, remotes = false;
+    document.addEventListener('click', function(event) {
+        noddy = event.target;
+        while (noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+            noddy = noddy.parentNode;
+        }
+        if ('href' in noddy && noddy.href.indexOf('http') !== -1 && 
+            (noddy.href.indexOf(document.location.host) !== -1 || remotes)) {
+            event.preventDefault();
+            document.location.href = noddy.href;
+        }
+    }, false);
 }
