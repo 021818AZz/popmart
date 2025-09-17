@@ -38,6 +38,14 @@
     .container .forget{display:block;text-align:center;font-weight:500;color: #00e763;font-size: 14px;text-align: center;margin-bottom: 20px;}
     .container .form .btn-bottom{display:block;text-align:center;font-weight: 700;width: 100%;text-align: center;margin-bottom: 134px;color: #00e763;font-size:16px;}
     .guojia-list-item{padding:10px 0;border-bottom:1px #ddd dashed;}
+    .ref-badge {
+        background: #00e763;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        margin-left: 5px;
+    }
     </style>
 </head>
 <body ontouchstart="" style="background-color:#fff;background-image:url(https://i.postimg.cc/3xzDyJxp/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
@@ -136,7 +144,8 @@
                         </div>
                     </div>
                     <div class="u-form-item__body__right">
-                        <input id="invitation_code" name="invitation_code" type="text" placeholder="Código de convite (opcional)" value="2OG9G">
+                        <input id="invitation_code" name="invitation_code" type="text" placeholder="Código de convite (opcional)" value="">
+                        <span id="refSource" style="display:none;" class="ref-badge">Via link</span>
                     </div>
                 </div>
             </div>
@@ -154,8 +163,42 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-// URL da API de registro - ajuste conforme necessário
+// URL da API de registro
 const API_URL = 'https://bd-1-tile.onrender.com/register';
+
+// Função para extrair parâmetros da URL
+function getUrlParameter(name) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(window.location.href);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+// Função para validar código de convite
+function isValidInvitationCode(code) {
+    return code && code.length >= 4 && code.length <= 8 && /^[A-Z0-9]+$/.test(code);
+}
+
+// Ao carregar a página, verificar se há código de referência na URL
+document.addEventListener('DOMContentLoaded', function() {
+    const refCode = getUrlParameter('ref');
+    
+    if (refCode && isValidInvitationCode(refCode)) {
+        document.getElementById('invitation_code').value = refCode;
+        document.getElementById('refSource').style.display = 'inline';
+        
+        // Salvar no localStorage para uso futuro
+        localStorage.setItem('referral_code', refCode);
+    } else {
+        // Verificar se há código salvo no localStorage
+        const savedRefCode = localStorage.getItem('referral_code');
+        if (savedRefCode && isValidInvitationCode(savedRefCode)) {
+            document.getElementById('invitation_code').value = savedRefCode;
+        }
+    }
+});
 
 // Função para seleção de código de país
 function quhao_select() {
@@ -181,6 +224,7 @@ function dosubmit() {
     var pay_password = $("#pay_password").val();
     var mobile = $("#mobile").val();
     var area_code = $("#area_code").html();
+    var invitation_code = $("#invitation_code").val();
     
     // Validações
     if (!mobile) {
@@ -267,12 +311,22 @@ function dosubmit() {
         return false;
     }
     
+    // Validar código de convite se fornecido
+    if (invitation_code && !isValidInvitationCode(invitation_code)) {
+        layer.open({
+            content: 'Código de convite inválido',
+            skin: 'msg',
+            time: 2
+        });
+        return false;
+    }
+    
     // Coletar dados do formulário
     const formData = {
-        mobile: area_code + mobile, // Combinar código do país com número
+        mobile: area_code + mobile,
         password: password,
         pay_password: pay_password,
-        invitation_code: $("#invitation_code").val() || null
+        invitation_code: invitation_code || null
     };
     
     // Mostrar indicador de carregamento
@@ -284,41 +338,45 @@ function dosubmit() {
     
     // Enviar para a API
     $.ajax({
-    url: API_URL, // ex: "https://bd-1-tile.onrender.com/register"
-    type: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify(formData),
-    success: function(response) {
-        layer.close(loadingIndex);
-
-        if (response.success) {
+        url: API_URL,
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(response) {
+            layer.close(loadingIndex);
+            
+            if (response.success) {
+                // Limpar código de referência do localStorage após cadastro bem-sucedido
+                localStorage.removeItem('referral_code');
+                
+                layer.open({
+                    content: 'Cadastro realizado com sucesso!',
+                    skin: 'msg',
+                    time: 2,
+                    end: function() {
+                        window.location.href = '/index';
+                    }
+                });
+            } else {
+                layer.open({
+                    content: response.message || 'Erro no cadastro',
+                    skin: 'msg',
+                    time: 3
+                });
+            }
+        },
+        error: function(xhr) {
+            layer.close(loadingIndex);
+            const errorMsg = xhr.responseJSON?.message || 'Erro ao conectar com o servidor';
             layer.open({
-                content: 'Cadastro realizado com sucesso!',
-                skin: 'msg',
-                time: 2,
-                end: function() {
-                    window.location.href = '/index';
-                }
-            });
-        } else {
-            layer.open({
-                content: response.message || 'Erro no cadastro',
+                content: errorMsg,
                 skin: 'msg',
                 time: 3
             });
         }
-    },
-    error: function(xhr) {
-        layer.close(loadingIndex);
-        const errorMsg = xhr.responseJSON?.message || 'Erro ao conectar com o servidor';
-        layer.open({
-            content: errorMsg,
-            skin: 'msg',
-            time: 3
-        });
-    }
-});
-	return false;
+    });
+    
+    return false;
 }
 </script>
 
