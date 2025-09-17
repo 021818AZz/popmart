@@ -27,7 +27,7 @@
                 <img style="height:44px;width:44px;border-radius:50%;display:inline-block;margin-right:8px;" src="https://www.adabr.com/images/mobile/avatar/head_6.png" onerror="this.src='https://www.adabr.com/images/mobile/no_user.jpg'">
                 <div style="display:flex;flex-direction:column;">
                     <div style="display:flex;justify-content: space-between;">
-                        <div style="font-size:16px;max-width:120px;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;">92925013535				</div>
+                        <div style="font-size:16px;max-width:120px;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;">				</div>
                         <span style="display:flex;align-items:center;justify-content:center;margin-left:4px;padding:0 10px;background:#c4f2dc;color:#1bbe64;font-size:12px;border-radius:15px;">Estagiário				</span>
                     </div>
                     <div style="display:flex;padding-top:2px;color:#fff;">
@@ -263,5 +263,122 @@
             </div>
         </div>
         <!--底部导航-end-->
+
+        <script>
+// Configuração da API
+const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+
+// Função para mostrar/ocultar loading
+function showLoading(show) {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) {
+        loadingOverlay.style.display = show ? 'flex' : 'none';
+    }
+}
+
+// Funções de cookie
+function getCookie(name) {
+    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+    if (arr != null) return unescape(arr[2]); 
+    return null;
+}
+
+// Verificar autenticação ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+    const token = getCookie('user_token');
+    const mobile = getCookie('mobile_user_name');
+    
+    if (!token) {
+        // Se não tem token, redirecionar para login
+        window.location.href = '/login.html';
+        return;
+    }
+    
+    // Se tem token, buscar dados do usuário
+    fetchUserData(token);
+    
+    // Exibir número de telefone do usuário
+    if (mobile) {
+        // Atualizar o elemento que mostra o número de telefone
+        const phoneElement = document.querySelector('div[style*="font-size:16px"]');
+        if (phoneElement) {
+            phoneElement.textContent = mobile;
+        }
+    }
+});
+
+// Função para buscar dados do usuário da API
+async function fetchUserData(token) {
+    showLoading(true);
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/user/profile`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            
+            // Atualizar a interface com os dados do usuário
+            updateUserInterface(userData);
+        } else {
+            console.error('Erro ao buscar dados do usuário:', response.status);
+            // Se o token for inválido, redirecionar para login
+            if (response.status === 401) {
+                window.location.href = '/login.html';
+            }
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    } finally {
+        showLoading(false);
+    }
+}
+
+// Função para atualizar a interface com os dados do usuário
+function updateUserInterface(userData) {
+    // Atualizar saldos e outras informações
+    if (userData.wallet_balance !== undefined) {
+        const flexibleWallet = document.querySelector('div:nth-child(1) > div:nth-child(2)');
+        if (flexibleWallet) {
+            flexibleWallet.textContent = userData.wallet_balance.toFixed(2) + ' KZ';
+        }
+    }
+    
+    if (userData.electronic_wallet !== undefined) {
+        const electronicWallet = document.querySelector('div:nth-child(2) > div:nth-child(2)');
+        if (electronicWallet) {
+            electronicWallet.textContent = userData.electronic_wallet.toFixed(2) + ' KZ';
+        }
+    }
+    
+    // Atualizar outros elementos conforme necessário
+    // ...
+}
+
+// Função de logout
+function logout() {
+    // Limpar cookies
+    document.cookie = 'user_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'mobile_user_name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    
+    // Redirecionar para login
+    window.location.href = '/login.html';
+}
+
+// Adicionar evento de logout ao botão de sair (se existir)
+const logoutBtn = document.querySelector('a[href*="logout"]');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        logout();
+    });
+}
+</script>
     </body>
 </html>
