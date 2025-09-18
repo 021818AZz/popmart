@@ -65,7 +65,7 @@
                 <div style="width:50%;display:flex;align-items:center;justify-content:center;">
                     <a href="https://www.adabr.com/mobile/user_withdraw/add" style="width:75%;padding:5px 0;background-color:#1ac479;border-radius:15px;color:#fff;font-size:14px;">
                         <img style="width:14px;height:14px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHySURBVHgBtVftUcMwDFW4/icjZISOkBG6Ad2AMgHeIGWCwARlg7ABZQKXCdoNhEQUTnHsxDbtu9PlQ5aeJMeWU0ACELGky5qkEoGiKAxkoogZRKQbujwKcTlyQFCBVa5eUKn7I5kcIYK0JrE4A2dsDMxgswqQcvQNydajPop8wz+x8hBXdDlAX+IBF5IXkj2V7BLwxe9PIgNKx08YnLGnzHupRBI4CfRPmQkZHJyBO8jADPFvMj6D7Q2JdVLtkoGBDGA/bZ8O8RbHibVzWVvIQIjY439Cbl2DDHKX2IA/uVYbrZXiDBlghyFi0Veq/LVW7JTROyRiiXjJeK8Mk75wGt9kE4sDvQw2CXbPqcQyxbVIyS865aCGCOQQi92I6w7GDaKCOGibt9yezo1FN4qoPZzIXilytqvpPuU70f4v7tfewo2A/XL7g+/lGTM6WCS53mg6rbBKkdVQIsg1x1YrjFLYa2eP045ZaWUpJR/QwJWA047Z+gbtnOge4ArAccOxo6ydgZ0TQPb8SzVdf5slA+sYtMFow358R24TY+g7BvFzsxSEkHY4hfGNLwJO+Gvng55v3vnMfiL5kud76LflGqY7JO+CT7wjQiqwXyIW83DAxOmaC6KLIOTlyueDqB+FqB9FFcTkLxX60rJ8UHlPkIAffwthM8WSagkAAAAASUVORK5CYII=">Retirar
-                    </a>
+                   </a>
                 </div>
             </div>
         </div>
@@ -211,8 +211,7 @@
 			<svg xmlns="http://www.w3.org/2000/svg" width="6" height="12" viewBox="0 0 10 20" fill="none"><path d="M2 18L7.27143 11.9755C8.26112 10.8444 8.26112 9.15557 7.27143 8.02449L2 2" stroke="#1C1C1C" stroke-width="2" stroke-linecap="round"></path></svg>
 		</span>
 	</a> -->
-        </div>
-        <script>
+        </div>        <script>
             function select_yuejilu() {
                 //底部对话框
                 layer.open({
@@ -273,30 +272,6 @@ function showLoading(show) {
     const loadingOverlay = document.getElementById('loadingOverlay');
     if (loadingOverlay) {
         loadingOverlay.style.display = show ? 'flex' : 'none';
-    } else {
-        // Criar overlay de loading se não existir
-        if (show) {
-            const overlay = document.createElement('div');
-            overlay.id = 'loadingOverlay';
-            overlay.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.5);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 9999;
-            `;
-            overlay.innerHTML = `
-                <div style="background: white; padding: 20px; border-radius: 8px;">
-                    <p>Carregando...</p>
-                </div>
-            `;
-            document.body.appendChild(overlay);
-        }
     }
 }
 
@@ -331,14 +306,13 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Se tem token, buscar dados do usuário
+    // Se tem token, buscar dados do usuário em segundo plano
     fetchUserData(token);
 });
 
 // Função para buscar dados do usuário da API
 async function fetchUserData() {
     try {
-        showLoading(true);
         const token = getStoredToken();
         if (!token) {
             throw new Error("Token inválido ou expirado");
@@ -376,22 +350,10 @@ async function fetchUserData() {
             localStorage.setItem('user_mobile', result.data.mobile);
         } else {
             console.error("Erro no perfil:", result.message);
-            layer.open({
-                content: 'Erro ao carregar dados do usuário: ' + result.message,
-                skin: 'msg',
-                time: 3
-            });
         }
 
     } catch (error) {
         console.error("Erro ao buscar dados do usuário:", error);
-        layer.open({
-            content: 'Erro de conexão com o servidor',
-            skin: 'msg',
-            time: 3
-        });
-    } finally {
-        showLoading(false);
     }
 }
 
