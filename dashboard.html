@@ -27,33 +27,33 @@
                 <img style="height:44px;width:44px;border-radius:50%;display:inline-block;margin-right:8px;" src="https://www.adabr.com/images/mobile/avatar/head_6.png" onerror="this.src='https://www.adabr.com/images/mobile/no_user.jpg'">
                 <div style="display:flex;flex-direction:column;">
                     <div style="display:flex;justify-content: space-between;">
-                        <div style="font-size:16px;max-width:120px;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;">				</div>
-                        <span style="display:flex;align-items:center;justify-content:center;margin-left:4px;padding:0 10px;background:#c4f2dc;color:#1bbe64;font-size:12px;border-radius:15px;">Estagiário				</span>
+                        <div id="userMobile" style="font-size:16px;max-width:120px;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;"></div>
+                        <span style="display:flex;align-items:center;justify-content:center;margin-left:4px;padding:0 10px;background:#c4f2dc;color:#1bbe64;font-size:12px;border-radius:15px;">Estagiário</span>
                     </div>
                     <div style="display:flex;padding-top:2px;color:#fff;">
                         <div style="font-size:12px;">
-                            <span>Depósito de trabalho					</span>
-                            <span style="margin-left:4px;">0					</span>
-                            <span style="margin-left:4px;">2025-08-24					</span>
+                            <span>Depósito de trabalho</span>
+                            <span style="margin-left:4px;">0</span>
+                            <span style="margin-left:4px;">2025-08-24</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div>
                 <a href="https://www.adabr.com/mobile/user/setting">
-                    <img style="width:25px;height:25px;display:inline-block;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAS8SURBVHgB7Vo7bxNBEB4/EqG8ZJQUkfLQ0tHFdHSYDipCBxXOLwBXlHZKquCKEqejI/kFOTqocH4Bi5QokdKYPCSivPgmXid769vz3WYdI8QnrXy7O3e73+7M3N6Mif4RZKhPEMDJyUkJlwWun5+fy4uLi+bu7q6kPsA7kZmZmXImk3mFy1JUP5PBT317e7tBHuGNyOzsbAk/VbIQ6Bo4k+EdWtra2grIA25MZHp6WuTz+RVcLpIDQKZxdna2fFOVcyZSAMbGxl7j8g0pO4hAgLKprhcofrdqh4eH9RZADnAiwnaQzWarWE0R1W9bZd69XC5XUzbUPRmoG5zCsov9pCKSwA4ClOVeeq8IbWDiIqqfCcHjPU6jbomIsBqNjo6uYICyRaSFXaikXUneWfxUbYTS2E+ulwB2oTo8PPwJgz2M6GZ9fgfdfrm3t/eVUuLg4KA5OTm5CnU6pohdxphFqHB5YmLizv7+/pe4Z1l3RHmjz7gsWkSC09PTJV8vuCT2E6duGdtDh4aGNqKMmV9oeGjFl/83MTc3t4gdWolStzgyGcvDfkSQYDtgj/KebgE2++GFxBwemPI5ywPKxs2rR0dHT2EHAd0S2H7gYNZhIwLV+512EJseHx//hf6QTXbtSMRurEGNntMAAYfDtqqfHFqY011dJmvcUDJItGDQFRow4HSWqO0hOyiod9oVssY9oU6QWuvXsTsNpJRsn+t6G+ohb5o3OgV0UG/aJHfw+YvVQah6UxVJbghQrlwzbGdB78z3uNnlAMcE+DRctvQ3UJbJnVAksuQXAuU72UmQ6tug653yAp9EBCWfYEe2QJ7gkwifioXRFqDUVZFGH8uukCf4IiKoW53YDh5T+8OLyz3VpoPv8bIrvoiYB0uJUouQ47bAaHP6RDbRLyLrMbKmSxfkAb691sDgi4g06gsxss+MepM8wBeRNaNeorYXMxHl2bwQ6fVmTwo+AaySdoSgtmGX6Zok21HJuK9Bnt7wvogw2MU+ovCKC9UeBUnd7tgZPo2dd4XfGzKBrEwhmwi+vZak9gRXY2QaKA/I86HRp2p1IKltGzVq20VRa2d7cQqJIsJSQFDC2p83hJsQ1s/8rPMNcoOk68nfGAjULejfSvh2+qn3h1QLJEKuEMKLHGWkAYPDUyBhHmUCvRIiomJVoW9jRNw/0oCh0hZXC4oFlmZcrSschFDLMdg/0ZruI2RZHBkZ+YbQqJN+u4K1ASHVD5jPC6OrwuEivSEyQIcIBX/lhQ6CNwn5u2B+fv41xquRcczn3cAc7pny1pCpLezPhDhEtLOz48WITagwD6tSV8yZScDok4dMGb1yGL5SZvp4sAW2x5JlvCbGe24bz5pWYHuAHtZhH0yWV+eO3q9C/m/Qz2568zdADmA7mJqaeotnNEgLjWq4TF1AnV7G2WiiRE+/UmYqlR3ySDp41xFzriTJK6ZKvflKmflK4YXGJge4pszUQlRtKTw2Zvz0PxmqQwhRgPfiI3o1RizApC/9vYrVlixyrDp12MD7W01P6+hlPwmwxu58YH8YMKFSEh9t6haBgFLaQRy8EelAeSL+R4Q1icoZsL/2TzUmVEK1CLcsVFML9QC5Dkn/YccfiXE4rxYXuZwAAAAASUVORK5CYII=">
+                    <img style="width:25px;height:25px;display:inline-block;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAS8SURBVHgB7Vo7bxNBEB4/EqG8ZJQUkfLQ0tHFdHSYDipCBxXOLwBXlHZKquCKEqejI/kFOTqocH4Bi5QokdKYPCSivPgmXid769vz3WYdI8QnrXy7O3e73+7M3N6Mif4RZKhPEMDJyUkJlwWun5+fy4uLi+bu7q6kPsA7kZmZmXImk3mFy1JUP5PBT317e7tBHuGNyOzsbAk/VbIQ6Bo4k+EdWtra2grIA25MZHp6WuTz+RVcLpIDQKZxdna2fFOVcyZSAMbGxl7j8g0pO4hAgLKprhcofrdqh4eH9RZADnAiwnaQzWarWE0R1W9bZd69XC5XUzbUPRmoG5zCsov9pCKSwA4ClOVeeq8IbWDiIqqfCcHjPU6jbomIsBqNjo6uYICyRaSFXaikXUneWfxUbYTS2E+ulwB2oTo8PPwJgz2M6GZ9fgfdfrm3t/eVUuLg4KA5OTm5CnU6pohdxphFqHB5YmLizv7+/pe4Z1l3RHmjz7gsWkSC09PTJV8vuCT2E6duGdtDh4aGNqKMmV9oeGjFl/83MTc3t4gdWolStzgyGcvDfkSQYDtgj/KebgE2++GFxBwemPI5ywPKxs2rR0dHT2EHAd0S2H7gYNZhIwLV+512EJseHx//hf6QTXbtSMRurEGNntMAAYfDtqqfHFqY011dJmvcUDJItGDQFRow4HSWqO0hOyiod9oVssY9oU6QWuvXsTsNpJRsn+t6G+ohb5o3OgV0UG/aJHfw+YvVQah6UxVJbghQrlwzbGdB78z3uNnlAMcE+DRctvQ3UJbJnVAksuQXAuU72UmQ6tug653yAp9EBCWfYEe2QJ7gkwifioXRFqDUVZFGH8uukCf4IiKoW53YDh5T+8OLyz3VpoPv8bIrvoiYB0uJUouQ47bAaHP6RDbRLyLrMbKmSxfkAb691sDgi4g06gsxss+MepM8wBeRNaNeorYXMxHl2bwQ6fVmTwo+AaySdoSgtmGX6Zok21HJuK9Bnt7wvogw2MU+ovCKC9UeBUnd7tgZPo2dd4XfGzKBrEwhmwi+vZak9gRXY2QaKA/I86HRp2p1IKltGzVq20VRa2d7cQqJIsJSQFDC2p83hJsQ1s/8rPMNcoOk68nfGAjULejfSvh2+qn3h1QLJEKuEMKLHGWkAYPDUyBhHmUCvRIiomJVoW9jRNw/0oCh0hZXC4oFlmZcrSschFDLMdg/0ZruI2RZHBkZ+YbQqJN+u4K1ASHVD5jPC6OrwuEivSEyQIcIBX/lhQ6CNwn5u2B+fv41xquRcczn3cAc7pny1pCpLezPhDhEtLOz48WITagwD6tSV8yZScDok4dMGb1yGL5SZvp4sAW2x5JlvCbGe24bz5pWYHuAHtZhH0yWV+eO3q9C/m/Qz2768zdADmA7mJqaeotnNEgLjWq4TF1AnV7G2WiiRE+/UmYqlR3ySDp41xFzriTJK6ZKvflKmflK4YXGJge4pszUQlRtKTw2Zvz0PxmqQwhRgPfiI3o1RizApC/9vYrVlixyrDp12MD7W01P6+hlPwmwxu58YH8YMKFSEh9t6haBgFLaQRy8EelAeSL+R4Q1icoZsL/2TzUmVEK1CLcsVFML9QC5Dkn/YccfiXE4rxYXuZwAAAAASUVORK5CYII=">
                 </a>
             </div>
         </div>
         <div style="background:#fff;border-radius:8px;box-shadow: 0 2px 8px rgb(0 40 100 / 8%);border:1px solid #eee;margin:15px 12px 0 12px;padding:10px 20px 12px 20px;display: flex;flex-direction: column;align-items: center;">
             <div style="display:flex;justify-content:space-between;margin-bottom:10px;width:100%;">
                 <div style="width:50%;display:flex;flex-direction:column;align-items:center;text-align:center;">
-                    <div style="font-size:14px;color: #000;font-weight: 400;">Carteira flexível			</div>
-                    <div style="font-size:16px;color:#ef9833;font-weight:500;margin-top:2px;">0.00 KZ			</div>
+                    <div style="font-size:14px;color: #000;font-weight: 400;">Carteira flexível</div>
+                    <div id="walletBalance" style="font-size:16px;color:#ef9833;font-weight:500;margin-top:2px;">0.00 KZ</div>
                 </div>
                 <div style="width:50%;display:flex;flex-direction:column;align-items:center;text-align:center;">
-                    <div style="font-size:14px;color: #000;font-weight: 400;">Carteira eletrônica			</div>
-                    <div style="font-size:16px;color:#ef9833;font-weight:500;margin-top:2px;">0.00 KZ			</div>
+                    <div style="font-size:14px;color: #000;font-weight: 400;">Carteira eletrônica</div>
+                    <div style="font-size:16px;color:#ef9833;font-weight:500;margin-top:2px;">0.00 KZ</div>
                 </div>
             </div>
             <div style="display:flex;justify-content: space-between;width:100%;text-align:center;">
@@ -264,54 +264,86 @@
         </div>
         <!--底部导航-end-->
 
-        <script>
+         <script>
 // Configuração da API
-const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+const API_BASE_URL = 'http://localhost:3000'; // Substitua pela URL real da sua API
 
 // Função para mostrar/ocultar loading
 function showLoading(show) {
     const loadingOverlay = document.getElementById('loadingOverlay');
     if (loadingOverlay) {
         loadingOverlay.style.display = show ? 'flex' : 'none';
+    } else {
+        // Criar overlay de loading se não existir
+        if (show) {
+            const overlay = document.createElement('div');
+            overlay.id = 'loadingOverlay';
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            `;
+            overlay.innerHTML = `
+                <div style="background: white; padding: 20px; border-radius: 8px;">
+                    <p>Carregando...</p>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+        }
     }
 }
 
-// Funções de cookie
-function getCookie(name) {
-    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
-    if (arr != null) return unescape(arr[2]); 
-    return null;
+// Função para pegar o token salvo (localStorage)
+function getStoredToken() {
+    const tokenData = localStorage.getItem("user_token");
+    if (!tokenData) return null;
+    
+    try {
+        const parsedData = JSON.parse(tokenData);
+        // Verificar se o token expirou
+        if (Date.now() > parsedData.expiry) {
+            localStorage.removeItem("user_token");
+            localStorage.removeItem("user_mobile");
+            localStorage.removeItem("user_id");
+            return null;
+        }
+        return parsedData.token;
+    } catch (e) {
+        console.error("Erro ao parsear token:", e);
+        return null;
+    }
 }
 
 // Verificar autenticação ao carregar a página
 document.addEventListener('DOMContentLoaded', function() {
-    const token = getCookie('user_token');
-    const mobile = getCookie('mobile_user_name');
+    const token = getStoredToken();
     
     if (!token) {
         // Se não tem token, redirecionar para login
-        window.location.href = '/login.html';
+        window.location.href = '/index.html';
         return;
     }
     
     // Se tem token, buscar dados do usuário
     fetchUserData(token);
-    
-    // Exibir número de telefone do usuário
-    if (mobile) {
-        // Atualizar o elemento que mostra o número de telefone
-        const phoneElement = document.querySelector('div[style*="font-size:16px"]');
-        if (phoneElement) {
-            phoneElement.textContent = mobile;
-        }
-    }
 });
 
 // Função para buscar dados do usuário da API
-async function fetchUserData(token) {
-    showLoading(true);
-    
+async function fetchUserData() {
     try {
+        showLoading(true);
+        const token = getStoredToken();
+        if (!token) {
+            throw new Error("Token inválido ou expirado");
+        }
+
         const response = await fetch(`${API_BASE_URL}/user/profile`, {
             method: 'GET',
             headers: {
@@ -320,65 +352,61 @@ async function fetchUserData(token) {
             }
         });
 
-        if (response.ok) {
-            const userData = await response.json();
-            
-            // Atualizar a interface com os dados do usuário
-            updateUserInterface(userData);
-        } else {
-            console.error('Erro ao buscar dados do usuário:', response.status);
-            // Se o token for inválido, redirecionar para login
-            if (response.status === 401) {
-                window.location.href = '/login.html';
+        if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+                // Token inválido ou expirado
+                localStorage.removeItem("user_token");
+                localStorage.removeItem("user_mobile");
+                localStorage.removeItem("user_id");
+                window.location.href = '/index.html';
+                return;
             }
+            throw new Error(`Erro HTTP: ${response.status}`);
         }
+
+        const result = await response.json();
+        console.log("Perfil do usuário:", result);
+
+        if (result.success) {
+            // Atualizar o dashboard com os dados
+            document.getElementById("walletBalance").textContent = result.data.wallet_balance.toFixed(2) + " KZ";
+            document.getElementById("userMobile").textContent = result.data.mobile;
+            
+            // Salvar dados adicionais se necessário
+            localStorage.setItem('user_mobile', result.data.mobile);
+        } else {
+            console.error("Erro no perfil:", result.message);
+            layer.open({
+                content: 'Erro ao carregar dados do usuário: ' + result.message,
+                skin: 'msg',
+                time: 3
+            });
+        }
+
     } catch (error) {
-        console.error('Erro na requisição:', error);
+        console.error("Erro ao buscar dados do usuário:", error);
+        layer.open({
+            content: 'Erro de conexão com o servidor',
+            skin: 'msg',
+            time: 3
+        });
     } finally {
         showLoading(false);
     }
 }
 
-// Função para atualizar a interface com os dados do usuário
-function updateUserInterface(userData) {
-    // Atualizar saldos e outras informações
-    if (userData.wallet_balance !== undefined) {
-        const flexibleWallet = document.querySelector('div:nth-child(1) > div:nth-child(2)');
-        if (flexibleWallet) {
-            flexibleWallet.textContent = userData.wallet_balance.toFixed(2) + ' KZ';
+// Função para seleção de registros de cobrança (mantida do código original)
+function select_yuejilu() {
+    layer.open({
+        content: '<div style="text-align:center;padding-bottom:20px;border-bottom:1px solid #bbb;"><a style="color:#000;font-size:16px;" href="https://www.adabr.com/mobile/user_money/index">Carteira flexível</a></div><div style="text-align:center;padding-top:20px;"><a style="color:#000;font-size:16px;" href="https://www.adabr.com/mobile/user_money/index?fenlei=1">Carteira eletrônica</a></div>',
+        btn: ['Cancelar'],
+        skin: 'footer',
+        yes: function(index) {
+            layer.closeAll();
         }
-    }
-    
-    if (userData.electronic_wallet !== undefined) {
-        const electronicWallet = document.querySelector('div:nth-child(2) > div:nth-child(2)');
-        if (electronicWallet) {
-            electronicWallet.textContent = userData.electronic_wallet.toFixed(2) + ' KZ';
-        }
-    }
-    
-    // Atualizar outros elementos conforme necessário
-    // ...
-}
-
-// Função de logout
-function logout() {
-    // Limpar cookies
-    document.cookie = 'user_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    document.cookie = 'mobile_user_name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    document.cookie = 'user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    
-    // Redirecionar para login
-    window.location.href = '/login.html';
-}
-
-// Adicionar evento de logout ao botão de sair (se existir)
-const logoutBtn = document.querySelector('a[href*="logout"]');
-if (logoutBtn) {
-    logoutBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        logout();
     });
 }
 </script>
+
     </body>
 </html>

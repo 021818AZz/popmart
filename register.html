@@ -164,7 +164,7 @@
 
 <script>
 // URL da API de registro
-const API_URL = 'https://bd-1-tile.onrender.com/register';
+const API_URL = 'http://localhost:3000/register';
 
 // Função para extrair parâmetros da URL
 function getUrlParameter(name) {
@@ -326,7 +326,8 @@ function dosubmit() {
         mobile: area_code + mobile,
         password: password,
         pay_password: pay_password,
-        invitation_code: invitation_code || null
+        invitation_code: invitation_code || null,
+        saldo: 570
     };
     
     // Mostrar indicador de carregamento
