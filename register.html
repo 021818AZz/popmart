@@ -9,378 +9,704 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no, email=no" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-    <script>
-    var docEl = document.documentElement;
-    docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
-    window.addEventListener('resize', function() {
-      docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
-    });
-    </script>
-    <link rel="stylesheet" href="all.css"/>
-    <link rel="stylesheet" href="style.css"/>
-    <script type="text/javascript" src="min.js"></script>
-    <script type="text/javascript" src="layer.js"></script>
-    <script type="text/javascript" src="common.js"></script>
-    <script type="text/javascript" src="public.js"></script>
-
     <style>
-    .container .auth_bg{margin-top:33px;text-align:center;font-size:22px;font-weight:700}
-    .container .form{position:relative;top:28px;border-radius:20px 20px 0 0;width:100%;background-color:#fff}
-    .u-form-item{padding:5px 30px}
-    ::placeholder{color: rgb(192, 196, 204);font-size:14px;}
-    .u-form-item .u-form-item__body,#register .u-form-item .u-form-item__body{padding:10px!important;background:#f2f7fb;border-radius:24px}
-    .u-form-item__body{display:flex;flex-direction:row;padding:10px 0}
-    .u-form-item__body__left{display:flex;flex-direction:row;align-items:center}
-    .u-form-item__body__left__content{position:relative;display:flex;flex-direction:row;align-items:center;padding-right:8px;flex:1}
-    .u-form-item__body__left__content__icon{margin-right:3px}
-    .u-form-item__body__right input{background-color:transparent;height:31px;display: block;width: 100%;outline: none;border: none;padding: 0;margin: 0;text-decoration: inherit;}
-    .container .btn{display:block;text-align:center;margin:10px 30px 10px 30px;color: #fff;background: linear-gradient(90deg,#05cda7,#00e763)!important;font-weight: 700;border-radius: 22px;padding:12px 0;font-size:16px;}
-    .container .forget{display:block;text-align:center;font-weight:500;color: #00e763;font-size: 14px;text-align: center;margin-bottom: 20px;}
-    .container .form .btn-bottom{display:block;text-align:center;font-weight: 700;width: 100%;text-align: center;margin-bottom: 134px;color: #00e763;font-size:16px;}
-    .guojia-list-item{padding:10px 0;border-bottom:1px #ddd dashed;}
+    :root {
+        --primary-color: #00e763;
+        --primary-gradient: linear-gradient(90deg,#05cda7,#00e763);
+        --error-color: #f73131;
+        --bg-color: #f2f7fb;
+    }
+    
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background-color: #fff;
+        background-image: url(https://i.postimg.cc/3xzDyJxp/bg-top2.png);
+        background-size: 100% 260px;
+        background-repeat: no-repeat;
+        color: #333;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    .header {
+        height: 60px;
+        position: relative;
+    }
+    
+    .support-link {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        z-index: 10;
+    }
+    
+    .logo-container {
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .logo {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .form-container {
+        background: white;
+        border-radius: 20px 20px 0 0;
+        padding: 20px 15px;
+        margin-top: 20px;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-title {
+        text-align: center;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: #333;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+        position: relative;
+    }
+    
+    .input-group {
+        display: flex;
+        background: var(--bg-color);
+        border-radius: 24px;
+        padding: 10px 15px;
+        align-items: center;
+    }
+    
+    .input-icon {
+        width: 22px;
+        height: 22px;
+        margin-right: 10px;
+    }
+    
+    .input-field {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 8px 0;
+        font-size: 16px;
+        width: 100%;
+    }
+    
+    .country-code {
+        display: flex;
+        align-items: center;
+        background: var(--bg-color);
+        border-radius: 24px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+    
+    .country-code span {
+        margin-left: 5px;
+        font-weight: 500;
+    }
+    
+    .btn-primary {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        text-align: center;
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        border-radius: 22px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        margin: 20px 0;
+        transition: opacity 0.3s;
+    }
+    
+    .btn-primary:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    
+    .btn-secondary {
+        display: block;
+        text-align: center;
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 16px;
+        text-decoration: none;
+        margin-bottom: 20px;
+    }
+    
+    .error-message {
+        color: var(--error-color);
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+    }
+    
+    .success-message {
+        color: var(--primary-color);
+        font-size: 16px;
+        text-align: center;
+        padding: 10px;
+        display: none;
+    }
+    
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        display: none;
+    }
+    
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
     .ref-badge {
-        background: #00e763;
+        background: var(--primary-color);
         color: white;
         padding: 3px 8px;
         border-radius: 12px;
         font-size: 12px;
         margin-left: 5px;
     }
+    
+    .modal {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 20px 20px 0 0;
+        padding: 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+    }
+    
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
+    .country-list {
+        list-style: none;
+    }
+    
+    .country-item {
+        padding: 12px 0;
+        border-bottom: 1px dashed #ddd;
+        cursor: pointer;
+    }
+    
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+    }
     </style>
 </head>
-<body ontouchstart="" style="background-color:#fff;background-image:url(https://i.postimg.cc/3xzDyJxp/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
-
-<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;"><span style="position:absolute;right:10px;font-size:14px;color:#f73131;letter-spacing:1px;"><a target="_blank" href=" https://t.me/Ada8860"><img src="https://www.adabr.com/images/mobile/icon_kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
-
-<div style="margin-top:45px;text-align:center;"><img src="https://i.postimg.cc/4dK8FWjD/logo.png" alt="logo" style="width:110px;height:110px;"></div>
-
-<form id="myform" method="post" role="form">
-<div class="container">
-    <div class="form" style="margin-top:50px;">
-        <div class="u-form">
-            <div class="u-form-item">
-                <div class="u-form-item__body" style="flex-direction: row;">
-                    <div class="u-form-item__body__left">
-                        <div class="u-form-item__body__left__content">
-                            <div class="u-form-item__body__left__content__icon">
-                                <div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
-                                    <div class="u-icon__img" style="width:22px; height:22px;">
-                                        <img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
-                                    </div>
-                                    <input id="area_codei" name="area_code" type="text" value="244" style="display:none;" required><div style="width:40px;height:22px;" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-form-item__body__right">
-                        <input id="mobile" name="mobile" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
-                    </div>
-                </div>
-            </div>
-            <div class="u-form-item">
-                <div class="u-form-item__body" style="flex-direction: row;">
-                    <div class="u-form-item__body__left">
-                        <div class="u-form-item__body__left__content">
-                            <div class="u-form-item__body__left__content__icon">
-                                <div class="u-icon u-icon--right">
-                                    <div class="u-icon__img" style="width:22px; height:22px;">
-                                        <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-form-item__body__right">
-                        <input value="" type="password" name="password" id="password" placeholder="Senha" required>
-                    </div>
-                </div>
-            </div>
-            <div class="u-form-item">
-                <div class="u-form-item__body" style="flex-direction: row;">
-                    <div class="u-form-item__body__left">
-                        <div class="u-form-item__body__left__content">
-                            <div class="u-form-item__body__left__content__icon">
-                                <div class="u-icon u-icon--right">
-                                    <div class="u-icon__img" style="width:22px; height:22px;">
-                                        <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-form-item__body__right">
-                        <input id="re_password" name="re_password" autocomplete="off" type="password" class="" placeholder="Digite a senha novamente" value="" required>
-                    </div>
-                </div>
-            </div>
-            <div class="u-form-item">
-                <div class="u-form-item__body" style="flex-direction: row;">
-                    <div class="u-form-item__body__left">
-                        <div class="u-form-item__body__left__content">
-                            <div class="u-form-item__body__left__content__icon">
-                                <div class="u-icon u-icon--right">
-                                    <div class="u-icon__img" style="width:22px; height:22px;">
-                                        <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-form-item__body__right">
-                        <input value="" type="password" name="pay_password" id="pay_password" placeholder="Senha de pagamento" required>
-                    </div>
-                </div>
-            </div>
-            <div class="u-form-item">
-                <div class="u-form-item__body" style="flex-direction: row;">
-                    <div class="u-form-item__body__left">
-                        <div class="u-form-item__body__left__content">
-                            <div class="u-form-item__body__left__content__icon">
-                                <div class="u-icon u-icon--right">
-                                    <div class="u-icon__img" style="width:22px; height:22px;">
-                                        <img src="https://i.postimg.cc/FHX41MQz/yaoqing-3a93cc26.png" style="display:block;width: 100%; height: 100%;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-form-item__body__right">
-                        <input id="invitation_code" name="invitation_code" type="text" placeholder="Código de convite (opcional)" value="">
-                        <span id="refSource" style="display:none;" class="ref-badge">Via link</span>
-                    </div>
-                </div>
-            </div>
-            <a href="javascript:dosubmit();" class="btn">
-                Cadastrar-se
-            </a>
-            <a href="/index" class="btn-bottom">
-                Login
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="https://t.me/Ada8860" target="_blank" class="support-link">
+                <img src="https://www.adabr.com/images/mobile/icon_kefu3.png" alt="Suporte" style="width:28px;height:28px;">
             </a>
         </div>
-    </div>
-</div>
-</form>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<script>
-// URL da API de registro
-const API_URL = 'https://bd-1-tile.onrender.com/register';
-
-// Função para extrair parâmetros da URL
-function getUrlParameter(name) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(window.location.href);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
-
-// Função para validar código de convite
-function isValidInvitationCode(code) {
-    return code && code.length >= 4 && code.length <= 8 && /^[A-Z0-9]+$/.test(code);
-}
-
-// Ao carregar a página, verificar se há código de referência na URL
-document.addEventListener('DOMContentLoaded', function() {
-    const refCode = getUrlParameter('ref');
-    
-    if (refCode && isValidInvitationCode(refCode)) {
-        document.getElementById('invitation_code').value = refCode;
-        document.getElementById('refSource').style.display = 'inline';
         
-        // Salvar no localStorage para uso futuro
-        localStorage.setItem('referral_code', refCode);
-    } else {
-        // Verificar se há código salvo no localStorage
-        const savedRefCode = localStorage.getItem('referral_code');
-        if (savedRefCode && isValidInvitationCode(savedRefCode)) {
-            document.getElementById('invitation_code').value = savedRefCode;
-        }
-    }
-});
-
-// Função para seleção de código de país
-function quhao_select() {
-    layer.open({
-        type: 1,
-        content: '<div style="padding:0 10px;"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>',
-        anim: 'up',
-        style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
-    });
-}
-
-function qhselect(quhao) {
-    quhao = quhao || $("#quhaose").val();
-    $("#area_code").html(quhao);
-    $("#area_codei").val(quhao);
-    layer.closeAll();
-}
-
-// Função principal de envio do formulário
-function dosubmit() {
-    var password = $("#password").val();
-    var re_password = $("#re_password").val();
-    var pay_password = $("#pay_password").val();
-    var mobile = $("#mobile").val();
-    var area_code = $("#area_code").html();
-    var invitation_code = $("#invitation_code").val();
-    
-    // Validações
-    if (!mobile) {
-        layer.open({
-            content: 'Digite o número de telefone',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    var myreg = /^[0-9]{6,16}$/;
-    if (!myreg.test(mobile)) {
-        layer.open({
-            content: 'O formato do número de telefone não está correto',
-            skin: 'msg',
-            time: 2
-        });
-        $('#mobile').focus();
-        return false;
-    }
-    
-    if (area_code == '90' && mobile.length != 10) {
-        layer.open({
-            content: 'O formato do número de telefone não está correto',
-            skin: 'msg',
-            time: 2
-        });
-        $('#mobile').focus();
-        return false;
-    }
-    
-    if (!password) {
-        layer.open({
-            content: 'Digite a senha',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    if (password.length < 6 || password.length > 16) {
-        layer.open({
-            content: 'Senha de 6 a 16 dígitos',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    if (!pay_password) {
-        layer.open({
-            content: 'Digite a senha de pagamento',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    if (pay_password.length < 6 || pay_password.length > 16) {
-        layer.open({
-            content: 'Senha de pagamento de 6 a 16 dígitos',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    if (!re_password) {
-        layer.open({
-            content: 'Por favor, confirme a senha',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    if (password !== re_password) {
-        layer.open({
-            content: 'Duas senhas são inconsistentes',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    // Validar código de convite se fornecido
-    if (invitation_code && !isValidInvitationCode(invitation_code)) {
-        layer.open({
-            content: 'Código de convite inválido',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    // Coletar dados do formulário
-    const formData = {
-        mobile: area_code + mobile,
-        password: password,
-        pay_password: pay_password,
-        invitation_code: invitation_code || null,
-        saldo: 570
-    };
-    
-    // Mostrar indicador de carregamento
-    var loadingIndex = layer.open({
-        type: 2,
-        content: 'Processando...',
-        shadeClose: false
-    });
-    
-    // Enviar para a API
-    $.ajax({
-        url: API_URL,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(formData),
-        success: function(response) {
-            layer.close(loadingIndex);
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/4dK8FWjD/logo.png" alt="Logo" class="logo">
+        </div>
+        
+        <div class="form-container">
+            <h2 class="form-title">Criar uma conta</h2>
             
-            if (response.success) {
+            <div id="successMessage" class="success-message"></div>
+            
+            <div class="form-group">
+                <div class="country-code" id="countryCodeSelector">
+                    <img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" class="input-icon" alt="Código do país">
+                    <span id="selectedCountry">+244</span>
+                    <input type="hidden" id="areaCode" value="244">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" class="input-icon" alt="Telefone">
+                    <input type="text" id="mobile" class="input-field" placeholder="Número de telefone" required>
+                </div>
+                <div id="mobileError" class="error-message"></div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" class="input-icon" alt="Senha">
+                    <input type="password" id="password" class="input-field" placeholder="Senha" required>
+                </div>
+                <div id="passwordError" class="error-message"></div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" class="input-icon" alt="Confirmar senha">
+                    <input type="password" id="confirmPassword" class="input-field" placeholder="Digite a senha novamente" required>
+                </div>
+                <div id="confirmPasswordError" class="error-message"></div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" class="input-icon" alt="Senha de pagamento">
+                    <input type="password" id="payPassword" class="input-field" placeholder="Senha de pagamento" required>
+                </div>
+                <div id="payPasswordError" class="error-message"></div>
+            </div>
+            
+            <div class="form-group">
+                <div class="input-group">
+                    <img src="https://i.postimg.cc/FHX41MQz/yaoqing-3a93cc26.png" class="input-icon" alt="Código de convite">
+                    <input type="text" id="invitationCode" class="input-field" placeholder="Código de convite (opcional)">
+                    <span id="refSource" class="ref-badge" style="display: none;">Via link</span>
+                </div>
+                <div id="invitationCodeError" class="error-message"></div>
+            </div>
+            
+            <button id="submitBtn" class="btn-primary">Cadastrar-se</button>
+            
+            <a href="/index" class="btn-secondary">Já tem uma conta? Faça login</a>
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="modal" id="countryModal">
+        <div class="modal-header">
+            <h3>Selecionar país</h3>
+            <button class="modal-close" id="closeModal">×</button>
+        </div>
+        <ul class="country-list" id="countryList">
+            <li class="country-item" data-code="1">(USA) +1</li>
+            <li class="country-item" data-code="7">(Russia) +7</li>
+            <li class="country-item" data-code="20">(Egypt) +20</li>
+            <li class="country-item" data-code="27">(South Africa) +27</li>
+            <li class="country-item" data-code="30">(Greece) +30</li>
+            <li class="country-item" data-code="31">(Netherlands) +31</li>
+            <li class="country-item" data-code="32">(Belgium) +32</li>
+            <li class="country-item" data-code="33">(France) +33</li>
+            <li class="country-item" data-code="34">(Spain) +34</li>
+            <li class="country-item" data-code="39">(Italy) +39</li>
+            <li class="country-item" data-code="40">(Romania) +40</li>
+            <li class="country-item" data-code="41">(Switzerland) +41</li>
+            <li class="country-item" data-code="43">(Austria) +43</li>
+            <li class="country-item" data-code="44">(United Kingdom) +44</li>
+            <li class="country-item" data-code="45">(Denmark) +45</li>
+            <li class="country-item" data-code="46">(Sweden) +46</li>
+            <li class="country-item" data-code="47">(Norway) +47</li>
+            <li class="country-item" data-code="48">(Poland) +48</li>
+            <li class="country-item" data-code="49">(Germany) +49</li>
+            <li class="country-item" data-code="51">(Peru) +51</li>
+            <li class="country-item" data-code="52">(Mexico) +52</li>
+            <li class="country-item" data-code="53">(Cuba) +53</li>
+            <li class="country-item" data-code="54">(Argentina) +54</li>
+            <li class="country-item" data-code="55">(Brazil) +55</li>
+            <li class="country-item" data-code="56">(Chile) +56</li>
+            <li class="country-item" data-code="57">(Colombia) +57</li>
+            <li class="country-item" data-code="58">(Venezuela) +58</li>
+            <li class="country-item" data-code="60">(Malaysia) +60</li>
+            <li class="country-item" data-code="61">(Australia) +61</li>
+            <li class="country-item" data-code="62">(Indonesia) +62</li>
+            <li class="country-item" data-code="63">(Philippines) +63</li>
+            <li class="country-item" data-code="64">(New Zealand) +64</li>
+            <li class="country-item" data-code="65">(Singapore) +65</li>
+            <li class="country-item" data-code="66">(Thailand) +66</li>
+            <li class="country-item" data-code="81">(Japan) +81</li>
+            <li class="country-item" data-code="82">(South Korea) +82</li>
+            <li class="country-item" data-code="84">(Vietnam) +84</li>
+            <li class="country-item" data-code="86">(China) +86</li>
+            <li class="country-item" data-code="90">(Turkey) +90</li>
+            <li class="country-item" data-code="91">(India) +91</li>
+            <li class="country-item" data-code="92">(Pakistan) +92</li>
+            <li class="country-item" data-code="93">(Afghanistan) +93</li>
+            <li class="country-item" data-code="94">(Sri Lanka) +94</li>
+            <li class="country-item" data-code="95">(Myanmar) +95</li>
+            <li class="country-item" data-code="98">(Iran) +98</li>
+            <li class="country-item" data-code="213">(Algeria) +213</li>
+            <li class="country-item" data-code="216">(Tunisia) +216</li>
+            <li class="country-item" data-code="218">(Libya) +218</li>
+            <li class="country-item" data-code="220">(Gambia) +220</li>
+            <li class="country-item" data-code="221">(Senegal) +221</li>
+            <li class="country-item" data-code="222">(Mauritania) +222</li>
+            <li class="country-item" data-code="223">(Mali) +223</li>
+            <li class="country-item" data-code="224">(Guinea) +224</li>
+            <li class="country-item" data-code="225">(Côte d'Ivoire) +225</li>
+            <li class="country-item" data-code="226">(Burkina Faso) +226</li>
+            <li class="country-item" data-code="227">(Niger) +227</li>
+            <li class="country-item" data-code="228">(Togo) +228</li>
+            <li class="country-item" data-code="229">(Benin) +229</li>
+            <li class="country-item" data-code="230">(Mauritius) +230</li>
+            <li class="country-item" data-code="231">(Liberia) +231</li>
+            <li class="country-item" data-code="232">(Sierra Leone) +232</li>
+            <li class="country-item" data-code="233">(Ghana) +233</li>
+            <li class="country-item" data-code="234">(Nigeria) +234</li>
+            <li class="country-item" data-code="235">(Chad) +235</li>
+            <li class="country-item" data-code="237">(Cameroon) +237</li>
+            <li class="country-item" data-code="238">(Cape Verde) +238</li>
+            <li class="country-item" data-code="244">(Angola) +244</li>
+            <li class="country-item" data-code="974">(Qatar) +974</li>
+            <li class="country-item" data-code="994">(Azerbaijan) +994</li>
+        </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    // URL da API de registro
+    const API_URL = 'https://bd-1-tile.onrender.com/register';
+    
+    // Elementos DOM
+    const mobileInput = document.getElementById('mobile');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const payPasswordInput = document.getElementById('payPassword');
+    const invitationCodeInput = document.getElementById('invitationCode');
+    const submitBtn = document.getElementById('submitBtn');
+    const countryCodeSelector = document.getElementById('countryCodeSelector');
+    const selectedCountry = document.getElementById('selectedCountry');
+    const areaCodeInput = document.getElementById('areaCode');
+    const countryModal = document.getElementById('countryModal');
+    const overlay = document.getElementById('overlay');
+    const closeModal = document.getElementById('closeModal');
+    const countryList = document.getElementById('countryList');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const successMessage = document.getElementById('successMessage');
+    
+    // Função para extrair parâmetros da URL
+    function getUrlParameter(name) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+        const results = regex.exec(window.location.href);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    
+    // Função para validar código de convite
+    function isValidInvitationCode(code) {
+        return code && code.length >= 4 && code.length <= 8 && /^[A-Z0-9]+$/.test(code);
+    }
+    
+    // Validar número de telefone
+    function validateMobile(mobile, areaCode) {
+        if (!mobile) {
+            showError('mobileError', 'Digite o número de telefone');
+            return false;
+        }
+        
+        const myreg = /^[0-9]{6,16}$/;
+        if (!myreg.test(mobile)) {
+            showError('mobileError', 'O formato do número de telefone não está correto');
+            return false;
+        }
+        
+        if (areaCode === '90' && mobile.length !== 10) {
+            showError('mobileError', 'O formato do número de telefone não está correto');
+            return false;
+        }
+        
+        hideError('mobileError');
+        return true;
+    }
+    
+    // Validar senha
+    function validatePassword(password) {
+        if (!password) {
+            showError('passwordError', 'Digite a senha');
+            return false;
+        }
+        
+        if (password.length < 6 || password.length > 16) {
+            showError('passwordError', 'Senha de 6 a 16 dígitos');
+            return false;
+        }
+        
+        hideError('passwordError');
+        return true;
+    }
+    
+    // Validar confirmação de senha
+    function validateConfirmPassword(password, confirmPassword) {
+        if (!confirmPassword) {
+            showError('confirmPasswordError', 'Por favor, confirme a senha');
+            return false;
+        }
+        
+        if (password !== confirmPassword) {
+            showError('confirmPasswordError', 'As senhas não coincidem');
+            return false;
+        }
+        
+        hideError('confirmPasswordError');
+        return true;
+    }
+    
+    // Validar senha de pagamento
+    function validatePayPassword(payPassword) {
+        if (!payPassword) {
+            showError('payPasswordError', 'Digite a senha de pagamento');
+            return false;
+        }
+        
+        if (payPassword.length < 6 || payPassword.length > 16) {
+            showError('payPasswordError', 'Senha de pagamento de 6 a 16 dígitos');
+            return false;
+        }
+        
+        hideError('payPasswordError');
+        return true;
+    }
+    
+    // Validar código de convite
+    function validateInvitationCode(code) {
+        if (code && !isValidInvitationCode(code)) {
+            showError('invitationCodeError', 'Código de convite inválido');
+            return false;
+        }
+        
+        hideError('invitationCodeError');
+        return true;
+    }
+    
+    // Mostrar erro
+    function showError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+    
+    // Ocultar erro
+    function hideError(elementId) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.style.display = 'none';
+    }
+    
+    // Mostrar loading
+    function showLoading() {
+        loadingOverlay.style.display = 'flex';
+        submitBtn.disabled = true;
+    }
+    
+    // Ocultar loading
+    function hideLoading() {
+        loadingOverlay.style.display = 'none';
+        submitBtn.disabled = false;
+    }
+    
+    // Mostrar mensagem de sucesso
+    function showSuccess(message) {
+        successMessage.textContent = message;
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 3000);
+    }
+    
+    // Abrir modal de seleção de país
+    function openCountryModal() {
+        countryModal.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+    
+    // Fechar modal de seleção de país
+    function closeCountryModal() {
+        countryModal.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+    
+    // Selecionar código de país
+    function selectCountryCode(code) {
+        selectedCountry.textContent = `+${code}`;
+        areaCodeInput.value = code;
+        closeCountryModal();
+    }
+    
+    // Enviar formulário
+    async function submitForm() {
+        const mobile = mobileInput.value.trim();
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        const payPassword = payPasswordInput.value;
+        const invitationCode = invitationCodeInput.value.trim();
+        const areaCode = areaCodeInput.value;
+        
+        // Validar campos
+        const isMobileValid = validateMobile(mobile, areaCode);
+        const isPasswordValid = validatePassword(password);
+        const isConfirmPasswordValid = validateConfirmPassword(password, confirmPassword);
+        const isPayPasswordValid = validatePayPassword(payPassword);
+        const isInvitationCodeValid = validateInvitationCode(invitationCode);
+        
+        if (!isMobileValid || !isPasswordValid || !isConfirmPasswordValid || 
+            !isPayPasswordValid || !isInvitationCodeValid) {
+            return;
+        }
+        
+        // Preparar dados para envio
+        const formData = {
+            mobile: areaCode + mobile,
+            password: password,
+            pay_password: payPassword,
+            invitation_code: invitationCode || null,
+            saldo: 570
+        };
+        
+        showLoading();
+        
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok && data.success) {
+                showSuccess('Cadastro realizado com sucesso!');
                 // Limpar código de referência do localStorage após cadastro bem-sucedido
                 localStorage.removeItem('referral_code');
                 
-                layer.open({
-                    content: 'Cadastro realizado com sucesso!',
-                    skin: 'msg',
-                    time: 2,
-                    end: function() {
-                        window.location.href = '/index';
-                    }
-                });
+                // Redirecionar após 2 segundos
+                setTimeout(() => {
+                    window.location.href = '/index';
+                }, 2000);
             } else {
-                layer.open({
-                    content: response.message || 'Erro no cadastro',
-                    skin: 'msg',
-                    time: 3
-                });
+                throw new Error(data.message || 'Erro no cadastro');
             }
-        },
-        error: function(xhr) {
-            layer.close(loadingIndex);
-            const errorMsg = xhr.responseJSON?.message || 'Erro ao conectar com o servidor';
-            layer.open({
-                content: errorMsg,
-                skin: 'msg',
-                time: 3
+        } catch (error) {
+            showError('invitationCodeError', error.message || 'Erro ao conectar com o servidor');
+        } finally {
+            hideLoading();
+        }
+    }
+    
+    // Event Listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar se há código de referência na URL
+        const refCode = getUrlParameter('ref');
+        
+        if (refCode && isValidInvitationCode(refCode)) {
+            invitationCodeInput.value = refCode;
+            document.getElementById('refSource').style.display = 'inline';
+            
+            // Salvar no localStorage para uso futuro
+            localStorage.setItem('referral_code', refCode);
+        } else {
+            // Verificar se há código salvo no localStorage
+            const savedRefCode = localStorage.getItem('referral_code');
+            if (savedRefCode && isValidInvitationCode(savedRefCode)) {
+                invitationCodeInput.value = savedRefCode;
+            }
+        }
+        
+        // Event listeners para validação em tempo real
+        mobileInput.addEventListener('blur', () => {
+            validateMobile(mobileInput.value.trim(), areaCodeInput.value);
+        });
+        
+        passwordInput.addEventListener('blur', () => {
+            validatePassword(passwordInput.value);
+        });
+        
+        confirmPasswordInput.addEventListener('blur', () => {
+            validateConfirmPassword(passwordInput.value, confirmPasswordInput.value);
+        });
+        
+        payPasswordInput.addEventListener('blur', () => {
+            validatePayPassword(payPasswordInput.value);
+        });
+        
+        invitationCodeInput.addEventListener('blur', () => {
+            validateInvitationCode(invitationCodeInput.value.trim());
+        });
+        
+        // Seleção de código de país
+        countryCodeSelector.addEventListener('click', openCountryModal);
+        closeModal.addEventListener('click', closeCountryModal);
+        overlay.addEventListener('click', closeCountryModal);
+        
+        // Adicionar event listeners para os itens da lista de países
+        const countryItems = countryList.getElementsByClassName('country-item');
+        for (let i = 0; i < countryItems.length; i++) {
+            countryItems[i].addEventListener('click', function() {
+                selectCountryCode(this.getAttribute('data-code'));
             });
         }
+        
+        // Enviar formulário
+        submitBtn.addEventListener('click', submitForm);
+        
+        // Permitir enviar com Enter
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitForm();
+            }
+        });
     });
-    
-    return false;
-}
-</script>
-
-<div style="display:none;"></div>
+    </script>
 </body>
 </html>
