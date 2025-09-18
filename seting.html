@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>Configurações da Conta</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fff;
+            background-image: url('https://www.adabr.com/images/mobile/bg-green.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100vh;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .classreturnbox {
+            background-color: #27cd87;
+            padding: 10px 0;
+        }
+        
+        .classreturn {
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+        }
+        
+        .ds-in-bl {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .return img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .tit {
+            flex: 1;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        .am-list {
+            list-style: none;
+        }
+        
+        .am-list-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+        }
+        
+        .am-list-thumb {
+            margin-right: 12px;
+        }
+        
+        .am-list-thumb img {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .am-list-content {
+            flex: 1;
+            font-size: 16px;
+        }
+        
+        .am-list-extra {
+            font-size: 14px;
+            color: #999;
+            margin-right: 10px;
+        }
+        
+        .am-list-arrow {
+            color: #ccc;
+        }
+        
+        .am-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            background-color: #ff5050;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        
+        .am-button.warn {
+            background-color: #ff5050;
+        }
+        
+        .adr-form-group {
+            margin-bottom: 15px;
+        }
+        
+        .adr-form-group input[type=text],
+        .adr-form-group input[type=password] {
+            display: block;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px;
+            color: #777;
+            vertical-align: middle;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .bottoma {
+            display: block;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 2px;
+            text-align: center;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        
+        .am-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -5px;
+        }
+        
+        .am-grid-col-5 .am-grid-item {
+            width: 20%;
+        }
+        
+        .am-grid-item {
+            padding: 5px;
+            text-align: center;
+        }
+        
+        .am-grid-item-thumb img {
+            width: 100%;
+            border-radius: 50%;
+        }
+        
+        .imgzsy {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loading-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .error-message {
+            color: #ff5050;
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            background-color: #fff8f8;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 90%;
+            max-height: 80%;
+            overflow: auto;
+            width: 300px;
+        }
+        
+        .modal-title {
+            background-color: #27cd87;
+            color: #fff;
+            padding: 10px;
+            margin: -20px -20px 20px -20px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .modal-button.confirm {
+            background-color: #27cd87;
+            color: white;
+        }
+        
+        .modal-button.cancel {
+            background-color: #ccc;
+            color: #333;
+        }
+        
+        .msg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body ontouchstart="">
+    <div id="loadingOverlay">
+        <div class="loading-content">
+            <p>Carregando...</p>
+        </div>
+    </div>
+    
+    <div id="errorMessage" class="error-message"></div>
+
+    <div class="classreturnbox">
+        <div class="classreturn">
+            <div class="ds-in-bl return"><a href="javascript:history.back(-1);"><img src="https://www.adabr.com/images/mobile/icon_return3.png" alt="Voltar"></a></div>
+            <div class="ds-in-bl tit center"><span style="vertical-align:middle;">Configurações da Conta</span></div>
+        </div>
+    </div>
+
+    <div style="margin:12px;background-color:#fff;border-radius:8px;overflow:hidden;">
+        <div class="am-list" style="padding:0;">
+            <a href="javascript:;" class="am-list-item">
+                <div class="am-list-content">Número de Telefone</div>
+                <div class="am-list-extra" id="phone-display">****</div>
+            </a>
+            <a href="javascript:;" class="am-list-item">
+                <div class="am-list-content">E-mail</div>
+                <div class="am-list-extra">-</div>
+            </a>
+            <a href="javascript:update_avator();" class="am-list-item">
+                <div class="am-list-thumb">
+                    <form id="head_img">
+                        <img style="width:38px;height:38px;" id="avator" src="https://www.adabr.com/images/mobile/avatar/head_6.png">
+                        <input id="fileupload" type="file" name="file" style="display:none;">
+                    </form>
+                </div>
+                <div class="am-list-content">Retrato da Cabeça</div>
+                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+            </a>
+            <a href="javascript:void(0);" class="am-list-item" id="bank-account-link">
+                <div class="am-list-content">Conta de remessa</div>
+                <div class="am-list-extra">-</div>
+                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+            </a>
+            <a href="javascript:update_nickname();" class="am-list-item">
+                <div class="am-list-content">Apelido</div>
+                <div class="am-list-extra" id="nickname-display">-</div>
+                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+            </a>
+            <a href="javascript:update_sex_layer();" class="am-list-item">
+                <div class="am-list-content">Sexo</div>
+                <div class="am-list-extra" id="gender-display">-</div>
+                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+            </a>
+        </div>
+    </div>
+
+    <div style="margin:12px;background-color:#fff;border-radius:8px;overflow:hidden;">
+        <div class="am-list" style="padding:0;">
+            <a href="javascript:update_password();" class="am-list-item">
+                <div class="am-list-content">Senha</div>
+                <div class="am-list-extra"></div>
+                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+            </a>
+            <a href="javascript:update_pay_password();" class="am-list-item">
+                <div class="am-list-content">Senha de pagamento</div>
+                <div class="am-list-extra"></div>
+                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+            </a>
+        </div>
+    </div>
+
+    <div style="padding:0 20px 15px 20px;">
+        <a href="javascript:logout();" class="am-button warn">Sair</a>
+    </div>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+        
+        // Função para mostrar/ocultar loading
+        function showLoading(show) {
+            document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+        }
+        
+        // Função para mostrar mensagens de erro
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            // Ocultar após 5 segundos
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Função para mostrar mensagens de sucesso
+        function showMessage(message, time = 2000) {
+            const msgElement = document.createElement('div');
+            msgElement.className = 'msg';
+            msgElement.textContent = message;
+            document.body.appendChild(msgElement);
+            
+            setTimeout(() => {
+                document.body.removeChild(msgElement);
+            }, time);
+        }
+        
+        // Verificar autenticação
+        function checkAuth() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) {
+                window.location.href = 'login.html';
+                return null;
+            }
+            
+            try {
+                const { token, expiry } = JSON.parse(tokenData);
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_mobile');
+                    localStorage.removeItem('user_id');
+                    window.location.href = 'login.html';
+                    return null;
+                }
+                return token;
+            } catch (e) {
+                console.error('Erro ao verificar token:', e);
+                window.location.href = 'login.html';
+                return null;
+            }
+        }
+        
+        // Carregar dados do usuário
+        async function loadUserData() {
+            const token = checkAuth();
+            if (!token) return;
+            
+            showLoading(true);
+            
+            try {
+                // Buscar informações do perfil
+                const response = await fetch(`${API_BASE_URL}/user/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                // Verificar se a resposta é válida
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        showError('Sessão expirada. Por favor, faça login novamente.');
+                        localStorage.removeItem('user_token');
+                        localStorage.removeItem('user_mobile');
+                        localStorage.removeItem('user_id');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 2000);
+                        return;
+                    }
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Preencher dados do usuário na interface
+                    const mobile = data.data.mobile;
+                    document.getElementById('phone-display').textContent = mobile.replace(/(\d{4})$/, '****');
+                    
+                    // Carregar outras informações se disponíveis
+                    await loadAdditionalUserInfo(token);
+                } else {
+                    console.error('Erro ao carregar dados do usuário:', data.message);
+                    showError('Erro ao carregar dados do usuário');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar dados do usuário:', error);
+                showError('Erro de conexão com o servidor');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Carregar informações adicionais do usuário
+       // Carregar informações adicionais do usuário
+async function loadAdditionalUserInfo(token) {
+    try {
+        const userId = localStorage.getItem('user_id');
+        if (!userId) {
+            console.error('ID do usuário não encontrado');
+            return;
+        }
+        
+        // Buscar informações completas do usuário
+        const response = await fetch(`${API_BASE_URL}/user/${userId}/full-profile`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        if (!response.ok) {
+            // Se houver erro, não interromper o fluxo principal
+            console.error('Erro ao buscar perfil completo:', response.status);
+            return;
+        }
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            const userInfo = data.data.user_info;
+            
+            // Preencher apelido
+            if (userInfo.nickname) {
+                document.getElementById('nickname-display').textContent = userInfo.nickname;
+            }
+            
+            // Preencher sexo
+            if (userInfo.sex) {
+                document.getElementById('gender-display').textContent = userInfo.sex === 1 ? 'Masculino' : 'Feminino';
+            }
+            
+            // Preencher avatar se existir
+            if (userInfo.head_img) {
+                document.getElementById('avator').src = userInfo.head_img;
+            }
+        }
+    } catch (error) {
+        console.error('Erro ao carregar informações adicionais:', error);
+        // Não mostrar erro para o usuário, pois estas informações são secundárias
+    }
+}
+        
+        // Atualizar avatar
+        function update_avator() {
+            const token = checkAuth();
+            if (!token) return;
+            
+            // Criar modal para seleção de avatar
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-title">Selecionar Avatar</div>
+                    <div class="am-grid am-grid-col-5 am-grid-radius">
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_1.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_1.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_2.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_2.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_3.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_3.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_4.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_4.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_5.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_5.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_6.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_6.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_7.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_7.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_8.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_8.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_9.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_9.png" /></div>
+                        </a>
+                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_10.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_10.png" /></div>
+                        </a>
+                    </div>
+                    <div class="modal-buttons">
+                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Fechar ao clicar fora
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+        
+        async function select_touxiang(head_img) {
+            const token = checkAuth();
+            if (!token) return;
+            
+            showLoading(true);
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/user/profile/update`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ head_img })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('Avatar atualizado com sucesso');
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    showMessage(data.message || 'Erro ao atualizar avatar');
+                }
+            } catch (error) {
+                console.error('Erro ao atualizar avatar:', error);
+                showMessage('Erro de conexão');
+            } finally {
+                showLoading(false);
+            }
+            
+            // Fechar todos os modals
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => document.body.removeChild(modal));
+        }
+        
+        // Atualizar apelido
+        function update_nickname() {
+            const token = checkAuth();
+            if (!token) return;
+            
+            // Criar modal para alterar apelido
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-title">Alterar apelido</div>
+                    <div class="adr-form-group">
+                        <input type="text" name="nickname" class="" id="nickname" placeholder="Por favor, insira o apelido">
+                    </div>
+                    <div class="modal-buttons">
+                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
+                        <button class="modal-button confirm" onclick="confirmNickname()">Confirmar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Fechar ao clicar fora
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+            
+            // Função para confirmar a alteração do apelido
+            window.confirmNickname = async function() {
+                const nickname = document.getElementById('nickname').value;
+                
+                if (!nickname) {
+                    showMessage('Por favor, insira um apelido');
+                    return;
+                }
+                
+                showLoading(true);
+                
+                try {
+                    const response = await fetch(`${API_BASE_URL}/user/profile/update`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ nickname })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        showMessage('Apelido atualizado com sucesso');
+                        setTimeout(() => location.reload(), 1000);
+                    } else {
+                        showMessage(data.message || 'Erro ao atualizar apelido');
+                    }
+                } catch (error) {
+                    console.error('Erro ao atualizar apelido:', error);
+                    showMessage('Erro de conexão');
+                } finally {
+                    showLoading(false);
+                    
+                    // Fechar modal
+                    const modals = document.querySelectorAll('.modal');
+                    modals.forEach(modal => document.body.removeChild(modal));
+                }
+            };
+        }
+        
+        // Atualizar sexo
+        function update_sex_layer() {
+            const token = checkAuth();
+            if (!token) return;
+            
+            // Criar modal para seleção de sexo
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-title">Selecionar sexo</div>
+                    <div style="padding:15px;">
+                        <a style="margin-bottom:10px;background-color:#1aad19;text-align:center;color:white;border:1px solid #179e16;" class="bottoma" href="javascript:update_sex(1);">Masculino</a>
+                        <a style="margin-bottom:10px;background-color:#ea5a3d;text-align:center;color:white;border:1px solid #dd2727;" class="bottoma" href="javascript:update_sex(2);">Feminino</a>
+                    </div>
+                    <div class="modal-buttons">
+                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Fechar ao clicar fora
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+        
+        async function update_sex(sex) {
+            const token = checkAuth();
+            if (!token) return;
+            
+            showLoading(true);
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/user/profile/update`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ sex })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('Sexo atualizado com sucesso');
+                    setTimeout(() => location.reload(), 1000);
+                } else {
+                    showMessage(data.message || 'Erro ao atualizar sexo');
+                }
+            } catch (error) {
+                console.error('Erro ao atualizar sexo:', error);
+                showMessage('Erro de conexão');
+            } finally {
+                showLoading(false);
+                
+                // Fechar todos os modals
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => document.body.removeChild(modal));
+            }
+        }
+        
+        // Atualizar senha
+        function update_password() {
+            const token = checkAuth();
+            if (!token) return;
+            
+            // Criar modal para alterar senha
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-title">Alterar senha</div>
+                    <div class="adr-form-group">
+                        <input type="password" name="current_password" class="" id="current_password" placeholder="Senha atual">
+                    </div>
+                    <div class="adr-form-group">
+                        <input type="password" name="new_password" class="" id="new_password" placeholder="Nova senha">
+                    </div>
+                    <div class="adr-form-group">
+                        <input type="password" name="confirm_password" class="" id="confirm_password" placeholder="Confirmar nova senha">
+                    </div>
+                    <div class="modal-buttons">
+                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
+                        <button class="modal-button confirm" onclick="confirmPassword()">Confirmar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Fechar ao clicar fora
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+            
+            // Função para confirmar a alteração da senha
+            window.confirmPassword = async function() {
+                const currentPassword = document.getElementById('current_password').value;
+                const newPassword = document.getElementById('new_password').value;
+                const confirmPassword = document.getElementById('confirm_password').value;
+                
+                if (!currentPassword || !newPassword || !confirmPassword) {
+                    showMessage('Por favor, preencha todos os campos');
+                    return;
+                }
+                
+                if (newPassword !== confirmPassword) {
+                    showMessage('As senhas não coincidem');
+                    return;
+                }
+                
+                showLoading(true);
+                
+                try {
+                    const response = await fetch(`${API_BASE_URL}/user/password/update`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ 
+                            current_password: currentPassword, 
+                            new_password: newPassword 
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        showMessage('Senha alterada com sucesso');
+                    } else {
+                        showMessage(data.message || 'Erro ao alterar senha');
+                    }
+                } catch (error) {
+                    console.error('Erro ao alterar senha:', error);
+                    showMessage('Erro de conexão');
+                } finally {
+                    showLoading(false);
+                    
+                    // Fechar modal
+                    const modals = document.querySelectorAll('.modal');
+                    modals.forEach(modal => document.body.removeChild(modal));
+                }
+            };
+        }
+        
+        // Atualizar senha de pagamento
+        function update_pay_password() {
+            const token = checkAuth();
+            if (!token) return;
+            
+            // Criar modal para alterar senha de pagamento
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-title">Alterar senha de pagamento</div>
+                    <div class="adr-form-group">
+                        <input type="password" name="current_pay_password" class="" id="current_pay_password" placeholder="Senha de pagamento atual">
+                    </div>
+                    <div class="adr-form-group">
+                        <input type="password" name="new_pay_password" class="" id="new_pay_password" placeholder="Nova senha de pagamento">
+                    </div>
+                    <div class="adr-form-group">
+                        <input type="password" name="confirm_pay_password" class="" id="confirm_pay_password" placeholder="Confirmar nova senha de pagamento">
+                    </div>
+                    <div class="modal-buttons">
+                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
+                        <button class="modal-button confirm" onclick="confirmPayPassword()">Confirmar</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Fechar ao clicar fora
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+            
+            // Função para confirmar a alteração da senha de pagamento
+            window.confirmPayPassword = async function() {
+                const currentPayPassword = document.getElementById('current_pay_password').value;
+                const newPayPassword = document.getElementById('new_pay_password').value;
+                const confirmPayPassword = document.getElementById('confirm_pay_password').value;
+                
+                if (!currentPayPassword || !newPayPassword || !confirmPayPassword) {
+                    showMessage('Por favor, preencha todos os campos');
+                    return;
+                }
+                
+                if (newPayPassword !== confirmPayPassword) {
+                    showMessage('As senhas não coincidem');
+                    return;
+                }
+                
+                showLoading(true);
+                
+                try {
+                    const response = await fetch(`${API_BASE_URL}/user/pay-password/update`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ 
+                            current_pay_password: currentPayPassword, 
+                            new_pay_password: newPayPassword 
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        showMessage('Senha de pagamento alterada com sucesso');
+                    } else {
+                        showMessage(data.message || 'Erro ao alterar senha de pagamento');
+                    }
+                } catch (error) {
+                    console.error('Erro ao alterar senha de pagamento:', error);
+                    showMessage('Erro de conexão');
+                } finally {
+                    showLoading(false);
+                    
+                    // Fechar modal
+                    const modals = document.querySelectorAll('.modal');
+                    modals.forEach(modal => document.body.removeChild(modal));
+                }
+            };
+        }
+        
+        // Logout
+        async function logout() {
+            const token = checkAuth();
+            if (!token) return;
+            
+            showLoading(true);
+            
+            try {
+                await fetch(`${API_BASE_URL}/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            } catch (error) {
+                console.error('Erro no logout:', error);
+            } finally {
+                // Independente da resposta da API, limpar localStorage e redirecionar
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_mobile');
+                localStorage.removeItem('user_id');
+                showLoading(false);
+                window.location.href = 'index.html';
+            }
+        }
+        
+        // Carregar dados quando a página for carregada
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+        });
+    </script>
+</body>
+</html>
