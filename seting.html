@@ -304,7 +304,7 @@
                         <input id="fileupload" type="file" name="file" style="display:none;">
                     </form>
                 </div>
-                <div class="am-list-content">Retrato da Cabeça</div>
+                <div class="am-list-content">Retrato da conta</div>
                 <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
             </a>
             <a href="javascript:void(0);" class="am-list-item" id="bank-account-link">
@@ -313,7 +313,7 @@
                 <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
             </a>
             <a href="javascript:update_nickname();" class="am-list-item">
-                <div class="am-list-content">Apelido</div>
+                <div class="am-list-content">Nome de Conta</div>
                 <div class="am-list-extra" id="nickname-display">-</div>
                 <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
             </a>
@@ -381,7 +381,7 @@
         function checkAuth() {
             const tokenData = localStorage.getItem('user_token');
             if (!tokenData) {
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
                 return null;
             }
             
@@ -391,13 +391,13 @@
                     localStorage.removeItem('user_token');
                     localStorage.removeItem('user_mobile');
                     localStorage.removeItem('user_id');
-                    window.location.href = 'login.html';
+                    window.location.href = 'index.html';
                     return null;
                 }
                 return token;
             } catch (e) {
                 console.error('Erro ao verificar token:', e);
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
                 return null;
             }
         }
@@ -514,8 +514,8 @@ async function loadAdditionalUserInfo(token) {
                 <div class="modal-content">
                     <div class="modal-title">Selecionar Avatar</div>
                     <div class="am-grid am-grid-col-5 am-grid-radius">
-                        <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_1.png');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_1.png" /></div>
+                        <a href="javascript:select_touxiang('https://i.postimg.cc/4dK8FWjD/logo.png');" class="am-grid-item">
+                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/4dK8FWjD/logo.png" /></div>
                         </a>
                         <a href="javascript:select_touxiang('https://www.adabr.com/images/mobile/avatar/head_2.png');" class="am-grid-item">
                             <div class="am-grid-item-thumb"><img src="https://www.adabr.com/images/mobile/avatar/head_2.png" /></div>

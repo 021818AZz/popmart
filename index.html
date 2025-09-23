@@ -19,12 +19,12 @@ window.addEventListener('resize', function() {
   docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
 });
 </script>
-<link rel="stylesheet" href="https://www.adabr.com/css/antui-all.css"/>
-<link rel="stylesheet" href="https://www.adabr.com/css/mobile/style.css"/>
-<script type="text/javascript" src="https://www.adabr.com/js/jquery.min.js"></script>
-<script type="text/javascript" src="https://www.adabr.com/js/layer/mobile/layer.js"></script>
-<script type="text/javascript" src="https://www.adabr.com/js/common.js"></script>
-<script type="text/javascript" src="https://www.adabr.com/js/mobile/public.js"></script>
+<link rel="stylesheet" href="all.css"/>
+<link rel="stylesheet" href="style.css"/>
+<script type="text/javascript" src="min.js"></script>
+<script type="text/javascript" src="layer.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<script type="text/javascript" src="public.js"></script>
 
 <style>
 .container .auth_bg{margin-top:33px;text-align:center;font-size:22px;font-weight:700}
@@ -250,7 +250,7 @@ async function dosubmit() {
                 time: 2,
                 end: function() {
                     // Redirecionar para a página principal/dashboard
-                    window.location.href = '/dashboard.html';
+                    window.location.href = '/principal.html';
                 }
             });
         } else {
