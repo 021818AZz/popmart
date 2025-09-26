@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Sistema de Check-in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="full-screen" content="true">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <style>
+        /* ===== RESET E CONFIGURAÇÕES GERAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.5;
+            color: #333;
+        }
+        
+        /* ===== LAYOUT PRINCIPAL ===== */
+        .page {
+            position: relative;
+            min-height: 100vh;
+            padding-top: 60px; /* Espaço para o cabeçalho fixo */
+        }
+        
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        .bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* ===== CABEÇALHO ===== */
+        .headers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            height: 60px;
+        }
+        
+        .head {
+            padding: 0 15px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .back {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+        
+        .back:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .back img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            flex: 1;
+        }
+        
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        .content-container {
+            padding: 20px 15px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            color: #3862e4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .page-title img {
+            width: 32px;
+            height: 32px;
+        }
+        
+        /* ===== CARDS ===== */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+        }
+        
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h2 img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* ===== ITENS DE TAREFA ===== */
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .task-item:last-child {
+            border-bottom: none;
+        }
+        
+        .task-info {
+            flex: 1;
+            padding-right: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .task-icon {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+        }
+        
+        .task-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .task-text {
+            flex: 1;
+        }
+        
+        .task-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .task-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .task-reward {
+            color: #3862e4;
+            font-weight: bold;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        /* ===== BOTÕES ===== */
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: #3862e4;
+            color: white;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+        
+        .btn:active:not(.btn-disabled) {
+            transform: translateY(2px);
+        }
+        
+        /* ===== BADGES ===== */
+        .completed-badge {
+            background: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .unavailable-badge {
+            background: #f0f0f0;
+            color: #999;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        /* ===== ANIMAÇÕES ===== */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ===== MENSAGENS ===== */
+        .message {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        
+        .success { 
+            background: #d4edda; 
+            color: #155724; 
+            border-left: 4px solid #28a745;
+        }
+        
+        .error { 
+            background: #f8d7da; 
+            color: #721c24; 
+            border-left: 4px solid #dc3545;
+        }
+        
+        .warning { 
+            background: #fff3cd; 
+            color: #856404; 
+            border-left: 4px solid #ffc107;
+        }
+        
+        /* ===== ESTADOS ESPECIAIS ===== */
+        .congratulations {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .congratulations-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .congratulations img {
+            width: 64px;
+            height: 64px;
+        }
+        
+        .congratulations p {
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+        
+        .congratulations .main-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #3862e4;
+        }
+        
+        /* ===== MEDIA QUERIES PARA RESPONSIVIDADE ===== */
+        
+        /* Tablets e telas maiores */
+        @media (min-width: 768px) {
+            .content-container {
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .page-title img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .card h2 {
+                font-size: 1.4rem;
+            }
+            
+            .card h2 img {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .btn {
+                max-width: 300px;
+                margin: 10px auto;
+            }
+            
+            .task-item {
+                padding: 18px 0;
+            }
+            
+            .task-icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        /* Smartphones pequenos */
+        @media (max-width: 360px) {
+            .content-container {
+                padding: 15px 10px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .page-title {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
+            
+            .page-title img {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .task-name {
+                font-size: 0.95rem;
+            }
+            
+            .task-description {
+                font-size: 0.85rem;
+            }
+            
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+            
+            .task-info {
+                gap: 8px;
+            }
+            
+            .task-icon {
+                width: 32px;
+                height: 32px;
+            }
+        }
+        
+        /* Smartphones muito pequenos */
+        @media (max-width: 320px) {
+            .head {
+                padding: 0 10px;
+            }
+            
+            .name {
+                font-size: 1rem;
+            }
+            
+            .content-container {
+                padding: 10px 5px;
+            }
+            
+            .card {
+                padding: 12px;
+            }
+            
+            .task-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .task-info {
+                padding-right: 0;
+                margin-bottom: 8px;
+                width: 100%;
+            }
+            
+            .task-reward, .completed-badge, .unavailable-badge {
+                align-self: flex-end;
+            }
+        }
+        
+        /* Orientação paisagem em smartphones */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .headers {
+                height: 50px;
+            }
+            
+            .page {
+                padding-top: 50px;
+            }
+            
+            .content-container {
+                padding: 15px;
+            }
+            
+            .card {
+                margin-bottom: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="bg">
+            <img src="https://aitech360.site/public/static/img/bg_ai.ecc46501.png" alt="Background">
+        </div>
+        
+        <!-- CABEÇALHO FIXO -->
+        <div class="headers">
+            <div class="head">
+                <div class="back" onclick="window.history.back()">
+                    <img src="https://i.postimg.cc/NjzY00MW/back-v1.png" alt="Voltar">
+                </div>
+                <div class="name">Sistema de Check-in</div>
+                <div style="width: 40px;"></div> <!-- Espaço para alinhamento -->
+            </div>
+        </div>
+        
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="content-container">
+            <h1 class="page-title">
+                <img src="https://i.postimg.cc/6qsDv2Jm/task.png" alt="Check-in">
+                Sistema de Check-in Diário
+            </h1>
+            
+            <!-- MENSAGENS DO SISTEMA -->
+            <div id="message" class="message" style="display: none;"></div>
+            
+            <!-- CARD DE STATUS DAS TAREFAS -->
+            <div class="card">
+                <h2>
+                    <img src="https://i.postimg.cc/6qsDv2Jm/task.png" alt="Tarefas">
+                    Status das Tarefas de Hoje
+                </h2>
+                <div id="tasks-status">
+                    <div class="task-item">
+                        <div class="task-info">
+                            <div class="task-icon">
+                                <img src="https://i.postimg.cc/6qsDv2Jm/task.png" alt="Carregando">
+                            </div>
+                            <div class="task-text">
+                                <div class="task-name">Carregando...</div>
+                                <div class="task-description">Aguarde enquanto buscamos suas informações</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD DE COMPRAS ATIVAS -->
+            <div class="card">
+                <h2>
+                    <img src="https://i.postimg.cc/j2KMTzrt/purchase-order.png" alt="Compras">
+                    Suas Compras Ativas
+                </h2>
+                <div id="active-purchases">
+                    <div class="task-item">
+                        <div class="task-info">
+                            <div class="task-icon">
+                                <img src="https://i.postimg.cc/j2KMTzrt/purchase-order.png" alt="Carregando">
+                            </div>
+                            <div class="task-text">
+                                <div class="task-name">Carregando...</div>
+                                <div class="task-description">Buscando informações sobre suas compras</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD DE OPÇÕES DISPONÍVEIS -->
+            <div class="card">
+                <h2>
+                    <img src="https://i.postimg.cc/KYMfg9Gm/available-updates.png" alt="Opções">
+                    Opções Disponíveis
+                </h2>
+                <div id="task-options">
+                    <p>Carregando opções...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+    <script>
+        // URLs dos ícones
+        const icons = {
+            checkin: "https://i.postimg.cc/6qsDv2Jm/task.png",
+            income: "https://i.postimg.cc/3rgqqwH3/external-seo-report-finance-trading-and-banking-smashingstocks-mixed-smashing-stocks-2.png",
+            purchases: "https://i.postimg.cc/j2KMTzrt/purchase-order.png",
+            options: "https://i.postimg.cc/KYMfg9Gm/available-updates.png",
+            congratulations: "https://i.postimg.cc/T1Jf2qL9/paraben-free-icon-isolated-vector-150nw-1097722715.jpg"
+        };
+
+        // Função para obter o token
+        function getToken() {
+            try {
+                const tokenData = localStorage.getItem('user_token');
+                if (tokenData) {
+                    const parsed = JSON.parse(tokenData);
+                    return parsed.token || parsed.access_token || parsed;
+                }
+                return null;
+            } catch (error) {
+                console.error('Erro ao obter token:', error);
+                return null;
+            }
+        }
+
+        // Função para mostrar mensagem
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Função de notificação
+        function showNotification(message, type) {
+            new Noty({
+                type: type,
+                text: message,
+                timeout: 5000,
+                progressBar: true,
+                theme: 'mint',
+                animation: {
+                    open: 'animated bounceInRight',
+                    close: 'animated bounceOutRight'
+                }
+            }).show();
+        }
+
+        // Carregar status das tarefas
+        async function loadTasksStatus() {
+            const token = getToken();
+            if (!token) {
+                showMessage('Por favor, faça login primeiro', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('https://bd-1-tile.onrender.com/api/tasks/status', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    updateUI(data.data);
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar status:', error);
+                showMessage('Erro ao carregar status das tarefas', 'error');
+            }
+        }
+
+        // Atualizar interface com os dados
+        function updateUI(data) {
+            // Atualizar status das tarefas
+            const tasksStatusEl = document.getElementById('tasks-status');
+            tasksStatusEl.innerHTML = `
+                <div class="task-item">
+                    <div class="task-info">
+                        <div class="task-icon">
+                            <img src="${icons.checkin}" alt="Check-in Diário">
+                        </div>
+                        <div class="task-text">
+                            <div class="task-name">Check-in Diário</div>
+                            <div class="task-description">Faça check-in todos os dias para ganhar 50 KZ</div>
+                        </div>
+                    </div>
+                    <div>
+                        ${data.tasks_status.daily_checkin.completed ? 
+                            '<span class="completed-badge">Concluído</span>' : 
+                            `<span class="task-reward">+50 KZ</span>`
+                        }
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-info">
+                        <div class="task-icon">
+                            <img src="${icons.income}" alt="Rendimentos">
+                        </div>
+                        <div class="task-text">
+                            <div class="task-name">Rendimentos de Produtos</div>
+                            <div class="task-description">Colete rendimentos dos seus produtos ativos</div>
+                        </div>
+                    </div>
+                    <div>
+                        ${data.tasks_status.product_income.completed ? 
+                            '<span class="completed-badge">Concluído</span>' : 
+                            data.tasks_status.product_income.available ?
+                                `<span class="task-reward">+${data.tasks_status.product_income.reward} KZ</span>` :
+                                '<span class="unavailable-badge">Indisponível</span>'
+                        }
+                    </div>
+                </div>
+            `;
+
+            // Atualizar compras ativas
+            const purchasesEl = document.getElementById('active-purchases');
+            if (data.active_purchases && data.active_purchases.length > 0) {
+                purchasesEl.innerHTML = data.active_purchases.map(purchase => `
+                    <div class="task-item">
+                        <div class="task-info">
+                            <div class="task-icon">
+                                <img src="${icons.purchases}" alt="Produto">
+                            </div>
+                            <div class="task-text">
+                                <div class="task-name">${purchase.product_name}</div>
+                                <div class="task-description">Rendimento diário: ${purchase.daily_return} KZ</div>
+                            </div>
+                        </div>
+                        <div class="task-reward">Total: ${purchase.total_earned || 0} KZ</div>
+                    </div>
+                `).join('');
+            } else {
+                purchasesEl.innerHTML = `
+                    <div class="task-item">
+                        <div class="task-info">
+                            <div class="task-icon">
+                                <img src="${icons.purchases}" alt="Sem Compras">
+                            </div>
+                            <div class="task-text">
+                                <div class="task-name">Nenhuma compra ativa</div>
+                                <div class="task-description">Você não tem compras ativas no momento.</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Atualizar opções disponíveis
+            const optionsEl = document.getElementById('task-options');
+            const checkinCompleted = data.tasks_status.daily_checkin.completed;
+            const incomeCompleted = data.tasks_status.product_income.completed;
+            const hasActivePurchases = data.has_active_purchases;
+
+            let optionsHTML = '';
+
+            if (!checkinCompleted || !incomeCompleted) {
+                optionsHTML = `
+                    <h3 style="margin-bottom: 15px; font-size: 1.1rem;">Escolha uma opção:</h3>
+                    ${!checkinCompleted ? `
+                        <button class="btn btn-primary" onclick="performDailyCheckin()">
+                            <img src="${icons.checkin}" alt="Check-in" style="width: 20px; height: 20px;">
+                            <span id="checkin-text">Fazer Check-in Diário (+50 KZ)</span>
+                            <span id="checkin-loading" class="loading" style="display: none;"></span>
+                        </button>
+                    ` : ''}
+                    
+                    ${hasActivePurchases && !incomeCompleted ? `
+                        <button class="btn btn-success" onclick="collectProductIncome()">
+                            <img src="${icons.income}" alt="Rendimentos" style="width: 20px; height: 20px;">
+                            <span id="income-text">Coletar Rendimentos dos Produtos (+${data.tasks_status.product_income.reward} KZ)</span>
+                            <span id="income-loading" class="loading" style="display: none;"></span>
+                        </button>
+                    ` : ''}
+                `;
+            } else {
+                optionsHTML = `
+                    <div class="congratulations">
+                        <div class="congratulations-content">
+                            <img src="${icons.congratulations}" alt="Parabéns">
+                            <p class="main-text">🎉 Parabéns!</p>
+                            <p>Você já completou todas as tarefas de hoje!</p>
+                            <p>Volte amanhã para novas recompensas.</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            optionsEl.innerHTML = optionsHTML;
+        }
+
+        // Função para fazer check-in diário
+        async function performDailyCheckin() {
+            const token = getToken();
+            if (!token) return;
+
+            const button = event.target;
+            const buttonText = document.getElementById('checkin-text');
+            const buttonLoading = document.getElementById('checkin-loading');
+            
+            button.disabled = true;
+            buttonText.textContent = 'Processando...';
+            buttonLoading.style.display = 'inline-block';
+
+            try {
+                const response = await fetch('https://bd-1-tile.onrender.com/api/tasks/daily-checkin', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showNotification('✅ Check-in realizado com sucesso! +50 KZ adicionados.', 'success');
+                    // Recarregar status
+                    setTimeout(loadTasksStatus, 1000);
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                showNotification('❌ ' + error.message, 'error');
+            } finally {
+                button.disabled = false;
+                buttonText.textContent = 'Fazer Check-in Diário (+50 KZ)';
+                buttonLoading.style.display = 'none';
+            }
+        }
+
+        // Função para coletar rendimentos dos produtos
+        async function collectProductIncome() {
+            const token = getToken();
+            if (!token) return;
+
+            const button = event.target;
+            const buttonText = document.getElementById('income-text');
+            const buttonLoading = document.getElementById('income-loading');
+            
+            button.disabled = true;
+            buttonText.textContent = 'Coletando...';
+            buttonLoading.style.display = 'inline-block';
+
+            try {
+                const response = await fetch('https://bd-1-tile.onrender.com/api/tasks/collect-product-income', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showNotification(`✅ Rendimentos coletados! +${data.data.total_income} KZ adicionados.`, 'success');
+                    // Recarregar status
+                    setTimeout(loadTasksStatus, 1000);
+                } else {
+                    throw new Error(data.message);
+                }
+            } catch (error) {
+                showNotification('❌ ' + error.message, 'error');
+            } finally {
+                button.disabled = false;
+                // Atualizar o texto do botão com o valor correto
+                const reward = data && data.tasks_status ? data.tasks_status.product_income.reward : '?';
+                buttonText.textContent = `Coletar Rendimentos dos Produtos (+${reward} KZ)`;
+                buttonLoading.style.display = 'none';
+            }
+        }
+
+        // Carregar status quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTasksStatus();
+            
+            // Atualizar a cada 30 segundos
+            setInterval(loadTasksStatus, 30000);
+        });
+
+        // Verificar autenticação
+        window.addEventListener('load', function() {
+            const token = getToken();
+            if (!token) {
+                showMessage('Faça login para acessar o sistema de check-in', 'warning');
+            }
+        });
+    </script>
+</body>
+</html>

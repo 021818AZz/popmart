@@ -1,0 +1,486 @@
+<html style="font-size: 47.2px;">
+<head>
+    <meta charset="utf-8">
+    <title>Team</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="full-screen" content="true">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <meta name="renderer" content="webkit">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+        }
+        
+        .copy-toast {
+            position: fixed;
+            left: 50%;
+            top: 16px;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,.8);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity .2s ease, transform .2s ease;
+            pointer-events: none;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(4px);
+        }
+        
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <link href="app.c1933b14.css" rel="preload" as="style">
+    <link href="chunk-vant.d14f5539.css" rel="preload" as="style">
+    <link href="chunk-vendors.794edbf9.css" rel="preload" as="style">
+    <link href="chunk-vant.d14f5539.css" rel="stylesheet">
+    <link href="chunk-vendors.794edbf9.css" rel="stylesheet">
+    <link href="app.c1933b14.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="chunk-15e30c0e.9dcbd293.css">
+    <link rel="stylesheet" type="text/css" href="chunk-5576a184.9f52f39a.css">
+    <link rel="stylesheet" type="text/css" href="chunk-3b94db02.5929650c.css">
+    <link rel="stylesheet" type="text/css" href="chunk-a6d04a00.3a1821fc.css">
+    <link rel="stylesheet" type="text/css" href="chunk-5ba702ec.7902583a.css">
+    <link rel="stylesheet" type="text/css" href="chunk-9884782a.e91864af.css">
+    <link rel="stylesheet" type="text/css" href="chunk-46c4d9be.73725c2e.css">
+</head>
+<body class="w856">
+    <div id="app" class="applang">
+        <div data-v-6e534c71="" data-v-32d0a848="" class="page">
+            <div data-v-6e534c71="" class="headers">
+                <div data-v-a53c4a36="" data-v-32d0a848="" class="head" data-v-6e534c71="">
+                    <div data-v-a53c4a36="" class="container flex">
+                        <div data-v-a53c4a36="" class="myName">
+                            <img data-v-a53c4a36="" src="https://i.postimg.cc/pLLVFXjj/1755341871gwz.png" alt="">
+                        </div>
+                        <div data-v-a53c4a36="" class="name tac">Equipe</div>
+                        <div data-v-a53c4a36="" class="flex1"></div>
+                        <div data-v-a53c4a36="" class="lang">
+                            <img data-v-a53c4a36="" src="data:image/png;base64,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" alt="">
+                        </div>
+                        <div data-v-a53c4a36="" class="notice">
+                            <img data-v-a53c4a36="" src="data:image/png;base64,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" alt="">
+                        </div>
+                    </div>
+                    <div data-v-a53c4a36=""></div>
+                </div>
+            </div>
+            <div data-v-6e534c71="" id="scroll" class="content-container" style="padding-top: 45px; padding-bottom: 54px;">
+                <div data-v-6e534c71="" id="content" class="content-scroll">
+                    <div data-v-32d0a848="" data-v-6e534c71="" class="container">
+                        <div data-v-32d0a848="" data-v-6e534c71="" class="itemBox">
+                            <div data-v-32d0a848="" data-v-6e534c71="" class="info">
+                                <div data-v-32d0a848="" data-v-6e534c71="" class="tab wrap bet">
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="name">Visão geral dos dados da equipe</div>
+                                    <div data-v-6e534c71="" id="content" class="content-scroll">
+                                        <div data-v-e9bc8f74="" data-v-6e534c71="" class="container">
+                                            <div data-v-e9bc8f74="" data-v-6e534c71="" class="itemBox">
+                                                <div data-v-e9bc8f74="" data-v-6e534c71="" class="url">
+                                                    <div data-v-e9bc8f74="" data-v-6e534c71="" class="n">Link de convite</div>
+                                                    <div data-v-e9bc8f74="" data-v-6e534c71="" class="val" id="invitationLink">https://bd-1-tile.onrender.com/register.html?ref=61806841</div>
+                                                </div>
+                                            </div>
+                                            <div data-v-e9bc8f74="" data-v-6e534c71="" class="itemBox">
+                                                <button data-v-e9bc8f74="" data-v-6e534c71="" class="btn2" onclick="copyLink()">Copiar link do convite</button>
+                                            </div>
+                                            <div data-v-e9bc8f74="" data-v-6e534c71="" class="box"></div>
+                                        </div>
+                                    </div>
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="set">
+                                        <span data-v-32d0a848="" data-v-6e534c71="">Calcular</span>
+                                        <img data-v-32d0a848="" data-v-6e534c71="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABLklEQVRIS+2VP07DMBSHf85QAT1BBiYOwVyxMLBVytSO0csxfI2XFcRg0QkGloqVE2TrUu5QCQaMXNlRANd/KmVrVjvf5/d7L47AyI8YmY+TIJpwH5FS6rzruk8p5Xf0rcAGKWVRluUZEe3Mtr2gbdu51voRwBbALRFtjpEw8xWAVwCXWutF0zRPewEz3wNYWOgHgFmuxMLfDNxyHoho6QTXQoi11np6jMQD3xVFcVPX9XvfA2aeCSGecyU+OIA7IjLV/P4OciUx+D+B7UdSJSlwr8BJALwAuPD1JBV+UBCSWOFwWsy895n/He/gXWR64qnEMNwoBuHBCtxJPBK3FIUnCQ7ElQRPFgwkK3v8uZvz2JWS9T9QSk0MsKqqrxjYrWcJUqHDfSdBNLXRI/oB0DmUGWphZ9UAAAAASUVORK5CYII=" alt="">
+                                    </div>
+                                </div>
+                                <ul data-v-32d0a848="" data-v-6e534c71="" class="it wrap bet">
+                                    <li data-v-32d0a848="" data-v-6e534c71="">
+                                        <div data-v-32d0a848="" data-v-6e534c71="" class="ico">
+                                            <img data-v-32d0a848="" data-v-6e534c71="" src="data:image/png;base64,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" alt="">
+                                        </div>
+                                        <div data-v-32d0a848="" data-v-6e534c71="" class="flex1">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Pessoas adicionadas</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="num" id="peopleAdded">0</div>
+                                        </div>
+                                    </li>
+                                    <li data-v-32d0a848="" data-v-6e534c71="">
+                                        <div data-v-32d0a848="" data-v-6e534c71="" class="ico">
+                                            <img data-v-32d0a848="" data-v-6e534c71="" src="data:image/png;base64,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" alt="">
+                                        </div>
+                                        <div data-v-32d0a848="" data-v-6e534c71="" class="flex1">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Renda adicionada</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="num" id="incomeAdded">KZ 0</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div data-v-32d0a848="" data-v-6e534c71="" class="itemBox">
+                            <div data-v-32d0a848="" data-v-6e534c71="" class="income">
+                                <div data-v-32d0a848="" data-v-6e534c71="" class="tab wrap bet">
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="name">Análise de receita</div>
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="set">
+                                        <span data-v-32d0a848="" data-v-6e534c71="" id="lastUpdate">Última atualização</span>
+                                        <img data-v-32d0a848="" data-v-6e534c71="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABLklEQVRIS+2VP07DMBSHf85QAT1BBiYOwVyxMLBVytSO0csxfI2XFcRg0QkGloqVE2TrUu5QCQaMXNlRANd/KmVrVjvf5/d7L47AyI8YmY+TIJpwH5FS6rzruk8p5Xf0rcAGKWVRluUZEe3Mtr2gbdu51voRwBbALRFtjpEw8xWAVwCXWutF0zRPewEz3wNYWOgHgFmuxMLfDNxyHoho6QTXQoi11np6jMQD3xVFcVPX9XvfA2aeCSGecyU+OIA7IjLV/P4OciUx+D+B7UdSJSlwr8BJALwAuPD1JBV+UBCSWOFwWsy895n/He/gXWR64qnEMNwoBuHBCtxJPBK3FIUnCQ7ElQRPFgwkK3v8uZvz2JWS9T9QSk0MsKqqrxjYrWcJUqHDfSdBNLXRI/oB0DmUGWphZ9UAAAAASUVORK5CYII=" alt="">
+                                    </div>
+                                </div>
+                                <div data-v-32d0a848="" data-v-6e534c71="" class="box2">
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="it wrap bet">
+                                        <div data-v-32d0a848="" data-v-6e534c71="" class="name">
+                                            Tamanho cumulativo da equipe：<span data-v-32d0a848="" data-v-6e534c71="" id="teamSize">0</span>
+                                        </div>
+                                        <div data-v-32d0a848="" data-v-6e534c71="" class="s" onclick="window.location.href='/comicao.html'">Ver lista de comissões</div>
+                                    </div>
+                                    <ul data-v-32d0a848="" data-v-6e534c71="" class="db">
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="cumulativeRecharge">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Recarga cumulativa</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="processingRecharge">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Processando recarga</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="validWithdrawal">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Retirada Válida</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-v-32d0a848="" data-v-6e534c71="" class="itemBox">
+                            <div data-v-32d0a848="" data-v-6e534c71="" class="tame">
+                                <div data-v-32d0a848="" data-v-6e534c71="" class="tab wrap bet">
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="name">As últimas três gerações de dados</div>
+                                </div>
+                                <div data-v-32d0a848="" data-v-6e534c71="" class="it">
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="name">Dados Nível 1</div>
+                                    <ul data-v-32d0a848="" data-v-6e534c71="" class="db">
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level1Members">0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Membro Válido</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level1Recharge">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Recarga de equipe</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level1Withdrawal">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Retirada da equipe</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s">27%</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Porcentagem de comissão</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div data-v-32d0a848="" data-v-6e534c71="" class="it">
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="name">Dados Nível 2</div>
+                                    <ul data-v-32d0a848="" data-v-6e534c71="" class="db">
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level2Members">0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Membro Válido</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level2Recharge">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Recarga de equipe</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level2Withdrawal">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Retirada da equipe</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s">3%</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Porcentagem de comissão</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div data-v-32d0a848="" data-v-6e534c71="" class="it">
+                                    <div data-v-32d0a848="" data-v-6e534c71="" class="name">Dados Nível 3</div>
+                                    <ul data-v-32d0a848="" data-v-6e534c71="" class="db">
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level3Members">0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Membro Válido</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level3Recharge">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Recarga de equipe</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s" id="level3Withdrawal">KZ 0</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Retirada da equipe</div>
+                                        </li>
+                                        <li data-v-32d0a848="" data-v-6e534c71="">
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="s">1%</div>
+                                            <div data-v-32d0a848="" data-v-6e534c71="" class="n">Porcentagem de comissão</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-v-6e534c71="" class="footer">
+                <div data-v-47e63dc4="" data-v-98526a88="" class="footers" data-v-6e534c71="">
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
+                        <div data-v-47e63dc4="" class="on">
+                            <img data-v-47e63dc4="" src="https://i.postimg.cc/rpp93Wrp/image.png" alt="">
+                            <span data-v-47e63dc4="">Lar </span>
+                        </div>
+                    </div>
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/tarefa.html'">
+                        <div data-v-47e63dc4="" class="">
+                            <img data-v-47e63dc4="" src="https://i.postimg.cc/fRz7SX5v/image.png" alt="">
+                            <span data-v-47e63dc4="">Meus ganhos </span>
+                        </div>
+                    </div>
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='produtos.html'">
+                        <div data-v-47e63dc4="" class="">
+                            <img data-v-47e63dc4="" src="https://i.postimg.cc/ZnzpbyCp/image.png" alt="">
+                            <span data-v-47e63dc4="">Plano IA </span>
+                        </div>
+                    </div>
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/equipe.html'">
+                        <div data-v-47e63dc4="" class="">
+                            <img data-v-47e63dc4="" src="https://i.postimg.cc/c1787Cvk/image.png" alt="">
+                            <span data-v-47e63dc4="">Equipe </span>
+                        </div>
+                    </div>
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/dashboard.html'">
+                        <div data-v-47e63dc4="" class="">
+                            <img data-v-47e63dc4="" src="https://i.postimg.cc/0yKkfXt5/image.png" alt="">
+                            <span data-v-47e63dc4="">Meu </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+    // Função para obter token do localStorage
+    function getAuthToken() {
+        const tokenData = localStorage.getItem('user_token');
+        if (!tokenData) return null;
+
+        try {
+            const { token, expiry } = JSON.parse(tokenData);
+            // Verificar expiração
+            if (Date.now() > expiry) {
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_id');
+                return null;
+            }
+            return token;
+        } catch (e) {
+            console.error('Erro ao processar token:', e);
+            return null;
+        }
+    }
+
+    // Pegar dados do login
+    let authToken = getAuthToken();
+    let userId = localStorage.getItem('user_id');
+
+    // Função para mostrar loading
+    function showLoading() {
+        document.getElementById('loading').style.display = 'flex';
+    }
+
+    // Função para esconder loading
+    function hideLoading() {
+        document.getElementById('loading').style.display = 'none';
+    }
+
+    // Função para mostrar toast
+    function showCopyToast(text = 'Copiado!') {
+        let t = document.getElementById('copyToast');
+        if (!t) {
+            t = document.createElement('div');
+            t.id = 'copyToast';
+            t.className = 'copy-toast';
+            document.body.appendChild(t);
+        }
+        t.textContent = text;
+        t.classList.add('show');
+        clearTimeout(t._h);
+        t._h = setTimeout(() => t.classList.remove('show'), 1400);
+    }
+
+    // Copiar link
+    async function copyLink() {
+        const text = document.getElementById('invitationLink').textContent;
+        const toCopy = String(text || '').replace(/\s+/g, '');
+
+        let ok = false;
+        try {
+            await navigator.clipboard.writeText(toCopy);
+            ok = true;
+        } catch (e) {
+            try {
+                const input = document.createElement('input');
+                input.value = toCopy;
+                input.style.position = 'fixed';
+                input.style.opacity = '0';
+                document.body.appendChild(input);
+                input.select();
+                input.setSelectionRange(0, input.value.length);
+                ok = document.execCommand('copy');
+                document.body.removeChild(input);
+            } catch (_) {}
+        }
+
+        if (ok) {
+            showCopyToast('Link de convite copiado!');
+        } else {
+            alert('Não foi possível copiar. Toque e segure para copiar manualmente.');
+        }
+    }
+
+    // Buscar dados da equipe
+    async function fetchTeamData() {
+        authToken = getAuthToken();
+        userId = localStorage.getItem('user_id');
+
+        if (!authToken || !userId) {
+            console.error('Usuário não autenticado');
+            window.location.href = '/index.html';
+            return;
+        }
+
+        showLoading();
+
+        try {
+            const response = await fetch(`https://bd-1-tile.onrender.com/api/team/statistics`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                updateTeamData(data.data);
+            } else {
+                console.error('Erro ao buscar dados da equipe:', response.status);
+            }
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+        } finally {
+            hideLoading();
+        }
+    }
+
+    // Atualizar interface
+    function updateTeamData(data) {
+        if (!data) return;
+
+        if (data.team_overview) {
+            document.getElementById('peopleAdded').textContent = data.team_overview.people_added || '0';
+            document.getElementById('incomeAdded').textContent = `KZ ${data.team_overview.income_added || '0'}`;
+            if (data.team_overview.invitation_link) {
+                document.getElementById('invitationLink').textContent = data.team_overview.invitation_link;
+            }
+        }
+
+        if (data.income_analysis) {
+            document.getElementById('teamSize').textContent = data.income_analysis.team_size || '0';
+            document.getElementById('cumulativeRecharge').textContent = `KZ ${data.income_analysis.cumulative_recharge || '0'}`;
+            document.getElementById('processingRecharge').textContent = `KZ ${data.income_analysis.processing_recharge || '0'}`;
+            document.getElementById('validWithdrawal').textContent = `KZ ${data.income_analysis.valid_withdrawal || '0'}`;
+        }
+
+        if (data.level_data) {
+            if (data.level_data.level1) {
+                document.getElementById('level1Members').textContent = data.level_data.level1.valid_members || '0';
+                document.getElementById('level1Recharge').textContent = `KZ ${data.level_data.level1.team_recharge || '0'}`;
+                document.getElementById('level1Withdrawal').textContent = `KZ ${data.level_data.level1.team_withdrawal || '0'}`;
+            }
+            if (data.level_data.level2) {
+                document.getElementById('level2Members').textContent = data.level_data.level2.valid_members || '0';
+                document.getElementById('level2Recharge').textContent = `KZ ${data.level_data.level2.team_recharge || '0'}`;
+                document.getElementById('level2Withdrawal').textContent = `KZ ${data.level_data.level2.team_withdrawal || '0'}`;
+            }
+            if (data.level_data.level3) {
+                document.getElementById('level3Members').textContent = data.level_data.level3.valid_members || '0';
+                document.getElementById('level3Recharge').textContent = `KZ ${data.level_data.level3.team_recharge || '0'}`;
+                document.getElementById('level3Withdrawal').textContent = `KZ ${data.level_data.level3.team_withdrawal || '0'}`;
+            }
+        }
+
+        document.getElementById('lastUpdate').textContent = `Última atualização: ${new Date().toLocaleTimeString()}`;
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', function () {
+        if (getAuthToken() && localStorage.getItem('user_id')) {
+            fetchTeamData();
+            setInterval(fetchTeamData, 30000);
+        } else {
+            window.location.href = '/index.html';
+        }
+    });
+
+    // Função para formatar números
+    function formatNumber(num) {
+        return new Intl.NumberFormat('pt-AO').format(num);
+    }
+
+    function formatAllNumbers() {
+        const numberElements = document.querySelectorAll('.num, .s');
+        numberElements.forEach(element => {
+            const text = element.textContent;
+            const match = text.match(/(KZ\s*)?([\d,\.]+)/);
+            if (match) {
+                const currency = match[1] || '';
+                const number = parseFloat(match[2].replace(/[^\d]/g, ''));
+                if (!isNaN(number)) {
+                    element.textContent = currency + formatNumber(number);
+                }
+            }
+        });
+    }
+
+    setTimeout(formatAllNumbers, 100);
+</script>

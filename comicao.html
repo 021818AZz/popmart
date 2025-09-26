@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Minha Equipe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            padding: 12px;
+            max-width: 100%;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f4b03a 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+        
+        .header-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 0 50px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px 10px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .stat-number {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fca043;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.3;
+        }
+        
+        .tab-container {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 16px 8px;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            background: white;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 0;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .members-list {
+            max-height: 60vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .member-card {
+            background: white;
+            padding: 16px;
+            margin: 0;
+            border-bottom: 1px solid #f0f0f0;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s ease;
+        }
+        
+        .member-card:active {
+            transform: scale(0.98);
+        }
+        
+        .member-card:last-child {
+            border-bottom: none;
+        }
+        
+        .member-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .member-phone {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+        
+        .member-date {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .member-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        
+        .stat-item {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: #fc8d5d;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+        
+        .stat-item div:first-child {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+        
+        .empty-state img {
+            width: 60px;
+            opacity: 0.5;
+            margin-bottom: 15px;
+        }
+        
+        .empty-state div {
+            font-size: 14px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .bonus-badge {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        
+        /* Melhorias para scroll no iOS */
+        .members-list::-webkit-scrollbar {
+            width: 3px;
+        }
+        
+        .members-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .members-list::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .member-card {
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* Responsividade adicional */
+        @media (max-width: 360px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .stats-grid {
+                gap: 8px;
+            }
+            
+            .stat-card {
+                padding: 12px 8px;
+            }
+            
+            .stat-number {
+                font-size: 16px;
+            }
+            
+            .tab {
+                padding: 14px 6px;
+                font-size: 13px;
+            }
+        }
+        
+        /* Prevenir zoom no input */
+        @media (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Cabeçalho -->
+    <div class="header">
+        <div class="back-btn" onclick="window.history.back()">
+            <img src="https://i.postimg.cc/CxzSVgWm/back.png" alt="Voltar" width="20" height="20">
+        </div>
+        <div class="header-title">Minha Equipe</div>
+    </div>
+
+    <!-- Estatísticas Gerais -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number" id="totalMembers">0</div>
+            <div class="stat-label">Total de Membros</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="totalBonus">KZ 0</div>
+            <div class="stat-label">Bônus Recebidos</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="totalPurchases">0</div>
+            <div class="stat-label">Compras da Equipe</div>
+        </div>
+    </div>
+
+    <!-- Abas de Níveis -->
+    <div class="tab-container">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab(1)">Nível 1</div>
+            <div class="tab" onclick="switchTab(2)">Nível 2</div>
+            <div class="tab" onclick="switchTab(3)">Nível 3</div>
+        </div>
+
+        <!-- Conteúdo Nível 1 -->
+        <div class="tab-content active" id="tab1">
+            <div class="members-list" id="level1Content">
+                <div class="loading">Carregando membros do nível 1...</div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Nível 2 -->
+        <div class="tab-content" id="tab2">
+            <div class="members-list" id="level2Content">
+                <div class="loading">Carregando membros do nível 2...</div>
+            </div>
+        </div>
+
+        <!-- Conteúdo Nível 3 -->
+        <div class="tab-content" id="tab3">
+            <div class="members-list" id="level3Content">
+                <div class="loading">Carregando membros do nível 3...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Configuração da API
+const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+
+// Dados carregados
+let teamData = null;
+let memberDetails = {
+    level1: [],
+    level2: [],
+    level3: []
+};
+
+// Função para verificar autenticação
+function checkAuth() {
+    const tokenData = localStorage.getItem('user_token');
+    if (!tokenData) {
+        window.location.href = '/login.html';
+        return null;
+    }
+    
+    try {
+        const { token, expiry } = JSON.parse(tokenData);
+        if (Date.now() > expiry) {
+            localStorage.removeItem('user_token');
+            window.location.href = '/index.html';
+            return null;
+        }
+        return token;
+    } catch (e) {
+        window.location.href = '/index.html';
+        return null;
+    }
+}
+
+// Função para carregar dados da equipe
+async function loadTeamData() {
+    const token = checkAuth();
+    if (!token) return;
+
+    try {
+        showLoadingState();
+        
+        // Carregar estatísticas da equipe
+        const statsResponse = await fetch(`${API_BASE_URL}/api/team/statistics`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (statsResponse.ok) {
+            const statsData = await statsResponse.json();
+            if (statsData.success) {
+                teamData = statsData.data;
+                updateStats();
+            }
+        }
+
+        // Carregar membros detalhados
+        const membersResponse = await fetch(`${API_BASE_URL}/api/team/members-detailed`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (membersResponse.ok) {
+            const membersData = await membersResponse.json();
+            if (membersData.success) {
+                processMemberData(membersData.data.members);
+                renderMembers();
+            }
+        }
+
+    } catch (error) {
+        console.error('Erro ao carregar dados da equipe:', error);
+        showError('Erro ao carregar dados da equipe');
+    }
+}
+
+// Mostrar estado de carregamento
+function showLoadingState() {
+    const containers = ['level1Content', 'level2Content', 'level3Content'];
+    containers.forEach(containerId => {
+        const container = document.getElementById(containerId);
+        if (container) {
+            container.innerHTML = '<div class="loading">Carregando...</div>';
+        }
+    });
+}
+
+// Processar dados dos membros
+function processMemberData(members) {
+    memberDetails = {
+        level1: members.filter(m => m.level === 1),
+        level2: members.filter(m => m.level === 2),
+        level3: members.filter(m => m.level === 3)
+    };
+}
+
+// Atualizar estatísticas
+function updateStats() {
+    if (!teamData) return;
+
+    document.getElementById('totalMembers').textContent = formatNumber(teamData.income_analysis.team_size || 0);
+    document.getElementById('totalBonus').textContent = `KZ ${formatNumber(teamData.income_analysis.valid_withdrawal || 0)}`;
+    document.getElementById('totalPurchases').textContent = formatNumber(teamData.income_analysis.cumulative_recharge || 0);
+}
+
+// Formatador de números
+function formatNumber(num) {
+    return new Intl.NumberFormat('pt-AO').format(num);
+}
+
+// Renderizar membros
+function renderMembers() {
+    renderLevelMembers(1);
+    renderLevelMembers(2);
+    renderLevelMembers(3);
+}
+
+function renderLevelMembers(level) {
+    const container = document.getElementById(`level${level}Content`);
+    const members = memberDetails[`level${level}`];
+
+    if (!members || members.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = members.map(member => `
+        <div class="member-card">
+            <div class="member-header">
+                <div class="member-phone">${member.mobile}</div>
+                <div class="member-date">${formatDate(member.registration_date)}</div>
+            </div>
+            <div class="member-stats">
+                <div class="stat-item">
+                    <div>Total Gasto</div>
+                    <div class="stat-value">KZ ${formatNumber(member.total_recharge)}</div>
+                </div>
+                <div class="stat-item">
+                    <div>Compras</div>
+                    <div class="stat-value">${formatNumber(member.recharge_count)}</div>
+                </div>
+                <div class="stat-item">
+                    <div>Bônus Gerado</div>
+                    <div class="stat-value">KZ ${formatNumber(member.generated_bonus)}</div>
+                </div>
+                <div class="stat-item">
+                    <div>Meu Bônus</div>
+                    <div class="stat-value">KZ ${formatNumber(member.bonus_value)}</div>
+                </div>
+            </div>
+            ${member.recharge_count > 0 ? '<span class="bonus-badge">Ativo</span>' : ''}
+        </div>
+    `).join('');
+}
+
+// Função para alternar abas
+function switchTab(level) {
+    // Remover classe active de todas as abas e conteúdos
+    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    
+    // Adicionar classe active à aba e conteúdo selecionados
+    document.querySelector(`.tab:nth-child(${level})`).classList.add('active');
+    document.getElementById(`tab${level}`).classList.add('active');
+    
+    // Garantir que os membros sejam renderizados
+    renderLevelMembers(level);
+}
+
+// Função para formatar data
+function formatDate(dateString) {
+    try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-AO', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    } catch (e) {
+        return dateString;
+    }
+}
+
+// Função para mostrar erro
+function showError(message) {
+    const containers = ['level1Content', 'level2Content', 'level3Content'];
+    containers.forEach(containerId => {
+        const container = document.getElementById(containerId);
+        if (container) {
+            container.innerHTML = `<div style="color: #e74c3c; text-align: center; padding: 30px; font-size: 14px;">${message}</div>`;
+        }
+    });
+}
+
+// Carregar dados quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    // Prevenir comportamento de zoom duplo-toque
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+
+    loadTeamData();
+});
+
+// Função para fazer logout (caso necessário)
+function logout() {
+    localStorage.removeItem('user_token');
+    localStorage.removeItem('user_mobile');
+    localStorage.removeItem('user_id');
+    window.location.href = '/index.html';
+}
+
+// Melhorar performance em dispositivos móveis
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+}, { passive: false });
+</script>
+</body>
+</html>

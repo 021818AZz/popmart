@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt" style="font-size: 16px;">
+<head>
+    <meta charset="utf-8">
+    <title>Histórico de Depósitos - Ai Tech 360</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .container {
+            padding: 0 15px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .head {
+            padding: 20px 0;
+            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back {
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .back img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .flex1 {
+            flex: 1;
+        }
+
+        .tac {
+            text-align: center;
+        }
+
+        /* Estilos para itens de depósito */
+        .deposit-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #fb8e36;
+        }
+
+        .deposit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .deposit-amount {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .deposit-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-failed {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .deposit-details {
+            margin-top: 10px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-state img {
+            width: 100px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .empty-state .subtext {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border-left: 4px solid #dc3545;
+        }
+
+        .filter-tabs {
+            display: flex;
+            background: white;
+            border-radius: 15px;
+            padding: 5px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .filter-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            color: white;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .summary-stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .receipt-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: 2px solid #f0f0f0;
+        }
+
+        .view-receipt {
+            color: #fb8e36;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .date-badge {
+            background: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .bank-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            opacity: 0.7;
+        }
+
+        
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="page">
+        <div class="headers">
+            <div class="head">
+                <div class="container flex">
+                    <div class="back" onclick="goBack()">
+                        <img src="https://i.postimg.cc/CxzSVgWm/back.png" alt="Voltar">
+                    </div>
+                    <div class="name tac flex1">Histórico de Depósitos</li>
+                    <div class="flex1"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-container">
+            <div class="content-scroll">
+                <div class="container">
+                    
+                    <!-- Cartão de Resumo -->
+                    <div class="summary-card">
+                        <div class="summary-stats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="totalDeposits">0</div>
+                                <div class="stat-label">Total Depósitos</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="totalAmount">0 KZ</div>
+                                <div class="stat-label">Valor Total</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="pendingCount">0</div>
+                                <div class="stat-label">Pendentes</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtros -->
+                    <div class="filter-tabs">
+                        <div class="filter-tab active" onclick="filterDeposits('all')">Todos</div>
+                        <div class="filter-tab" onclick="filterDeposits('pending')">Pendentes</div>
+                        <div class="filter-tab" onclick="filterDeposits('completed')">Concluídos</div>
+                        <div class="filter-tab" onclick="filterDeposits('failed')">Falhados</div>
+                    </div>
+
+                    <!-- Lista de Depósitos -->
+                    <div id="depositList">
+                        <div class="loading">Carregando histórico de depósitos...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para visualizar comprovante -->
+<div class="modal-overlay" id="receiptModal">
+    <button class="modal-close" onclick="closeReceiptModal()">&times;</button>
+    <div class="modal-content">
+        <img id="modalReceipt" class="modal-img" src="" alt="Comprovante">
+    </div>
+</div>
+
+<script>
+    // Configurações
+    const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+    let currentFilter = 'all';
+    let allDeposits = [];
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!isTokenValid()) {
+            window.location.href = '/index.html';
+            return;
+        }
+        loadDepositHistory();
+    });
+
+    // Função para voltar
+    function goBack() {
+        window.history.back();
+    }
+
+    // Carregar histórico de depósitos
+    async function loadDepositHistory() {
+        try {
+            showLoading(true);
+            const token = getToken();
+            
+            const response = await fetch(`${API_BASE_URL}/api/deposits`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Erro ao carregar histórico');
+            }
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                allDeposits = data.data.deposits || [];
+                updateSummary();
+                displayDeposits(allDeposits);
+            } else {
+                throw new Error(data.message || 'Erro ao carregar dados');
+            }
+        } catch (error) {
+            console.error('Erro ao carregar histórico:', error);
+            showError('Erro ao carregar histórico: ' + error.message);
+        } finally {
+            showLoading(false);
+        }
+    }
+
+    // Atualizar resumo
+    function updateSummary() {
+        const totalDeposits = allDeposits.length;
+        const totalAmount = allDeposits.reduce((sum, d) => sum + d.amount, 0);
+        const pendingCount = allDeposits.filter(d => d.status === 'pending').length;
+        
+        document.getElementById('totalDeposits').textContent = totalDeposits;
+        document.getElementById('totalAmount').textContent = totalAmount.toLocaleString('pt-AO') + ' KZ';
+        document.getElementById('pendingCount').textContent = pendingCount;
+    }
+
+    // Filtrar depósitos
+    function filterDeposits(filter) {
+        currentFilter = filter;
+        
+        // Atualizar tabs ativas
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        let filteredDeposits = allDeposits;
+        
+        if (filter !== 'all') {
+            filteredDeposits = allDeposits.filter(d => d.status === filter);
+        }
+        
+        displayDeposits(filteredDeposits);
+    }
+
+    // Exibir lista de depósitos
+    function displayDeposits(deposits) {
+        const depositList = document.getElementById('depositList');
+        
+        if (deposits.length === 0) {
+            depositList.innerHTML = `
+                <div class="empty-state">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik01MCA4My4zMzMzQzY4LjgwOTUgODMuMzMzMyA4My4zMzMzIDY4LjgwOTUgODMuMzMzMyA1MEM4My4zMzMzIDMxLjE5MDUgNjguODA5NSAxNi42NjY3IDUwIDE2LjY2NjdDMzEuMTkwNSAxNi42NjY3IDE2LjY2NjcgMzEuMTkwNSAxNi42NjY3IDUwQzE2LjY2NjcgNjguODA5NSAzMS4xOTA1IDgzLjMzMzMgNTAgODMuMzMzM1oiIGZpbGw9IiNEOEQ4RDgiLz4KPHBhdGggZD0iTTUzLjMzMzMgNDMuMzMzM0g0Ni42NjY3VjY2LjY2NjdINTMuMzMzM1Y0My4zMzMzWiIgZmlsbD0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNNTAgNzMuMzMzM0M1Mi43NjE5IDczLjMzMzMgNTUgNzEuMDk1MiA1NSA2OC4zMzMzQzU1IDY1LjU3MTQgNTIuNzYxOSA2My4zMzMzIDUwIDYzLjMzMzNDNDcuMjM4MSA2My4zMzMzIDQ1IDY1LjU3MTQgNDUgNjguMzMzM0M0NSA3MS4wOTUyIDQ3LjIzODEgNzMuMzMzMyA1MCA3My4zMzMzWiIgZmlsbD0iIzk5OTk5OSIvPgo8L3N2Zz4K" alt="Nenhum depósito">
+                    <p>Nenhum depósito encontrado</p>
+                    <p class="subtext">${currentFilter === 'all' ? 'Você ainda não realizou nenhum depósito' : `Nenhum depósito com status "${getStatusText(currentFilter)}"`}</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Ordenar por data (mais recente primeiro)
+        deposits.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        
+        let html = '';
+        let currentDate = '';
+        
+        deposits.forEach(deposit => {
+            const date = new Date(deposit.created_at);
+            const dateString = date.toLocaleDateString('pt-AO', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            // Agrupar por data
+            if (dateString !== currentDate) {
+                currentDate = dateString;
+                html += `<div class="date-badge">${dateString}</div>`;
+            }
+            
+            const time = date.toLocaleTimeString('pt-AO', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            const statusText = getStatusText(deposit.status);
+            const statusClass = `status-${deposit.status}`;
+            
+            html += `
+                <div class="deposit-item">
+                    <div class="deposit-header">
+                        <div class="deposit-amount">+${deposit.amount.toLocaleString('pt-AO')} KZ</div>
+                        <div class="deposit-status ${statusClass}">${statusText}</div>
+                    </div>
+                    
+                    <div class="deposit-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Banco:</span>
+                            <span class="detail-value">${deposit.bank_name}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Conta:</span>
+                            <span class="detail-value">${deposit.account_name}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">IBAN:</span>
+                            <span class="detail-value">${deposit.iban}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Data:</span>
+                            <span class="detail-value">${time}</span>
+                        </div>
+                        ${deposit.processed_at ? `
+                        <div class="detail-row">
+                            <span class="detail-label">Processado em:</span>
+                            <span class="detail-value">${new Date(deposit.processed_at).toLocaleString('pt-AO')}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    ${deposit.receipt_image ? `
+                    <div style="margin-top: 15px;">
+                        <img src="${deposit.receipt_image}" 
+                             alt="Comprovante" 
+                             class="receipt-preview"
+                             onclick="viewReceipt('${deposit.receipt_image}')">
+                        <a href="javascript:void(0)" onclick="viewReceipt('${deposit.receipt_image}')" class="view-receipt">
+                            Ver comprovante
+                        </a>
+                    </div>
+                    ` : `
+                    <div style="margin-top: 15px; color: #999; font-size: 14px;">
+                        Comprovante não enviado
+                    </div>
+                    `}
+                </div>
+            `;
+        });
+        
+        depositList.innerHTML = html;
+    }
+
+    // Visualizar comprovante
+    function viewReceipt(imageUrl) {
+        document.getElementById('modalReceipt').src = imageUrl;
+        document.getElementById('receiptModal').classList.add('active');
+    }
+
+    function closeReceiptModal() {
+        document.getElementById('receiptModal').classList.remove('active');
+    }
+
+    // Obter texto do status
+    function getStatusText(status) {
+        const statusMap = {
+            'pending': 'Pendente',
+            'completed': 'Concluído',
+            'failed': 'Falhou'
+        };
+        
+        return statusMap[status] || status;
+    }
+
+    // Mostrar loading
+    function showLoading(show) {
+        const depositList = document.getElementById('depositList');
+        if (show) {
+            depositList.innerHTML = '<div class="loading">Carregando histórico de depósitos...</div>';
+        }
+    }
+
+    // Mostrar erro
+    function showError(message) {
+        const depositList = document.getElementById('depositList');
+        depositList.innerHTML = `<div class="error-message">${message}</div>`;
+    }
+
+    // Funções de autenticação
+    function isTokenValid() {
+        const tokenData = localStorage.getItem('user_token');
+        
+        if (!tokenData) return false;
+        
+        try {
+            const { expiry } = JSON.parse(tokenData);
+            return Date.now() < expiry;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function getToken() {
+        const tokenData = localStorage.getItem('user_token');
+        if (!tokenData) return null;
+        
+        try {
+            const { token } = JSON.parse(tokenData);
+            return token;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    // Fechar modal ao clicar fora
+    document.getElementById('receiptModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeReceiptModal();
+        }
+    });
+
+    // Fechar modal com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeReceiptModal();
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<html style="font-size: 47.2px;">
+<head>
+    <meta charset="utf-8">
+    <title>Histórico de Saques - Ai Tech 360</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="full-screen" content="true">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <meta name="renderer" content="webkit">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .container {
+            padding: 0 15px;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .head[data-v-a53c4a36] {
+            padding: 20px 0;
+            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            color: white;
+        }
+
+        .badger {
+            background: bisque;
+            padding: 3px 8px;
+            text-align: center;
+            text-transform: capitalize;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .withdrawal-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .withdrawal-info {
+            flex: 1;
+        }
+
+        .withdrawal-amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .withdrawal-details {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .withdrawal-status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-failed {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .empty-state img {
+            width: 80px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .filter-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .filter-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #fb8e36 0%, #2575fc 100%);
+            color: white;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .summary-stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .back {
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .flex1 {
+            flex: 1;
+        }
+
+        .tac {
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="w856">
+<div id="app" class="applang">
+    <div data-v-6e534c71="" data-v-443ea612="" class="page">
+        <div data-v-6e534c71="" class="headers">
+            <div data-v-a53c4a36="" data-v-443ea612="" class="head" data-v-6e534c71="">
+                <div data-v-a53c4a36="" class="container flex">
+                    <div data-v-a53c4a36="" class="back" onclick="goBack()">
+                        <img data-v-a53c4a36="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALkSURBVHgB7ZnPThNBHMd/v9lpK6XFJrWlG5DsoYeqkNSbN/UN8AmEJ9A3EJ/A+ATi0ZMc9YTePFbgwIHDJqBZMDEDLGvTf+NvhBVKgENnZnvZT9J0822y+/3u7Mzvt1OAlJSUlBQNEMbAzMz9Zpc5L6SUh92QrwjREjAiHBJGme8xvk53roSIkCkMAAS8hBFhkCC1WsMj8x/psBRryOAxaJBYAGVeZrLrdOhd1JmUb0GDRB6h68yjhNfB3uYqaGB9BEolr3S9+Y0V0MTqKqTMZwtT6zRXm5cu+j7Y3VgCA1h9hHLF4jv6ag6ruBbsfl8CQ1gLUL27QOZx8aImEVodhstgECtzoDo3/woBl4ZEBL/D2FPhj160rsJ4gH/mJVsZEsk8WjB/emqD3GQ+8Fs+WMBYgHGYP72EASpzD54z6axeOrMg8w9tmldoz4Gqu7B4lXlu+c6fX0qDCnWWiFxVWeosz3UJ8tnB7uYaJIDeCKDzBs46SynPJJDLSZlXmF1GJX7pdaUPCaIVwOHOslpp6LBNn8/06HxlnD2pVJpNSAgHNAhFIPK5uQ/AB4c0BYJYRy4b+ZwroigIwDJaARRR9DOcyrt7ksnhu84H3mTuzk4U/QrBItoBFGFII1F0BaJsxBr1Qhw4ztsOYSSAIjoOgkJxuk3O67GmQkiH1bOOu91uB22wgLEAipPj/b3ilKvqgBdrVB9uYUY2bIUwGkARHgV+kiGMB1DcFKJanmgJIXpgCCsBFCrE5O0qVWmsxZoK0e1n6pVyfstUCGsBFCdHB9uXQ1CKQqefnY2OD1pgAOvbKnmn/InajKGCRluKnupiwQBWR0AhhN+rlO9tdfvtOq2rhf8/MKzlJ6dvReH+DmhgPYDiNIS70+tToaN5EOu0Lzqbo9rxh5ZfGJHE9kZ9eqGfyLBV2pEberHnMNBq/BLdnb4qhETmgwZj+YPD85qlk17nUV9y8fvHxjdISUlJSRkXfwFHSxhpEL4NbwAAAABJRU5ErkJggg==" alt="">
+                    </div>
+                    <div data-v-a53c4a36="" class="name tac">Histórico de Saques</div>
+                    <div data-v-a53c4a36="" class="flex1"></div>
+                </div>
+                <div data-v-a53c4a36=""></div>
+            </div>
+        </div>
+        <div data-v-6e534c71="" id="scroll" class="content-container" style="padding-top: 0px; padding-bottom: 62px;">
+            <div data-v-6e534c71="" id="content" class="content-scroll">
+                <div data-v-443ea612="" data-v-6e534c71="" class="container">
+                    
+                    <!-- Cartão de Resumo -->
+                    <div class="summary-card">
+                        <div class="summary-stats">
+                            <div class="stat-item">
+                                <div class="stat-value" id="totalWithdrawals">0</div>
+                                <div class="stat-label">Total Saques</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="totalAmount">0 KZ</div>
+                                <div class="stat-label">Valor Total</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="pendingCount">0</div>
+                                <div class="stat-label">Pendentes</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filtros -->
+                    <div class="filter-tabs">
+                        <div class="filter-tab active" onclick="filterWithdrawals('all')">Todos</div>
+                        <div class="filter-tab" onclick="filterWithdrawals('pending')">Pendentes</div>
+                        <div class="filter-tab" onclick="filterWithdrawals('completed')">Concluídos</div>
+                    </div>
+
+                    <div data-v-443ea612="" data-v-6e534c71="" class="itemBox">
+                        <div data-v-443ea612="" data-v-6e534c71="" class="list" style="margin-top: 20px;" id="withdrawalList">
+                            <!-- Histórico será carregado aqui -->
+                            <div class="loading"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Configurações
+    const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+    let currentFilter = 'all';
+    let allWithdrawals = [];
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar se o usuário está autenticado
+        if (!isTokenValid()) {
+            window.location.href = '/index.html';
+            return;
+        }
+        
+        // Carregar histórico de saques
+        loadWithdrawalHistory();
+    });
+
+    // Função para voltar
+    function goBack() {
+        window.history.back();
+    }
+
+    // Carregar histórico de saques
+    async function loadWithdrawalHistory() {
+        try {
+            const token = getToken();
+            
+            const response = await fetch(`${API_BASE_URL}/api/withdrawals`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Erro ao carregar histórico');
+            }
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                allWithdrawals = data.data.withdrawals || [];
+                updateSummary();
+                displayWithdrawals(allWithdrawals);
+            } else {
+                throw new Error(data.message || 'Erro ao carregar dados');
+            }
+        } catch (error) {
+            console.error('Erro ao carregar histórico:', error);
+            showError('Erro ao carregar histórico: ' + error.message);
+        }
+    }
+
+    // Atualizar resumo
+    function updateSummary() {
+        const totalWithdrawals = allWithdrawals.length;
+        const totalAmount = allWithdrawals.reduce((sum, w) => sum + w.amount, 0);
+        const pendingCount = allWithdrawals.filter(w => w.status === 'pending').length;
+        
+        document.getElementById('totalWithdrawals').textContent = totalWithdrawals;
+        document.getElementById('totalAmount').textContent = totalAmount.toLocaleString('pt-AO') + ' KZ';
+        document.getElementById('pendingCount').textContent = pendingCount;
+    }
+
+    // Filtrar saques
+    function filterWithdrawals(filter) {
+        currentFilter = filter;
+        
+        // Atualizar tabs ativas
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        let filteredWithdrawals = allWithdrawals;
+        
+        if (filter !== 'all') {
+            filteredWithdrawals = allWithdrawals.filter(w => w.status === filter);
+        }
+        
+        displayWithdrawals(filteredWithdrawals);
+    }
+
+    // Exibir lista de saques
+    function displayWithdrawals(withdrawals) {
+        const withdrawalList = document.getElementById('withdrawalList');
+        
+        if (withdrawals.length === 0) {
+            withdrawalList.innerHTML = `
+                <div class="empty-state">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMyIDU2QzQ0LjE1MDMgNTYgNTQgNDYuMTUwMyA1NCAzNEM1NCAyMS44NDk3IDQ0LjE1MDMgMTIgMzIgMTJDMTkuODQ5NyAxMiAxMCAyMS44NDk3IDEwIDM0QzEwIDQ2LjE1MDMgMTkuODQ5NyA1NiAzMiA1NloiIGZpbGw9IiNEOEQ4RDgiLz4KPHBhdGggZD0iTTM0IDI2SDMwVjM4SDM0VjI2WiIgZmlsbD0iIzk5OTk5OSIvPgo8cGF0aCBkPSJNMzIgNDJDMzMuMTA0NiA0MiAzNCA0MS4xMDQ2IDM0IDQwQzM0IDM4Ljg5NTQgMzMuMTA0NiAzOCAzMiAzOEMzMC44OTU0IDM4IDMwIDM4Ljg5NTQgMzAgNDBDMzAgNDEuMTA0NiAzMC44OTU0IDQyIDMyIDQyWiIgZmlsbD0iIzk5OTk5OSIvPgo8L3N2Zz4K" alt="Nenhum saque">
+                    <p></p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Ordenar por data (mais recente primeiro)
+        withdrawals.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        
+        let html = '';
+        
+        withdrawals.forEach(withdrawal => {
+            const date = new Date(withdrawal.created_at).toLocaleDateString('pt-AO');
+            const time = new Date(withdrawal.created_at).toLocaleTimeString('pt-AO', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            const statusText = getStatusText(withdrawal.status);
+            const statusClass = `status-${withdrawal.status}`;
+            
+            html += `
+                <div class="withdrawal-item">
+                    <div class="withdrawal-info">
+                        <div class="withdrawal-amount">${withdrawal.amount.toLocaleString('pt-AO')} KZ</div>
+                        <div class="withdrawal-details">
+                            <div>${withdrawal.bank_name} • ${withdrawal.account_name}</div>
+                            <div>${date} às ${time}</div>
+                            <div>Líquido: ${withdrawal.net_amount.toLocaleString('pt-AO')} KZ (Taxa: ${withdrawal.tax.toLocaleString('pt-AO')} KZ)</div>
+                        </div>
+                    </div>
+                    <div class="withdrawal-status ${statusClass}">${statusText}</div>
+                </div>
+            `;
+        });
+        
+        withdrawalList.innerHTML = html;
+    }
+
+    // Obter texto do status
+    function getStatusText(status) {
+        const statusMap = {
+            'pending': 'Pendente',
+            'completed': 'Concluído',
+            'failed': 'Falhou'
+        };
+        
+        return statusMap[status] || status;
+    }
+
+    // Mostrar erro
+    function showError(message) {
+        const withdrawalList = document.getElementById('withdrawalList');
+        withdrawalList.innerHTML = `<div class="error-message">${message}</div>`;
+    }
+
+    // Funções de autenticação
+    function isTokenValid() {
+        const tokenData = localStorage.getItem('user_token');
+        
+        if (!tokenData) return false;
+        
+        try {
+            const { token, expiry } = JSON.parse(tokenData);
+            
+            if (Date.now() > expiry) {
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_mobile');
+                localStorage.removeItem('user_id');
+                return false;
+            }
+            
+            return true;
+        } catch (e) {
+            console.error('Erro ao verificar token:', e);
+            return false;
+        }
+    }
+
+    function getToken() {
+        const tokenData = localStorage.getItem('user_token');
+        if (!tokenData) return null;
+        
+        try {
+            const { token } = JSON.parse(tokenData);
+            return token;
+        } catch (e) {
+            console.error('Erro ao obter token:', e);
+            return null;
+        }
+    }
+</script>
+</body>
+</html>

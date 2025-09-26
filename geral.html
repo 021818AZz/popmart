@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Histórico de Transações</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            padding: 12px;
+            max-width: 100%;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f1aa58 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+        
+        .header-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 0 50px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 15px 10px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .stat-number {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-number.entrada {
+            color: #28a745;
+        }
+        
+        .stat-number.saida {
+            color: #dc3545;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.3;
+        }
+        
+        .filter-container {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #f8f9fa;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .transactions-list {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-height: 60vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .transaction-card {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .transaction-card:active {
+            transform: scale(0.98);
+        }
+        
+        .transaction-card:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-info {
+            flex: 1;
+        }
+        
+        .transaction-type {
+            font-weight: 600;
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .transaction-date {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .transaction-amount {
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .amount-entrada {
+            color: #28a745;
+        }
+        
+        .amount-saida {
+            color: #dc3545;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+        
+        .empty-state img {
+            width: 60px;
+            opacity: 0.5;
+            margin-bottom: 15px;
+        }
+        
+        .empty-state div {
+            font-size: 14px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+        
+        .icon-entrada {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        
+        .icon-saida {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+        
+        .transaction-content {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .transaction-card {
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* Responsividade adicional */
+        @media (max-width: 360px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .stats-grid {
+                gap: 8px;
+            }
+            
+            .stat-card {
+                padding: 12px 8px;
+            }
+            
+            .stat-number {
+                font-size: 16px;
+            }
+            
+            .transaction-card {
+                padding: 14px;
+            }
+            
+            .transaction-amount {
+                font-size: 15px;
+            }
+        }
+        .transaction-icon {
+    width: 40px;         /* tamanho do ícone */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transaction-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;  /* mantém proporção da imagem */
+}
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Cabeçalho -->
+    <div class="header">
+        <div class="back-btn" onclick="window.history.back()">
+            <img src="https://i.postimg.cc/CxzSVgWm/back.png" alt="Voltar" width="20" height="20">
+        </div>
+        <div class="header-title">Histórico de Transações</div>
+    </div>
+
+    <!-- Estatísticas Gerais -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number entrada" id="totalEntradas">KZ 0</div>
+            <div class="stat-label">Total de Entradas</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number saida" id="totalSaidas">KZ 0</div>
+            <div class="stat-label">Total de Saídas</div>
+        </div>
+    </div>
+
+    <!-- Filtro -->
+    <div class="filter-container">
+        <select class="filter-select" id="filterType" onchange="filterTransactions()">
+            <option value="all">Todas as Transações</option>
+            <option value="entrada">Apenas Entradas</option>
+            <option value="saida">Apenas Saídas</option>
+        </select>
+    </div>
+
+    <!-- Lista de Transações -->
+    <div class="transactions-list">
+        <div id="transactionsContent">
+            <div class="loading">Carregando transações...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Configuração da API
+const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+
+// Dados carregados
+let transactionsData = [];
+let filteredTransactions = [];
+
+// Função para verificar autenticação
+function checkAuth() {
+    const tokenData = localStorage.getItem('user_token');
+    if (!tokenData) {
+        window.location.href = '/index.html';
+        return null;
+    }
+    
+    try {
+        const { token, expiry } = JSON.parse(tokenData);
+        if (Date.now() > expiry) {
+            localStorage.removeItem('user_token');
+            window.location.href = '/index.html';
+            return null;
+        }
+        return token;
+    } catch (e) {
+        window.location.href = '/index.html';
+        return null;
+    }
+}
+
+// Função para carregar histórico de transações usando rotas existentes
+async function loadTransactionHistory() {
+    const token = checkAuth();
+    if (!token) return;
+
+    try {
+        showLoadingState();
+        
+        // Usar rotas existentes do server.js para buscar dados
+        const [withdrawalsResponse, depositsResponse, tasksResponse, commissionsResponse] = await Promise.all([
+            // Saques
+            fetch(`${API_BASE_URL}/api/withdrawals`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }),
+            // Depósitos
+            fetch(`${API_BASE_URL}/api/deposits`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }),
+            // Tarefas (check-in e rendimentos)
+            fetch(`${API_BASE_URL}/api/tasks/history`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }),
+            // Comissões (bônus)
+            fetch(`${API_BASE_URL}/api/team/commissions`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+        ]);
+
+        // Processar saques (withdrawals) - SAÍDAS
+        let saidas = [];
+        if (withdrawalsResponse.ok) {
+            const withdrawalsData = await withdrawalsResponse.json();
+            if (withdrawalsData.success && withdrawalsData.data.withdrawals) {
+                saidas = withdrawalsData.data.withdrawals.map(withdrawal => ({
+                    id: withdrawal.id,
+                    type: 'saida',
+                    operation_type: 'withdrawal',
+                    amount: withdrawal.amount,
+                    date: withdrawal.created_at,
+                    description: `Saque - ${withdrawal.bank_name}`,
+                    status: withdrawal.status
+                }));
+            }
+        }
+
+        // Processar depósitos - ENTRADAS (quando aprovados)
+        let entradas = [];
+        if (depositsResponse.ok) {
+            const depositsData = await depositsResponse.json();
+            if (depositsData.success && depositsData.data.deposits) {
+                entradas = depositsData.data.deposits
+                    .filter(deposit => deposit.status === 'completed')
+                    .map(deposit => ({
+                        id: deposit.id,
+                        type: 'entrada',
+                        operation_type: 'deposit',
+                        amount: deposit.amount,
+                        date: deposit.processed_at || deposit.created_at,
+                        description: `Depósito - ${deposit.bank_name}`,
+                        status: deposit.status
+                    }));
+            }
+        }
+
+        // Processar tarefas - ENTRADAS
+        let tarefas = [];
+        if (tasksResponse.ok) {
+            const tasksData = await tasksResponse.json();
+            if (tasksData.success && tasksData.data.tasks) {
+                tarefas = tasksData.data.tasks.map(task => ({
+                    id: task.id,
+                    type: 'entrada',
+                    operation_type: task.task_type === 'daily_checkin' ? 'checkin' : 'product_income',
+                    amount: task.amount,
+                    date: task.task_date,
+                    description: task.description || `Tarefa - ${task.task_type}`,
+                    status: 'completed'
+                }));
+            }
+        }
+
+        // Processar comissões - ENTRADAS
+        let comissoes = [];
+        if (commissionsResponse.ok) {
+            const commissionsData = await commissionsResponse.json();
+            if (commissionsData.success && commissionsData.data.commissions) {
+                comissoes = commissionsData.data.commissions.map(commission => ({
+                    id: commission.id,
+                    type: 'entrada',
+                    operation_type: 'commission',
+                    amount: commission.bonus_amount,
+                    date: commission.created_at,
+                    description: `Comissão Nível ${commission.level} - ${commission.referred_user.mobile}`,
+                    status: 'completed'
+                }));
+            }
+        }
+
+        // Combinar todas as transações
+        transactionsData = [...entradas, ...saidas, ...tarefas, ...comissoes];
+        filteredTransactions = [...transactionsData];
+        
+        updateStats();
+        renderTransactions();
+
+    } catch (error) {
+        console.error('Erro ao carregar histórico:', error);
+        showError('Erro ao carregar histórico de transações');
+    }
+}
+
+// Mostrar estado de carregamento
+function showLoadingState() {
+    const container = document.getElementById('transactionsContent');
+    if (container) {
+        container.innerHTML = '<div class="loading">Carregando transações...</div>';
+    }
+}
+
+// Atualizar estatísticas
+function updateStats() {
+    const totalEntradas = transactionsData
+        .filter(t => t.type === 'entrada')
+        .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
+    
+    const totalSaidas = transactionsData
+        .filter(t => t.type === 'saida')
+        .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
+
+    document.getElementById('totalEntradas').textContent = `KZ ${formatNumber(totalEntradas)}`;
+    document.getElementById('totalSaidas').textContent = `KZ ${formatNumber(totalSaidas)}`;
+}
+
+// Filtrar transações
+function filterTransactions() {
+    const filterType = document.getElementById('filterType').value;
+    
+    if (filterType === 'all') {
+        filteredTransactions = [...transactionsData];
+    } else {
+        filteredTransactions = transactionsData.filter(t => t.type === filterType);
+    }
+    
+    renderTransactions();
+}
+
+// Renderizar transações
+function renderTransactions() {
+    const container = document.getElementById('transactionsContent');
+
+    if (!filteredTransactions || filteredTransactions.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div>📊</div>
+                <div></div>
+            </div>
+        `;
+        return;
+    }
+
+    // Ordenar por data (mais recente primeiro)
+    const sortedTransactions = [...filteredTransactions].sort((a, b) => 
+        new Date(b.date) - new Date(a.date)
+    );
+
+    container.innerHTML = sortedTransactions.map(transaction => `
+        <div class="transaction-card">
+            <div class="transaction-content">
+                <div class="transaction-icon ${transaction.type === 'entrada' ? 'icon-entrada' : 'icon-saida'}">
+    <img src="${transaction.type === 'entrada' ? 'https://i.postimg.cc/vZJc0sh8/external-transactions-gamefi-filled-outline-wichaiwi.png' : 'https://i.postimg.cc/2ygDCzVj/withdrawal-limit.png'}" alt="${transaction.type}">
+</div>
+
+                <div class="transaction-info">
+                    <div class="transaction-type">${getTransactionTypeLabel(transaction.operation_type)}</div>
+                    <div class="transaction-date">${formatDate(transaction.date)}</div>
+                    ${transaction.status ? `<div style="font-size: 10px; color: ${getStatusColor(transaction.status)}">${transaction.status}</div>` : ''}
+                </div>
+            </div>
+            <div class="transaction-amount ${transaction.type === 'entrada' ? 'amount-entrada' : 'amount-saida'}">
+                ${transaction.type === 'entrada' ? '+' : '-'} KZ ${formatNumber(transaction.amount)}
+            </div>
+        </div>
+    `).join('');
+}
+
+// Obter label do tipo de operação
+function getTransactionTypeLabel(operationType) {
+    const labels = {
+        'deposit': 'Depósito',
+        'withdrawal': 'Saque',
+        'checkin': 'Check-in Diário',
+        'product_income': 'Rendimento',
+        'commission': 'Comissão',
+        'purchase': 'Compra',
+        'transfer': 'Transferência',
+        'refund': 'Reembolso'
+    };
+    
+    return labels[operationType] || operationType;
+}
+
+// Obter cor do status
+function getStatusColor(status) {
+    const colors = {
+        'completed': '#28a745',
+        'pending': '#ffc107',
+        'failed': '#dc3545',
+        'processing': '#17a2b8'
+    };
+    return colors[status] || '#666';
+}
+
+// Formatador de números
+function formatNumber(num) {
+    if (!num) return '0';
+    return new Intl.NumberFormat('pt-AO').format(parseFloat(num));
+}
+
+// Função para formatar data
+function formatDate(dateString) {
+    try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-AO', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    } catch (e) {
+        return dateString;
+    }
+}
+
+// Função para mostrar erro
+function showError(message) {
+    const container = document.getElementById('transactionsContent');
+    if (container) {
+        container.innerHTML = `<div style="color: #e74c3c; text-align: center; padding: 30px; font-size: 14px;">${message}</div>`;
+    }
+}
+
+// Carregar dados quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    // Prevenir comportamento de zoom duplo-toque
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+
+    loadTransactionHistory();
+});
+
+// Melhorar performance em dispositivos móveis
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+}, { passive: false });
+</script>
+</body>
+</html>

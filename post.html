@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Feed Social</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 12px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .header-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 0 50px;
+        }
+        
+        .create-post {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .post-input {
+            width: 100%;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            resize: none;
+            margin-bottom: 10px;
+            font-family: inherit;
+        }
+        
+        .image-upload-area {
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .preview-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .image-count {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .post-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .post-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .feed {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .post-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+        }
+        
+        .post-time {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .post-content {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .post-images {
+            display: grid;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .post-images.one-image {
+            grid-template-columns: 1fr;
+        }
+        
+        .post-images.two-images {
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .post-images.three-images {
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .post-images.three-images img:first-child {
+            grid-column: 1 / 3;
+        }
+        
+        .post-images img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .post-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .post-actions-buttons {
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 10px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            background: none;
+            border: 1px solid #e0e0e0;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .action-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .comments-section {
+            margin-top: 10px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 10px;
+        }
+        
+        .comment-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .comment-input input {
+            flex: 1;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 8px 12px;
+        }
+        
+        .comment-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        
+        .comments-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .comment-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #f8f8f8;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .comment-text {
+            font-size: 14px;
+        }
+        
+        .comment-time {
+            font-size: 11px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <div class="header">
+            <div class="back-btn" onclick="window.history.back()">
+                <img src="https://i.postimg.cc/CxzSVgWm/back.png" alt="Voltar" width="20" height="20">
+            </div>
+            <div class="header-title">Feed Social</div>
+        </div>
+
+        <!-- Criar Publicação -->
+        <div class="create-post">
+            <textarea 
+                class="post-input" 
+                id="postContent" 
+                placeholder="O que você está pensando?" 
+                rows="3"
+            ></textarea>
+            
+            <div class="image-upload-area" onclick="document.getElementById('postImages').click()">
+                <div>📷 Clique para adicionar imagens (máx. 3)</div>
+                <input type="file" id="postImages" accept="image/*" multiple style="display: none;">
+            </div>
+            
+            <div class="image-preview" id="imagePreview"></div>
+            
+            <div class="post-actions">
+                <div class="image-count" id="imageCount">0/3 imagens</div>
+                <button class="post-btn" id="postBtn" onclick="createPost()">Publicar</button>
+            </div>
+        </div>
+
+        <!-- Feed -->
+        <div class="feed" id="feedContainer">
+            <div style="text-align: center; padding: 40px; color: #666;">
+                Carregando publicações...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3000';
+        let selectedImages = [];
+        let posts = [];
+
+        // Verificar autenticação
+        function checkAuth() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) {
+                window.location.href = '/login.html';
+                return null;
+            }
+            try {
+                const { token, expiry } = JSON.parse(tokenData);
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    window.location.href = '/login.html';
+                    return null;
+                }
+                return token;
+            } catch (e) {
+                window.location.href = '/login.html';
+                return null;
+            }
+        }
+
+        // Gerenciar seleção de imagens
+        document.getElementById('postImages').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            if (selectedImages.length + files.length > 3) {
+                alert('Máximo de 3 imagens permitido');
+                return;
+            }
+
+            files.forEach(file => {
+                if (!file.type.startsWith('image/')) {
+                    alert('Por favor, selecione apenas imagens');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    selectedImages.push({
+                        file: file,
+                        dataUrl: e.target.result
+                    });
+                    updateImagePreview();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            e.target.value = '';
+        });
+
+        // Atualizar preview das imagens
+        function updateImagePreview() {
+            const preview = document.getElementById('imagePreview');
+            const count = document.getElementById('imageCount');
+            
+            preview.innerHTML = '';
+            count.textContent = `${selectedImages.length}/3 imagens`;
+
+            selectedImages.forEach((image, index) => {
+                const div = document.createElement('div');
+                div.className = 'preview-item';
+                div.innerHTML = `
+                    <img src="${image.dataUrl}" alt="Preview">
+                    <div class="remove-btn" onclick="removePostImage(${index})">×</div>
+                `;
+                preview.appendChild(div);
+            });
+        }
+
+        // Remover imagem do post
+        function removePostImage(index) {
+            selectedImages.splice(index, 1);
+            updateImagePreview();
+        }
+
+        // Criar publicação
+        async function createPost() {
+            const token = checkAuth();
+            if (!token) return;
+
+            const content = document.getElementById('postContent').value.trim();
+            const postBtn = document.getElementById('postBtn');
+
+            if (content === '' && selectedImages.length === 0) {
+                alert('Digite algo ou adicione imagens');
+                return;
+            }
+
+            postBtn.disabled = true;
+            postBtn.textContent = 'Publicando...';
+
+            try {
+                const formData = new FormData();
+                formData.append('content', content);
+
+                selectedImages.forEach((image, index) => {
+                    formData.append('images', image.file);
+                });
+
+                const response = await fetch(`${API_BASE_URL}/api/posts/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    document.getElementById('postContent').value = '';
+                    selectedImages = [];
+                    updateImagePreview();
+                    loadPosts();
+                } else {
+                    throw new Error('Erro ao publicar');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao publicar');
+            } finally {
+                postBtn.disabled = false;
+                postBtn.textContent = 'Publicar';
+            }
+        }
+
+        // Carregar publicações
+        async function loadPosts() {
+            const token = checkAuth();
+            if (!token) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/posts`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    posts = data.data.posts || [];
+                    displayPosts();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar posts:', error);
+            }
+        }
+
+        // Exibir publicações
+        function displayPosts() {
+            const container = document.getElementById('feedContainer');
+            
+            if (posts.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        Nenhuma publicação ainda. Seja o primeiro a publicar!
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = posts.map(post => `
+                <div class="post-card" data-post-id="${post.id}">
+                    <div class="post-header">
+                        <div class="user-avatar">
+                            ${post.user.mobile.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name">${post.user.mobile}</div>
+                            <div class="post-time">${formatTime(post.created_at)}</div>
+                        </div>
+                    </div>
+                    
+                    ${post.content ? `<div class="post-content">${post.content}</div>` : ''}
+                    
+                    ${post.images && post.images.length > 0 ? `
+                        <div class="post-images ${post.images.length === 1 ? 'one-image' : post.images.length === 2 ? 'two-images' : 'three-images'}">
+                            ${post.images.map(img => `<img src="${img}" alt="Imagem do post">`).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="post-stats">
+                        <span>${post.like_count} curtidas</span>
+                        <span>${post.comment_count} comentários</span>
+                    </div>
+                    
+                    <div class="post-actions-buttons">
+                        <button class="action-btn ${post.user_has_liked ? 'active' : ''}" 
+                                onclick="toggleLike('${post.id}')">
+                            👍 Curtir
+                        </button>
+                        <button class="action-btn" onclick="toggleComments('${post.id}')">
+                            💬 Comentar
+                        </button>
+                    </div>
+                    
+                    <div class="comments-section" id="comments-${post.id}" style="display: none;">
+                        <div class="comment-input">
+                            <input type="text" id="comment-input-${post.id}" placeholder="Escreva um comentário...">
+                            <button class="comment-btn" onclick="addComment('${post.id}')">Enviar</button>
+                        </div>
+                        <div class="comments-list" id="comments-list-${post.id}">
+                            ${post.comments ? post.comments.map(comment => `
+                                <div class="comment-item">
+                                    <div class="comment-author">${comment.user.mobile}</div>
+                                    <div class="comment-text">${comment.content}</div>
+                                    <div class="comment-time">${formatTime(comment.created_at)}</div>
+                                </div>
+                            `).join('') : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Curtir/Descurtir
+        async function toggleLike(postId) {
+            const token = checkAuth();
+            if (!token) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/posts/${postId}/like`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    loadPosts(); // Recarregar posts
+                }
+            } catch (error) {
+                console.error('Erro ao curtir:', error);
+            }
+        }
+
+        // Alternar comentários
+        function toggleComments(postId) {
+            const commentsSection = document.getElementById(`comments-${postId}`);
+            const isVisible = commentsSection.style.display !== 'none';
+            
+            document.querySelectorAll('.comments-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            commentsSection.style.display = isVisible ? 'none' : 'block';
+        }
+
+        // Adicionar comentário
+        async function addComment(postId) {
+            const token = checkAuth();
+            if (!token) return;
+
+            const input = document.getElementById(`comment-input-${postId}`);
+            const content = input.value.trim();
+
+            if (content === '') return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/posts/${postId}/comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content })
+                });
+
+                if (response.ok) {
+                    input.value = '';
+                    loadPosts(); // Recarregar posts
+                }
+            } catch (error) {
+                console.error('Erro ao comentar:', error);
+            }
+        }
+
+        // Formatar hora
+        function formatTime(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) return 'Agora';
+            if (diff < 3600000) return `${Math.floor(diff / 60000)} min atrás`;
+            if (diff < 86400000) return `${Math.floor(diff / 3600000)} h atrás`;
+            
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPosts();
+        });
+    </script>
+</body>
+</html>

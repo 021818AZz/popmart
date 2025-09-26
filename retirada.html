@@ -1,0 +1,1126 @@
+
+
+<!DOCTYPE html>
+<html lang="pt" style="font-size: 16px;">
+<head>
+    <meta charset="utf-8">
+    <title>Retirada - Ai Tech 360</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="full-screen" content="true">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <meta name="renderer" content="webkit">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .container {
+            padding: 0 15px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .head[data-v-a53c4a36] {
+            padding: 15px 0;
+            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back {
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .back img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .flex1 {
+            flex: 1;
+        }
+
+        .tac {
+            text-align: center;
+        }
+
+        /* Estilos da página de retirada */
+        .balance-card {
+            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .balance-label {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .balance-amount {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .withdrawal-form {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .form-label-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #6a11cb;
+            background-color: white;
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 42px;
+            width: 20px;
+            height: 20px;
+            opacity: 0.6;
+        }
+
+        .bank-selector {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 60px;
+        }
+
+        .bank-selector:hover {
+            background-color: #f0f0f0;
+        }
+
+        .bank-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+        }
+
+        .bank-info {
+            flex: 1;
+        }
+
+        .bank-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .bank-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .bank-arrow {
+            width: 16px;
+            height: 16px;
+            opacity: 0.5;
+        }
+
+        .quick-amounts {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .amount-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 12px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .amount-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .amount-btn.active {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+        }
+
+        .tax-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .tax-info > div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            min-height: 50px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .tips {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .tips h3 {
+            color: #2196F3;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .tips-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .tips ul {
+            padding-left: 20px;
+        }
+
+        .tips li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Modal de seleção de bancos */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 15px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            padding: 0 20px 20px;
+        }
+
+        .bank-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 70px;
+        }
+
+        .bank-option:hover {
+            background: #f9f9f9;
+        }
+
+        .bank-option:last-child {
+            border-bottom: none;
+        }
+
+        .bank-option-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .bank-option-info {
+            flex: 1;
+        }
+
+        .bank-option-name {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .bank-option-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        .error-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 14px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        .success-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+
+        .loading {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .history-icon {
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .history-icon img {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Melhorias para telas muito pequenas */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .balance-card, .withdrawal-form, .tips {
+                padding: 15px;
+            }
+            
+            .quick-amounts {
+                gap: 5px;
+            }
+            
+            .amount-btn {
+                min-width: 70px;
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .form-input {
+                padding: 12px 12px 12px 40px;
+            }
+            
+            .input-icon {
+                left: 12px;
+                top: 39px;
+            }
+        }
+
+        /* Melhorias para orientação paisagem */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .content-container {
+                padding-bottom: 15px;
+            }
+            
+            .balance-card, .withdrawal-form {
+                margin: 10px 0;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Melhorias para dispositivos com notch */
+        @supports(padding: max(0px)) {
+            .head[data-v-a53c4a36] {
+                padding-top: max(15px, env(safe-area-inset-top));
+                padding-bottom: 15px;
+            }
+            
+            .container {
+                padding-left: max(15px, env(safe-area-inset-left));
+                padding-right: max(15px, env(safe-area-inset-right));
+            }
+            
+            .content-container {
+                padding-bottom: max(62px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body class="w856">
+<div id="app" class="applang">
+    <div data-v-6e534c71="" data-v-443ea612="" class="page">
+        <div data-v-6e534c71="" class="headers">
+            <div data-v-a53c4a36="" data-v-443ea612="" class="head" data-v-6e534c71="">
+                <div data-v-a53c4a36="" class="container flex">
+                    <div class="back" onclick="goBack()">
+  <img src="https://i.postimg.cc/vmW7qTdx/back.png" alt="Voltar" width="24" height="24">
+</div>
+
+                    <div data-v-a53c4a36="" class="name tac flex1">Saque Bancário</div>
+                    <div data-v-a53c4a36="" class="history-icon" onclick="goToHistory()">
+                        <img src="https://i.postimg.cc/vZZQdcvx/activity-history.png" alt="Histórico" width="24" height="24">
+                    </div>
+                </div>
+                <div data-v-a53c4a36=""></div>
+            </div>
+        </div>
+        <div data-v-6e534c71="" id="scroll" class="content-container" style="padding-top: 0px; padding-bottom: 62px;">
+            <div data-v-6e534c71="" id="content" class="content-scroll">
+                <div data-v-443ea612="" data-v-6e534c71="" class="container">
+                    
+                    <!-- Cartão de Saldo -->
+                    <div class="balance-card">
+                        <div class="balance-label">Saldo Disponível</div>
+                        <div class="balance-amount" id="userBalance">0 KZ</div>
+                    </div>
+
+                    <!-- Formulário de Retirada -->
+                    <div class="withdrawal-form">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <img class="form-label-icon" src="https://i.postimg.cc/pXLCND2m/username-v1.png" alt="Nome">
+                                Nome da Conta
+                            </label>
+                            <img class="input-icon" src="https://i.postimg.cc/pXLCND2m/username-v1.png" alt="Nome">
+                            <input type="text" class="form-input" id="accountName" placeholder="Digite o nome da conta" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <img class="form-label-icon" src="https://i.postimg.cc/j2fwWCsS/bank-emoji.png" alt="IBAN">
+                                IBAN
+                            </label>
+                            <img class="input-icon" src="https://i.postimg.cc/j2fwWCsS/bank-emoji.png" alt="IBAN">
+                            <input type="text" class="form-input" id="iban" maxlength="21" placeholder="Digite o IBAN (21 dígitos)" required>
+                            <div class="error-message" id="ibanError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <img class="form-label-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="Banco">
+                                Banco
+                            </label>
+                            <div class="bank-selector" id="bankSelector">
+                                <img class="bank-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="Banco">
+                                <div class="bank-info">
+                                    <div class="bank-name" id="selectedBankName">Selecione o banco</div>
+                                    <div class="bank-desc" id="selectedBankDesc">Toque para escolher</div>
+                                </div>
+                                <img class="bank-arrow" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNkw4IDEwTDEyIDZINloiIGZpbGw9IiM2NjY2NjYiLz4KPC9zdmc+" alt="Seta">
+                            </div>
+                            <input type="hidden" id="bankCode" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <img class="form-label-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDBDNC40NzcgMCAwIDQuNDc3IDAgMTBTNC40NzcgMjAgMTAgMjBTMjAgMTUuNTIzIDIwIDEwUzE1LjUyMyAwIDEwIDBaTTEwIDE4LjE1OEM1LjY2MiAxOC4xNTggMi4xNDIgMTQuNjM4IDIuMTQyIDEwLjMxOEMyLjE0MiA1Ljk5OCA1LjY2MiAyLjQ3OCAxMCAyLjQ3OFMxNy44NTggNS45OTggMTcuODU4IDEwLjMxOEMxNy44NTggMTQuNjM4IDE0LjMzOCAxOC4xNTggMTAgMTguMTU4Wk0xMy4wMjMgMTMuMDIzQTEuMDggMS4wOCAwIDAgMSAxMi41IDEzLjI1SDEyLjVINy41QzcuMjI0IDEzLjI1IDYuOTc0IDE3LjE1IDYuNzc0IDEyLjk1QzYuNTc0IDEyLjc1IDYuNDc0IDEyLjUgNi40NzQgMTIuMjI0VjguNDc0QzYuNDc0IDguMTk4IDYuNTc0IDcuOTQ4IDYuNzc0IDcuNzQ4QzYuOTc0IDcuNTQ4IDcuMjI0IDcuNDQ4IDcuNSA3LjQ0OEgxMi41QzEyLjc3NiA3LjQ0OCAxMy4wMjYgNy41NDggMTMuMjI2IDcuNzQ4QzEzLjQyNiA3Ljk0OCAxMy41MjYgOC4xOTggMTMuNTI2IDguNDc0VjEyLjIyNEMxMy41MjYgMTIuNSAxMy40MjYgMTIuNzUgMTMuMjI2IDEyLjk1QzEzLjAyNiAxMy4xNSAxMi43NzYgMTMuMjUgMTIuNSAxMy4yNUgxMi41SDEzLjAyM1pNMTIuMjUgOC41SDEyLjI1SDcuNzVWMTIuMjVIMTIuMjVWOC41WiIgZmlsbD0iIzY2NjY2NiIvPgo8L3N2Zz4K" alt="Valor">
+                                Valor do Saque (KZ)
+                            </label>
+                            <img class="input-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDBDNC40NzcgMCAwIDQuNDc3IDAgMTBTNC40NzcgMjAgMTAgMjBTMjAgMTUuNTIzIDIwIDEwUzE1LjUyMyAwIDEwIDBaTTEwIDE4LjE1OEM1LjY2MiAxOC4xNTggMi4xNDIgMTQuNjM4IDIuMTQyIDEwLjMxOEMyLjE0MiA1Ljk5OCA1LjY2MiAyLjQ3OCAxMCAyLjQ3OFMxNy44NTggNS45OTggMTcuODU4IDEwLjM1OEMxNy44NTggMTQuNjM4IDE0LjMzOCAxOC4xNTggMTAgMTguMTU4Wk0xMy4wMjMgMTMuMDIzQTEuMDggMS4wOCAwIDAgMSAxMi41IDEzLjI1SDEyLjVINy41QzcuMjI0IDEzLjI1IDYuOTc0IDEzLjE1IDYuNzc0IDEyLjk1QzYuNTc0IDEyLjc1IDYuNDc0IDEyLjUgNi40NzQgMTIuMjI0VjguNDc0QzYuNDc0IDguMTk4IDYuNTc0IDcuOTQ4IDYuNzc0IDcuNzQ4QzYuOTc0IDcuNTQ4IDcuMjI0IDcuNDQ4IDcuNSA3LjQ0OEgxMi41QzEyLjc3NiA3LjQ0OCAxMy4wMjYgNy41NDggMTMuMjI2IDcuNzQ4QzEzLjQyNiA3Ljk0OCAxMy41MjYgOC4xOTggMTMuNTI2IDguNDc0VjEyLjIyNEMxMy41MjYgMTIuNSAxMy40MjYgMTIuNzUgMTMuMjI2IDEyLjk1QzEzLjAyNiAxMy4xNSAxMi43NzYgMTMuMjUgMTIuNSAxMy4yNUgxMi41SDEzLjAyM1pNMTIuMjUgOC41SDEyLjI1SDcuNzVWMTIuMjVIMTIuMjVWOC41WiIgZmlsbD0iIzY2NjY2NiIvPgo8L3N2Zz4K" alt="Valor">
+                            <input type="number" class="form-input" id="withdrawalAmount" min="1" placeholder="Digite o valor" required>
+                            
+                            <div class="quick-amounts">
+                                <button type="button" class="amount-btn" onclick="fillAmount(1000)">1.000 KZ</button>
+                                <button type="button" class="amount-btn" onclick="fillAmount(5000)">5.000 KZ</button>
+                                <button type="button" class="amount-btn" onclick="fillAmount(10000)">10.000 KZ</button>
+                            </div>
+                            
+                            <div class="tax-info">
+                                <div>
+                                    <span>Taxa: 15%</span>
+                                    <span>Valor líquido: <span id="netAmount">0</span> KZ</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="submit-btn" id="submitBtn" onclick="handleWithdrawal()">Solicitar Saque</button>
+                    </div>
+
+                    <!-- Dicas Importantes -->
+                    <div class="tips">
+                        <h3>
+                            <img class="tips-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDBDNC40NzcgMCAwIDQuNDc3IDAgMTBTNC40NzcgMjAgMTAgMjBTMjAgMTUuNTIzIDIwIDEwUzE1LjUyMyAwIDEwIDBaTTkgMTVIOVY5SDlWMTVaTTEwIDZDOS40NDggNiA5IDUuNTUyIDkgNUM5IDQuNDQ4IDkuNDQ4IDQgMTAgNFMxMSA0LjQ0OCAxMSA1QzExIDUuNTUyIDEwLjU1MiA2IDEwIDZaIiBmaWxsPSIjMjE5NkYzIi8+Cjwvc3ZnPgo=" alt="Info">
+                            Informações Importantes
+                        </h3>
+                        <ul>
+                            <li>Horário de processamento: Segunda a Sábado, das 9h às 21h</li>
+                            <li>Tempo máximo de espera: 24 horas</li>
+                            <li>Taxa de saque: 15% sobre o valor solicitado</li>
+                            <li>Após o primeiro saque, você poderá usar as mesmas informações bancárias</li>
+                            <li>Verifique se todas as informações estão corretas antes de confirmar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Seleção de Bancos -->
+<div class="modal-overlay" id="bankModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title">Selecione o Banco</div>
+            <button class="modal-close" onclick="closeBankModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="bank-option" onclick="selectBank('BFA', 'BFA - Banco de Fomento Angola', 'Banco de Fomento Angola')">
+                <img class="bank-option-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="BFA">
+                <div class="bank-option-info">
+                    <div class="bank-option-name">BFA </div>
+                    <div class="bank-option-desc">Banco de Fomento Angola</div>
+                </div>
+            </div>
+            <div class="bank-option" onclick="selectBank('BAI', 'BAI - Banco Angolano de Investimentos', 'Banco Angolano de Investimentos')">
+                <img class="bank-option-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="BAI">
+                <div class="bank-option-info">
+                    <div class="bank-option-name">BAI </div>
+                    <div class="bank-option-desc">Banco Angolano de Investimentos</div>
+                </div>
+            </div>
+            <div class="bank-option" onclick="selectBank('BIC', 'BIC - Banco Internacional de Crédito', 'Banco Internacional de Crédito')">
+                <img class="bank-option-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="BIC">
+                <div class="bank-option-info">
+                    <div class="bank-option-name">BIC </div>
+                    <div class="bank-option-desc">Banco Internacional de Crédito</div>
+                </div>
+            </div>
+            <div class="bank-option" onclick="selectBank('ATL', 'ATL - Banco Atlântico', 'Banco Atlântico')">
+                <img class="bank-option-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="ATL">
+                <div class="bank-option-info">
+                    <div class="bank-option-name">ATL </div>
+                    <div class="bank-option-desc">Banco Atlântico</div>
+                </div>
+            </div>
+            <div class="bank-option" onclick="selectBank('OTHER', 'Outro Banco', 'Selecione se seu banco não está listado')">
+                <img class="bank-option-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="Outro">
+                <div class="bank-option-info">
+                    <div class="bank-option-name">Outro Banco</div>
+                    <div class="bank-option-desc">Selecione se seu banco não está listado</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading" id="loadingOverlay">
+    <div class="spinner"></div>
+</div>
+
+
+
+<script>
+    // Configurações
+    const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+    const WITHDRAWAL_TAX = 0.15; // 15%
+    
+    // Dados do usuário
+    let userData = {
+        id: null,
+        mobile: null,
+        balance: 0,
+        bankInfo: null
+    };
+    
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar se o usuário está autenticado
+        if (!isTokenValid()) {
+            window.location.href = '/index.html';
+            return;
+        }
+        
+        // Carregar dados do usuário
+        loadUserData();
+        
+        // Configurar eventos
+        setupEventListeners();
+    });
+    
+    // Configurar listeners de eventos
+    function setupEventListeners() {
+        // Calcular valor líquido ao digitar o valor do saque
+        document.getElementById('withdrawalAmount').addEventListener('input', calculateNetAmount);
+        
+        // Validar IBAN
+        document.getElementById('iban').addEventListener('input', validateIBAN);
+        
+        // Abrir modal de seleção de bancos
+        document.getElementById('bankSelector').addEventListener('click', openBankModal);
+        
+        // Fechar modal ao clicar fora
+        document.getElementById('bankModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBankModal();
+            }
+        });
+    }
+    
+    // Carregar dados do usuário
+    async function loadUserData() {
+        showLoading(true);
+        
+        try {
+            const token = getToken();
+            
+            // Buscar perfil do usuário
+            const response = await fetch(`${API_BASE_URL}/user/profile`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Erro ao carregar dados do usuário');
+            }
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                userData.id = data.data.user_id;
+                userData.mobile = data.data.mobile;
+                userData.balance = data.data.wallet_balance;
+                
+                // Atualizar UI
+                document.getElementById('userBalance').textContent = userData.balance.toLocaleString('pt-AO') + ' KZ';
+                
+                // Carregar informações bancárias salvas (se existirem)
+                await loadBankInfo();
+            } else {
+                throw new Error(data.message || 'Erro ao carregar dados');
+            }
+        } catch (error) {
+            console.error('Erro ao carregar dados:', error);
+            showError('Erro ao carregar dados: ' + error.message);
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    // Carregar informações bancárias salvas
+    async function loadBankInfo() {
+        try {
+            // Tentar carregar do localStorage
+            const savedBankInfo = localStorage.getItem(`bankInfo_${userData.id}`);
+            
+            if (savedBankInfo) {
+                userData.bankInfo = JSON.parse(savedBankInfo);
+                
+                // Preencher formulário com dados salvos
+                document.getElementById('accountName').value = userData.bankInfo.accountName || '';
+                document.getElementById('iban').value = userData.bankInfo.iban || '';
+                
+                if (userData.bankInfo.bankCode) {
+                    selectBank(userData.bankInfo.bankCode, userData.bankInfo.bankName, userData.bankInfo.bankDesc);
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao carregar informações bancárias:', error);
+        }
+    }
+    
+    // Validar IBAN
+    function validateIBAN() {
+        const ibanInput = document.getElementById('iban');
+        const ibanError = document.getElementById('ibanError');
+        
+        // Remover caracteres não numéricos
+        ibanInput.value = ibanInput.value.replace(/\D/g, '');
+        
+        // Validar comprimento
+        if (ibanInput.value.length !== 21 && ibanInput.value.length > 0) {
+            ibanError.textContent = 'IBAN deve ter exatamente 21 dígitos';
+        } else {
+            ibanError.textContent = '';
+        }
+    }
+    
+    // Calcular valor líquido após taxa
+    function calculateNetAmount() {
+        const amount = parseFloat(document.getElementById('withdrawalAmount').value) || 0;
+        const netAmount = amount * (1 - WITHDRAWAL_TAX);
+        document.getElementById('netAmount').textContent = netAmount.toFixed(2);
+    }
+    
+    // Preencher valor rapidamente
+    function fillAmount(amount) {
+        document.getElementById('withdrawalAmount').value = amount;
+        calculateNetAmount();
+        
+        // Ativar visualmente o botão clicado
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+    }
+    
+    // Abrir modal de seleção de bancos
+    function openBankModal() {
+        document.getElementById('bankModal').classList.add('active');
+    }
+    
+    // Fechar modal de seleção de bancos
+    function closeBankModal() {
+        document.getElementById('bankModal').classList.remove('active');
+    }
+    
+    // Selecionar banco
+    function selectBank(code, name, desc) {
+        document.getElementById('bankCode').value = code;
+        document.getElementById('selectedBankName').textContent = name;
+        document.getElementById('selectedBankDesc').textContent = desc;
+        closeBankModal();
+    }
+    
+    // Processar solicitação de saque
+    async function handleWithdrawal() {
+        // Validar dados
+        const accountName = document.getElementById('accountName').value;
+        const iban = document.getElementById('iban').value;
+        const bankCode = document.getElementById('bankCode').value;
+        const amount = parseFloat(document.getElementById('withdrawalAmount').value);
+        
+        if (!accountName) {
+            showError('Por favor, digite o nome da conta');
+            return;
+        }
+        
+        if (!iban || iban.length !== 21) {
+            showError('Por favor, digite um IBAN válido (21 dígitos)');
+            return;
+        }
+        
+        if (!bankCode) {
+            showError('Por favor, selecione um banco');
+            return;
+        }
+        
+        if (!amount || amount <= 0) {
+            showError('Por favor, digite um valor válido');
+            return;
+        }
+        
+        // Validar saldo suficiente
+        const taxAmount = amount * WITHDRAWAL_TAX;
+        const netAmount = amount - taxAmount;
+        
+        if (amount > userData.balance) {
+            showError('Saldo insuficiente para realizar este saque');
+            return;
+        }
+        
+        // Validar horário (apenas Seg-Sáb, 9h-21h)
+        const now = new Date();
+        const day = now.getDay(); // 0=Domingo, 1=Segunda, ..., 6=Sábado
+        const hour = now.getHours();
+        
+        if (day === 0 || (day === 6 && hour >= 21) || hour < 9 || hour >= 21) {
+            if (!confirm('Fora do horário de processamento (Seg-Sáb, 9h-21h). O saque será processado no próximo dia útil. Deseja continuar?')) {
+                return;
+            }
+        }
+        
+        showLoading(true);
+        
+        try {
+            const token = getToken();
+            const bankName = document.getElementById('selectedBankName').textContent;
+            
+            // Preparar dados do saque
+            const withdrawalData = {
+                amount: amount,
+                tax: taxAmount,
+                net_amount: netAmount,
+                account_name: accountName,
+                iban: iban,
+                bank_name: bankName,
+                bank_code: bankCode
+            };
+            
+            // Salvar informações bancárias para uso futuro
+            userData.bankInfo = {
+                accountName: accountName,
+                iban: iban,
+                bankCode: bankCode,
+                bankName: bankName,
+                bankDesc: document.getElementById('selectedBankDesc').textContent
+            };
+            
+            localStorage.setItem(`bankInfo_${userData.id}`, JSON.stringify(userData.bankInfo));
+            
+            // Enviar solicitação de saque
+            const response = await fetch(`${API_BASE_URL}/api/withdraw`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(withdrawalData)
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Atualizar saldo
+                userData.balance -= amount;
+                document.getElementById('userBalance').textContent = userData.balance.toLocaleString('pt-AO') + ' KZ';
+                
+                // Limpar formulário (mas manter dados bancários)
+                document.getElementById('withdrawalAmount').value = '';
+                calculateNetAmount();
+                
+                showSuccess('Saque solicitado com sucesso! O valor será processado em até 24 horas.');
+            } else {
+                throw new Error(data.message || 'Erro ao processar saque');
+            }
+        } catch (error) {
+            console.error('Erro ao processar saque:', error);
+            showError('Erro ao processar saque: ' + error.message);
+        } finally {
+            showLoading(false);
+        }
+    }
+    
+    // Funções de navegação
+    function goBack() {
+        window.history.back();
+    }
+    
+    function goToHistory() {
+        window.location.href = '/historico.html';
+    }
+    
+    // Funções de UI
+    function showError(message) {
+        // Remover mensagens anteriores
+        document.querySelectorAll('.error-message, .success-message').forEach(el => {
+            el.remove();
+        });
+        
+        // Criar nova mensagem de erro
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.innerHTML = `
+            <img class="error-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMEMzLjU4IDAgMCAzLjU4IDAgOFMzLjU4IDE2IDggMTZTMTYgMTIuNDIgMTYgOFMxMi40MiAwIDggMFpNOCAxNEM0LjY5IDE0IDIgMTEuMzEgMiA4UzQuNjkgMiA4IDJTMTQgNC42OSAxNCA4UzExLjMxIDE0IDggMTRaTTkgNUg3VjExSDlWNVpNOSAxMkg3VjE0SDlWMTJaIiBmaWxsPSIjZTc0YzNjIi8+Cjwvc3ZnPgo=" alt="Erro">
+            ${message}
+        `;
+        
+        // Inserir após o botão de submit
+        document.getElementById('submitBtn').parentNode.insertBefore(errorDiv, document.getElementById('submitBtn').nextSibling);
+    }
+    
+    function showSuccess(message) {
+        // Remover mensagens anteriores
+        document.querySelectorAll('.error-message, .success-message').forEach(el => {
+            el.remove();
+        });
+        
+        // Criar nova mensagem de sucesso
+        const successDiv = document.createElement('div');
+        successDiv.className = 'success-message';
+        successDiv.innerHTML = `
+            <img class="success-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMEMzLjU4IDAgMCAzLjU4IDAgOFMzLjU4IDE2IDggMTZTMTYgMTIuNDIgMTYgOFMxMi40MiAwIDggMFpNNy4wNSAxMi4yNUwzLjIgOC41TDMuOTMgNy43NUw3LjA1IDEwLjc1TDEyLjA3IDUuNzVMMTIuOCA2LjVMNy4wNSAxMi4yNVoiIGZpbGw9IiMyN2FlNjAiLz4KPC9zdmc+Cg==" alt="Sucesso">
+            ${message}
+        `;
+        
+        // Inserir após o botão de submit
+        document.getElementById('submitBtn').parentNode.insertBefore(successDiv, document.getElementById('submitBtn').nextSibling);
+    }
+    
+    function showLoading(show) {
+        document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+    }
+    
+    // Funções de autenticação (mantendo a sessão ativa)
+    function isTokenValid() {
+        const tokenData = localStorage.getItem('user_token');
+        
+        if (!tokenData) return false;
+        
+        try {
+            const { token, expiry } = JSON.parse(tokenData);
+            
+            // Verificar se o token está próximo de expirar (menos de 5 minutos)
+            if (Date.now() > expiry - 5 * 60 * 1000) {
+                // Tentar renovar o token automaticamente
+                return renewToken();
+            }
+            
+            if (Date.now() > expiry) {
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_mobile');
+                localStorage.removeItem('user_id');
+                return false;
+            }
+            
+            return true;
+        } catch (e) {
+            console.error('Erro ao verificar token:', e);
+            return false;
+        }
+    }
+    
+    // Função para renovar token automaticamente
+    async function renewToken() {
+        try {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return false;
+            
+            const { token } = JSON.parse(tokenData);
+            
+            // Tentar renovar o token
+            const response = await fetch(`${API_BASE_URL}/api/refresh-token`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Atualizar token no localStorage
+                    const newTokenData = {
+                        token: data.data.token,
+                        expiry: Date.now() + (5 * 60 * 60 * 1000) // 5 horas
+                    };
+                    
+                    localStorage.setItem('user_token', JSON.stringify(newTokenData));
+                    return true;
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao renovar token:', error);
+        }
+        
+        // Se não conseguiu renovar, redirecionar para login
+        localStorage.removeItem('user_token');
+        localStorage.removeItem('user_mobile');
+        localStorage.removeItem('user_id');
+        window.location.href = '/index.html';
+        return false;
+    }
+    
+    function getToken() {
+        const tokenData = localStorage.getItem('user_token');
+        if (!tokenData) return null;
+        
+        try {
+            const { token } = JSON.parse(tokenData);
+            return token;
+        } catch (e) {
+            console.error('Erro ao obter token:', e);
+            return null;
+        }
+    }
+</script>
+</body>
+</html>
