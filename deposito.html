@@ -663,8 +663,8 @@
 
                                 <div class="form-group">
                                     <label class="form-label">Enviar Comprovante</label>
-                                    <div class="receipt-upload" onclick="document.getElementById('receiptInput').click()">
-                                        <input type="file" id="receiptInput" accept="image/*" style="display: none;" onchange="handleReceiptUpload(event)" capture="camera">
+                                    <div class="receipt-upload" onclick="openGallery()">
+                                        <input type="file" id="receiptInput" accept="image/*" style="display: none;" onchange="handleReceiptUpload(event)">
                                         <img src="https://i.postimg.cc/qqNqD3XK/camera.png" alt="Upload" width="50">
                                         <p>Toque para enviar o comprovante</p>
                                         
@@ -736,11 +736,6 @@
           
         </div>
     </div>
-</div>
-
-<!-- Loading Overlay -->
-<div class="loading" id="loadingOverlay">
-    <div class="spinner"></div>
 </div>
 
 <!-- Loading Overlay -->
@@ -855,6 +850,7 @@
     document.getElementById('displayIban').textContent = depositData.iban;
     document.getElementById('displayAmount').textContent = depositData.amount.toLocaleString('pt-AO') + ' KZ';
 }
+
     function showStep(step) {
         currentStep = step;
         
@@ -898,6 +894,11 @@
         document.getElementById('confirmBankBtn').disabled = false;
         
         closeBankModal();
+    }
+
+    // Função para abrir a galeria em vez da câmera
+    function openGallery() {
+        document.getElementById('receiptInput').click();
     }
 
     // Upload do comprovante
