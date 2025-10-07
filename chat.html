@@ -273,7 +273,7 @@
     </div>
 
     <script>
-        const API_BASE_URL = 'http://localhost:3000';
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
         let selectedImages = [];
         let isAdminTyping = false;
 
@@ -281,19 +281,19 @@
         function checkAuth() {
             const tokenData = localStorage.getItem('user_token');
             if (!tokenData) {
-                window.location.href = '/login.html';
+                window.location.href = '/index.html';
                 return null;
             }
             try {
                 const { token, expiry } = JSON.parse(tokenData);
                 if (Date.now() > expiry) {
                     localStorage.removeItem('user_token');
-                    window.location.href = '/login.html';
+                    window.location.href = '/index.html';
                     return null;
                 }
                 return token;
             } catch (e) {
-                window.location.href = '/login.html';
+                window.location.href = '/index.html';
                 return null;
             }
         }
@@ -473,7 +473,7 @@
             const token = checkAuth();
             if (!token) return;
 
-            const ws = new WebSocket(`ws://localhost:3000/ws/chat?token=${token}`);
+            const ws = new WebSocket(`ws:https://bd-p4q7.onrender.com/ws/chat?token=${token}`);
             
             ws.onmessage = function(event) {
                 const data = JSON.parse(event.data);

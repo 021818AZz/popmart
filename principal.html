@@ -616,7 +616,7 @@ function checkCheckinStatus() {
     }
 
     $.ajax({
-        url: "https://bd-1-tile.onrender.com/api/checkin/status",
+        url: "https://bd-p4q7.onrender.com/api/checkin/status",
         method: "GET",
         headers: {
             'Authorization': 'Bearer ' + token
@@ -686,7 +686,7 @@ $(document).on('click', '#checkin-btn', function() {
         }).show();
 
         $.ajax({
-            url: "https://bd-1-tile.onrender.com/api/checkin",
+            url: "https://bd-p4q7.onrender.com/api/checkin",
             method: "POST",
             headers: {
                 'Authorization': 'Bearer ' + token

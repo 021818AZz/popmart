@@ -349,7 +349,7 @@
 
 <script>
 // Configuração da API
-const API_BASE_URL = 'https://bd-1-tile.onrender.com';
+const API_BASE_URL = 'https://bd-p4q7.onrender.com';
 
 // Dados carregados
 let teamData = null;
@@ -363,7 +363,7 @@ let memberDetails = {
 function checkAuth() {
     const tokenData = localStorage.getItem('user_token');
     if (!tokenData) {
-        window.location.href = '/login.html';
+        window.location.href = '/index.html';
         return null;
     }
     

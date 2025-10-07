@@ -231,7 +231,7 @@ async function loadUserBalance() {
     }
 
     try {
-        const response = await fetch('https://bd-1-tile.onrender.com/api/user/profile', {
+        const response = await fetch('https://bd-p4q7.onrender.com/api/user/profile', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -295,7 +295,7 @@ async function buyProduct() {
     buttonLoading.style.display = 'inline-block';
 
     try {
-        const response = await fetch('https://bd-1-tile.onrender.com/api/purchase', {
+        const response = await fetch('https://bd-p4q7.onrender.com/api/purchase', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
