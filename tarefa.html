@@ -798,46 +798,47 @@
         }
 
         // Função para coletar rendimentos dos produtos
-        async function collectProductIncome() {
-            const token = getToken();
-            if (!token) return;
+       async function collectProductIncome() {
+    const token = getToken();
+    if (!token) return;
 
-            const button = event.target;
-            const buttonText = document.getElementById('income-text');
-            const buttonLoading = document.getElementById('income-loading');
-            
-            button.disabled = true;
-            buttonText.textContent = 'Coletando...';
-            buttonLoading.style.display = 'inline-block';
+    const button = event.target;
+    const buttonText = document.getElementById('income-text');
+    const buttonLoading = document.getElementById('income-loading');
 
-            try {
-                const response = await fetch('https://bd-p4q7.onrender.com/api/tasks/collect-product-income', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + token,
-                        'Content-Type': 'application/json'
-                    }
-                });
+    let data = null; // <<< declarar aqui
 
-                const data = await response.json();
+    button.disabled = true;
+    buttonText.textContent = 'Coletando...';
+    buttonLoading.style.display = 'inline-block';
 
-                if (data.success) {
-                    showNotification(`✅ Rendimentos coletados! +${data.data.total_income} KZ adicionados.`, 'success');
-                    // Recarregar status
-                    setTimeout(loadTasksStatus, 1000);
-                } else {
-                    throw new Error(data.message);
-                }
-            } catch (error) {
-                showNotification('❌ ' + error.message, 'error');
-            } finally {
-                button.disabled = false;
-                // Atualizar o texto do botão com o valor correto
-                const reward = data && data.tasks_status ? data.tasks_status.product_income.reward : '?';
-                buttonText.textContent = `Coletar Rendimentos dos Produtos (+${reward} KZ)`;
-                buttonLoading.style.display = 'none';
+    try {
+        const response = await fetch('https://bd-p4q7.onrender.com/api/tasks/collect-product-income', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
             }
+        });
+
+        data = await response.json();
+
+        if (data.success) {
+            showNotification(`✅ Rendimentos coletados! +${data.data.total_income} KZ adicionados.`, 'success');
+            setTimeout(loadTasksStatus, 1000);
+        } else {
+            throw new Error(data.message);
         }
+    } catch (error) {
+        showNotification('❌ ' + error.message, 'error');
+    } finally {
+        button.disabled = false;
+        const reward = data && data.tasks_status ? data.tasks_status.product_income.reward : '?';
+        buttonText.textContent = `Coletar Rendimentos dos Produtos (+${reward} KZ)`;
+        buttonLoading.style.display = 'none';
+    }
+}
+
 
         // Carregar status quando a página carregar
         document.addEventListener('DOMContentLoaded', function() {
