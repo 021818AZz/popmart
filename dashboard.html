@@ -1,4 +1,5 @@
-<html style="font-size: 48.5333px;">
+<!DOCTYPE html>
+<html style="font-size: 48.5333px; height: 100%;">
 <head>
     <meta charset="utf-8">
     <title>Assets</title>
@@ -30,16 +31,33 @@
         html,
         body {
             width: 100%;
+            height: 100%;
             background-color: var(--coffee-lighter);
             color: var(--coffee-dark);
+            overflow-x: hidden;
         }
 
-        /* Aplicar cores de café em elementos principais */
+        /* Estrutura principal corrigida */
+        #app, .applang {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
         .page {
-            background-color: var(--coffee-lighter);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
+        /* Cabeçalho fixo */
         .headers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             background: var(--coffee-gradient) !important;
         }
 
@@ -47,14 +65,30 @@
             background: var(--coffee-gradient) !important;
         }
 
+        /* Container de conteúdo rolável */
         .content-container {
-            background-color: var(--coffee-lighter);
+            flex: 1;
+            overflow-y: auto;
+            padding-top: 43px; /* Altura do cabeçalho */
+            padding-bottom: 50px; /* Altura do rodapé */
+            -webkit-overflow-scrolling: touch; /* Scroll suave em dispositivos móveis */
         }
 
         .content-scroll {
-            background-color: var(--coffee-lighter);
+            min-height: 100%;
         }
 
+        /* Rodapé fixo */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--coffee-gradient) !important;
+        }
+
+        /* Estilos existentes mantidos */
         .container {
             background-color: transparent;
         }
@@ -187,10 +221,6 @@
             color: white !important;
         }
 
-        .footer {
-            background: var(--coffee-gradient) !important;
-        }
-
         .footers {
             background: transparent;
         }
@@ -232,6 +262,30 @@
             background-color: var(--coffee-medium);
             color: white !important;
         }
+
+        /* Botão de sair no final */
+        .logout-section {
+            margin: 20px 10px;
+            text-align: center;
+        }
+
+        .logout-btn {
+            background-color: var(--coffee-cream);
+            border: 1px solid var(--coffee-light);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            width: 100%;
+            color: var(--coffee-dark);
+        }
+
+        .logout-btn:hover {
+            background-color: var(--coffee-medium);
+            color: white !important;
+        }
     </style>
     <link href="https://aitech360.site/public/static/css/app.c1933b14.css" rel="preload" as="style">
     <link href="https://aitech360.site/public/static/css/chunk-vant.d14f5539.css" rel="preload" as="style">
@@ -254,11 +308,12 @@
 <body class="w856">
 <div id="app" class="applang">
     <div data-v-6e534c71="" data-v-35d43c50="" class="page">
+        <!-- Cabeçalho fixo -->
         <div data-v-6e534c71="" class="headers">
             <div data-v-a53c4a36="" data-v-35d43c50="" class="head" data-v-6e534c71="">
                 <div data-v-a53c4a36="" class="container flex">
                     <div data-v-a53c4a36="" class="back"><img data-v-a53c4a36=""
-                                                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALkSURBVHgB7ZnPThNBGMf/babdttBCS6G0W5LsoYeqkNSbN/UN8AmEJ9A3EJ/A+ATi0ZMc9YTePFbgwIHDJqBZMDEDLGvTf+NvhBVKgENnZnvZT9J0822y+/3u7Mzvt1OAlJSUlBQNEMbAzMz9Zpc5L6SUh92QrwjREjAiHBJGme8xvk53roSIkCkMAAS8hBFhkCC1WsMj8x/psBRryOAxaJBYAGVeZrLrdOhd1JmUb0GDRB6h68yjhNfB3uYqaGB9BEolr3S9+Y0V0MTqKqTMZwtT6zRXm5cu+j7Y3VgCA1h9hHLF4jv6ag6ruBbsfl8CQ1gLUL27QOZx8aImEVodhstgECtzoDo3/woBl4ZEBL/D2FPhj160rsJ4gH/mJVsZEsk8WjB/emqD3GQ+8Fs+WMBYgHGYP72EASpzD54z6axeOrMg8w9tmldoz4Gqu7B4lXlu+c6fX0qDCnWWiFxVWeosz3UJ8tnB7uYaJIDeCKDzBs46SynPJJDLSZlXmF1GJX7pdaUPCaIVwOHOslpp6LBNn8/06HxlnD2pVJpNSAgHNAhFIPK5uQ/AB4c0BYJYRy4b+ZwroigIwDJaARRR9DOcyrt7ksnhu84H3mTuzk4U/QrBItoBFGFII1F0BaJsxBr1Qhw4ztsOYSSAIjoOgkJxuk3O67GmQkiH1bOOu91uB22wgLEAipPj/b3ilKvqgBdrVB9uYUY2bIUwGkARHgV+kiGMB1DcFKJanmgJIXpgCCsBFCrE5O0qVWmsxZoK0e1n6pVyfstUCGsBFCdHB9uXQ1CKQqefnY2OD1pgAOvbKnmn/IlajKGCRluKnupiwQBWR0AhhN+rlO9tdfvtOq2rhf8/MKzlJ6dvReH+DmhgPYDiNIS70+tToaN5EOu0Lzqbo9rxh5ZfGJHE9kZ9eqGfyLBV2pEberHnMNBq/BLdnb4qhETmgwZj+YPD85qlk17nUV9y8fvHxjdISUlJSRkXfwFHSxhpEL4NbwAAAABJRU5ErkJggg=="
+                                                              src="https://i.postimg.cc/0yGRHYfx/image.png"
                                                               alt=""></div>
                     <div data-v-a53c4a36="" class="name tac" style="color: white !important;"> Bammer Wallet</div>
                     <div data-v-a53c4a36="" class="flex1"></div>
@@ -266,7 +321,9 @@
                 <div data-v-a53c4a36=""></div>
             </div>
         </div>
-        <div data-v-6e534c71="" id="scroll" class="content-container" style="padding-top: 43px; padding-bottom: 0px;">
+        
+        <!-- Conteúdo rolável -->
+        <div data-v-6e534c71="" id="scroll" class="content-container">
             <div data-v-6e534c71="" id="content" class="content-scroll">
                 <div data-v-35d43c50="" data-v-6e534c71="" class="bgs">
                     <div data-v-35d43c50="" data-v-6e534c71="" class="container">
@@ -277,7 +334,7 @@
 
     <!-- Saldo -->
     <div class="am" style="white-space: nowrap; font-weight: bold; color: #fff !important;">
-        KZ 1
+        KZ 
     </div>
 
     <!-- Telefone -->
@@ -309,11 +366,7 @@
                                 </ul>
                             </div>
                         </div>
-                                                    <div class="bonus-info" style="margin-top:10px;padding:15px;background:var(--coffee-cream) !important;border:1px solid var(--coffee-medium) !important;color:var(--coffee-dark) !important;border-radius:8px;margin:10px;">
-                                <strong>Saldo Bônus:</strong> KZ 300.000  
-                                <br>
-                                Mínimo necessário para liberar: 10 convidados de nível 1
-                            </div>
+                               
                                                 <ul data-v-35d43c50="" data-v-6e534c71="" class="tab flex">
                             <li data-v-35d43c50="" data-v-6e534c71=""
                                 onclick="window.location.href='/deposito.html'"><img data-v-35d43c50=""
@@ -333,7 +386,6 @@
                     </div>
                
                  
-                  <div> <img src="https://aitech360.site/public/file.png" style="height:120px;"></div>
                 
                 
                 
@@ -389,6 +441,14 @@
                                 <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Ajuda</p></div>
                         </li>
                    </div>
+                   
+                   <!-- Botão de Sair adicionado no final -->
+                   <div class="logout-section">
+                       <div class="logout-btn" onclick="logout()">
+                           Sair
+                       </div>
+                   </div>
+                   
                 <div data-v-35d43c50="" data-v-6e534c71="" class="container">
                     <div data-v-a386f8f2="" class="popup_box" id="sidebar">
                         <div data-v-a2a35538="" data-v-a386f8f2="" class="my">
@@ -421,12 +481,7 @@
                 </div>  
                                         
                 </div>
-                <div data-v-98526a88="" data-v-6e534c71="" class="lucku_bann"
-                   onclick="window.location.href='/index'">
-                    <div data-v-98526a88="" data-v-6e534c71="">
-                        <div data-v-98526a88="" data-v-6e534c71="" class="item" style="color: var(--coffee-dark);">Sair</div>
-                    </div>
-                </div>
+                <!-- Removido o botão de sair duplicado -->
                                         </li>
                                     </ul>
                                 </div>
@@ -438,6 +493,8 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Rodapé fixo -->
         <div data-v-6e534c71="" class="footer">
     <div data-v-47e63dc4="" data-v-98526a88="" class="footers" data-v-6e534c71="">
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
@@ -470,9 +527,10 @@
 </div>
 
 <script>
+// Suas funções JavaScript permanecem exatamente as mesmas
 // Configuração da API
-const API_BASE_URL = 'https://bd-p4q7.onrender.com'; // Substitua pela URL real da sua API
-const TOKEN_EXPIRY_HOURS = 5; // Token expira em 5 horas
+const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+const TOKEN_EXPIRY_HOURS = 5;
 
 // Função para seleção de código de área
 function quhao_select() {
