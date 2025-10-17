@@ -332,14 +332,6 @@
             
             <div class="form-group">
                 <div class="input-group">
-                    <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" class="input-icon" alt="Senha de pagamento">
-                    <input type="password" id="payPassword" class="input-field" placeholder="Senha de pagamento" required>
-                </div>
-                <div id="payPasswordError" class="error-message"></div>
-            </div>
-            
-            <div class="form-group">
-                <div class="input-group">
                     <img src="https://i.postimg.cc/FHX41MQz/yaoqing-3a93cc26.png" class="input-icon" alt="Código de convite">
                     <input type="text" id="invitationCode" class="input-field" placeholder="Código de convite (opcional)">
                     <span id="refSource" class="ref-badge" style="display: none;">Via link</span>
@@ -446,7 +438,6 @@
     const mobileInput = document.getElementById('mobile');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
-    const payPasswordInput = document.getElementById('payPassword');
     const invitationCodeInput = document.getElementById('invitationCode');
     const submitBtn = document.getElementById('submitBtn');
     const countryCodeSelector = document.getElementById('countryCodeSelector');
@@ -528,22 +519,6 @@
         return true;
     }
     
-    // Validar senha de pagamento
-    function validatePayPassword(payPassword) {
-        if (!payPassword) {
-            showError('payPasswordError', 'Digite a senha de pagamento');
-            return false;
-        }
-        
-        if (payPassword.length < 6 || payPassword.length > 16) {
-            showError('payPasswordError', 'Senha de pagamento de 6 a 16 dígitos');
-            return false;
-        }
-        
-        hideError('payPasswordError');
-        return true;
-    }
-    
     // Validar código de convite
     function validateInvitationCode(code) {
         if (code && !isValidInvitationCode(code)) {
@@ -613,7 +588,6 @@
         const mobile = mobileInput.value.trim();
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
-        const payPassword = payPasswordInput.value;
         const invitationCode = invitationCodeInput.value.trim();
         const areaCode = areaCodeInput.value;
         
@@ -621,11 +595,9 @@
         const isMobileValid = validateMobile(mobile, areaCode);
         const isPasswordValid = validatePassword(password);
         const isConfirmPasswordValid = validateConfirmPassword(password, confirmPassword);
-        const isPayPasswordValid = validatePayPassword(payPassword);
         const isInvitationCodeValid = validateInvitationCode(invitationCode);
         
-        if (!isMobileValid || !isPasswordValid || !isConfirmPasswordValid || 
-            !isPayPasswordValid || !isInvitationCodeValid) {
+        if (!isMobileValid || !isPasswordValid || !isConfirmPasswordValid || !isInvitationCodeValid) {
             return;
         }
         
@@ -633,7 +605,6 @@
         const formData = {
             mobile: areaCode + mobile,
             password: password,
-            pay_password: payPassword,
             invitation_code: invitationCode || null,
             saldo: 570
         };
@@ -700,10 +671,6 @@
         
         confirmPasswordInput.addEventListener('blur', () => {
             validateConfirmPassword(passwordInput.value, confirmPasswordInput.value);
-        });
-        
-        payPasswordInput.addEventListener('blur', () => {
-            validatePayPassword(payPasswordInput.value);
         });
         
         invitationCodeInput.addEventListener('blur', () => {
