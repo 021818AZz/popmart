@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <title>Login</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#317EFB">
+<meta name="theme-color" content="#8B4513">
 
 <meta name="description" content=" Ganhar dinheiro impoortante demais" />
 <meta name="keywords" content="investmentos, hamister, ganhar dinheiro" />
@@ -27,53 +27,180 @@ window.addEventListener('resize', function() {
 <script type="text/javascript" src="public.js"></script>
 
 <style>
-.container .auth_bg{margin-top:33px;text-align:center;font-size:22px;font-weight:700}
-.container .form{position:relative;top:28px;border-radius:20px 20px 0 0;width:100%;background-color:#fff}
-.u-form-item{padding:5px 30px}
-::placeholder{color: rgb(192, 196, 204);font-size:14px;}
-.u-form-item .u-form-item__body,#register .u-form-item .u-form-item__body{padding:10px!important;background:#f2f7fb;border-radius:24px}
-.u-form-item__body{display:flex;flex-direction:row;padding:10px 0}
-.u-form-item__body__left{display:flex;flex-direction:row;align-items:center}
-.u-form-item__body__left__content{position:relative;display:flex;flex-direction:row;align-items:center;padding-right:8px;flex:1}
-.u-form-item__body__left__content__icon{margin-right:3px}
-.u-form-item__body__right input{background-color:transparent;height:31px;display: block;width: 100%;outline: none;border: none;padding: 0;margin: 0;text-decoration: inherit;}
-.container .btn{display:block;text-align:center;margin:10px 30px 10px 30px;color: #fff;background: linear-gradient(90deg,#05cda7,#00e763)!important;font-weight: 700;border-radius: 22px;padding:12px 0;font-size:16px;}
-.container .forget{display:block;text-align:center;font-weight: 500;color: #00e763;font-size: 14px;text-align: center;margin-bottom: 20px;}
-.container .form .btn-bottom{display:block;text-align:center;font-weight: 700;font-size:16px;width: 100%;text-align: center;margin-bottom:20px;color: #00e763;}
-.guojia-list-item{padding:10px 0;border-bottom:1px #ddd dashed;}
+/* Cores de café definidas */
+:root {
+  --coffee-dark: #5D4037;
+  --coffee-medium: #8B4513;
+  --coffee-light: #A1887F;
+  --coffee-cream: #D7CCC8;
+  --coffee-lighter: #EFEBE9;
+  --coffee-accent: #6D4C41;
+}
+
+body {
+  background-color: var(--coffee-lighter);
+  background-image: url(fundoindex.jpg);
+  background-size: 100% 260px;
+  background-repeat: no-repeat;
+}
+
+.container .auth_bg {
+  margin-top: 33px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--coffee-dark);
+}
+
+.container .form {
+  position: relative;
+  top: 28px;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  background-color: var(--coffee-cream);
+}
+
+.u-form-item {
+  padding: 5px 30px;
+}
+
+::placeholder {
+  color: var(--coffee-light);
+  font-size: 14px;
+}
+
+.u-form-item .u-form-item__body, #register .u-form-item .u-form-item__body {
+  padding: 10px !important;
+  background: var(--coffee-lighter);
+  border-radius: 24px;
+  border: 1px solid var(--coffee-light);
+}
+
+.u-form-item__body {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0;
+}
+
+.u-form-item__body__left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.u-form-item__body__left__content {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 8px;
+  flex: 1;
+}
+
+.u-form-item__body__left__content__icon {
+  margin-right: 3px;
+}
+
+.u-form-item__body__right input {
+  background-color: transparent;
+  height: 31px;
+  display: block;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: inherit;
+  color: var(--coffee-dark);
+}
+
+.container .btn {
+  display: block;
+  text-align: center;
+  margin: 10px 30px 10px 30px;
+  color: #fff;
+  background: linear-gradient(90deg, var(--coffee-medium), var(--coffee-accent)) !important;
+  font-weight: 700;
+  border-radius: 22px;
+  padding: 12px 0;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.container .forget {
+  display: block;
+  text-align: center;
+  font-weight: 500;
+  color: var(--coffee-medium);
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container .form .btn-bottom {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--coffee-medium);
+}
+
+.guojia-list-item {
+  padding: 10px 0;
+  border-bottom: 1px var(--coffee-light) dashed;
+  color: var(--coffee-dark);
+}
+
+.guojia-list-item:hover {
+  background-color: var(--coffee-cream);
+}
 
 /* Estilos adicionais para loading */
 .loading-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(93, 64, 55, 0.7);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
 }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #00e763;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--coffee-cream);
+  border-top: 5px solid var(--coffee-medium);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilo para o cabeçalho fixo */
+div[style*="position:fixed"] {
+  background-color: var(--coffee-medium) !important;
+}
+
+/* Estilo para o link de suporte */
+span[style*="color:#f73131"] a {
+  filter: sepia(100%) hue-rotate(-20deg) saturate(500%);
 }
 </style>
 </head>
-<body ontouchstart="" style="background-color:#fff;background-image:url(https://i.postimg.cc/zDb2Jhw2/bg-top2.png);background-size:100% 260px;background-repeat:no-repeat;">
+<body ontouchstart="">
 
-<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;"><span style="position:absolute;right:10px;font-size:14px;color:#f73131;letter-spacing:1px;"><a target="_blank" href=" https://t.me/Ada8860"><img src="https://i.postimg.cc/CLvcSTY3/icon-kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
+<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;background-color: var(--coffee-medium);"><span style="position:absolute;right:10px;font-size:14px;color:#fff;letter-spacing:1px;"><a target="_blank" href=" https://t.me/Ada8860"><img src="https://i.postimg.cc/CLvcSTY3/icon-kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
 
 <div style="margin-top:45px;text-align:center;"><img src="https://i.postimg.cc/cCG9pCW5/image.png" alt="logo" style="width:110px;height:110px;"></div>
 
@@ -96,7 +223,7 @@ window.addEventListener('resize', function() {
                                         <img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
                                     </div>
                                     <input id="area_codei" name="area_code" type="text" value="244" style="display:none;" required>
-                                    <div style="width:40px;height:22px;" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>
+                                    <div style="width:40px;height:22px;color: var(--coffee-dark);" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>
                                 </div>
                             </div>
                         </div>
@@ -144,9 +271,9 @@ const TOKEN_EXPIRY_HOURS = 5; // Token expira em 5 horas
 function quhao_select() {
     layer.open({
         type: 1,
-        content: '<div style="padding:0 10px;"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>',
+        content: '<div style="padding:0 10px;background-color: var(--coffee-lighter);"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>',
         anim: 'up',
-        style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
+        style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none; background-color: var(--coffee-lighter);'
     });
 }
 
@@ -172,14 +299,14 @@ function showLoading(show) {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(93, 64, 55, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
         `;
         overlay.innerHTML = `
-            <div style="background: white; padding: 20px; border-radius: 8px;">
+            <div style="background: var(--coffee-cream); padding: 20px; border-radius: 8px; color: var(--coffee-dark);">
                 <p>Carregando...</p>
             </div>
         `;
@@ -322,5 +449,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-<body>
-    
+</body>
+</html>
