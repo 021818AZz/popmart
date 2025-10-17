@@ -9,15 +9,230 @@
     <meta name="x5-fullscreen" content="true">
     <meta name="360-fullscreen" content="true">
     <meta name="renderer" content="webkit">
-    <style>* {
+    <style>
+        /* Cores de café definidas */
+        :root {
+            --coffee-dark: #5D4037;
+            --coffee-medium: #8B4513;
+            --coffee-light: #A1887F;
+            --coffee-cream: #D7CCC8;
+            --coffee-lighter: #EFEBE9;
+            --coffee-accent: #6D4C41;
+            --coffee-gradient: linear-gradient(90deg, var(--coffee-medium), var(--coffee-accent));
+        }
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         html,
         body {
             width: 100%;
-        }</style>
+            background-color: var(--coffee-lighter);
+            color: var(--coffee-dark);
+        }
+
+        /* Aplicar cores de café em elementos principais */
+        .page {
+            background-color: var(--coffee-lighter);
+        }
+
+        .headers {
+            background: var(--coffee-gradient) !important;
+        }
+
+        .head {
+            background: var(--coffee-gradient) !important;
+        }
+
+        .content-container {
+            background-color: var(--coffee-lighter);
+        }
+
+        .content-scroll {
+            background-color: var(--coffee-lighter);
+        }
+
+        .container {
+            background-color: transparent;
+        }
+
+        .bgs {
+            background-color: var(--coffee-lighter);
+        }
+
+        .itemBox {
+            background-color: var(--coffee-cream);
+            border-radius: 12px;
+            margin: 10px;
+            padding: 15px;
+            border: 1px solid var(--coffee-light);
+        }
+
+        .income_box {
+            background: var(--coffee-gradient) !important;
+            color: white !important;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .income_box .name {
+            color: white !important;
+        }
+
+        .income_box .am {
+            color: white !important;
+        }
+
+        .income_box .qb li {
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        .income_box .qb .n {
+            color: white !important;
+        }
+
+        .income_box .qb .s {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .bonus-info {
+            background: var(--coffee-cream) !important;
+            border: 1px solid var(--coffee-medium) !important;
+            color: var(--coffee-dark) !important;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 15px;
+        }
+
+        .tab {
+            background-color: var(--coffee-cream);
+            border-radius: 12px;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .tab li {
+            background-color: var(--coffee-lighter);
+            border: 1px solid var(--coffee-light);
+            border-radius: 8px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tab li:hover {
+            background-color: var(--coffee-medium);
+        }
+
+        .tab .s0, .tab .s1 {
+            color: var(--coffee-dark) !important;
+        }
+
+        .tab li:hover .s0, .tab li:hover .s1 {
+            color: white !important;
+        }
+
+        .nav1 {
+            background-color: var(--coffee-cream);
+        }
+
+        .nav1 li {
+            background-color: var(--coffee-lighter);
+            border: 1px solid var(--coffee-light);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .nav1 li:hover {
+            background-color: var(--coffee-medium);
+            transform: translateY(-2px);
+        }
+
+        .nav1 li p {
+            color: var(--coffee-dark) !important;
+        }
+
+        .nav1 li:hover p {
+            color: white !important;
+        }
+
+        .lucku_bann {
+            background-color: var(--coffee-cream);
+            border-radius: 12px;
+            margin: 10px;
+            padding: 15px;
+            border: 1px solid var(--coffee-light);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lucku_bann:hover {
+            background-color: var(--coffee-medium);
+            color: white !important;
+        }
+
+        .lucku_bann .item {
+            color: var(--coffee-dark);
+            font-weight: bold;
+        }
+
+        .lucku_bann:hover .item {
+            color: white !important;
+        }
+
+        .footer {
+            background: var(--coffee-gradient) !important;
+        }
+
+        .footers {
+            background: transparent;
+        }
+
+        .footers .item {
+            color: white !important;
+        }
+
+        .footers .item:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        /* Texto em branco para elementos importantes */
+        .head .name {
+            color: white !important;
+        }
+
+        #uid div {
+            color: white !important;
+        }
+
+        #uid div:first-child {
+            color: rgba(255,255,255,0.8) !important;
+        }
+
+        /* Popup e modais */
+        .popup_box {
+            background-color: var(--coffee-cream);
+            border: 1px solid var(--coffee-light);
+            border-radius: 12px;
+        }
+
+        .line ul li {
+            color: var(--coffee-dark);
+        }
+
+        .line ul li:hover {
+            background-color: var(--coffee-medium);
+            color: white !important;
+        }
+    </style>
     <link href="https://aitech360.site/public/static/css/app.c1933b14.css" rel="preload" as="style">
     <link href="https://aitech360.site/public/static/css/chunk-vant.d14f5539.css" rel="preload" as="style">
     <link href="https://aitech360.site/public/static/css/chunk-vendors.794edbf9.css" rel="preload" as="style">
@@ -43,9 +258,9 @@
             <div data-v-a53c4a36="" data-v-35d43c50="" class="head" data-v-6e534c71="">
                 <div data-v-a53c4a36="" class="container flex">
                     <div data-v-a53c4a36="" class="back"><img data-v-a53c4a36=""
-                                                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALkSURBVHgB7ZnPThNBHMd/v9lpK6XFJrWlG5DsoYeqkNSbN/UN8AmEJ9A3EJ/A+ATi0ZMc9YTePFbgwIHDJqBZMDEDLGvTf+NvhBVKgENnZnvZT9J0822y+/3u7Mzvt1OAlJSUlBQNEMbAzMz9Zpc5L6SUh92QrwjREjAiHBJGme8xvk53roSIkCkMAAS8hBFhkCC1WsMj8x/psBRryOAxaJBYAGVeZrLrdOhd1JmUb0GDRB6h68yjhNfB3uYqaGB9BEolr3S9+Y0V0MTqKqTMZwtT6zRXm5cu+j7Y3VgCA1h9hHLF4jv6ag6ruBbsfl8CQ1gLUL27QOZx8aImEVodhstgECtzoDo3/woBl4ZEBL/D2FPhj160rsJ4gH/mJVsZEsk8WjB/emqD3GQ+8Fs+WMBYgHGYP72EASpzD54z6axeOrMg8w9tmldoz4Gqu7B4lXlu+c6fX0qDCnWWiFxVWeosz3UJ8tnB7uYaJIDeCKDzBs46SynPJJDLSZlXmF1GJX7pdaUPCaIVwOHOslpp6LBNn8/06HxlnD2pVJpNSAgHNAhFIPK5uQ/AB4c0BYJYRy4b+ZwroigIwDJaARRR9DOcyrt7ksnhu84H3mTuzk4U/QrBItoBFGFII1F0BaJsxBr1Qhw4ztsOYSSAIjoOgkJxuk3O67GmQkiH1bOOu91uB22wgLEAipPj/b3ilKvqgBdrVB9uYUY2bIUwGkARHgV+kiGMB1DcFKJanmgJIXpgCCsBFCrE5O0qVWmsxZoK0e1n6pVyfstUCGsBFCdHB9uXQ1CKQqefnY2OD1pgAOvbKnmn/IlajKGCRluKnupiwQBWR0AhhN+rlO9tdfvtOq2rhf8/MKzlJ6dvReH+DmhgPYDiNIS70+tToaN5EOu0Lzqbo9rxh5ZfGJHE9kZ9eqGfyLBV2pEberHnMNBq/BLdnb4qhETmgwZj+YPD85qlk17nUV9y8fvHxjdISUlJSRkXfwFHSxhpEL4NbwAAAABJRU5ErkJggg=="
+                                                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALkSURBVHgB7ZnPThNBGMf/babdttBCS6G0W5LsoYeqkNSbN/UN8AmEJ9A3EJ/A+ATi0ZMc9YTePFbgwIHDJqBZMDEDLGvTf+NvhBVKgENnZnvZT9J0822y+/3u7Mzvt1OAlJSUlBQNEMbAzMz9Zpc5L6SUh92QrwjREjAiHBJGme8xvk53roSIkCkMAAS8hBFhkCC1WsMj8x/psBRryOAxaJBYAGVeZrLrdOhd1JmUb0GDRB6h68yjhNfB3uYqaGB9BEolr3S9+Y0V0MTqKqTMZwtT6zRXm5cu+j7Y3VgCA1h9hHLF4jv6ag6ruBbsfl8CQ1gLUL27QOZx8aImEVodhstgECtzoDo3/woBl4ZEBL/D2FPhj160rsJ4gH/mJVsZEsk8WjB/emqD3GQ+8Fs+WMBYgHGYP72EASpzD54z6axeOrMg8w9tmldoz4Gqu7B4lXlu+c6fX0qDCnWWiFxVWeosz3UJ8tnB7uYaJIDeCKDzBs46SynPJJDLSZlXmF1GJX7pdaUPCaIVwOHOslpp6LBNn8/06HxlnD2pVJpNSAgHNAhFIPK5uQ/AB4c0BYJYRy4b+ZwroigIwDJaARRR9DOcyrt7ksnhu84H3mTuzk4U/QrBItoBFGFII1F0BaJsxBr1Qhw4ztsOYSSAIjoOgkJxuk3O67GmQkiH1bOOu91uB22wgLEAipPj/b3ilKvqgBdrVB9uYUY2bIUwGkARHgV+kiGMB1DcFKJanmgJIXpgCCsBFCrE5O0qVWmsxZoK0e1n6pVyfstUCGsBFCdHB9uXQ1CKQqefnY2OD1pgAOvbKnmn/IlajKGCRluKnupiwQBWR0AhhN+rlO9tdfvtOq2rhf8/MKzlJ6dvReH+DmhgPYDiNIS70+tToaN5EOu0Lzqbo9rxh5ZfGJHE9kZ9eqGfyLBV2pEberHnMNBq/BLdnb4qhETmgwZj+YPD85qlk17nUV9y8fvHxjdISUlJSRkXfwFHSxhpEL4NbwAAAABJRU5ErkJggg=="
                                                               alt=""></div>
-                    <div data-v-a53c4a36="" class="name tac"> Ai Tech 360 Wallet</div>
+                    <div data-v-a53c4a36="" class="name tac" style="color: white !important;"> Bammer Wallet</div>
                     <div data-v-a53c4a36="" class="flex1"></div>
                 </div>
                 <div data-v-a53c4a36=""></div>
@@ -57,20 +272,20 @@
                     <div data-v-35d43c50="" data-v-6e534c71="" class="container">
                         <div data-v-35d43c50="" data-v-6e534c71="" class="itemBox">
                             <div data-v-35d43c50="" data-v-6e534c71="" class="income_box b">
-                              <div data-v-35d43c50="" data-v-6e534c71="" class="name">Saldo Real</div>
+                              <div data-v-35d43c50="" data-v-6e534c71="" class="name" style="color: white !important;">Saldo Real</div>
 <div data-v-35d43c50="" data-v-6e534c71="" class="flex" style="justify-content: space-between; align-items: center;">
 
     <!-- Saldo -->
-    <div class="am" style="white-space: nowrap; font-weight: bold; color: #fff;">
+    <div class="am" style="white-space: nowrap; font-weight: bold; color: #fff !important;">
         KZ 1
     </div>
 
     <!-- Telefone -->
-    <div style="text-align: right; color: #fff; font-size: 14px;" id="uid">
-        <div style="font-size: 12px; color: #bbb; font-weight: normal; margin-bottom: 2px;">
+    <div style="text-align: right; color: #fff !important; font-size: 14px;" id="uid">
+        <div style="font-size: 12px; color: rgba(255,255,255,0.8) !important; font-weight: normal; margin-bottom: 2px;">
             Número telefone
         </div>
-        <div style="font-weight: bold;">
+        <div style="font-weight: bold; color: #fff !important;">
             
         </div>
     </div>
@@ -80,21 +295,21 @@
                                 
                                 <ul data-v-35d43c50="" data-v-6e534c71="" class="qb wrap bet">
                                     <li data-v-35d43c50="" data-v-6e534c71="">
-                                        <div data-v-35d43c50="" data-v-6e534c71="" class="n">Comissão da equipe de hoje</div>
-                                        <div data-v-35d43c50="" data-v-6e534c71="" class="s">
+                                        <div data-v-35d43c50="" data-v-6e534c71="" class="n" style="color: white !important;">Comissão da equipe de hoje</div>
+                                        <div data-v-35d43c50="" data-v-6e534c71="" class="s" style="color: white !important;">
                                                                                         KZ 0
                                         </div>
                                     </li>
                                     <li data-v-35d43c50="" data-v-6e534c71="">
-                                        <div data-v-35d43c50="" data-v-6e534c71="" class="n">Hoje minha comissão</div>
-                                        <div data-v-35d43c50="" data-v-6e534c71="" class="s">
+                                        <div data-v-35d43c50="" data-v-6e534c71="" class="n" style="color: white !important;">Hoje minha comissão</div>
+                                        <div data-v-35d43c50="" data-v-6e534c71="" class="s" style="color: white !important;">
                                                                                         KZ 0
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                                                    <div class="bonus-info" style="margin-top:10px;padding:10px;background:#fff3cd;border:1px solid #ffeeba;border-radius:5px;">
+                                                    <div class="bonus-info" style="margin-top:10px;padding:15px;background:var(--coffee-cream) !important;border:1px solid var(--coffee-medium) !important;color:var(--coffee-dark) !important;border-radius:8px;margin:10px;">
                                 <strong>Saldo Bônus:</strong> KZ 300.000  
                                 <br>
                                 Mínimo necessário para liberar: 10 convidados de nível 1
@@ -105,14 +320,14 @@
                                                                                             data-v-6e534c71=""
                                                                                             src="https://aitech360.site/public/download (34).png"
                                                                                             alt="">
-                                <div data-v-35d43c50="" data-v-6e534c71="" class="s0">Recarregar</div>
+                                <div data-v-35d43c50="" data-v-6e534c71="" class="s0" style="color: var(--coffee-dark) !important;">Recarregar</div>
                             </li>
                             <li data-v-35d43c50="" data-v-6e534c71=""
                                 onclick="window.location.href='/retirada.html'"><img data-v-35d43c50=""
                                                                                                  data-v-6e534c71=""
                                                                                                  src="https://aitech360.site/public/download (34).png"
                                                                                                  alt="">
-                                <div data-v-35d43c50="" data-v-6e534c71="" class="s1">Retirar</div>
+                                <div data-v-35d43c50="" data-v-6e534c71="" class="s1" style="color: var(--coffee-dark) !important;">Retirar</div>
                             </li>
                         </ul> <div data-v-98526a88="" data-v-6e534c71="" class="lucku_bann"
                     </div>
@@ -129,21 +344,21 @@
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://aitech360.site/public/download (28).png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Registro de recarga</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Registro de recarga</p></div>
                         </li>
                         <li data-v-98526a88="" data-v-6e534c71=""
                             onclick="window.location.href='/historico.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://aitech360.site/public/download (29).png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Retirar registro</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Retirar registro</p></div>
                         </li>
 
                         <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='/seting.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://aitech360.site/public/download (30).png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Alteração de senha</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Alteração de senha</p></div>
                         </li>
 
          </div>
@@ -155,7 +370,7 @@
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://aitech360.site/public/download (31).png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Cadastrar Chave Pix</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Cadastrar Chave Pix</p></div>
                         </li>
 
                          <li data-v-98526a88="" data-v-6e534c71=""
@@ -163,7 +378,7 @@
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://aitech360.site/public/download (29).png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Registro <br> Geral</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Registro <br> Geral</p></div>
                         </li>
                         
 
@@ -171,7 +386,7 @@
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://aitech360.site/public/download (33).png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Ajuda</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Ajuda</p></div>
                         </li>
                    </div>
                 <div data-v-35d43c50="" data-v-6e534c71="" class="container">
@@ -209,7 +424,7 @@
                 <div data-v-98526a88="" data-v-6e534c71="" class="lucku_bann"
                    onclick="window.location.href='/index'">
                     <div data-v-98526a88="" data-v-6e534c71="">
-                        <div data-v-98526a88="" data-v-6e534c71="" class="item">Sair</div>
+                        <div data-v-98526a88="" data-v-6e534c71="" class="item" style="color: var(--coffee-dark);">Sair</div>
                     </div>
                 </div>
                                         </li>
@@ -228,26 +443,26 @@
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
             <div data-v-47e63dc4="" class="on"><img data-v-47e63dc4=""
                                                     src="https://aitech360.site/public/download (23).png"
-                                                    alt=""><span data-v-47e63dc4=""> Lar </span></div>
+                                                    alt=""><span data-v-47e63dc4="" style="color: white !important;"> Lar </span></div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/tarefa.html'">
             <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
                                                   src="https://aitech360.site/public/download (24).png"
-                                                  alt=""><span data-v-47e63dc4=""> Meus ganhos </span></div>
+                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Meus ganhos </span></div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/produtos.html'">
             <div data-v-47e63dc4="" class=""><img data-v-47e63dc4="" src="https://aitech360.site/public/download (25).png"
-                                                  alt=""><span data-v-47e63dc4="">Plano IA </span></div>
+                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;">Plano IA </span></div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/equipe.html'">
             <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
                                                   src="https://aitech360.site/public/download (26).png"
-                                                  alt=""><span data-v-47e63dc4=""> Equipe </span></div>
+                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Equipe </span></div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/dashboard.html'">
             <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
                                                   src="https://aitech360.site/public/download (27).png"
-                                                  alt=""><span data-v-47e63dc4=""> Meu </span></div>
+                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Meu </span></div>
         </div>
     </div>
 </div>
