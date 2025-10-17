@@ -127,7 +127,6 @@
         border-radius: 24px;
         padding: 10px 15px;
         margin-bottom: 15px;
-        cursor: pointer;
         border: 1px solid var(--coffee-light);
         color: var(--coffee-dark);
     }
@@ -221,64 +220,6 @@
         font-size: 12px;
         margin-left: 5px;
     }
-    
-    .modal {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: var(--coffee-cream);
-        border-radius: 20px 20px 0 0;
-        padding: 20px;
-        max-height: 70vh;
-        overflow-y: auto;
-        z-index: 1000;
-        display: none;
-    }
-    
-    .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--coffee-light);
-        color: var(--coffee-dark);
-    }
-    
-    .modal-close {
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        color: var(--coffee-dark);
-    }
-    
-    .country-list {
-        list-style: none;
-    }
-    
-    .country-item {
-        padding: 12px 0;
-        border-bottom: 1px dashed var(--coffee-light);
-        cursor: pointer;
-        color: var(--coffee-dark);
-    }
-    
-    .country-item:hover {
-        background-color: var(--coffee-lighter);
-    }
-    
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(93, 64, 55, 0.5);
-        z-index: 999;
-        display: none;
-    }
     </style>
 </head>
 <body>
@@ -299,9 +240,9 @@
             <div id="successMessage" class="success-message"></div>
             
             <div class="form-group">
-                <div class="country-code" id="countryCodeSelector">
+                <div class="country-code">
                     <img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" class="input-icon" alt="Código do país">
-                    <span id="selectedCountry">+244</span>
+                    <span>+244 (Angola)</span>
                     <input type="hidden" id="areaCode" value="244">
                 </div>
             </div>
@@ -348,86 +289,6 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
     </div>
-    
-    <div class="overlay" id="overlay"></div>
-    
-    <div class="modal" id="countryModal">
-        <div class="modal-header">
-            <h3>Selecionar país</h3>
-            <button class="modal-close" id="closeModal">×</button>
-        </div>
-        <ul class="country-list" id="countryList">
-            <li class="country-item" data-code="1">(USA) +1</li>
-            <li class="country-item" data-code="7">(Russia) +7</li>
-            <li class="country-item" data-code="20">(Egypt) +20</li>
-            <li class="country-item" data-code="27">(South Africa) +27</li>
-            <li class="country-item" data-code="30">(Greece) +30</li>
-            <li class="country-item" data-code="31">(Netherlands) +31</li>
-            <li class="country-item" data-code="32">(Belgium) +32</li>
-            <li class="country-item" data-code="33">(France) +33</li>
-            <li class="country-item" data-code="34">(Spain) +34</li>
-            <li class="country-item" data-code="39">(Italy) +39</li>
-            <li class="country-item" data-code="40">(Romania) +40</li>
-            <li class="country-item" data-code="41">(Switzerland) +41</li>
-            <li class="country-item" data-code="43">(Austria) +43</li>
-            <li class="country-item" data-code="44">(United Kingdom) +44</li>
-            <li class="country-item" data-code="45">(Denmark) +45</li>
-            <li class="country-item" data-code="46">(Sweden) +46</li>
-            <li class="country-item" data-code="47">(Norway) +47</li>
-            <li class="country-item" data-code="48">(Poland) +48</li>
-            <li class="country-item" data-code="49">(Germany) +49</li>
-            <li class="country-item" data-code="51">(Peru) +51</li>
-            <li class="country-item" data-code="52">(Mexico) +52</li>
-            <li class="country-item" data-code="53">(Cuba) +53</li>
-            <li class="country-item" data-code="54">(Argentina) +54</li>
-            <li class="country-item" data-code="55">(Brazil) +55</li>
-            <li class="country-item" data-code="56">(Chile) +56</li>
-            <li class="country-item" data-code="57">(Colombia) +57</li>
-            <li class="country-item" data-code="58">(Venezuela) +58</li>
-            <li class="country-item" data-code="60">(Malaysia) +60</li>
-            <li class="country-item" data-code="61">(Australia) +61</li>
-            <li class="country-item" data-code="62">(Indonesia) +62</li>
-            <li class="country-item" data-code="63">(Philippines) +63</li>
-            <li class="country-item" data-code="64">(New Zealand) +64</li>
-            <li class="country-item" data-code="65">(Singapore) +65</li>
-            <li class="country-item" data-code="66">(Thailand) +66</li>
-            <li class="country-item" data-code="81">(Japan) +81</li>
-            <li class="country-item" data-code="82">(South Korea) +82</li>
-            <li class="country-item" data-code="84">(Vietnam) +84</li>
-            <li class="country-item" data-code="86">(China) +86</li>
-            <li class="country-item" data-code="90">(Turkey) +90</li>
-            <li class="country-item" data-code="91">(India) +91</li>
-            <li class="country-item" data-code="92">(Pakistan) +92</li>
-            <li class="country-item" data-code="93">(Afghanistan) +93</li>
-            <li class="country-item" data-code="94">(Sri Lanka) +94</li>
-            <li class="country-item" data-code="95">(Myanmar) +95</li>
-            <li class="country-item" data-code="98">(Iran) +98</li>
-            <li class="country-item" data-code="213">(Algeria) +213</li>
-            <li class="country-item" data-code="216">(Tunisia) +216</li>
-            <li class="country-item" data-code="218">(Libya) +218</li>
-            <li class="country-item" data-code="220">(Gambia) +220</li>
-            <li class="country-item" data-code="221">(Senegal) +221</li>
-            <li class="country-item" data-code="222">(Mauritania) +222</li>
-            <li class="country-item" data-code="223">(Mali) +223</li>
-            <li class="country-item" data-code="224">(Guinea) +224</li>
-            <li class="country-item" data-code="225">(Côte d'Ivoire) +225</li>
-            <li class="country-item" data-code="226">(Burkina Faso) +226</li>
-            <li class="country-item" data-code="227">(Niger) +227</li>
-            <li class="country-item" data-code="228">(Togo) +228</li>
-            <li class="country-item" data-code="229">(Benin) +229</li>
-            <li class="country-item" data-code="230">(Mauritius) +230</li>
-            <li class="country-item" data-code="231">(Liberia) +231</li>
-            <li class="country-item" data-code="232">(Sierra Leone) +232</li>
-            <li class="country-item" data-code="233">(Ghana) +233</li>
-            <li class="country-item" data-code="234">(Nigeria) +234</li>
-            <li class="country-item" data-code="235">(Chad) +235</li>
-            <li class="country-item" data-code="237">(Cameroon) +237</li>
-            <li class="country-item" data-code="238">(Cape Verde) +238</li>
-            <li class="country-item" data-code="244">(Angola) +244</li>
-            <li class="country-item" data-code="974">(Qatar) +974</li>
-            <li class="country-item" data-code="994">(Azerbaijan) +994</li>
-        </ul>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
@@ -440,15 +301,11 @@
     const confirmPasswordInput = document.getElementById('confirmPassword');
     const invitationCodeInput = document.getElementById('invitationCode');
     const submitBtn = document.getElementById('submitBtn');
-    const countryCodeSelector = document.getElementById('countryCodeSelector');
-    const selectedCountry = document.getElementById('selectedCountry');
-    const areaCodeInput = document.getElementById('areaCode');
-    const countryModal = document.getElementById('countryModal');
-    const overlay = document.getElementById('overlay');
-    const closeModal = document.getElementById('closeModal');
-    const countryList = document.getElementById('countryList');
     const loadingOverlay = document.getElementById('loadingOverlay');
     const successMessage = document.getElementById('successMessage');
+    
+    // Código do país fixo para Angola
+    const AREA_CODE = '244';
     
     // Função para extrair parâmetros da URL
     function getUrlParameter(name) {
@@ -466,7 +323,7 @@
     }
     
     // Validar número de telefone
-    function validateMobile(mobile, areaCode) {
+    function validateMobile(mobile) {
         if (!mobile) {
             showError('mobileError', 'Digite o número de telefone');
             return false;
@@ -474,11 +331,6 @@
         
         const myreg = /^[0-9]{6,16}$/;
         if (!myreg.test(mobile)) {
-            showError('mobileError', 'O formato do número de telefone não está correto');
-            return false;
-        }
-        
-        if (areaCode === '90' && mobile.length !== 10) {
             showError('mobileError', 'O formato do número de telefone não está correto');
             return false;
         }
@@ -564,35 +416,15 @@
         }, 3000);
     }
     
-    // Abrir modal de seleção de país
-    function openCountryModal() {
-        countryModal.style.display = 'block';
-        overlay.style.display = 'block';
-    }
-    
-    // Fechar modal de seleção de país
-    function closeCountryModal() {
-        countryModal.style.display = 'none';
-        overlay.style.display = 'none';
-    }
-    
-    // Selecionar código de país
-    function selectCountryCode(code) {
-        selectedCountry.textContent = `+${code}`;
-        areaCodeInput.value = code;
-        closeCountryModal();
-    }
-    
     // Enviar formulário
     async function submitForm() {
         const mobile = mobileInput.value.trim();
         const password = passwordInput.value;
         const confirmPassword = confirmPasswordInput.value;
         const invitationCode = invitationCodeInput.value.trim();
-        const areaCode = areaCodeInput.value;
         
         // Validar campos
-        const isMobileValid = validateMobile(mobile, areaCode);
+        const isMobileValid = validateMobile(mobile);
         const isPasswordValid = validatePassword(password);
         const isConfirmPasswordValid = validateConfirmPassword(password, confirmPassword);
         const isInvitationCodeValid = validateInvitationCode(invitationCode);
@@ -603,7 +435,7 @@
         
         // Preparar dados para envio
         const formData = {
-            mobile: areaCode + mobile,
+            mobile: AREA_CODE + mobile,
             password: password,
             invitation_code: invitationCode || null,
             saldo: 570
@@ -662,7 +494,7 @@
         
         // Event listeners para validação em tempo real
         mobileInput.addEventListener('blur', () => {
-            validateMobile(mobileInput.value.trim(), areaCodeInput.value);
+            validateMobile(mobileInput.value.trim());
         });
         
         passwordInput.addEventListener('blur', () => {
@@ -676,19 +508,6 @@
         invitationCodeInput.addEventListener('blur', () => {
             validateInvitationCode(invitationCodeInput.value.trim());
         });
-        
-        // Seleção de código de país
-        countryCodeSelector.addEventListener('click', openCountryModal);
-        closeModal.addEventListener('click', closeCountryModal);
-        overlay.addEventListener('click', closeCountryModal);
-        
-        // Adicionar event listeners para os itens da lista de países
-        const countryItems = countryList.getElementsByClassName('country-item');
-        for (let i = 0; i < countryItems.length; i++) {
-            countryItems[i].addEventListener('click', function() {
-                selectCountryCode(this.getAttribute('data-code'));
-            });
-        }
         
         // Enviar formulário
         submitBtn.addEventListener('click', submitForm);
