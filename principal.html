@@ -93,6 +93,11 @@
             color: white !important;
         }
 
+        /* Texto dos itens do menu em cor escura */
+        .nav1 li p {
+            color: var(--coffee-dark) !important;
+        }
+
         .lucku_bann {
             background-color: var(--coffee-cream);
             border-radius: 12px;
@@ -109,7 +114,7 @@
         }
 
         .footers .item {
-            color: white;
+            color: white !important; /* Texto do footer em branco */
         }
 
         .footers .item:hover {
@@ -132,7 +137,7 @@
 
         .popup-content button {
             background: var(--coffee-gradient);
-            color: white;
+            color: white !important; /* Texto do botão em branco */
             border: none;
         }
 
@@ -143,7 +148,7 @@
         /* Notices e barras */
         .van-notice-bar {
             background: var(--coffee-lighter) !important;
-            color: var(--coffee-dark) !important;
+            color: var(--coffee-dark) !important; /* Texto da notice em cor escura */
             border: 1px solid var(--coffee-light);
             border-radius: 8px;
         }
@@ -173,26 +178,31 @@
 
         #checkin-status {
             background: var(--coffee-medium) !important;
-            color: white !important;
+            color: white !important; /* Texto do status em branco */
         }
 
         /* Toast e mensagens */
         .van-toast {
             background-color: var(--coffee-medium) !important;
-            color: white !important;
+            color: white !important; /* Texto do toast em branco */
         }
 
         .gig_box {
             background-color: var(--coffee-medium) !important;
         }
 
-        /* Links do Telegram */
+        /* Links do Telegram - MANTIDO EM AZUL */
         .telegram-link a {
-            color: var(--coffee-medium) !important;
+            color: #0088cc !important; /* Azul do Telegram mantido */
         }
 
         .telegram-link a:hover {
-            color: var(--coffee-dark) !important;
+            color: #006699 !important; /* Azul mais escuro no hover */
+        }
+
+        /* Ícone do Telegram mantido em azul */
+        .telegram-link svg {
+            fill: #0088cc !important;
         }
 
         /* Banner e carousel */
@@ -204,6 +214,16 @@
 
         .carousel__slide__overlay {
             background-color: rgba(93, 64, 55, 0.3);
+        }
+
+        /* Texto do cabeçalho em branco */
+        .head .name {
+            color: white !important;
+        }
+
+        /* Texto dos botões em branco quando aplicável */
+        .btn-primary, .btn-secondary {
+            color: white !important;
         }
     </style>
     <link href="app.c1933b14.css" rel="preload" as="style">
@@ -349,7 +369,7 @@
                     <div data-v-a53c4a36="" class="myName"><img data-v-a53c4a36=""
                                                                 src="img/logo1.jpg"
                                                                 alt=""></div>
-                    <div data-v-a53c4a36="" class="name tac"> Bammer</div>
+                    <div data-v-a53c4a36="" class="name tac" style="color: white !important;"> Bammer</div>
                     <div data-v-a53c4a36="" class="flex1"></div>
                     <div data-v-a53c4a36="" class="lang"><img data-v-a53c4a36=""
                                                               src="https://i.postimg.cc/P5T4C7Tm/b9839d010ab7f254febe57fd0398f0ad.png"
@@ -454,7 +474,7 @@
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://i.postimg.cc/cHp709Ft/image.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Recarregar</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Recarregar</p></div>
                         </li>
                         <!-- No seu HTML, substitua o botão de check-in por este: -->
 <li data-v-98526a88="" data-v-6e534c71="" id="checkin-btn" style="position: relative;">
@@ -462,13 +482,13 @@
         <img data-v-98526a88="" data-v-6e534c71=""
             src="https://i.postimg.cc/T30cgc3B/a0486a1340083788d4db56d97ee8acee.png"
             alt="Check-in">
-        <p data-v-98526a88="" data-v-6e534c71="">Check-in</p>
+        <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Check-in</p>
         <div id="checkin-status" style="
             position: absolute;
             top: -5px;
             right: -5px;
             background: var(--coffee-medium);
-            color: white;
+            color: white !important;
             padding: 2px 6px;
             border-radius: 10px;
             font-size: 10px;
@@ -483,21 +503,21 @@
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://i.postimg.cc/kMSFfC5Q/f5ff996fe84131803e14f18a009d87b6.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Retirar</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Retirar</p></div>
                         </li>
 
                         <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='produtos.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://aitech360.site/public/57125d1902de26bd24015093ac5a3e5d.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Compra de IA</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Compra de IA</p></div>
                         </li>
 
                         <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='/produtos.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://i.postimg.cc/JzrNrB5x/22e6a62610c270223a22ffc10e9515e7.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Código de presente</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Código de presente</p></div>
                         </li>
 
                         <li data-v-98526a88="" data-v-6e534c71=""
@@ -505,20 +525,20 @@
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://i.postimg.cc/Njd15fNc/ff7e05e7e4e86beace60c23c9852c228.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Ganhos recebidos</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Ganhos recebidos</p></div>
                         </li>
                         <li data-v-98526a88="" data-v-6e534c71=""
                             onclick="window.location.href='/chat.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://i.postimg.cc/sxCWtB2p/3c2c9d4cc3d5a3088c6ae40c3c6139b9.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Meu Chat</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Meu Chat</p></div>
                         </li>
                         <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='https://t.me/AItechi'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://i.postimg.cc/P5T4C7Tm/b9839d010ab7f254febe57fd0398f0ad.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="">Central de ajuda</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Central de ajuda</p></div>
                         </li>
                        
                     </ul>
@@ -544,9 +564,9 @@
              alt="Logo Sistema" 
              style="max-width: 200px; height: auto; margin-bottom: 15px; border-radius: 8px;">
         
-        <h3 class="text-lg font-semibold section-title mb-4">Sistema Anúncio</h3>
+        <h3 class="text-lg font-semibold section-title mb-4" style="color: var(--coffee-medium);">Sistema Anúncio</h3>
         
-        <div class="text-sm text-white/70 leading-relaxed space-y-3" style="text-align: left;">
+        <div class="text-sm leading-relaxed space-y-3" style="text-align: left; color: var(--coffee-dark);">
             <p>
                1: Bônus de inscrição de KZ 570, bônus de check-in diário de KZ 10.
             </p>
@@ -566,10 +586,10 @@
             </p>
         </div>
 
-        <!-- ICONE TELEGRAM -->
+        <!-- ICONE TELEGRAM - MANTIDO EM AZUL -->
         <div class="telegram-link" style="margin-top: 20px; text-align: center;">
-            <a href="https://t.me/+jESkfFFhHHcxYzg0" target="_blank" title="Entrar no Grupo do Telegram" style="display: inline-flex; align-items: center; gap: 8px; color: var(--coffee-medium); font-weight: bold;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="var(--coffee-medium)" viewBox="0 0 24 24">
+            <a href="https://t.me/+jESkfFFhHHcxYzg0" target="_blank" title="Entrar no Grupo do Telegram" style="display: inline-flex; align-items: center; gap: 8px; color: #0088cc !important; font-weight: bold;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#0088cc !important" viewBox="0 0 24 24">
                     <path d="M12 0C5.372 0 0 5.373 0 12c0 6.627 
                         5.372 12 12 12s12-5.373 12-12C24 5.373 
                         18.628 0 12 0zm5.684 8.217c-.173 
@@ -579,14 +599,14 @@
                         1.097-4.875 3.207-.462.317-.88.472-1.256.464-.413-.009-1.207-.233-1.797-.425-.724-.237-1.298-.363-1.248-.767.026-.21.315-.425.867-.646 
                         3.396-1.478 5.66-2.45 6.791-2.902 3.233-1.345 3.906-1.58 4.345-1.588.096-.002.31.022.449.136.117.095.19.228.208.375.017.147.005.295-.003.43z"/>
                 </svg>
-                <span>Grupo no Telegram</span>
+                <span style="color: #0088cc !important;">Grupo no Telegram</span>
             </a>
         </div>
 
         <!-- BOTÃO FECHAR EMBAIXO -->
         <div style="margin-top: 20px; text-align: center;">
             <button onclick="closePopup()" 
-                style="background: var(--coffee-gradient); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                style="background: var(--coffee-gradient); color: white !important; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">
                 Fechar
             </button>
         </div>
@@ -645,12 +665,12 @@
     gap: 8px;
     font-size: 14px;
     font-weight: bold;
-    color: var(--coffee-medium);
+    color: #0088cc !important;
     text-decoration: none;
 }
 .telegram-link a:hover {
     text-decoration: underline;
-    color: var(--coffee-dark);
+    color: #006699 !important;
 }
 </style>
 
@@ -672,26 +692,26 @@ function closePopup() {
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
             <div data-v-47e63dc4="" class="on"><img data-v-47e63dc4=""
                                                     src="https://i.postimg.cc/kGXBKWYX/image.png"
-                                                    alt=""><span data-v-47e63dc4=""> Lar </span></div>
+                                                    alt=""><span data-v-47e63dc4="" style="color: white !important;"> Lar </span></div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/tarefa.html'">
             <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
                                                   src="https://i.postimg.cc/024bKMYP/image.png"
-                                                  alt=""><span data-v-47e63dc4=""> Meus ganhos </span></div>
+                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Meus ganhos </span></div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/produtos.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4="" src="https://i.postimg.cc/VNq6hK3k/image.png"
-                                                  alt=""><span data-v-47e63dc4="">Plano IA </span></div>
+            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4="" src="img/footer3.jpg"
+                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;">Plano Café </span></div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/equipe.html'">
             <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
                                                   src="https://i.postimg.cc/sxNDWqZw/image.png"
-                                                  alt=""><span data-v-47e63dc4=""> Equipe </span></div>
+                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Equipe </span></div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/dashboard.html'">
             <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
                                                   src="https://i.postimg.cc/Y2nSTGyY/image.png"
-                                                  alt=""><span data-v-47e63dc4=""> Meu </span></div>
+                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Meu </span></div>
         </div>
     </div>
 </div>
@@ -722,7 +742,7 @@ function closePopup() {
         max-width: 70%;
         min-height: 1.51724rem;
         padding: .27586rem;
-        color: #fff;
+        color: white !important;
         font-size: .24138rem;
         white-space: pre-wrap;
         text-align: center;
@@ -758,7 +778,7 @@ function closePopup() {
         max-width: 70%;
         min-height: 1.51724rem;
         padding: .27586rem;
-        color: #fff;
+        color: white !important;
         font-size: .24138rem;
         white-space: pre-wrap;
         text-align: center;
