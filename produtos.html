@@ -1,529 +1,762 @@
+<!DOCTYPE html>
 <html style="font-size: 47.2px;">
-    <head>
-        <meta charset="utf-8">
-        <title>Ai Tech 360</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="full-screen" content="true">
-        <meta name="x5-fullscreen" content="true">
-        <meta name="360-fullscreen" content="true">
-        <meta name="renderer" content="webkit">
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+<head>
+    <meta charset="utf-8">
+    <title>Bammer</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="full-screen" content="true">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <meta name="renderer" content="webkit">
+    <style>
+        /* Cores de café definidas */
+        :root {
+            --coffee-dark: #5D4037;
+            --coffee-medium: #8B4513;
+            --coffee-light: #A1887F;
+            --coffee-cream: #D7CCC8;
+            --coffee-lighter: #A1887F;
+            --coffee-accent: #6D4C41;
+            --coffee-gradient: linear-gradient(90deg, var(--coffee-medium), var(--coffee-accent));
+        }
 
-            html, body {
-                width: 100%;
-            }
-        </style>
-        <link href="https://aitech360.site/public/static/css/app.c1933b14.css" rel="preload" as="style">
-        <link href="https://aitech360.site/public/static/css/chunk-vant.d14f5539.css" rel="preload" as="style">
-        <link href="https://aitech360.site/public/static/css/chunk-vendors.794edbf9.css" rel="preload" as="style">
-        <link href="https://aitech360.site/public/static/css/chunk-vant.d14f5539.css" rel="stylesheet">
-        <link href="https://aitech360.site/public/static/css/chunk-vendors.794edbf9.css" rel="stylesheet">
-        <link href="https://aitech360.site/public/static/css/app.c1933b14.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-159f11a9.a3a3db2b.css">
-        <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-5576a184.9f52f39a.css">
-        <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-3b94db02.5929650c.css">
-        <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-a6d04a00.3a1821fc.css">
-        <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-5ba702ec.7902583a.css">
-        <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-9884782a.e91864af.css">
-        <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-07731f62.d388cdd4.css">
-        <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-15e30c0e.9dcbd293.css">
-        <style>
-            .info[data-v-11bc267c] {
-                background: url(https://aitech360.site/public/static/img/ai_bg2.2a79c9b7.png) no-repeat;
-                background-size: 100% 100%;
-                color: #fff;
-                padding: .28rem;
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            .container {
-                padding: 0 13px !important;
-            }
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: var(--coffee-lighter);
+            color: var(--coffee-dark);
+            overflow-x: hidden;
+        }
 
-            .list li[data-v-11bc267c] {
-                padding: 3px .24rem;
-            }
+        /* Estrutura principal corrigida */
+        #app, .applang {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
 
-            .list li .he[data-v-11bc267c] {
-                align-items: center;
-                margin-bottom: 3px;
-            }
-        </style>
-    </head>
-    <body class="w856">
-        <div id="app" class="applang">
-            <div data-v-6e534c71="" data-v-11bc267c="" class="page">
-                <div data-v-11bc267c="" data-v-6e534c71="" class="bg">
-                    <img data-v-11bc267c="" data-v-6e534c71="" src="https://aitech360.site/public/static/img/bg_ai.ecc46501.png" alt="">
-                </div>
-                <div data-v-6e534c71="" class="headers">
-                    <div data-v-a53c4a36="" data-v-11bc267c="" class="head" data-v-6e534c71="">
-                        <div data-v-a53c4a36="" class="container flex">
-                            <div data-v-a53c4a36="" class="myName">
-                                <img data-v-a53c4a36="" src="https://aitech360.site/public/upload/logo/1755341871gwz.png" alt="">
-                            </div>
-                            <div data-v-a53c4a36="" class="name tac">Robôs AITech</div>
-                            <div data-v-a53c4a36="" class="flex1"></div>
-                            <div data-v-a53c4a36="" class="lang">
-                                <img data-v-a53c4a36="" src="data:image/png;base64,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" alt="">
-                            </div>
-                            <div data-v-a53c4a36="" class="notice">
-                                <img data-v-a53c4a36="" src="data:image/png;base64,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" alt="">
-                            </div>
+        .page {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Cabeçalho fixo */
+        .headers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--coffee-gradient) !important;
+        }
+
+        .head {
+            background: var(--coffee-gradient) !important;
+        }
+
+        /* Container de conteúdo rolável */
+        .content-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-top: 45px; /* Altura do cabeçalho */
+            padding-bottom: 54px; /* Altura do rodapé */
+            -webkit-overflow-scrolling: touch; /* Scroll suave em dispositivos móveis */
+        }
+
+        .content-scroll {
+            min-height: 100%;
+        }
+
+        /* Rodapé fixo */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--coffee-gradient) !important;
+        }
+
+        /* Estilos existentes mantidos */
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            padding: 0 13px !important;
+            background-color: transparent;
+        }
+
+        .list li[data-v-11bc267c] {
+            padding: 3px .24rem;
+            background-color: var(--coffee-cream);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--coffee-light);
+        }
+
+        .list li .he[data-v-11bc267c] {
+            align-items: center;
+            margin-bottom: 3px;
+        }
+
+        .info[data-v-11bc267c] {
+            background: url(img/pro.jpg) no-repeat;
+            background-size: 100% 100%;
+            color: #fff;
+            padding: .28rem;
+        }
+
+        .ico img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .n {
+            font-weight: bold;
+            color: var(--coffee-dark);
+            margin-bottom: 5px;
+        }
+
+        .tag span {
+            display: inline-block;
+            background-color: var(--coffee-medium);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        button.on {
+            background-color: var(--coffee-medium);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button.on:hover {
+            background-color: var(--coffee-dark);
+            transform: translateY(-2px);
+        }
+
+        .it.flex {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .li {
+            text-align: center;
+            flex: 1;
+        }
+
+        .s {
+            font-weight: bold;
+            color: var(--coffee-medium);
+            margin-bottom: 3px;
+        }
+
+        .jindu {
+            margin-top: 10px;
+        }
+
+        .txt {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            color: var(--coffee-dark);
+        }
+
+        .x {
+            background-color: var(--coffee-lighter);
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .x span {
+            display: block;
+            height: 100%;
+            background-color: var(--coffee-medium);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .x var {
+            position: absolute;
+            right: 5px;
+            top: -15px;
+            font-size: 10px;
+            color: var(--coffee-dark);
+        }
+
+        .footers {
+            background: transparent;
+        }
+
+        .footers .item {
+            color: rgba(255, 255, 255, 0.964) !important;
+            text-align: center;
+            padding: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .footers .item:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        .footers img {
+            width: 24px;
+            height: 24px;
+            display: block;
+            margin: 0 auto 3px;
+        }
+
+        .footers span {
+            font-size: 12px;
+        }
+
+        /* Texto em branco para elementos importantes */
+        .head .name {
+            color: rgb(121, 38, 38) !important;
+        }
+
+        .myName img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .lang img, .notice img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+    <link href="app.c1933b14.css" rel="preload" as="style">
+    <link href="chunk-vant.d14f5539.css" rel="preload" as="style">
+    <link href="chunk-vendors.794edbf9.css" rel="preload" as="style">
+    <link href="chunk-vant.d14f5539.css" rel="stylesheet">
+    <link href="chunk-vendors.794edbf9.css" rel="stylesheet">
+    <link href="app.c1933b14.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="chunk-159f11a9.a3a3db2b.css">
+    <link rel="stylesheet" type="text/css" href="chunk-5576a184.9f52f39a.css">
+    <link rel="stylesheet" type="text/css" href="chunk-3b94db02.5929650c.css">
+    <link rel="stylesheet" type="text/css" href="chunk-a6d04a00.3a1821fc.css">
+    <link rel="stylesheet" type="text/css" href="chunk-5ba702ec.7902583a.css">
+    <link rel="stylesheet" type="text/css" href="chunk-9884782a.e91864af.css">
+    <link rel="stylesheet" type="text/css" href="chunk-07731f62.d388cdd4.css">
+    <link rel="stylesheet" type="text/css" href="chunk-15e30c0e.9dcbd293.css">
+    <style>
+        .list .it .n[data-v-35d43c50] {
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body class="w856">
+    <div id="app" class="applang">
+        <div data-v-6e534c71="" data-v-11bc267c="" class="page">
+            <!-- Imagem de fundo -->
+            <div data-v-11bc267c="" data-v-6e534c71="" class="bg">
+                <img data-v-11bc267c="" data-v-6e534c71="" src="img/pro.jpg" alt="">
+            </div>
+            
+            <!-- Cabeçalho fixo -->
+            <div data-v-6e534c71="" class="headers">
+                <div data-v-a53c4a36="" data-v-11bc267c="" class="head" data-v-6e534c71="">
+                    <div data-v-a53c4a36="" class="container flex">
+                        <div data-v-a53c4a36="" class="myName">
+                            <img data-v-a53c4a36="" src="img/logo1.jpg" alt="">
                         </div>
-                        <div data-v-a53c4a36=""></div>
-                    </div>
-                </div>
-                <div data-v-6e534c71="" id="scroll" class="content-container" style="padding-top: 45px; padding-bottom: 54px;">
-                    <div data-v-6e534c71="" id="content" class="content-scroll">
-                        <div data-v-11bc267c="" data-v-6e534c71="" class="container">
-                            <div data-v-11bc267c="" data-v-6e534c71="">
-                                <ul data-v-11bc267c="" data-v-6e534c71="" class="list">
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 1" data-src="https://aitech360.site/public/upload/package/17553832924BJ.jpeg" src="https://aitech360.site/public/upload/package/17553832924BJ.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 1</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">850 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">5.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">76.500 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 2" data-src="https://aitech360.site/public/upload/package/1755383475sJD.jpeg" src="https://aitech360.site/public/upload/package/1755383475sJD.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 2</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip2.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">2.550 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">15.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">229.500 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 3" data-src="https://aitech360.site/public/upload/package/1755383490XRj.jpeg" src="https://aitech360.site/public/upload/package/1755383490XRj.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 3</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip3.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">5.100 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">30.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">459.000 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 4" data-src="https://aitech360.site/public/upload/package/1755383517yNE.jpeg" src="https://aitech360.site/public/upload/package/1755383517yNE.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 4</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip4.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">8.500 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">50.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">765.000 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 5" data-src="https://aitech360.site/public/upload/package/1755383530Uyz.jpeg" src="https://aitech360.site/public/upload/package/1755383530Uyz.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 5</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip5.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">17.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">100.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">1.530.000 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 6" data-src="https://aitech360.site/public/upload/package/1755383541OeO.jpeg" src="https://aitech360.site/public/upload/package/1755383541OeO.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 6</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip6.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">25.500 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">150.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">2.295.000 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 7" data-src="https://aitech360.site/public/upload/package/1755383791ZWi.jpeg" src="https://aitech360.site/public/upload/package/1755383791ZWi.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 7</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip7.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">51.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">300.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">4.590.000 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 8" data-src="https://aitech360.site/public/upload/package/1755383811Onv.jpg" src="https://aitech360.site/public/upload/package/1755383811Onv.jpg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 8</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip8.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">119.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">700.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">10.710.000 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 9" data-src="https://aitech360.site/public/upload/package/1755383829MzA.jpeg" src="https://aitech360.site/public/upload/package/1755383829MzA.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 9</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip9.html'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">153.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">900.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">13.770.000 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-v-11bc267c="" data-v-6e534c71="">
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
-                                                <img data-v-11bc267c="" data-v-6e534c71="" alt="AGI 10" data-src="https://aitech360.site/public/upload/package/1755383873rSp.jpeg" src="https://aitech360.site/public/upload/package/1755383873rSp.jpeg" lazy="loaded">
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">AGI 10</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
-                                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
-                                                </div>
-                                            </div>
-                                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip10'">Comprar</button>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">204.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (17%)</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">1.200.000 Kz</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
-                                            </div>
-                                        </div>
-                                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
-                                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
-                                                <div data-v-11bc267c="" data-v-6e534c71="">18.360.000 Kz</div>
-                                            </div>
-                                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
-                                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
-                                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div data-v-a53c4a36="" class="name tac">BAMME</div>
+                        <div data-v-a53c4a36="" class="flex1"></div>
+                        <div data-v-a53c4a36="" class="lang">
+                            <img data-v-a53c4a36="" src="img/logo.png" alt="">
+                        </div>
+                        <div data-v-a53c4a36="" class="notice">
+                            <img data-v-a53c4a36="" src="data:image/png;base64,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" alt="">
                         </div>
                     </div>
+                    <div data-v-a53c4a36=""></div>
                 </div>
-                <div data-v-6e534c71="" class="footer">
-                    <div data-v-47e63dc4="" data-v-98526a88="" class="footers" data-v-6e534c71="">
-                        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
-                            <div data-v-47e63dc4="" class="on">
-                                <img data-v-47e63dc4="" src="https://aitech360.site/public/download (23).png" alt="">
-                                <span data-v-47e63dc4="">Lar </span>
+            </div>
+            
+          <!-- Conteúdo rolável -->
+<div data-v-6e534c71="" id="scroll" class="content-container">
+    <div data-v-6e534c71="" id="content" class="content-scroll">
+        <div data-v-11bc267c="" data-v-6e534c71="" class="container">
+            <div data-v-11bc267c="" data-v-6e534c71="">
+                <ul data-v-11bc267c="" data-v-6e534c71="" class="list">
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 1" data-src="img/baner1.jpg" src="img/baner2.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 1</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">500 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">2.500 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
                             </div>
                         </div>
-                        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/tarefa.html'">
-                            <div data-v-47e63dc4="" class="">
-                                <img data-v-47e63dc4="" src="https://aitech360.site/public/download (24).png" alt="">
-                                <span data-v-47e63dc4="">Meus ganhos </span>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">45.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
                             </div>
                         </div>
-                        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/produtos.html'">
-                            <div data-v-47e63dc4="" class="">
-                                <img data-v-47e63dc4="" src="https://aitech360.site/public/download (25).png" alt="">
-                                <span data-v-47e63dc4="">Plano IA </span>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 2" data-src="img/baner1.jpg" src="img/baner3.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 2</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip2.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">1.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">5.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
                             </div>
                         </div>
-                        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/equipe.html'">
-                            <div data-v-47e63dc4="" class="">
-                                <img data-v-47e63dc4="" src="https://aitech360.site/public/download (26).png" alt="">
-                                <span data-v-47e63dc4="">Equipe </span>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">90.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
                             </div>
                         </div>
-                        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/dashboard.html'">
-                            <div data-v-47e63dc4="" class="">
-                                <img data-v-47e63dc4="" src="https://aitech360.site/public/download (27).png" alt="">
-                                <span data-v-47e63dc4="">Meu </span>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 3" data-src="https://aitech360.site/public/upload/package/1755383490XRj.jpeg" src="img/baner4.jpg" lazy="loaded">
                             </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 3</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip3.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">2.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">10.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
+                            </div>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">180.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 4" data-src="https://aitech360.site/public/upload/package/1755383517yNE.jpeg" src="img/baner5.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 4</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip4.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">6.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">30.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
+                            </div>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">540.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 5" data-src="https://aitech360.site/public/upload/package/1755383530Uyz.jpeg" src="img/baner6.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 5</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip5.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">16.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">80.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
+                            </div>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">1.440.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 6" data-src="https://aitech360.site/public/upload/package/1755383541OeO.jpeg" src="img/baner7.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 6</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip6.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">34.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">150.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
+                            </div>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">3.060.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 7" data-src="https://aitech360.site/public/upload/package/1755383791ZWi.jpeg" src="img/baner8.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 7</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip7.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">60.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">300.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
+                            </div>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">5.400.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 8" data-src="https://aitech360.site/public/upload/package/1755383811Onv.jpg" src="https://aitech360.site/public/upload/package/1755383811Onv.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 8</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip8.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">125.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">600.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
+                            </div>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">11.250.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 9" data-src="https://aitech360.site/public/upload/package/1755383829MzA.jpeg" src="img/pro.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 9</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip9.html'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">300.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">1.200.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
+                            </div>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">27.000.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <li data-v-11bc267c="" data-v-6e534c71="">
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="he flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="ico">
+                                <img data-v-11bc267c="" data-v-6e534c71="" alt="Blommer 10" data-src="https://aitech360.site/public/upload/package/1755383873rSp.jpeg" src="img/footer3.jpg" lazy="loaded">
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="flex1">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Blommer 10</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="tag">
+                                    <span data-v-11bc267c="" data-v-6e534c71="">Para entrar</span>
+                                    <span data-v-11bc267c="" data-v-6e534c71="">amigável para novatos</span>
+                                </div>
+                            </div>
+                            <button data-v-11bc267c="" data-v-6e534c71="" class="on" onclick="window.location.href='/vip10'">Comprar</button>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="it flex">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">400.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Rendimento diário (20%)</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">2.000.000 Kz</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Faixa de preço</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="li">
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="s">90 Dias</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="" class="n">Período de tesouraria</div>
+                            </div>
+                        </div>
+                        <div data-v-11bc267c="" data-v-6e534c71="" class="jindu">
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="txt">
+                                <div data-v-11bc267c="" data-v-6e534c71="">Renda total</div>
+                                <div data-v-11bc267c="" data-v-6e534c71="">36.000.000 Kz</div>
+                            </div>
+                            <div data-v-11bc267c="" data-v-6e534c71="" class="x">
+                                <span data-v-11bc267c="" data-v-6e534c71="" style="width: 99.99%;">
+                                    <var data-v-11bc267c="" data-v-6e534c71="">99.99% </var>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+            
+            <!-- Rodapé fixo -->
+            <div data-v-6e534c71="" class="footer">
+                <div data-v-47e63dc4="" data-v-98526a88="" class="footers" data-v-6e534c71="">
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
+                        <div data-v-47e63dc4="" class="on">
+                            <img data-v-47e63dc4="" src="https://aitech360.site/public/download (23).png" alt="">
+                            <span data-v-47e63dc4="">Lar </span>
+                        </div>
+                    </div>
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/tarefa.html'">
+                        <div data-v-47e63dc4="" class="">
+                            <img data-v-47e63dc4="" src="https://aitech360.site/public/download (24).png" alt="">
+                            <span data-v-47e63dc4="">Meus ganhos </span>
+                        </div>
+                    </div>
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/produtos.html'">
+                        <div data-v-47e63dc4="" class="">
+                            <img data-v-47e63dc4="" src="img/footer3.jpg" alt="">
+                            <span data-v-47e63dc4="">Plano IA </span>
+                        </div>
+                    </div>
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/equipe.html'">
+                        <div data-v-47e63dc4="" class="">
+                            <img data-v-47e63dc4="" src="https://aitech360.site/public/download (26).png" alt="">
+                            <span data-v-47e63dc4="">Equipe </span>
+                        </div>
+                    </div>
+                    <div data-v-47e63dc4="" class="item" onclick="window.location.href='/dashboard.html'">
+                        <div data-v-47e63dc4="" class="">
+                            <img data-v-47e63dc4="" src="https://aitech360.site/public/download (27).png" alt="">
+                            <span data-v-47e63dc4="">Meu </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
