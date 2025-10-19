@@ -21,24 +21,23 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #fff;
-            background-image: url('https://www.adabr.com/images/mobile/bg-green.png');
-            background-repeat: no-repeat;
-            background-size: 100% 100vh;
-            background-attachment: fixed;
-            color: #333;
+            background: linear-gradient(135deg, #3e2723 0%, #5d4037 100%);
+            color: #fff;
             line-height: 1.5;
+            min-height: 100vh;
         }
         
         .classreturnbox {
-            background-color: #f69b14;
-            padding: 10px 0;
+            background: linear-gradient(135deg, #6d4c41 0%, #8d6e63 100%);
+            padding: 12px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
         .classreturn {
             display: flex;
             align-items: center;
-            padding: 0 12px;
+            padding: 0 16px;
         }
         
         .ds-in-bl {
@@ -49,18 +48,43 @@
         .return img {
             width: 24px;
             height: 24px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .return {
+            background: rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .return:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
         }
         
         .tit {
             flex: 1;
             text-align: center;
             color: #fff;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 18px;
+            letter-spacing: 0.5px;
         }
         
         .center {
             text-align: center;
+        }
+        
+        .section-container {
+            margin: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .am-list {
@@ -70,57 +94,86 @@
         .am-list-item {
             display: flex;
             align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
+            padding: 18px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             text-decoration: none;
-            color: #333;
+            color: #fff;
             position: relative;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .am-list-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .am-list-item:active {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(0.98);
+        }
+        
+        .am-list-item:last-child {
+            border-bottom: none;
         }
         
         .am-list-thumb {
-            margin-right: 12px;
+            margin-right: 16px;
         }
         
         .am-list-thumb img {
             border-radius: 50%;
             object-fit: cover;
+            width: 44px;
+            height: 44px;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
         .am-list-content {
             flex: 1;
             font-size: 16px;
+            font-weight: 500;
         }
         
         .am-list-extra {
-            font-size: 14px;
-            color: #999;
-            margin-right: 10px;
+            font-size: 15px;
+            color: rgba(255,255,255,0.8);
+            margin-right: 12px;
         }
         
         .am-list-arrow {
-            color: #ccc;
+            color: rgba(255,255,255,0.6);
+            font-size: 18px;
         }
         
-        .am-button {
+        .logout-button {
             display: block;
-            width: 100%;
-            padding: 12px;
+            width: calc(100% - 32px);
+            margin: 20px 16px;
+            padding: 16px;
             text-align: center;
-            background-color: #ff5050;
+            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 12px;
             font-size: 16px;
-            margin-top: 20px;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
         }
         
-        .am-button.warn {
-            background-color: #ff5050;
+        .logout-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(183, 28, 28, 0.6);
+        }
+        
+        .logout-button:active {
+            transform: translateY(0);
         }
         
         .adr-form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .adr-form-group input[type=text],
@@ -128,30 +181,60 @@
             display: block;
             width: 100%;
             font-size: 16px;
-            padding: 12px;
-            color: #777;
+            padding: 14px 16px;
+            color: #fff;
             vertical-align: middle;
-            background-color: #fff;
-            background-image: none;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
             box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        
+        .adr-form-group input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .adr-form-group input:focus {
+            outline: none;
+            border-color: #d7ccc8;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(215, 204, 200, 0.2);
         }
         
         .bottoma {
             display: block;
-            font-size: 18px;
-            padding: 10px;
-            border-radius: 2px;
+            font-size: 16px;
+            padding: 14px;
+            border-radius: 12px;
             text-align: center;
             text-decoration: none;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .bottoma.male {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+        }
+        
+        .bottoma.female {
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+            color: white;
+        }
+        
+        .bottoma:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         
         .am-grid {
             display: flex;
             flex-wrap: wrap;
-            margin: 0 -5px;
+            margin: 0 -8px;
+            padding: 16px 0;
         }
         
         .am-grid-col-5 .am-grid-item {
@@ -159,13 +242,25 @@
         }
         
         .am-grid-item {
-            padding: 5px;
+            padding: 8px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .am-grid-item:hover {
+            transform: scale(1.05);
         }
         
         .am-grid-item-thumb img {
             width: 100%;
             border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .am-grid-item-thumb img:hover {
+            border-color: #d7ccc8;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         
         .imgzsy {
@@ -173,34 +268,17 @@
             height: auto;
         }
         
-        #loadingOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        
-        .loading-content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
         
         .error-message {
-            color: #ff5050;
+            color: #ffcdd2;
             text-align: center;
-            padding: 10px;
-            margin: 10px;
-            background-color: #fff8f8;
-            border-radius: 5px;
+            padding: 14px;
+            margin: 16px;
+            background: rgba(244, 67, 54, 0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(244, 67, 54, 0.3);
             display: none;
+            font-weight: 500;
         }
         
         .modal {
@@ -209,53 +287,80 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.7);
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 16px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
         
         .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #5d4037 0%, #4e342e 100%);
+            padding: 0;
+            border-radius: 16px;
             max-width: 90%;
             max-height: 80%;
             overflow: auto;
-            width: 300px;
+            width: 400px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .modal-title {
-            background-color: #ee875a;
+            background: linear-gradient(135deg, #6d4c41 0%, #8d6e63 100%);
             color: #fff;
-            padding: 10px;
-            margin: -20px -20px 20px -20px;
-            border-radius: 8px 8px 0 0;
+            padding: 20px;
+            margin: 0;
             text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            border-radius: 16px 16px 0 0;
+        }
+        
+        .modal-body {
+            padding: 24px;
         }
         
         .modal-buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 24px;
+            gap: 12px;
         }
         
         .modal-button {
-            padding: 10px 20px;
+            padding: 14px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: 12px;
             cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            flex: 1;
         }
         
         .modal-button.confirm {
-            background-color: #f89045;
+            background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(109, 76, 65, 0.4);
+        }
+        
+        .modal-button.confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(109, 76, 65, 0.6);
         }
         
         .modal-button.cancel {
-            background-color: #ccc;
-            color: #333;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255,255,255,0.9);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .modal-button.cancel:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .msg {
@@ -263,11 +368,72 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 16px 28px;
+            border-radius: 12px;
             z-index: 1000;
+            font-weight: 500;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-container {
+            animation: fadeIn 0.4s ease;
+        }
+        
+        /* Efeito de brilho sutil */
+        .am-list-item, .logout-button, .modal-button {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .am-list-item::before, .logout-button::before, .modal-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.7s;
+        }
+        
+        .am-list-item:hover::before, .logout-button:hover::before, .modal-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 360px) {
+            .section-container {
+                margin: 12px;
+            }
+            
+            .am-list-item {
+                padding: 16px 12px;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+        }
+        
+        /* Prevenir zoom em inputs no iOS */
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            input, select, textarea {
+                font-size: 16px !important;
+            }
         }
     </style>
 </head>
@@ -287,7 +453,7 @@
         </div>
     </div>
 
-    <div style="margin:12px;background-color:#fff;border-radius:8px;overflow:hidden;">
+    <div class="section-container">
         <div class="am-list" style="padding:0;">
             <a href="javascript:;" class="am-list-item">
                 <div class="am-list-content">Número de Telefone</div>
@@ -300,49 +466,47 @@
             <a href="javascript:update_avator();" class="am-list-item">
                 <div class="am-list-thumb">
                     <form id="head_img">
-                        <img style="width:38px;height:38px;" id="avator" src="https://www.adabr.com/images/mobile/avatar/head_6.png">
+                        <img style="width:44px;height:44px;" id="avator" src="https://www.adabr.com/images/mobile/avatar/head_6.png">
                         <input id="fileupload" type="file" name="file" style="display:none;">
                     </form>
                 </div>
                 <div class="am-list-content">Retrato da conta</div>
-                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+                <div class="am-list-arrow" aria-hidden="true">›</div>
             </a>
             <a href="javascript:void(0);" class="am-list-item" id="bank-account-link">
                 <div class="am-list-content">Conta de remessa</div>
                 <div class="am-list-extra">-</div>
-                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+                <div class="am-list-arrow" aria-hidden="true">›</div>
             </a>
             <a href="javascript:update_nickname();" class="am-list-item">
                 <div class="am-list-content">Nome de Conta</div>
                 <div class="am-list-extra" id="nickname-display">-</div>
-                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+                <div class="am-list-arrow" aria-hidden="true">›</div>
             </a>
             <a href="javascript:update_sex_layer();" class="am-list-item">
                 <div class="am-list-content">Sexo</div>
                 <div class="am-list-extra" id="gender-display">-</div>
-                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+                <div class="am-list-arrow" aria-hidden="true">›</div>
             </a>
         </div>
     </div>
 
-    <div style="margin:12px;background-color:#fff;border-radius:8px;overflow:hidden;">
+    <div class="section-container">
         <div class="am-list" style="padding:0;">
             <a href="javascript:update_password();" class="am-list-item">
                 <div class="am-list-content">Senha</div>
                 <div class="am-list-extra"></div>
-                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+                <div class="am-list-arrow" aria-hidden="true">›</div>
             </a>
             <a href="javascript:update_pay_password();" class="am-list-item">
                 <div class="am-list-content">Senha de pagamento</div>
                 <div class="am-list-extra"></div>
-                <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+                <div class="am-list-arrow" aria-hidden="true">›</div>
             </a>
         </div>
     </div>
 
-    <div style="padding:0 20px 15px 20px;">
-        <a href="javascript:logout();" class="am-button warn">Sair</a>
-    </div>
+    <button class="logout-button" onclick="logout()">Sair da Conta</button>
 
     <script>
         // Configuração da API
@@ -454,53 +618,52 @@
         }
         
         // Carregar informações adicionais do usuário
-       // Carregar informações adicionais do usuário
-async function loadAdditionalUserInfo(token) {
-    try {
-        const userId = localStorage.getItem('user_id');
-        if (!userId) {
-            console.error('ID do usuário não encontrado');
-            return;
+        async function loadAdditionalUserInfo(token) {
+            try {
+                const userId = localStorage.getItem('user_id');
+                if (!userId) {
+                    console.error('ID do usuário não encontrado');
+                    return;
+                }
+                
+                // Buscar informações completas do usuário
+                const response = await fetch(`${API_BASE_URL}/user/${userId}/full-profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    // Se houver erro, não interromper o fluxo principal
+                    console.error('Erro ao buscar perfil completo:', response.status);
+                    return;
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const userInfo = data.data.user_info;
+                    
+                    // Preencher apelido
+                    if (userInfo.nickname) {
+                        document.getElementById('nickname-display').textContent = userInfo.nickname;
+                    }
+                    
+                    // Preencher sexo
+                    if (userInfo.sex) {
+                        document.getElementById('gender-display').textContent = userInfo.sex === 1 ? 'Masculino' : 'Feminino';
+                    }
+                    
+                    // Preencher avatar se existir
+                    if (userInfo.head_img) {
+                        document.getElementById('avator').src = userInfo.head_img;
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar informações adicionais:', error);
+                // Não mostrar erro para o usuário, pois estas informações são secundárias
+            }
         }
-        
-        // Buscar informações completas do usuário
-        const response = await fetch(`${API_BASE_URL}/user/${userId}/full-profile`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        
-        if (!response.ok) {
-            // Se houver erro, não interromper o fluxo principal
-            console.error('Erro ao buscar perfil completo:', response.status);
-            return;
-        }
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            const userInfo = data.data.user_info;
-            
-            // Preencher apelido
-            if (userInfo.nickname) {
-                document.getElementById('nickname-display').textContent = userInfo.nickname;
-            }
-            
-            // Preencher sexo
-            if (userInfo.sex) {
-                document.getElementById('gender-display').textContent = userInfo.sex === 1 ? 'Masculino' : 'Feminino';
-            }
-            
-            // Preencher avatar se existir
-            if (userInfo.head_img) {
-                document.getElementById('avator').src = userInfo.head_img;
-            }
-        }
-    } catch (error) {
-        console.error('Erro ao carregar informações adicionais:', error);
-        // Não mostrar erro para o usuário, pois estas informações são secundárias
-    }
-}
         
         // Atualizar avatar
         function update_avator() {
@@ -513,40 +676,42 @@ async function loadAdditionalUserInfo(token) {
             modal.innerHTML = `
                 <div class="modal-content">
                     <div class="modal-title">Selecionar Avatar</div>
-                    <div class="am-grid am-grid-col-5 am-grid-radius">
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/PrmyrHsX/1755341871gwz.png');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/PrmyrHsX/1755341871gwz.png" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/KYsrsvLN/1755383983-Lmu.jpg');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/KYsrsvLN/1755383983-Lmu.jpg" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/BnvB4Kq3/logo-AITECH-web-1.jpg');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/BnvB4Kq3/logo-AITECH-web-1.jpg" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/VNq6hK3k/image.png');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/VNq6hK3k/image.png" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/t4sJNfNp/external-ml-data-science-bright-fill-bright-fill-juicy-fish.png');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/t4sJNfNp/external-ml-data-science-bright-fill-bright-fill-juicy-fish.png" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/FHX41MQz/yaoqing-3a93cc26.png');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/FHX41MQz/yaoqing-3a93cc26.png" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/ydsr8byq/head-6.png');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/ydsr8byq/head-6.png" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/kgyC8vLp/external-Thief-Insurance-insurance-goofy-color-kerismaker.png');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/kgyC8vLp/external-Thief-Insurance-insurance-goofy-color-kerismaker.png" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/g249rkZR/MGNh-M2-Vj-MC5qc-Gc.webpg');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/g249rkZR/MGNh-M2-Vj-MC5qc-Gc.webp" /></div>
-                        </a>
-                        <a href="javascript:select_touxiang('https://i.postimg.cc/7PSWfZvY/c-CRs-Yp9-Zg-MIIns0h.webp');" class="am-grid-item">
-                            <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/7PSWfZvY/c-CRs-Yp9-Zg-MIIns0h.webp" /></div>
-                        </a>
-                    </div>
-                    <div class="modal-buttons">
-                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
+                    <div class="modal-body">
+                        <div class="am-grid am-grid-col-5 am-grid-radius">
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/PrmyrHsX/1755341871gwz.png');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/PrmyrHsX/1755341871gwz.png" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/KYsrsvLN/1755383983-Lmu.jpg');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/KYsrsvLN/1755383983-Lmu.jpg" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/BnvB4Kq3/logo-AITECH-web-1.jpg');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/BnvB4Kq3/logo-AITECH-web-1.jpg" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/VNq6hK3k/image.png');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/VNq6hK3k/image.png" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/t4sJNfNp/external-ml-data-science-bright-fill-bright-fill-juicy-fish.png');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/t4sJNfNp/external-ml-data-science-bright-fill-bright-fill-juicy-fish.png" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/FHX41MQz/yaoqing-3a93cc26.png');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/FHX41MQz/yaoqing-3a93cc26.png" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/ydsr8byq/head-6.png');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/ydsr8byq/head-6.png" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/kgyC8vLp/external-Thief-Insurance-insurance-goofy-color-kerismaker.png');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/kgyC8vLp/external-Thief-Insurance-insurance-goofy-color-kerismaker.png" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/g249rkZR/MGNh-M2-Vj-MC5qc-Gc.webpg');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/g249rkZR/MGNh-M2-Vj-MC5qc-Gc.webp" /></div>
+                            </a>
+                            <a href="javascript:select_touxiang('https://i.postimg.cc/7PSWfZvY/c-CRs-Yp9-Zg-MIIns0h.webp');" class="am-grid-item">
+                                <div class="am-grid-item-thumb"><img src="https://i.postimg.cc/7PSWfZvY/c-CRs-Yp9-Zg-MIIns0h.webp" /></div>
+                            </a>
+                        </div>
+                        <div class="modal-buttons">
+                            <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement.parentElement)">Cancelar</button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -608,12 +773,14 @@ async function loadAdditionalUserInfo(token) {
             modal.innerHTML = `
                 <div class="modal-content">
                     <div class="modal-title">Alterar apelido</div>
-                    <div class="adr-form-group">
-                        <input type="text" name="nickname" class="" id="nickname" placeholder="Por favor, insira o apelido">
-                    </div>
-                    <div class="modal-buttons">
-                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
-                        <button class="modal-button confirm" onclick="confirmNickname()">Confirmar</button>
+                    <div class="modal-body">
+                        <div class="adr-form-group">
+                            <input type="text" name="nickname" class="" id="nickname" placeholder="Por favor, insira o apelido">
+                        </div>
+                        <div class="modal-buttons">
+                            <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement.parentElement)">Cancelar</button>
+                            <button class="modal-button confirm" onclick="confirmNickname()">Confirmar</button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -680,12 +847,12 @@ async function loadAdditionalUserInfo(token) {
             modal.innerHTML = `
                 <div class="modal-content">
                     <div class="modal-title">Selecionar sexo</div>
-                    <div style="padding:15px;">
-                        <a style="margin-bottom:10px;background-color:#1aad19;text-align:center;color:white;border:1px solid #179e16;" class="bottoma" href="javascript:update_sex(1);">Masculino</a>
-                        <a style="margin-bottom:10px;background-color:#ea5a3d;text-align:center;color:white;border:1px solid #dd2727;" class="bottoma" href="javascript:update_sex(2);">Feminino</a>
-                    </div>
-                    <div class="modal-buttons">
-                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
+                    <div class="modal-body">
+                        <a class="bottoma male" href="javascript:update_sex(1);">Masculino</a>
+                        <a class="bottoma female" href="javascript:update_sex(2);">Feminino</a>
+                        <div class="modal-buttons">
+                            <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement.parentElement)">Cancelar</button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -747,18 +914,20 @@ async function loadAdditionalUserInfo(token) {
             modal.innerHTML = `
                 <div class="modal-content">
                     <div class="modal-title">Alterar senha</div>
-                    <div class="adr-form-group">
-                        <input type="password" name="current_password" class="" id="current_password" placeholder="Senha atual">
-                    </div>
-                    <div class="adr-form-group">
-                        <input type="password" name="new_password" class="" id="new_password" placeholder="Nova senha">
-                    </div>
-                    <div class="adr-form-group">
-                        <input type="password" name="confirm_password" class="" id="confirm_password" placeholder="Confirmar nova senha">
-                    </div>
-                    <div class="modal-buttons">
-                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
-                        <button class="modal-button confirm" onclick="confirmPassword()">Confirmar</button>
+                    <div class="modal-body">
+                        <div class="adr-form-group">
+                            <input type="password" name="current_password" class="" id="current_password" placeholder="Senha atual">
+                        </div>
+                        <div class="adr-form-group">
+                            <input type="password" name="new_password" class="" id="new_password" placeholder="Nova senha">
+                        </div>
+                        <div class="adr-form-group">
+                            <input type="password" name="confirm_password" class="" id="confirm_password" placeholder="Confirmar nova senha">
+                        </div>
+                        <div class="modal-buttons">
+                            <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement.parentElement)">Cancelar</button>
+                            <button class="modal-button confirm" onclick="confirmPassword()">Confirmar</button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -834,18 +1003,20 @@ async function loadAdditionalUserInfo(token) {
             modal.innerHTML = `
                 <div class="modal-content">
                     <div class="modal-title">Alterar senha de pagamento</div>
-                    <div class="adr-form-group">
-                        <input type="password" name="current_pay_password" class="" id="current_pay_password" placeholder="Senha de pagamento atual">
-                    </div>
-                    <div class="adr-form-group">
-                        <input type="password" name="new_pay_password" class="" id="new_pay_password" placeholder="Nova senha de pagamento">
-                    </div>
-                    <div class="adr-form-group">
-                        <input type="password" name="confirm_pay_password" class="" id="confirm_pay_password" placeholder="Confirmar nova senha de pagamento">
-                    </div>
-                    <div class="modal-buttons">
-                        <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Cancelar</button>
-                        <button class="modal-button confirm" onclick="confirmPayPassword()">Confirmar</button>
+                    <div class="modal-body">
+                        <div class="adr-form-group">
+                            <input type="password" name="current_pay_password" class="" id="current_pay_password" placeholder="Senha de pagamento atual">
+                        </div>
+                        <div class="adr-form-group">
+                            <input type="password" name="new_pay_password" class="" id="new_pay_password" placeholder="Nova senha de pagamento">
+                        </div>
+                        <div class="adr-form-group">
+                            <input type="password" name="confirm_pay_password" class="" id="confirm_pay_password" placeholder="Confirmar nova senha de pagamento">
+                        </div>
+                        <div class="modal-buttons">
+                            <button class="modal-button cancel" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement.parentElement)">Cancelar</button>
+                            <button class="modal-button confirm" onclick="confirmPayPassword()">Confirmar</button>
+                        </div>
                     </div>
                 </div>
             `;
