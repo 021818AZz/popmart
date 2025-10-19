@@ -712,6 +712,7 @@
                                 <input type="number" class="form-input" id="depositAmount" min="5000" placeholder="Mínimo 5.000 KZ" required inputmode="numeric">
                                 
                                 <div class="quick-amounts">
+                                    <button type="button" class="amount-btn" onclick="fillAmount(2500)">2.500 KZ</button>
                                     <button type="button" class="amount-btn" onclick="fillAmount(5000)">5.000 KZ</button>
                                     <button type="button" class="amount-btn" onclick="fillAmount(15000)">15.000 KZ</button>
                                     <button type="button" class="amount-btn" onclick="fillAmount(30000)">30.000 KZ</button>
@@ -902,7 +903,7 @@
     // Validação do valor
     function validateAmount() {
         const amount = parseFloat(document.getElementById('depositAmount').value);
-        const isValid = amount && amount >= 5000;
+        const isValid = amount && amount >= 2500;
         
         if (isValid) {
             clearError();
@@ -913,7 +914,7 @@
     // Navegação do fluxo
     function proceedToBankSelection() {
         if (!validateAmount()) {
-            showError('Valor mínimo de depósito é 5.000 KZ');
+            showError('Valor mínimo de depósito é 2.500 KZ');
             return;
         }
 
