@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
-        /* Reset e configurações base para mobile */
+        /* Reset e configurações base */
         * {
             margin: 0;
             padding: 0;
@@ -17,35 +17,37 @@
         }
 
         html {
-            font-size: 14px; /* Base para cálculos rem */
+            font-size: 14px;
         }
 
         body {
             width: 100%;
             min-height: 100vh;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #3e2723 0%, #5d4037 100%);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.5;
-            color: #333;
+            color: #fff;
             overflow-x: hidden;
         }
 
-        /* Container principal responsivo */
+        /* Container principal */
         .container {
             padding: 0 1rem;
             max-width: 100%;
             margin: 0 auto;
         }
 
-        /* Header otimizado para mobile */
-        .head {
+        /* Header refinado */
+        .header {
             padding: 1rem 0;
-            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            background: rgba(78, 52, 46, 0.95);
             color: white;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .back, .history-icon {
@@ -54,24 +56,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 3rem;
-            height: 3rem;
+            width: 2.5rem;
+            height: 2.5rem;
             border-radius: 50%;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .back:active, .history-icon:active {
-            background-color: rgba(255,255,255,0.1);
+        .back:hover, .history-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
 
         .back img, .history-icon img {
-            width: 1.5rem;
-            height: 1.5rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            filter: brightness(0) invert(1);
         }
 
         .name {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .flex {
@@ -87,149 +93,203 @@
             text-align: center;
         }
 
-        /* Cartão de saldo otimizado */
+        /* Cartão de saldo premium */
         .balance-card {
-            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            background: linear-gradient(135deg, #6d4c41 0%, #8d6e63 100%);
             color: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 1.2rem;
+            padding: 1.8rem 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .balance-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
         }
 
         .balance-label {
-            font-size: 1rem;
+            font-size: 0.95rem;
             opacity: 0.9;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
         }
 
         .balance-amount {
-            font-size: 2rem;
-            font-weight: bold;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Formulário de depósito com inputs touch-friendly */
+        /* Formulário elegante */
         .deposit-form {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1.2rem;
+            padding: 1.8rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             position: relative;
         }
 
         .form-label {
             display: flex;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 600;
-            color: #2c3e50;
             font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .form-input {
             width: 100%;
-            padding: 1rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 0.75rem;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.9rem;
             font-size: 1rem;
             transition: all 0.3s ease;
-            background-color: #f9f9f9;
-            -webkit-appearance: none; /* Remove estilos padrão do iOS */
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            -webkit-appearance: none;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #fb8e36;
-            background-color: white;
-            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.1);
+            border-color: #d7ccc8;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(215, 204, 200, 0.2);
         }
 
-        /* Botões de valor rápido com tamanho adequado para toque */
+        /* Botões de valor rápido */
         .quick-amounts {
-            display: flex;
-            gap: 0.75rem;
-            margin: 1rem 0;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
 
         .amount-btn {
-            flex: 1;
-            min-width: 5rem;
             padding: 1rem 0.5rem;
-            background: #f0f0f0;
-            border: none;
-            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.9rem;
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            touch-action: manipulation; /* Melhora a resposta ao toque */
+            color: white;
+            touch-action: manipulation;
         }
 
-        .amount-btn:active {
-            transform: scale(0.98);
+        .amount-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .amount-btn.active {
-            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            background: linear-gradient(135deg, #a1887f 0%, #8d6e63 100%);
             color: white;
+            border-color: #a1887f;
+            box-shadow: 0 4px 12px rgba(141, 110, 99, 0.4);
         }
 
-        /* Botão principal com tamanho adequado para toque */
+        /* Botão principal */
         .submit-btn {
             width: 100%;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, #fb8e36 0%, #fb8e36 100%);
+            padding: 1.3rem;
+            background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
             color: white;
             border: none;
-            border-radius: 0.75rem;
+            border-radius: 0.9rem;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 0.5rem;
+            margin-top: 0.8rem;
             touch-action: manipulation;
-            min-height: 3.5rem; /* Altura mínima para toque fácil */
+            min-height: 3.5rem;
+            box-shadow: 0 4px 15px rgba(109, 76, 65, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(109, 76, 65, 0.6);
         }
 
         .submit-btn:active:not(:disabled) {
-            transform: translateY(1px);
+            transform: translateY(0);
         }
 
         .submit-btn:disabled {
-            background: #cccccc;
+            background: #5d4037;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+            opacity: 0.6;
         }
 
         /* Modal de informações bancárias */
         .bank-info-modal {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1.2rem;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .bank-details {
-            background: #f8f9fa;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            margin: 1rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.9rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .bank-detail-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e9ecef;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             flex-wrap: wrap;
         }
 
@@ -238,87 +298,117 @@
         }
 
         .copy-btn {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(135deg, #a1887f 0%, #8d6e63 100%);
             color: white;
             border: none;
-            border-radius: 0.5rem;
-            padding: 0.5rem 1rem;
+            border-radius: 0.7rem;
+            padding: 0.7rem 1.2rem;
             cursor: pointer;
             font-size: 0.9rem;
             margin-left: 0.5rem;
             touch-action: manipulation;
             min-height: 2.5rem;
+            transition: all 0.3s ease;
         }
 
-        /* Área de upload de comprovante otimizada para mobile */
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(141, 110, 99, 0.4);
+        }
+
+        /* Área de upload de comprovante */
         .receipt-upload {
             text-align: center;
-            padding: 2rem 1rem;
-            border: 2px dashed #ddd;
-            border-radius: 0.75rem;
-            margin: 1rem 0;
+            padding: 2.5rem 1.5rem;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 0.9rem;
+            margin: 1.5rem 0;
             cursor: pointer;
             transition: all 0.3s ease;
             touch-action: manipulation;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .receipt-upload:active {
-            border-color: #6a11cb;
-            background-color: #f8f9fa;
+        .receipt-upload:hover {
+            border-color: #d7ccc8;
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .receipt-preview {
             max-width: 100%;
             max-height: 300px;
-            margin: 1rem auto;
-            border-radius: 0.75rem;
+            margin: 1.5rem auto;
+            border-radius: 0.9rem;
             display: block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Indicador de passos responsivo */
+        /* Indicador de passos elegante */
         .step-indicator {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
+            position: relative;
         }
 
         .step {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 2.8rem;
+            height: 2.8rem;
             border-radius: 50%;
-            background: #e0e0e0;
-            color: #666;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 0.5rem;
+            margin: 0 0.8rem;
             font-weight: bold;
             font-size: 1rem;
             flex-shrink: 0;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            z-index: 2;
         }
 
         .step.active {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
             color: white;
+            border-color: #d7ccc8;
+            box-shadow: 0 4px 12px rgba(141, 110, 99, 0.4);
         }
 
         .step-line {
             flex: 1;
             height: 2px;
-            background: #e0e0e0;
-            margin: 0 0.25rem;
-            max-width: 3rem;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 0.5rem;
+            max-width: 4rem;
+            position: relative;
         }
 
-        /* Modal otimizado para mobile */
+        .step-line::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: #8d6e63;
+            transition: width 0.5s ease;
+        }
+
+        .step-line.active::after {
+            width: 100%;
+        }
+
+        /* Modal refinado */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -327,6 +417,8 @@
             visibility: hidden;
             transition: all 0.3s ease;
             padding: 1rem;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .modal-overlay.active {
@@ -335,15 +427,17 @@
         }
 
         .modal {
-            background: white;
-            border-radius: 1rem;
+            background: linear-gradient(135deg, #5d4037 0%, #4e342e 100%);
+            border-radius: 1.2rem;
             width: 100%;
             max-width: 500px;
             max-height: 80vh;
             overflow-y: auto;
             transform: translateY(20px);
             transition: all 0.3s ease;
-            -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
+            -webkit-overflow-scrolling: touch;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .modal-overlay.active .modal {
@@ -351,62 +445,63 @@
         }
 
         .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 1.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            background: white;
+            background: linear-gradient(135deg, #5d4037 0%, #4e342e 100%);
             z-index: 10;
-            border-radius: 1rem 1rem 0 0;
+            border-radius: 1.2rem 1.2rem 0 0;
         }
 
         .modal-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: white;
         }
 
         .modal-close {
-            background: none;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #666;
+            color: white;
             width: 2.5rem;
             height: 2.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
         }
 
-        .modal-close:active {
-            background-color: #f0f0f0;
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
         }
 
         .bank-option {
             display: flex;
             align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
             touch-action: manipulation;
         }
 
-        .bank-option:active {
-            background: #f9f9f9;
+        .bank-option:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .bank-option:last-child {
             border-bottom: none;
         }
 
-        /* Loading otimizado */
+        /* Loading elegante */
         .loading {
             display: none;
             justify-content: center;
@@ -416,16 +511,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 1000;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-top: 4px solid #d7ccc8;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             animation: spin 1s linear infinite;
         }
 
@@ -436,69 +533,77 @@
 
         /* Mensagens de status */
         .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            margin: 1rem 0;
+            background: rgba(76, 175, 80, 0.2);
+            color: #a5d6a7;
+            padding: 1.2rem;
+            border-radius: 0.9rem;
+            margin: 1.5rem 0;
             text-align: center;
+            border: 1px solid rgba(165, 214, 167, 0.3);
         }
 
         .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            margin: 1rem 0;
+            background: rgba(244, 67, 54, 0.2);
+            color: #ef9a9a;
+            padding: 1.2rem;
+            border-radius: 0.9rem;
+            margin: 1.5rem 0;
             text-align: center;
+            border: 1px solid rgba(239, 154, 154, 0.3);
         }
 
-        /* Dicas importantes com melhor legibilidade */
+        /* Dicas importantes */
         .tips {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1.2rem;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .tips h3 {
-            margin-bottom: 1rem;
-            color: #2c3e50;
-            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .tips ul {
-            padding-left: 1.2rem;
+            padding-left: 1.5rem;
         }
 
         .tips li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             line-height: 1.4;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Selecionador de banco com melhor usabilidade em mobile */
+        /* Selecionador de banco */
         .bank-selector {
             display: flex;
             align-items: center;
-            padding: 1rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 0.75rem;
-            background: #f9f9f9;
+            padding: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
             touch-action: manipulation;
         }
 
-        .bank-selector:active {
-            background: #f0f0f0;
-            border-color: #6a11cb;
+        .bank-selector:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .bank-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            margin-right: 1rem;
+            width: 2.8rem;
+            height: 2.8rem;
+            margin-right: 1.2rem;
+            filter: brightness(0) invert(1);
         }
 
         .bank-info {
@@ -507,18 +612,20 @@
 
         .bank-name {
             font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: white;
         }
 
         .bank-desc {
             font-size: 0.9rem;
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .bank-arrow {
-            width: 1rem;
-            height: 1rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            filter: brightness(0) invert(1);
         }
 
         /* Ajustes para telas muito pequenas */
@@ -532,12 +639,13 @@
             }
             
             .quick-amounts {
-                gap: 0.5rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.6rem;
             }
             
             .amount-btn {
                 min-width: 4rem;
-                padding: 0.75rem 0.25rem;
+                padding: 0.9rem 0.25rem;
                 font-size: 0.8rem;
             }
         }
@@ -554,7 +662,7 @@
             select,
             textarea,
             input {
-                font-size: 16px; /* Previne zoom no iOS */
+                font-size: 16px;
             }
         }
     </style>
@@ -563,7 +671,7 @@
 <div id="app">
     <div class="page">
         <div class="headers">
-            <div class="head">
+            <div class="header">
                 <div class="container flex">
                     <div class="back" onclick="goBack()">
                         <img src="https://i.postimg.cc/vmW7qTdx/back.png" alt="Voltar">
@@ -626,7 +734,7 @@
                                         <div class="bank-name" id="selectedBankName">Selecione o banco</div>
                                         <div class="bank-desc" id="selectedBankDesc">Toque para escolher</div>
                                     </div>
-                                    <img class="bank-arrow" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNkw4IDEwTDEyIDZINloiIGZpbGw9IiM2NjY2NjYiLz4KPC9zdmc+" alt="Seta">
+                                    <img class="bank-arrow" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNkw4IDEwTDEyIDZINloiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+" alt="Seta">
                                 </div>
                                 <input type="hidden" id="bankCode" value="">
                             </div>
@@ -637,7 +745,7 @@
                         <!-- Passo 3: Informações Bancárias -->
                         <div class="deposit-form" id="step3" style="display: none;">
                             <div class="bank-info-modal">
-                                <h3 style="text-align: center; margin-bottom: 1.5rem;">Informações para Depósito</h3>
+                                <h3 style="text-align: center; margin-bottom: 1.5rem; color: white;">Informações para Depósito</h3>
                                 
                                 <div class="bank-details">
                                     <div class="bank-detail-item">
@@ -665,9 +773,8 @@
                                     <label class="form-label">Enviar Comprovante</label>
                                     <div class="receipt-upload" onclick="openGallery()">
                                         <input type="file" id="receiptInput" accept="image/*" style="display: none;" onchange="handleReceiptUpload(event)">
-                                        <img src="https://i.postimg.cc/qqNqD3XK/camera.png" alt="Upload" width="50">
-                                        <p>Toque para enviar o comprovante</p>
-                                        
+                                        <img src="https://i.postimg.cc/qqNqD3XK/camera.png" alt="Upload" width="50" style="filter: brightness(0) invert(1);">
+                                        <p style="margin-top: 1rem;">Toque para enviar o comprovante</p>
                                     </div>
                                     <img id="receiptPreview" class="receipt-preview" style="display: none;">
                                 </div>
@@ -733,7 +840,6 @@
                     <div class="bank-desc">Banco Atlântico</div>
                 </div>
             </div>
-          
         </div>
     </div>
 </div>
@@ -827,29 +933,28 @@
     }
 
     function generateBankDetails() {
-    const banks = {
-        'BFA': { accountName: 'ANTONIO VASCO', iban: '000600001636744130186' },
-        'BAI': { accountName: 'MARIA ANASTÁSIA', iban: '004000009649885610118' },
-        'ATL': { accountName: 'MARIA MALONDA', iban: '005500002800024310142' },
-        'BIC': { accountName: 'Alexandre Gomes', iban: '005100007348498810127' },
-        
-    };
+        const banks = {
+            'BFA': { accountName: 'ANTONIO VASCO', iban: '000600001636744130186' },
+            'BAI': { accountName: 'MARIA ANASTÁSIA', iban: '004000009649885610118' },
+            'ATL': { accountName: 'MARIA MALONDA', iban: '005500002800024310142' },
+            'BIC': { accountName: 'Alexandre Gomes', iban: '005100007348498810127' },
+        };
 
-    const bankCode = document.getElementById('bankCode').value;
-    const bankInfo = banks[bankCode] || banks['OTHER'];
+        const bankCode = document.getElementById('bankCode').value;
+        const bankInfo = banks[bankCode] || banks['OTHER'];
 
-    // CORREÇÃO: Use os nomes de campos que a API espera
-    depositData.account_name = bankInfo.accountName; // estava accountName
-    depositData.iban = bankInfo.iban;
-    depositData.bank_name = document.getElementById('selectedBankName').textContent; // estava bankName
-    depositData.bank_code = bankCode; // estava bankCode
+        // CORREÇÃO: Use os nomes de campos que a API espera
+        depositData.account_name = bankInfo.accountName;
+        depositData.iban = bankInfo.iban;
+        depositData.bank_name = document.getElementById('selectedBankName').textContent;
+        depositData.bank_code = bankCode;
 
-    // Atualizar display (mantenha como está para a UI)
-    document.getElementById('displayBankName').textContent = depositData.bank_name;
-    document.getElementById('displayAccountName').textContent = depositData.account_name;
-    document.getElementById('displayIban').textContent = depositData.iban;
-    document.getElementById('displayAmount').textContent = depositData.amount.toLocaleString('pt-AO') + ' KZ';
-}
+        // Atualizar display
+        document.getElementById('displayBankName').textContent = depositData.bank_name;
+        document.getElementById('displayAccountName').textContent = depositData.account_name;
+        document.getElementById('displayIban').textContent = depositData.iban;
+        document.getElementById('displayAmount').textContent = depositData.amount.toLocaleString('pt-AO') + ' KZ';
+    }
 
     function showStep(step) {
         currentStep = step;
@@ -867,11 +972,21 @@
 
     function updateStepIndicator() {
         const steps = document.querySelectorAll('.step');
+        const lines = document.querySelectorAll('.step-line');
+        
         steps.forEach((step, index) => {
-            if (index + 1 === currentStep) {
+            if (index + 1 <= currentStep) {
                 step.classList.add('active');
             } else {
                 step.classList.remove('active');
+            }
+        });
+        
+        lines.forEach((line, index) => {
+            if (index + 1 < currentStep) {
+                line.classList.add('active');
+            } else {
+                line.classList.remove('active');
             }
         });
     }
@@ -896,7 +1011,7 @@
         closeBankModal();
     }
 
-    // Função para abrir a galeria em vez da câmera
+    // Função para abrir a galeria
     function openGallery() {
         document.getElementById('receiptInput').click();
     }
@@ -1038,10 +1153,11 @@
             transform: translate(-50%, -50%);
             background: rgba(0,0,0,0.8);
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 8px;
             z-index: 10000;
             font-size: 14px;
+            font-weight: 500;
         `;
         msgDiv.textContent = message;
         document.body.appendChild(msgDiv);
@@ -1088,7 +1204,7 @@
         window.location.href = '/historico1.html';
     }
 
-    // Funções de autenticação (mantenha as do código anterior)
+    // Funções de autenticação
     function isTokenValid() {
         const tokenData = localStorage.getItem('user_token');
         if (!tokenData) return false;
