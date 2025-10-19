@@ -746,7 +746,7 @@
                             
                             <div class="tax-info">
                                 <div>
-                                    <span>Taxa: 15%</span>
+                                    <span>Taxa: 20%</span>
                                     <span>Valor líquido: <span id="netAmount">0</span> KZ</span>
                                 </div>
                             </div>
@@ -762,10 +762,10 @@
                             Informações Importantes
                         </h3>
                         <ul>
-                            <li>Horário de processamento: Domingo a Domingo, das 9h às 21h</li>
+                            <li>Horário de processamento: Domingo a Domingo, das 8h às 18h</li>
                             <li>Tempo máximo de espera: 1 hora</li>
                             <li>Valor mínimo de saque: 1.000 KZ</li>
-                            <li>Taxa de saque: 15% sobre o valor solicitado</li>
+                            <li>Taxa de saque: 20% sobre o valor solicitado</li>
                             <li>Após o primeiro saque, você poderá usar as mesmas informações bancárias</li>
                             <li>Verifique se todas as informações estão corretas antes de confirmar</li>
                         </ul>
@@ -834,7 +834,7 @@
 <script>
     // Configurações
     const API_BASE_URL = 'https://bd-p4q7.onrender.com';
-    const WITHDRAWAL_TAX = 0.15; // 15%
+    const WITHDRAWAL_TAX = 0.20; // 20%
     const MIN_WITHDRAWAL_AMOUNT = 1000; // 1.000 KZ mínimo
     
     // Dados do usuário
@@ -1001,8 +1001,10 @@
         const day = now.getDay(); // 0=Domingo, 1=Segunda, ..., 6=Sábado
         const hour = now.getHours();
         
-        // Domingo a Domingo, das 9h às 21h
-        return hour >= 9 && hour < 21;
+        // Domingo a Domingo, das 8h às 18h
+        return hour >= 8 && hour < 18;
+
+
     }
     
     // Processar solicitação de saque
@@ -1042,9 +1044,9 @@
             return;
         }
         
-        // Validar horário (Domingo a Domingo, 9h-21h)
+        // Validar horário (Domingo a Domingo, 8h-18h)
         if (!isWithinWithdrawalHours()) {
-            showToast('Fora do horário de processamento (Domingo a Domingo, 9h-21h). Tente novamente dentro do horário permitido.', 'error');
+            showToast('Fora do horário de processamento (Domingo a Domingo, 8h-18h). Tente novamente dentro do horário permitido.', 'error');
             return;
         }
         
