@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html style="font-size: 47.2px;">
 <head>
     <meta charset="utf-8">
-    <title>Detalhes confiáveis</title>
+    <title>Blommer 6 - Detalhes</title>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -42,10 +43,97 @@
     <link rel="stylesheet" type="text/css" href="chunk-d844143c.96bbb122.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
     <style>
+        :root {
+            --coffee-primary: #8B4513;
+            --coffee-secondary: #A0522D;
+            --coffee-light: #D2B48C;
+            --coffee-dark: #654321;
+            --coffee-accent: #CD853F;
+        }
+        
+        body {
+            background-color: #f5f1eb;
+            color: #5c3a21;
+        }
+        
+        .page {
+            background-color: #f5f1eb;
+        }
+        
+        .headers .head {
+            background-color: var(--coffee-primary);
+        }
+        
+        .headers .name {
+            color: white;
+        }
+        
+        .item {
+            background-color: white;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 2px 8px rgba(139, 69, 19, 0.1);
+        }
+        
+        .item .container {
+            padding: 15px;
+        }
+        
+        .item .he {
+            border-bottom: 1px solid var(--coffee-light);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .item .name1 {
+            color: var(--coffee-primary);
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .item .p {
+            color: #5c3a21;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        
+        .it1 li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0e6d6;
+        }
+        
+        .it1 li:last-child {
+            border-bottom: none;
+        }
+        
+        .it1 .s {
+            color: var(--coffee-primary);
+            font-weight: bold;
+        }
+        
+        .cname {
+            margin-bottom: 10px;
+        }
+        
+        .color1 {
+            color: var(--coffee-secondary);
+            font-size: 14px;
+        }
+        
+        .val input {
+            background-color: #f9f5f0;
+            border: 1px solid var(--coffee-light);
+            border-radius: 6px;
+            padding: 12px;
+            width: 100%;
+            color: var(--coffee-dark);
+        }
+        
         button.bbtyn {
             width: 100%;
             padding: 14px 0;
-            background: #3862e4;
+            background: var(--coffee-primary);
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -53,14 +141,15 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 15px;
         }
         button.bbtyn:disabled {
-            background: #3862e463 !important;
+            background: #8b451380 !important;
             cursor: not-allowed;
         }
         button.bbtyn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(56, 98, 228, 0.3);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
         }
         .pic img[data-v-7cbde459] {
         width: 50%;
@@ -76,14 +165,14 @@
         font-size: 14px;
     }
     .success-message {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
+        background: #e8f5e8;
+        color: #2d5a2d;
+        border: 1px solid #c3e6c3;
     }
     .error-message {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
+        background: #f8e8e8;
+        color: #5a2d2d;
+        border: 1px solid #f5c6c6;
     }
     .loading {
         display: inline-block;
@@ -109,9 +198,9 @@
             <div data-v-a53c4a36="" data-v-7cbde459="" class="head" data-v-6e534c71="">
                 <div data-v-a53c4a36="" class="container flex">
                     <div data-v-a53c4a36="" class="back" onclick="window.location.href='/produtos.html'"><img data-v-a53c4a36=""
-                                                              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALkSURBVHgB7ZnPThNBHMd/v9lpK6XFJrWlG5DsoYeqkNSbN/UN8AmEJ9A3EJ/A+ATi0ZMc9YTePFbgwIHDJqBZMDEDLGvTf+NvhBVKgENnZnvZT9J0822y+/3u7Mzvt1OAlJSUlBQNEMbAzMz9Zpc5L6SUh92QrwjREjAiHBJGme8xvk53roSIkCkMAAS8hBFhkCC1WsMj8x/psBRryOAxaJBYAGVeZrLrdOhd1JmUb0GDRB6h68yjhNfB3uYqaGB9BEolr3S9+Y0V0MTqKqTMZwtT6zRXm5cu+j7Y3VgCA1h9hHLF4jv6ag6ruBbsfl8CQ1gLUL27QOZx8aImEVodhstgECtzoDo3/woBl4ZEBL/D2FPhj160rsJ4gH/mJVsZEsk8WjB/emqD3GQ+8Fs+WMBYgHGYP72EASpzD54z6axeOrMg8w9tmldoz4Gqu7B4lXlu+c6fX0qDCnWWiFxVWeosz3UJ8tnB7uYaJIDeCKDzBs46SynPJJDLSZlXmF1GJX7pdaUPCaIVwOHOslpp6LBNn8/06HxlnD2pVJpNSAgHNAhFIPK5uQ/AB4c0BYJYRy4b+ZwroigIwDJaARRR9DOcyrt7ksnhu84H3mTuzk4U/QrBItoBFGFII1F0BaJsxBr1Qhw4ztsOYSSAIjoOgkJxuk3O67GmQkiH1bOOu91uB22wgLEAipPj/b3ilKvqgBdrVB9uYUY2bIUwGkARHgV+kiGMB1DcFKJanmgJIXpgCCsBFCrE5O0qVWmsxZoK0e1n6pVyfstUCGsBFCdHB9uXQ1CKQqefnY2OD1pgAOvbKnmn/IlajKGCRluKnupiwQBWR0AhhN+rlO9tdfvtOq2rhf8/MKzlJ6dvReH+DmhgPYDiNIS70+tToaN5EOu0Lzqbo9rxh5ZfGJHE9kZ9eqGfyLBV2pEberHnMNBq/BLdnb4qhETmgwZj+YPD85qlk17nUV9y8fvHxjdISUlJSRkXfwFHSxhpEL4NbwAAAABJRU5ErkJggg=="
+                                                              src="img/voltar.png"
                                                               alt=""></div><!---->
-                    <div data-v-a53c4a36="" class="name tac"> AGI 6</div>
+                    <div data-v-a53c4a36="" class="name tac"> Blommer 6</div>
                     <div data-v-a53c4a36="" class="flex1"></div><!----><!----></div>
                 <div data-v-a53c4a36=""><!----></div>
             </div>
@@ -119,21 +208,21 @@
         <div data-v-6e534c71="" id="scroll" class="content-container" style="padding-top: 42px;">
             <div data-v-6e534c71="" id="content" class="content-scroll">
                 <div data-v-7cbde459="" data-v-6e534c71="" class="pic"><img data-v-7cbde459="" data-v-6e534c71=""
-                                                                            src="https://i.postimg.cc/J4XhLWKr/17553832924-BJ.jpg"
-                                                                            alt=""></div>
+                                                                            src="img/baner7.jpg"
+                                                                            alt="Blommer 6"></div>
                 <div data-v-7cbde459="" data-v-6e534c71="" class="item">
                     <div data-v-7cbde459="" data-v-6e534c71="" class="container">
                         <div data-v-7cbde459="" data-v-6e534c71="" class="he flex">
                             <div data-v-7cbde459="" data-v-6e534c71="" class="ico"><img data-v-7cbde459=""
                                                                                         data-v-6e534c71="" alt=""
-                                                                                        data-src="https://i.postimg.cc/J4XhLWKr/17553832924-BJ.jpg"
-                                                                                        src="https://i.postimg.cc/J4XhLWKr/17553832924-BJ.jpg"
+                                                                                        data-src="img/baner7.jpg"
+                                                                                        src="img/baner7.jpg"
                                                                                         lazy="loaded"></div>
                             <div data-v-7cbde459="" data-v-6e534c71="" class="flex1"><span data-v-7cbde459=""
-                                                                                           data-v-6e534c71="">Rendimento diário: 25.500 KZ</span>
+                                                                                           data-v-6e534c71="">Rendimento diário: 34,000 KZ</span>
                             </div>
                         </div>
-                        <div data-v-7cbde459="" data-v-6e534c71="" class="name1">AGI 6</div>
+                        <div data-v-7cbde459="" data-v-6e534c71="" class="name1">Blommer 6</div>
                         <div data-v-7cbde459="" data-v-6e534c71="" class="p">
                             Organize a oportunidade de entrada e saída por meio de dados de IA e adicione lógica, como filtragem de média móvel, simultaneamente para reduzir impactos emocionais artificiais. Ao mesmo tempo em que melhora os retornos e garante a segurança do principal, a taxa de precisão da entrada e saída é significativamente aprimorada.
                         </div>
@@ -144,15 +233,15 @@
                             </li>
                             <li data-v-7cbde459="" data-v-6e534c71="" class="flex">
                                 <div data-v-7cbde459="" data-v-6e534c71="" class="flex1">Tipo de negociação：</div>
-                                <div data-v-7cbde459="" data-v-6e534c71="" class="s">AGI 6</div>
+                                <div data-v-7cbde459="" data-v-6e534c71="" class="s">Blommer 6</div>
                             </li>
                             <li data-v-7cbde459="" data-v-6e534c71="" class="flex">
                                 <div data-v-7cbde459="" data-v-6e534c71="" class="flex1">Preço de negociação：</div>
-                                <div data-v-7cbde459="" data-v-6e534c71="" class="s">150.000 KZ</div>
+                                <div data-v-7cbde459="" data-v-6e534c71="" class="s">150,000 KZ</div>
                             </li>
                             <li data-v-7cbde459="" data-v-6e534c71="" class="flex">
                                 <div data-v-7cbde459="" data-v-6e534c71="" class="flex1">Valor total da renda：</div>
-                                <div data-v-7cbde459="" data-v-6e534c71="" class="s">2.295.000,00 KZ</div>
+                                <div data-v-7cbde459="" data-v-6e534c71="" class="s">3,060,000 KZ</div>
                             </li>
                         </ul>
                     </div>
@@ -172,15 +261,15 @@
                                 type="number" 
                                 placeholder="Digite o valor" 
                                 name="amount"
-                                value="150.000"
+                                value="150000"
                                 readonly
-                                style="background: #f5f5f5; text-align: center; font-weight: bold;">
+                                style="background: #f9f5f0; text-align: center; font-weight: bold; color: #5c3a21;">
                         </div>
                         
                         <div id="purchase-message" class="purchase-message" style="display: none;"></div>
                         
                         <button class="bbtyn" id="buy-button" onclick="buyProduct()">
-                            <span id="button-text">Comprar AGI 6 - 150.000 KZ</span>
+                            <span id="button-text">Comprar Blommer 6 - 150,000 KZ</span>
                             <span id="button-loading" class="loading" style="display: none;"></span>
                         </button>
                     </div>
@@ -196,12 +285,12 @@
 <script>
 // Configurações do produto PARA PRODUÇÃO
 const PRODUCT_CONFIG = {
-    id: 6, // Alterado para ID 3 para diferenciar do AGI 4
-    name: "AGI 6",
-    price: 150000, // em KZ (150 mil)
-    daily_return: 25500, // em KZ (25.500)
+    id: 6,
+    name: "Blommer 6",
+    price: 150000, // em KZ
+    daily_return: 34000, // em KZ
     cycle_days: 90,
-    total_return: 2295000, // em KZ (2.295.000)
+    total_return: 3060000, // em KZ
     payout_interval: 24 * 60 * 60 * 1000 // 24 HORAS em milissegundos (PRODUÇÃO)
 };
 
@@ -261,11 +350,11 @@ function updateBuyButton(balance) {
     const messageElement = document.getElementById('purchase-message');
     
     if (balance >= PRODUCT_CONFIG.price) {
-        buyButton.style.background = '#3862e4';
+        buyButton.style.background = '#8B4513';
         buyButton.disabled = false;
         messageElement.style.display = 'none';
     } else {
-        buyButton.style.background = '#3862e463';
+        buyButton.style.background = '#8b451380';
         buyButton.disabled = true;
         messageElement.textContent = 'Saldo insuficiente. Recarregue sua conta.';
         messageElement.className = 'purchase-message error-message';
@@ -313,7 +402,7 @@ async function buyProduct() {
         const data = await response.json();
 
         if (data.success) {
-            showNotification('✅ Compra realizada com sucesso! Rendimentos diários de 25.500 KZ iniciados.', 'success');
+            showNotification('✅ Compra realizada com sucesso! Rendimentos diários de 34,000 KZ iniciados.', 'success');
             
             // Mostrar mensagem de sucesso
             messageElement.textContent = 'Compra realizada! Rendimentos começam em 24 horas.';
@@ -344,7 +433,7 @@ async function buyProduct() {
         messageElement.style.display = 'block';
     } finally {
         // Reabilitar botão
-        buttonText.textContent = 'Comprar AGI 6 - 150.000 KZ';
+        buttonText.textContent = 'Comprar Blommer 6 - 150,000 KZ';
         buttonLoading.style.display = 'none';
         updateBuyButton(parseInt(document.getElementById('user-balance').textContent) || 0);
     }
@@ -410,7 +499,7 @@ window.addEventListener('load', function() {
         white-space: pre-wrap;
         text-align: center;
         word-break: break-all;
-        background-color: rgba(0,0,0,.7) !important;
+        background-color: rgba(139, 69, 19, 0.9) !important;
         border-radius: .13793rem;
         -webkit-transform: translate3d(-50%,-50%,0);
         transform: translate3d(-50%,-50%,0);
@@ -446,7 +535,7 @@ window.addEventListener('load', function() {
         white-space: pre-wrap;
         text-align: center;
         word-break: break-all;
-        background-color: rgba(0,0,0,.7) !important;
+        background-color: rgba(139, 69, 19, 0.9) !important;
         border-radius: .13793rem;
         -webkit-transform: translate3d(-50%,-50%,0);
         transform: translate3d(-50%,-50%,0);
