@@ -519,29 +519,7 @@
             margin-right: 6px;
         }
 
-        .loading {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(92, 58, 33, 0.8);
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .spinner {
-            border: 4px solid #f5f1eb;
-            border-top: 4px solid #8B4513;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -567,6 +545,42 @@
             width: 20px;
             height: 20px;
             filter: brightness(0) invert(1);
+        }
+
+        /* Toast Notification */
+        .toast-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .toast {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            word-wrap: break-word;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Melhorias para telas muito pequenas */
@@ -722,7 +736,7 @@
                                 Valor do Saque (KZ)
                             </label>
                             <img class="input-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTkgMEM0LjAzIDAgMCA0LjAzIDAgOVM0LjAzIDE4IDkgMThTMTggMTMuOTcgMTggOVMxMy45NyAwIDkgMFpNOSAxNi41QzUuNDEgMTYuNSAyLjUgMTMuNTkgMi41IDEwUzUuNDEgMy41IDkgMy41UzE1LjUgNi40MSAxNS41IDEwUzEyLjU5IDE2LjUgOSAxNi41Wk0xMi4yNSA4LjI1SDUuNzVWMTEuNzVIMTIuMjVWOC4yNVpNMTEuMjUgMTAuNzVINi43NVY5LjI1SDExLjI1VjEwLjc1WiIgZmlsbD0iIzVjM2EyMSIvPgo8L3N2Zz4K" alt="Valor">
-                            <input type="number" class="form-input" id="withdrawalAmount" min="1" placeholder="Digite o valor" required>
+                            <input type="number" class="form-input" id="withdrawalAmount" min="1000" placeholder="Mínimo: 1.000 KZ" required>
                             
                             <div class="quick-amounts">
                                 <button type="button" class="amount-btn" onclick="fillAmount(1000)">1.000 KZ</button>
@@ -748,8 +762,9 @@
                             Informações Importantes
                         </h3>
                         <ul>
-                            <li>Horário de processamento: Segunda a Sábado, das 9h às 21h</li>
-                            <li>Tempo máximo de espera: 24 horas</li>
+                            <li>Horário de processamento: Domingo a Domingo, das 9h às 21h</li>
+                            <li>Tempo máximo de espera: 1 hora</li>
+                            <li>Valor mínimo de saque: 1.000 KZ</li>
                             <li>Taxa de saque: 15% sobre o valor solicitado</li>
                             <li>Após o primeiro saque, você poderá usar as mesmas informações bancárias</li>
                             <li>Verifique se todas as informações estão corretas antes de confirmar</li>
@@ -813,10 +828,14 @@
     <div class="spinner"></div>
 </div>
 
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
 <script>
     // Configurações
     const API_BASE_URL = 'https://bd-p4q7.onrender.com';
     const WITHDRAWAL_TAX = 0.15; // 15%
+    const MIN_WITHDRAWAL_AMOUNT = 1000; // 1.000 KZ mínimo
     
     // Dados do usuário
     let userData = {
@@ -895,7 +914,7 @@
             }
         } catch (error) {
             console.error('Erro ao carregar dados:', error);
-            showError('Erro ao carregar dados: ' + error.message);
+            showToast('Erro ao carregar dados: ' + error.message, 'error');
         } finally {
             showLoading(false);
         }
@@ -976,6 +995,16 @@
         closeBankModal();
     }
     
+    // Verificar se está dentro do horário permitido
+    function isWithinWithdrawalHours() {
+        const now = new Date();
+        const day = now.getDay(); // 0=Domingo, 1=Segunda, ..., 6=Sábado
+        const hour = now.getHours();
+        
+        // Domingo a Domingo, das 9h às 21h
+        return hour >= 9 && hour < 21;
+    }
+    
     // Processar solicitação de saque
     async function handleWithdrawal() {
         // Validar dados
@@ -985,22 +1014,22 @@
         const amount = parseFloat(document.getElementById('withdrawalAmount').value);
         
         if (!accountName) {
-            showError('Por favor, digite o nome da conta');
+            showToast('Por favor, digite o nome da conta', 'error');
             return;
         }
         
         if (!iban || iban.length !== 21) {
-            showError('Por favor, digite um IBAN válido (21 dígitos)');
+            showToast('Por favor, digite um IBAN válido (21 dígitos)', 'error');
             return;
         }
         
         if (!bankCode) {
-            showError('Por favor, selecione um banco');
+            showToast('Por favor, selecione um banco', 'error');
             return;
         }
         
-        if (!amount || amount <= 0) {
-            showError('Por favor, digite um valor válido');
+        if (!amount || amount < MIN_WITHDRAWAL_AMOUNT) {
+            showToast(`Valor mínimo de saque é ${MIN_WITHDRAWAL_AMOUNT.toLocaleString('pt-AO')} KZ`, 'error');
             return;
         }
         
@@ -1009,19 +1038,14 @@
         const netAmount = amount - taxAmount;
         
         if (amount > userData.balance) {
-            showError('Saldo insuficiente para realizar este saque');
+            showToast('Saldo insuficiente para realizar este saque', 'error');
             return;
         }
         
-        // Validar horário (apenas Seg-Sáb, 9h-21h)
-        const now = new Date();
-        const day = now.getDay(); // 0=Domingo, 1=Segunda, ..., 6=Sábado
-        const hour = now.getHours();
-        
-        if (day === 0 || (day === 6 && hour >= 21) || hour < 9 || hour >= 21) {
-            if (!confirm('Fora do horário de processamento (Seg-Sáb, 9h-21h). O saque será processado no próximo dia útil. Deseja continuar?')) {
-                return;
-            }
+        // Validar horário (Domingo a Domingo, 9h-21h)
+        if (!isWithinWithdrawalHours()) {
+            showToast('Fora do horário de processamento (Domingo a Domingo, 9h-21h). Tente novamente dentro do horário permitido.', 'error');
+            return;
         }
         
         showLoading(true);
@@ -1073,16 +1097,43 @@
                 document.getElementById('withdrawalAmount').value = '';
                 calculateNetAmount();
                 
-                showSuccess('Saque solicitado com sucesso! O valor será processado em até 24 horas.');
+                showToast('Saque solicitado com sucesso! O valor será processado em até 1 hora.', 'success');
             } else {
                 throw new Error(data.message || 'Erro ao processar saque');
             }
         } catch (error) {
             console.error('Erro ao processar saque:', error);
-            showError('Erro ao processar saque: ' + error.message);
+            showToast('Erro ao processar saque: ' + error.message, 'error');
         } finally {
             showLoading(false);
         }
+    }
+    
+    // Função para mostrar toast notifications
+    function showToast(message, type = 'info') {
+        const toastContainer = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        
+        // Adicionar ao container
+        toastContainer.appendChild(toast);
+        
+        // Mostrar toast
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 10);
+        
+        // Remover após 1 hora (3600000ms) ou 5 segundos para outros tipos
+        const duration = type === 'success' ? 3600000 : 5000;
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, duration);
     }
     
     // Funções de navegação
@@ -1095,42 +1146,6 @@
     }
     
     // Funções de UI
-    function showError(message) {
-        // Remover mensagens anteriores
-        document.querySelectorAll('.error-message, .success-message').forEach(el => {
-            el.remove();
-        });
-        
-        // Criar nova mensagem de erro
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.innerHTML = `
-            <img class="error-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMEMzLjU4IDAgMCAzLjU4IDAgOFMzLjU4IDE2IDggMTZTMTYgMTIuNDIgMTYgOFMxMi40MiAwIDggMFpNOCAxNEM0LjY5IDE0IDIgMTEuMzEgMiA4UzQuNjkgMiA4IDJTMTQgNC42OSAxNCA4UzExLjMxIDE0IDggMTRaTTkgNUg3VjExSDlWNVpNOSAxMkg3VjE0SDlWMTJaIiBmaWxsPSIjYzQ0NTM2Ii8+Cjwvc3ZnPgo=" alt="Erro">
-            ${message}
-        `;
-        
-        // Inserir após o botão de submit
-        document.getElementById('submitBtn').parentNode.insertBefore(errorDiv, document.getElementById('submitBtn').nextSibling);
-    }
-    
-    function showSuccess(message) {
-        // Remover mensagens anteriores
-        document.querySelectorAll('.error-message, .success-message').forEach(el => {
-            el.remove();
-        });
-        
-        // Criar nova mensagem de sucesso
-        const successDiv = document.createElement('div');
-        successDiv.className = 'success-message';
-        successDiv.innerHTML = `
-            <img class="success-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTggMEMzLjU4IDAgMCAzLjU4IDAgOFMzLjU4IDE2IDggMTZTMTYgMTIuNDIgMTYgOFMxMi40MiAwIDggMFpNNy4wNSAxMi4yNUwzLjIgOC41TDMuOTMgNy43NUw3LjA1IDEwLjc1TDEyLjA3IDUuNzVMMTIuOCA2LjVMNy4wNSAxMi4yNVoiIGZpbGw9IiMyN2FlNjAiLz4KPC9zdmc+Cg==" alt="Sucesso">
-            ${message}
-        `;
-        
-        // Inserir após o botão de submit
-        document.getElementById('submitBtn').parentNode.insertBefore(successDiv, document.getElementById('submitBtn').nextSibling);
-    }
-    
     function showLoading(show) {
         document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
     }
