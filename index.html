@@ -1,453 +1,164 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt">
 <head>
-<meta charset="utf-8" />
-<title>Login</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#8B4513">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blomer — Atualização</title>
+  <style>
+    :root{
+      --coffee-dark: #6f4e37;    /* café escuro */
+      --coffee-mid:  #8b5e3c;    /* café médio */
+      --coffee-light:#d6b78b;    /* café claro */
+      --bg: #f7f3ef;
+      --text: #222;
+      --card-radius: 16px;
+      --max-width: 820px;
+    }
 
-<meta name="description" content=" Ganhar dinheiro impoortante demais" />
-<meta name="keywords" content="investmentos, hamister, ganhar dinheiro" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="format-detection" content="telephone=no, email=no" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-<script>
-var docEl = document.documentElement;
-docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
-window.addEventListener('resize', function() {
-  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
-});
-</script>
-<link rel="stylesheet" href="all.css"/>
-<link rel="stylesheet" href="style.css"/>
-<script type="text/javascript" src="min.js"></script>
-<script type="text/javascript" src="layer.js"></script>
-<script type="text/javascript" src="common.js"></script>
-<script type="text/javascript" src="public.js"></script>
+    *{box-sizing:border-box;font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg, var(--bg), #fff);color:var(--text);-webkit-font-smoothing:antialiased;}
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
 
-<style>
-/* Cores de café definidas */
-:root {
-  --coffee-dark: #5D4037;
-  --coffee-medium: #8B4513;
-  --coffee-light: #A1887F;
-  --coffee-cream: #D7CCC8;
-  --coffee-lighter: #EFEBE9;
-  --coffee-accent: #6D4C41;
-}
+    .card{
+      width:100%;
+      max-width:var(--max-width);
+      background:linear-gradient(180deg, rgba(255,255,255,0.98), #fff);
+      border-radius:var(--card-radius);
+      box-shadow: 0 10px 30px rgba(17,17,17,0.08);
+      padding:36px;
+      display:flex;
+      gap:28px;
+      align-items:center;
+    }
 
-body {
-  background-color: var(--coffee-lighter);
-  background-image: url(fundoindex.jpg);
-  background-size: 100% 260px;
-  background-repeat: no-repeat;
-}
+    .logo{
+      flex:0 0 120px;
+      height:120px;
+      border-radius:12px;
+      background:linear-gradient(135deg, var(--coffee-dark), var(--coffee-mid));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: #fff;
+      font-weight:700;
+      font-size:20px;
+      box-shadow: inset 0 -6px 18px rgba(0,0,0,0.08);
+    }
 
-.container .auth_bg {
-  margin-top: 33px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--coffee-dark);
-}
+    .logo svg{width:62px;height:62px;opacity:0.98;}
 
-.container .form {
-  position: relative;
-  top: 28px;
-  border-radius: 20px 20px 0 0;
-  width: 100%;
-  background-color: var(--coffee-cream);
-}
+    .content{flex:1;}
+    .title{
+      margin:0;
+      font-size:20px;
+      color:var(--coffee-dark);
+      letter-spacing:0.2px;
+    }
+    .subtitle{
+      margin:8px 0 18px 0;
+      color:#333;
+      line-height:1.45;
+    }
 
-.u-form-item {
-  padding: 5px 30px;
-}
+    .notice{
+      background: linear-gradient(90deg, rgba(139,94,60,0.06), rgba(111,78,55,0.045));
+      border-left:4px solid var(--coffee-mid);
+      padding:14px 16px;
+      border-radius:10px;
+      color:#2a2a2a;
+      margin-bottom:18px;
+    }
 
-::placeholder {
-  color: var(--coffee-light);
-  font-size: 14px;
-}
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
 
-.u-form-item .u-form-item__body, #register .u-form-item .u-form-item__body {
-  padding: 10px !important;
-  background: var(--coffee-lighter);
-  border-radius: 24px;
-  border: 1px solid var(--coffee-light);
-}
+    .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:600;
+      transition:transform .12s ease, box-shadow .12s ease;
+      box-shadow: 0 6px 18px rgba(111,78,55,0.08);
+    }
 
-.u-form-item__body {
-  display: flex;
-  flex-direction: row;
-  padding: 10px 0;
-}
+    .btn-primary{
+      background: linear-gradient(180deg, var(--coffee-dark), var(--coffee-mid));
+      color:#fff;
+      border: none;
+    }
+    .btn-primary:hover{ transform:translateY(-3px); box-shadow: 0 14px 28px rgba(111,78,55,0.12); }
 
-.u-form-item__body__left {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
+    .btn-ghost{
+      background:transparent;
+      color:var(--coffee-dark);
+      border:1px solid rgba(111,78,55,0.12);
+    }
+    .btn-ghost:hover{ transform:translateY(-2px); }
 
-.u-form-item__body__left__content {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-right: 8px;
-  flex: 1;
-}
+    .small{
+      color:#666;
+      font-size:13px;
+    }
 
-.u-form-item__body__left__content__icon {
-  margin-right: 3px;
-}
-
-.u-form-item__body__right input {
-  background-color: transparent;
-  height: 31px;
-  display: block;
-  width: 100%;
-  outline: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  text-decoration: inherit;
-  color: var(--coffee-dark);
-}
-
-.container .btn {
-  display: block;
-  text-align: center;
-  margin: 10px 30px 10px 30px;
-  color: #fff;
-  background: linear-gradient(90deg, var(--coffee-medium), var(--coffee-accent)) !important;
-  font-weight: 700;
-  border-radius: 22px;
-  padding: 12px 0;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.container .forget {
-  display: block;
-  text-align: center;
-  font-weight: 500;
-  color: var(--coffee-medium);
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.container .form .btn-bottom {
-  display: block;
-  text-align: center;
-  font-weight: 700;
-  font-size: 16px;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 20px;
-  color: var(--coffee-medium);
-}
-
-.guojia-list-item {
-  padding: 10px 0;
-  border-bottom: 1px var(--coffee-light) dashed;
-  color: var(--coffee-dark);
-}
-
-.guojia-list-item:hover {
-  background-color: var(--coffee-cream);
-}
-
-/* Estilos adicionais para loading */
-.loading-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(93, 64, 55, 0.7);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid var(--coffee-cream);
-  border-top: 5px solid var(--coffee-medium);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Estilo para o cabeçalho fixo */
-div[style*="position:fixed"] {
-  background-color: var(--coffee-medium) !important;
-}
-
-/* Estilo para o link de suporte */
-span[style*="color:#f73131"] a {
-  filter: sepia(100%) hue-rotate(-20deg) saturate(500%);
-}
-</style>
+    /* Responsivo */
+    @media (max-width:720px){
+      .card{flex-direction:column;align-items:stretch;padding:20px;}
+      .logo{width:100%;height:80px;border-radius:10px;flex:unset;}
+    }
+  </style>
 </head>
-<body ontouchstart="">
+<body>
+  <div class="wrap" role="main">
+    <div class="card" aria-live="polite">
+      <div class="logo" aria-hidden="true">
+        <!-- Ícone simples de café (SVG) -->
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <path d="M14 16h28a8 8 0 0 1 8 8v6a12 12 0 0 1-12 12H18A8 8 0 0 1 10 34v-10a8 8 0 0 1 4-8z" fill="#fff" opacity="0.12"/>
+          <path d="M16 30c0 8 6 14 14 14s14-6 14-14" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M44 22h6a6 6 0 1 1 0 12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
 
-<div style="height:60px;"><div style="width:100%;height:59px;line-height:59px;position:fixed;top:0;left:0;z-index:999999;background-color: var(--coffee-medium);"><span style="position:absolute;right:10px;font-size:14px;color:#fff;letter-spacing:1px;"><a target="_blank" href=" https://t.me/Ada8860"><img src="https://i.postimg.cc/CLvcSTY3/icon-kefu3.png" style="width:28px;height:28px;" /></a></span></div></div>
+      <div class="content">
+        <h1 class="title">Plataforma Blomer — Atualização a longo prazo</h1>
+        <p class="subtitle">
+          A plataforma <strong>Blomer</strong> está a ser atualizada e ficará offline por um período prolongado.
+          Pedimos a tua compreensão — a atualização visa melhorar a segurança e a performance.
+        </p>
 
-<div style="margin-top:45px;text-align:center;"><img src="img/logo1.jpg" alt="logo" style="width:110px;height:110px;"></div>
-
-<!-- Overlay de loading -->
-<div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-spinner"></div>
-</div>
-
-<form id="myform" method="post" role="form" style="margin-top:50px;">
-<div class="container">
-    <div class="form">
-        <div class="u-form">
-            <div class="u-form-item">
-                <div class="u-form-item__body" style="flex-direction: row;">
-                    <div class="u-form-item__body__left">
-                        <div class="u-form-item__body__left__content">
-                            <div class="u-form-item__body__left__content__icon">
-                                <div class="u-icon u-icon--right" style="display:flex;flex-direction: row;">
-                                    <div class="u-icon__img" style="width:22px; height:22px;">
-                                        <img src="https://i.postimg.cc/8Cq1Y0jW/shoujitubiao.png" style="display:block;width: 100%; height: 100%;">
-                                    </div>
-                                    <input id="area_codei" name="area_code" type="text" value="244" style="display:none;" required>
-                                    <div style="width:40px;height:22px;color: var(--coffee-dark);" id="quhao" onclick="quhao_select()">+<span id="area_code">244</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-form-item__body__right">
-                        <input id="user_name" name="user_name" autocomplete="off" type="text" maxlength="30" placeholder="Número de telefone" value="" autofocus="autofocus" required>
-                    </div>
-                </div>
-            </div>
-            <div class="u-form-item">
-                <div class="u-form-item__body" style="flex-direction: row;">
-                    <div class="u-form-item__body__left">
-                        <div class="u-form-item__body__left__content">
-                            <div class="u-form-item__body__left__content__icon">
-                                <div class="u-icon u-icon--right">
-                                    <div class="u-icon__img" style="width:22px; height:22px;">
-                                        <img src="https://i.postimg.cc/tgm5GhjF/mima-d3ef0ce0.png" style="display:block;width: 100%; height: 100%;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="u-form-item__body__right">
-                        <input value="" type="password" name="password" id="password" placeholder="Senha" required>
-                    </div>
-                </div>
-            </div>
-            <a href="javascript:dosubmit();" class="btn" id="loginBtn">
-                Login
-            </a>
-            <a href="/register" class="btn-bottom">
-                Cadastrar-se
-            </a>
+        <div class="notice">
+          <strong>Aguarda a atualização.</strong> Em breve voltaremos com todas as funcionalidades.  
+          Enquanto isso, participa no nosso grupo do Telegram para notícias e suporte.
         </div>
+
+        <div class="actions" role="navigation" aria-label="Ações">
+          <a class="btn btn-primary" href="https://t.me/+I_ZCdcMWo2AwOTk0" target="_blank" rel="noopener noreferrer nofollow">
+            Abrir grupo no Telegram
+          </a>
+
+          <a class="btn btn-ghost" href="/" title="Voltar">
+            Voltar à página inicial
+          </a>
+        </div>
+
+        <p class="small" style="margin-top:14px;">
+          Nota: Não partilhes dados sensíveis no grupo. Mensagens oficiais serão publicadas apenas nos canais autorizados.
+        </p>
+      </div>
     </div>
-</div>
-</form>
-
-<script>
-// Configuração da API
-const API_BASE_URL = 'https://bd-p4q7.onrender.com'; // Substitua pela URL real da sua API
-const TOKEN_EXPIRY_HOURS = 5; // Token expira em 5 horas
-
-// Função para seleção de código de área
-function quhao_select() {
-    layer.open({
-        type: 1,
-        content: '<div style="padding:0 10px;background-color: var(--coffee-lighter);"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>',
-        anim: 'up',
-        style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none; background-color: var(--coffee-lighter);'
-    });
-}
-
-function qhselect(quhao) {
-    quhao = quhao || $("#quhaose").val();
-    $("#area_code").html(quhao);
-    $("#area_codei").val(quhao);
-    layer.closeAll();
-}
-
-// Função para mostrar/ocultar loading
-function showLoading(show) {
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    if (loadingOverlay) {
-        loadingOverlay.style.display = show ? 'flex' : 'none';
-    } else if (show) {
-        // Criar overlay de loading se não existir
-        const overlay = document.createElement('div');
-        overlay.id = 'loadingOverlay';
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(93, 64, 55, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        `;
-        overlay.innerHTML = `
-            <div style="background: var(--coffee-cream); padding: 20px; border-radius: 8px; color: var(--coffee-dark);">
-                <p>Carregando...</p>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-    }
-}
-
-// Função principal de login
-async function dosubmit() {
-    const areaCode = $("#area_code").html();
-    const user_name = $("#user_name").val();
-    const password = $("#password").val();
-    
-    // Validações
-    if (!user_name) {
-        layer.open({
-            content: 'Digite o número de telefone',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    if (!password) {
-        layer.open({
-            content: 'Digite a senha',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-
-    // Combinar código do país com número de telefone
-    const mobile = areaCode + user_name;
-
-    showLoading(true);
-
-    try {
-        // Fazer requisição para a API de login
-        const response = await fetch(`${API_BASE_URL}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                mobile: mobile,
-                password: password
-            })
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            // Login bem-sucedido - Armazenar no localStorage com expiração
-            const tokenData = {
-                token: data.data.token,
-                expiry: Date.now() + (TOKEN_EXPIRY_HOURS * 60 * 60 * 1000) // 5 horas a partir de agora
-            };
-            
-            // Salvar no localStorage (sem cookies)
-            localStorage.setItem('user_token', JSON.stringify(tokenData));
-            localStorage.setItem('user_mobile', user_name);
-            localStorage.setItem('user_id', data.data.user.id);
-            
-            layer.open({
-                content: 'Login realizado com sucesso!',
-                skin: 'msg',
-                time: 2,
-                end: function() {
-                    // Redirecionar para a página principal/dashboard
-                    window.location.href = '/principal.html';
-                }
-            });
-        } else {
-            layer.open({
-                content: data.message || 'Erro ao fazer login',
-                skin: 'msg',
-                time: 3
-            });
-        }
-    } catch (error) {
-        console.error('Erro no login:', error);
-        layer.open({
-            content: 'Erro de conexão com o servidor',
-            skin: 'msg',
-            time: 3
-        });
-    } finally {
-        showLoading(false);
-    }
-}
-
-// Função para verificar se o token no localStorage ainda é válido
-function isTokenValid() {
-    const tokenData = localStorage.getItem('user_token');
-    
-    if (!tokenData) return false;
-    
-    try {
-        const { token, expiry } = JSON.parse(tokenData);
-        
-        // Verificar se o token expirou
-        if (Date.now() > expiry) {
-            // Token expirado, remover do localStorage
-            localStorage.removeItem('user_token');
-            localStorage.removeItem('user_mobile');
-            localStorage.removeItem('user_id');
-            return false;
-        }
-        
-        return true;
-    } catch (e) {
-        console.error('Erro ao verificar token:', e);
-        return false;
-    }
-}
-
-// Verificar se já está logado ao carregar a página
-document.addEventListener('DOMContentLoaded', function() {
-    // Carregar número salvo se existir
-    const savedMobile = localStorage.getItem('user_mobile');
-    if (savedMobile && document.getElementById('user_name')) {
-        document.getElementById('user_name').value = savedMobile;
-    }
-    
-    // Verificar se há token válido no localStorage
-    if (isTokenValid()) {
-        // Se já tem token válido, redirecionar para dashboard
-        window.location.href = '/dashboard.html';
-    }
-    
-    // Tecla Enter para submeter o formulário (apenas se o campo existir)
-    const passwordField = document.getElementById('password');
-    if (passwordField) {
-        passwordField.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                dosubmit();
-            }
-        });
-    }
-});
-</script>
+  </div>
 </body>
 </html>
