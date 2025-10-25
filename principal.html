@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html style="font-size: 47.2px;">
 <head>
     <meta charset="utf-8">
@@ -10,220 +11,354 @@
     <meta name="360-fullscreen" content="true">
     <meta name="renderer" content="webkit">
     <style>
-        /* Cores de café definidas */
+        /* Cores de futebol definidas */
         :root {
-            --coffee-dark: #5D4037;
-            --coffee-medium: #8B4513;
-            --coffee-light: #A1887F;
-            --coffee-cream: #D7CCC8;
-            --coffee-lighter: #EFEBE9;
-            --coffee-accent: #6D4C41;
-            --coffee-gradient: linear-gradient(90deg, var(--coffee-medium), var(--coffee-accent));
+            --soccer-green: #f1f3f1;
+            --soccer-dark-green: #f6f9f6;
+            --soccer-light-green: #4CAF50;
+            --soccer-white: #FFFFFF;
+            --soccer-light-gray: #F5F5F5;
+            --soccer-gray: #E0E0E0;
+            --soccer-dark: #333333;
+            --soccer-gradient: linear-gradient(135deg, var(--soccer-green), var(--soccer-dark-green));
+            --soccer-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         html,
         body {
             width: 100%;
-            background-color: var(--coffee-lighter);
-            color: var(--coffee-dark);
+            background-color: var(--soccer-light-gray);
+            color: var(--soccer-dark);
         }
 
-        /* Aplicar cores de café em elementos principais */
+        /* Layout principal */
         .page {
-            background-color: var(--coffee-lighter);
+            background-color: var(--soccer-light-gray);
+            min-height: 100vh;
         }
 
         .headers {
-            background: var(--coffee-gradient) !important;
+            background: var(--soccer-gradient) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .head {
-            background: var(--coffee-gradient) !important;
+            background: var(--soccer-gradient) !important;
         }
 
         .content-container {
-            background-color: var(--coffee-lighter);
+            background-color: var(--soccer-light-gray);
+            padding: 15px 0;
         }
 
         .content-scroll {
-            background-color: var(--coffee-lighter);
+            background-color: var(--soccer-light-gray);
         }
 
         .container {
             background-color: transparent;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Cartões */
+        .card {
+            background-color: var(--soccer-white);
+            border-radius: 12px;
+            box-shadow: var(--soccer-card-shadow);
+            margin: 15px 0;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--soccer-green);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .scroll0 {
-            background-color: var(--coffee-cream);
+            background-color: var(--soccer-white);
             border-radius: 12px;
-            margin: 10px;
-            padding: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            box-shadow: var(--soccer-card-shadow);
+            display: flex;
+            align-items: center;
         }
 
         .itemBox {
-            background-color: var(--coffee-cream);
-            border-radius: 12px;
-            margin: 10px;
-            padding: 15px;
+            background-color: transparent;
+            margin: 20px 0;
         }
 
+        /* Menu de navegação */
         .nav1 {
-            background-color: var(--coffee-cream);
+            background-color: transparent;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
         }
 
         .nav1 li {
-            background-color: var(--coffee-lighter);
-            border: 1px solid var(--coffee-light);
+            background-color: var(--soccer-white);
             border-radius: 12px;
             transition: all 0.3s ease;
+            box-shadow: var(--soccer-card-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 10px;
+            cursor: pointer;
+            border-top: 3px solid var(--soccer-green);
         }
 
         .nav1 li:hover {
-            background-color: var(--coffee-medium);
-            transform: translateY(-2px);
+            background-color: var(--soccer-green);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(27, 94, 32, 0.3);
         }
 
         .nav1 li:hover p {
-            color: white !important;
+            color: var(--soccer-white) !important;
         }
 
-        /* Texto dos itens do menu em cor escura */
+        .nav1 li:hover img {
+            filter: brightness(0) invert(1);
+        }
+
+        /* Texto dos itens do menu */
         .nav1 li p {
-            color: var(--coffee-dark) !important;
+            color: var(--soccer-dark) !important;
+            font-weight: 600;
+            margin-top: 8px;
+            text-align: center;
+            font-size: 0.9rem;
         }
 
         .lucku_bann {
-            background-color: var(--coffee-cream);
+            background-color: var(--soccer-white);
             border-radius: 12px;
-            margin: 10px;
-            padding: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            box-shadow: var(--soccer-card-shadow);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .lucku_bann:hover {
+            transform: scale(1.02);
         }
 
         .footer {
-            background: var(--coffee-gradient) !important;
+            background: var(--soccer-gradient) !important;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .footers {
             background: transparent;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
         }
 
         .footers .item {
-            color: white !important; /* Texto do footer em branco */
+            color: var(--soccer-white) !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
         }
 
         .footers .item:hover {
             background-color: rgba(255,255,255,0.1);
-            border-radius: 8px;
         }
 
-        /* Popup com tema café */
+        .footers .item span {
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        /* Popup com tema futebol */
         .popup-content {
-            background: var(--coffee-cream);
-            color: var(--coffee-dark);
-            border: 2px solid var(--coffee-medium);
+            background: var(--soccer-white);
+            color: var(--soccer-dark);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-top: 5px solid var(--soccer-green);
         }
 
         .popup-content h3 {
-            color: var(--coffee-medium);
-            border-bottom: 2px solid var(--coffee-light);
-            padding-bottom: 10px;
+            color: var(--soccer-green);
+            border-bottom: 2px solid var(--soccer-gray);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.4rem;
         }
 
         .popup-content button {
-            background: var(--coffee-gradient);
-            color: white !important; /* Texto do botão em branco */
+            background: var(--soccer-gradient);
+            color: var(--soccer-white) !important;
             border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
         }
 
         .popup-content button:hover {
-            background: var(--coffee-medium);
+            background: var(--soccer-dark-green);
+            transform: translateY(-2px);
         }
 
         /* Notices e barras */
         .van-notice-bar {
-            background: var(--coffee-lighter) !important;
-            color: var(--coffee-dark) !important; /* Texto da notice em cor escura */
-            border: 1px solid var(--coffee-light);
+            background: var(--soccer-white) !important;
+            color: var(--soccer-dark) !important;
             border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            padding: 10px 15px;
         }
 
-        /* Check-in com tema café */
+        /* Check-in com tema futebol */
         #checkin-btn {
-            background-color: var(--coffee-lighter);
-            border: 2px solid var(--coffee-light);
+            background-color: var(--soccer-white);
             border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: var(--soccer-card-shadow);
+            position: relative;
+            border-top: 3px solid var(--soccer-green);
         }
 
         #checkin-btn:hover:not(:disabled) {
-            border-color: var(--coffee-medium);
-            background-color: var(--coffee-cream);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(27, 94, 32, 0.3);
+        }
+
+        #checkin-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .checkin-available {
-            border: 2px solid var(--coffee-medium);
-            animation: coffee-pulse 2s infinite;
+            border: 2px solid var(--soccer-green);
+            animation: soccer-pulse 2s infinite;
         }
 
-        @keyframes coffee-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(139, 69, 19, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(139, 69, 19, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(139, 69, 19, 0); }
+        @keyframes soccer-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(27, 94, 32, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
         }
 
         #checkin-status {
-            background: var(--coffee-medium) !important;
-            color: white !important; /* Texto do status em branco */
+            background: var(--soccer-green) !important;
+            color: var(--soccer-white) !important;
         }
 
         /* Toast e mensagens */
         .van-toast {
-            background-color: var(--coffee-medium) !important;
-            color: white !important; /* Texto do toast em branco */
+            background-color: var(--soccer-green) !important;
+            color: var(--soccer-white) !important;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .gig_box {
-            background-color: var(--coffee-medium) !important;
-        }
-
-        /* Links do Telegram - MANTIDO EM AZUL */
-        .telegram-link a {
-            color: #0088cc !important; /* Azul do Telegram mantido */
-        }
-
-        .telegram-link a:hover {
-            color: #006699 !important; /* Azul mais escuro no hover */
-        }
-
-        /* Ícone do Telegram mantido em azul */
-        .telegram-link svg {
-            fill: #0088cc !important;
+            background-color: var(--soccer-green) !important;
         }
 
         /* Banner e carousel */
         .banner {
             border-radius: 12px;
             overflow: hidden;
-            margin: 10px;
+            margin: 20px 0;
+            box-shadow: var(--soccer-card-shadow);
         }
 
         .carousel__slide__overlay {
-            background-color: rgba(93, 64, 55, 0.3);
+            background-color: rgba(27, 94, 32, 0.3);
         }
 
-        /* Texto do cabeçalho em branco */
+        /* Texto do cabeçalho */
         .head .name {
-            color: white !important;
+            color: var(--soccer-white) !important;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        /* Texto dos botões em branco quando aplicável */
-        .btn-primary, .btn-secondary {
-            color: white !important;
+        /* Ícones e imagens */
+        .myName img {
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+        }
+
+        .ico img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .nav1 li img {
+            width: 30px;
+            height: 30px;
+            transition: all 0.3s ease;
+        }
+
+        /* Seção de título */
+        .section-title {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--soccer-green);
+            border-radius: 3px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav1 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footers .item span {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav1 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            html {
+                font-size: 42px;
+            }
         }
     </style>
     <link href="app.c1933b14.css" rel="preload" as="style">
@@ -347,14 +482,14 @@
 }
 
 .checkin-available {
-    border: 2px solid var(--coffee-medium);
-    animation: coffee-pulse 2s infinite;
+    border: 2px solid var(--soccer-green);
+    animation: soccer-pulse 2s infinite;
 }
 
-@keyframes coffee-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(139, 69, 19, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(139, 69, 19, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(139, 69, 19, 0); }
+@keyframes soccer-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(27, 94, 32, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
 }
 </style>
 
@@ -390,7 +525,7 @@
                                                         <div class="carousel__slide">
                                 <div class="carousel__slide__inner">
                                     <div data-v-98526a88="" class="item">
-                                        <img data-v-98526a88="" src="img/baner2.jpg" alt="">
+                                        <img data-v-98526a88="" src="img/logo1.jpg" alt="">
                                     </div>
                                     <div class="carousel__slide__overlay"></div>
                                 </div>
@@ -399,7 +534,7 @@
                                                     <div class="carousel__slide">
                                 <div class="carousel__slide__inner">
                                     <div data-v-98526a88="" class="item">
-                                        <img data-v-98526a88="" src="img/baner4.jpg" alt="">
+                                        <img data-v-98526a88="" src="img/logo2.png" alt="">
                                     </div>
                                     <div class="carousel__slide__overlay"></div>
                                 </div>
@@ -407,7 +542,7 @@
                                                         <div class="carousel__slide">
                                 <div class="carousel__slide__inner">
                                     <div data-v-98526a88="" class="item">
-                                        <img data-v-98526a88="" src="img/baner3.jpg" alt="">
+                                        <img data-v-98526a88="" src="img/baner2.jpg" alt="">
                                     </div>
                                     <div class="carousel__slide__overlay"></div>
                                 </div>
@@ -456,38 +591,40 @@
                     </div>
                     <div data-v-98526a88="" data-v-6e534c71="" class="scroll0 flex">
                         <div data-v-98526a88="" data-v-6e534c71="" class="ico">
-                            <img data-v-98526a88="" data-v-6e534c71="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAXCAYAAAAYyi9XAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALCSURBVHgBrVVRbtpAEJ1Zr5tKVSWO4N7AqKSC/MRRSNW/hBOEnqD0BIETNDlB0xMk/asCFUSqAClG0BOUG9SfjWt2O7PGhFJsIGWk1XrXs/NmZmfeAjxCCqXXHwp7R7pQLHuwochNlF3Py8l7eQWoPV4roZws3VGnEyzuC1gXrOg5VmgPAdFbpVvYK9dlaP+kDJw9CvBV8fDUEvYQARxa3gLoz5kHNMSRCaxT6occ7dqA7KUS4pLAchrgwu82PdQYZJ3xe61zqawXCDimpUvRtpN/0tzLL+n+4yTqHKA4ps8qjQAVvPf7zcs0kEKpfKURg4n63Rj1O+N+/8uYbOft8MlQg3Y5zX63VZfmXoRJ1V9C3sWzJi8jXbm7a47SwEzKQvQ4CxbaHt33AYNy0RSLbw4iMflBlt6R3rmY3kuAGj4tDlJqPNsJ81lgLGyYUpintFwjgkOg7eTeONLYFnCFV01b0N0Efq9Zhf8QNkxTpVA6ahOoJ0NZo3Xd2Nf6kqr7lAI4Xrst1hatG/GM+8lW9DSKM4Tgbh3Q77c6NAVk3Ev2pgTAI7f9CFfI1gGZkWjiglksNN4Ltg4oUZ7wjHOAcyT/XS7ZnAlf9jICThOOjpr/jDvYUlZj9kPE96lBjcTUG4d4r7040gh4mRDT1KZ8m+P+nbYJxEDcEgC2ss8l8yMpuSl29g0Bl8putBO9zYpWI9QSvh10b+ozR2KHHRq37IQcdJu1NCNES85EqDYZO7HubTehrGW6tpJeJCNn8M20hRF398ildNb5m5ioynNm0bBHlhIH9DlKKGuXjaTo+nNg5kmzYfpKPKR4ZZUaQ91m3qSeQLUNQ4UPLLJMuACTJ43B/LkUr90WcerRVB6CdrJ0uboR1IXQqjIPFp/dUF6WDk8QxUfgAtFYGfRurjc5v3HjD3pfr/kp4gie74Qd2FD+APTMLv5BP+uHAAAAAElFTkSuQmCC" alt="">
+                            <img data-v-98526a88="" data-v-6e534c71="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAXCAYAAAAYyi9XAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALCSURBVHgBrVVRbtpAEJ1Zr5tKVSWO4N7AqKSC/MRRSNW/hBOEnqD0BIETNDlB0xMk/asCFUSqAClG0BOUG9SfjWv2O7PGhFJsIGWk1XrXs/NmZmfeAjxCCqXXHwp7R7pQLHuwochNlF3Py8l7eQWoPV4roZws3VGnEyzuC1gXrOg5VmgPAdFbpVvYK9dlaP+kDJw9CvBV8fDUEvYQARxa3gLoz5kHNMSRCaxT6occ7dqA7KUS4pLAchrgwu82PdQYZJ3xe61zqawXCDimpUvRtpN/0tzLL+n+4yTqHKA4ps8qjQAVvPf7zcs0kEKpfKURg4n63Rj1O+N+/8uYbOft8MlQg3Y5zX63VZfmXoRJ1V9C3sWzJi8jXbm7a47SwEzKQvQ4CxbaHt33AYNy0RSLbw4iMflBlt6R3rmY3kuAGj4tDlJqPNsJ81lgLGyYUpintFwjgkOg7eTeONLYFnCFV01b0N0Efq9Zhf8QNkxTpVA6ahOoJ0NZo3Xd2Nf6kqr7lAI4Xrst1hatG/GM+8lW9DSKM4Tgbh3Q77c6NAVk3Ev2pgTAI7f9CFfI1gGZkWjigtksNN4Ltg4oUZ7wjHOAcyT/XS7ZnAlf9jICThOOjpr/jDvYUlZj9kPE96lBjcTUG4d4r7040gh4mRDT1KZ8m+P+nbYJxEDcEgC2ss8l8yMpuSl29g0Bl8putBO9zYpWI9QSvh10b+ozR2KHHRq37IQcdJu1NCNES85EqDYZO7HubTehrGW6tpJeJCNn8M20hRF398iltNZ5m5ioynNm0bBHlhIH9DlKKGuXjaTo+nNg5kmzYfpKPKR4ZZUaQ91m3qSeQLUNQ4UPLLJMuACTJ43B/LkUr90WcerRVB6CdrJ0uboR1IXQqjIPFp/dUF6WDk8QxUfgAtFYGfRurjc5v3HjD3pfr/kp4gie74Qd2FD+APTMLv5BP+uHAAAAAElFTkSuQmCC" alt="">
                         </div>
                         <div data-v-98526a88="" data-v-6e534c71="" class="flex1">
                             <div data-v-98526a88="" role="alert" class="van-notice-bar" data-v-6e534c71=""
-                                 style="color: var(--coffee-dark); background: none;">
+                                 style="color: var(--soccer-dark); background: none;">
                                 <marquee behavior="" direction="">Olá amigos da Blommer, bem-vindos ao registro em nossa plataforma!
                                     Nossa plataforma é um projeto de ganhos permanente e seguro!</marquee>
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 <div data-v-98526a88="" data-v-6e534c71="" class="itemBox">
+                    <h3 class="section-title" style="color: var(--soccer-green); margin-left: 15px;">Menu Principal</h3>
                     <ul data-v-98526a88="" data-v-6e534c71="" class="nav1">
                         <li data-v-98526a88="" data-v-6e534c71=""
                             onclick="window.location.href='/deposito.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://i.postimg.cc/cHp709Ft/image.png"
+                                                                            src="img/recarregar.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Recarregar</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Recarregar</p></div>
                         </li>
                         <!-- No seu HTML, substitua o botão de check-in por este: -->
 <li data-v-98526a88="" data-v-6e534c71="" id="checkin-btn" style="position: relative;">
     <div data-v-98526a88="" data-v-6e534c71="">
         <img data-v-98526a88="" data-v-6e534c71=""
-            src="https://i.postimg.cc/T30cgc3B/a0486a1340083788d4db56d97ee8acee.png"
+            src="img/vida2.png"
             alt="Check-in">
-        <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Check-in</p>
+        <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Check-in</p>
         <div id="checkin-status" style="
             position: absolute;
             top: -5px;
             right: -5px;
-            background: var(--coffee-medium);
+            background: var(--soccer-green);
             color: white !important;
             padding: 2px 6px;
             border-radius: 10px;
@@ -501,23 +638,23 @@
                         <li data-v-98526a88="" data-v-6e534c71=""
                             onclick="window.location.href='/retirada.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://i.postimg.cc/kMSFfC5Q/f5ff996fe84131803e14f18a009d87b6.png"
+                                                                            src="img/retirar.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Retirar</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Retirar</p></div>
                         </li>
 
                         <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='produtos.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://aitech360.site/public/57125d1902de26bd24015093ac5a3e5d.png"
+                                                                            src="img/1.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Produtos</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Produtos</p></div>
                         </li>
 
                         <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='/produtos.html'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://i.postimg.cc/JzrNrB5x/22e6a62610c270223a22ffc10e9515e7.png"
+                                                                            src="img/produto.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Código de presente</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Código de presente</p></div>
                         </li>
 
                         <li data-v-98526a88="" data-v-6e534c71=""
@@ -525,7 +662,7 @@
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
                                                                             src="https://i.postimg.cc/Njd15fNc/ff7e05e7e4e86beace60c23c9852c228.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Ganhos recebidos</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Ganhos recebidos</p></div>
                         </li>
                <li data-v-98526a88="" data-v-6e534c71=""
     onclick="window.location.href='https://raw.githubusercontent.com/021818AZz/aplicativo/main/app-debug.apk'">
@@ -533,30 +670,38 @@
         <img data-v-98526a88="" data-v-6e534c71=""
              src="img/app.png"
              alt="">
-        <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Baixar App</p>
+        <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Baixar App</p>
     </div>
 </li>
 
                         <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='https://t.me/+I_ZCdcMWo2AwOTk0'">
                             <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://i.postimg.cc/P5T4C7Tm/b9839d010ab7f254febe57fd0398f0ad.png"
+                                                                            src="img/suporte.png"
                                                                             alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Central de ajuda</p></div>
+                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Central de ajuda</p></div>
                         </li>
                        
                     </ul>
                 </div>
                 
                 <div data-v-98526a88="" data-v-6e534c71="" class="lucku_bann"
-                     onclick="window.location.href='/tarefa.html'">
+                     onclick="window.location.href='/equipe.html'">
                     <div data-v-98526a88="" data-v-6e534c71="">
                         <div data-v-98526a88="" data-v-6e534c71="" class="item"><img data-v-98526a88=""
                                                                                      data-v-6e534c71=""
-                                                                                     src="https://i.postimg.cc/dt6jbBcn/file.png"
+                                                                                     src="img/anuncio.png"
                                                                                      alt=""></div>
                     </div>
                 </div>
-               
+                
+                <div class="card">
+                    <h3 class="section-title" style="color: var(--soccer-green);">Sobre a Plataforma</h3>
+                    <p style="line-height: 1.6; margin-top: 10px;">
+                        A Blommer é uma plataforma de investimentos segura e confiável, focada em proporcionar 
+                        retornos consistentes para nossos usuários. Com uma equipe experiente e tecnologia de ponta, 
+                        garantimos transparência e segurança em todas as operações.
+                    </p>
+                </div>
                
                 <div class="van-overlay" style="z-index: 2002; display: none;"></div>
                 <div class="popup-overlay" id="systemPopup">
@@ -567,9 +712,9 @@
              alt="Logo Sistema" 
              style="max-width: 200px; height: auto; margin-bottom: 15px; border-radius: 8px;">
         
-        <h3 class="text-lg font-semibold section-title mb-4" style="color: var(--coffee-medium);">Sistema Anúncio</h3>
+        <h3 class="text-lg font-semibold section-title mb-4" style="color: var(--soccer-green);">Sistema Anúncio</h3>
         
-        <div class="text-sm leading-relaxed space-y-3" style="text-align: left; color: var(--coffee-dark);">
+        <div class="text-sm leading-relaxed space-y-3" style="text-align: left; color: var(--soccer-dark);">
             <p>
                1: Bônus de inscrição de KZ 400, bônus de check-in diário de KZ 10.
             </p>
@@ -609,7 +754,7 @@
         <!-- BOTÃO FECHAR EMBAIXO -->
         <div style="margin-top: 20px; text-align: center;">
             <button onclick="closePopup()" 
-                style="background: var(--coffee-gradient); color: white !important; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                style="background: var(--soccer-gradient); color: white !important; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">
                 Fechar
             </button>
         </div>
@@ -623,13 +768,127 @@
         
 
 <style>
+
+ 
+  /* Footer com tema de futebol - verde e branco */
+.footer {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32) !important;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
+    border-top: 2px solid #4caf50;
+}
+
+.footers {
+    background: transparent;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.footers .item {
+    color: white !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+}
+
+.footers .item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.footers .item.active {
+    background-color: rgba(76, 175, 80, 0.3);
+    border-bottom: 2px solid white;
+}
+
+.footers .item img {
+    width: 20px !important;
+    height: 20px !important;
+    margin-bottom: 2px;
+    filter: brightness(0) invert(1); /* Torna as imagens brancas */
+}
+
+.footers .item span {
+    font-size: 0.6rem !important;
+    margin-top: 0;
+    line-height: 1;
+    text-align: center;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    color: white !important;
+}
+
+/* Ajuste no container de conteúdo para não ficar atrás do footer */
+.content-container {
+    padding-bottom: 60px !important;
+}
+
+/* Efeito de campo de futebol no fundo do footer */
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(transparent 49%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 51%),
+        radial-gradient(circle at 50% 50%, transparent 40%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.1) 42%, transparent 42%);
+    background-size: 100% 10px, 100% 100%;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Para telas muito pequenas */
+@media (max-width: 320px) {
+    .footers .item span {
+        font-size: 0.55rem !important;
+    }
+    
+    .footers .item img {
+        width: 18px !important;
+        height: 18px !important;
+    }
+    
+    .footer {
+        height: 48px;
+    }
+    
+    .content-container {
+        padding-bottom: 58px !important;
+    }
+}
+/* Ajuste no container de conteúdo para não ficar atrás do footer */
+.content-container {
+    padding-bottom: 60px !important; /* Espaço para o footer fixo */
+}
 /* Overlay */
 .popup-overlay {
     display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(93, 64, 55, 0.7);
+    background: rgba(27, 94, 32, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -638,14 +897,15 @@
 
 /* Conteúdo do popup */
 .popup-content {
-    background: var(--coffee-cream);
-    color: var(--coffee-dark);
+    background: var(--soccer-white);
+    color: var(--soccer-dark);
     padding: 20px;
     max-width: 500px;
     width: 90%;
     border-radius: 12px;
     position: relative;
-    border: 2px solid var(--coffee-medium);
+    border-top: 5px solid var(--soccer-green);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* Botão de fechar */
@@ -690,31 +950,37 @@ function closePopup() {
 // window.onload = openPopup;
 </script>
 
-        <div data-v-6e534c71="" class="footer">
+      <div data-v-6e534c71="" class="footer">
     <div data-v-47e63dc4="" data-v-98526a88="" class="footers" data-v-6e534c71="">
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
-            <div data-v-47e63dc4="" class="on"><img data-v-47e63dc4=""
-                                                    src="https://i.postimg.cc/kGXBKWYX/image.png"
-                                                    alt=""><span data-v-47e63dc4="" style="color: white !important;"> Lar </span></div>
+            <div data-v-47e63dc4="" class="on">
+                <img data-v-47e63dc4="" src="img/home.png" alt="">
+                <span data-v-47e63dc4="" style="color: white !important;"></span>
+            </div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/tarefa.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
-                                                  src="https://i.postimg.cc/024bKMYP/image.png"
-                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Meus ganhos </span></div>
+            <div data-v-47e63dc4="" class="">
+                <img data-v-47e63dc4="" src="img/tarefa.png" alt="">
+                <span data-v-47e63dc4="" style="color: white !important;"></span>
+            </div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/produtos.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4="" src="img/footer3.jpg"
-                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;">Plano Café </span></div>
+            <div data-v-47e63dc4="" class="">
+                <img data-v-47e63dc4="" src="img/produto.png" alt="">
+                <span data-v-47e63dc4="" style="color: white !important;"></span>
+            </div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/equipe.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
-                                                  src="https://i.postimg.cc/sxNDWqZw/image.png"
-                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Equipe </span></div>
+            <div data-v-47e63dc4="" class="">
+                <img data-v-47e63dc4="" src="img/fortuna.png" alt="">
+                <span data-v-47e63dc4="" style="color: white !important;"></span>
+            </div>
         </div>
         <div data-v-47e63dc4="" class="item" onclick="window.location.href='/dashboard.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
-                                                  src="https://i.postimg.cc/Y2nSTGyY/image.png"
-                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Meu </span></div>
+            <div data-v-47e63dc4="" class="">
+                <img data-v-47e63dc4="" src="img/equipe.png" alt="">
+                <span data-v-47e63dc4="" style="color: white !important;"></span>
+            </div>
         </div>
     </div>
 </div>
@@ -750,7 +1016,7 @@ function closePopup() {
         white-space: pre-wrap;
         text-align: center;
         word-break: break-all;
-        background-color: var(--coffee-medium) !important;
+        background-color: var(--soccer-green) !important;
         border-radius: .13793rem;
         -webkit-transform: translate3d(-50%,-50%,0);
         transform: translate3d(-50%,-50%,0);
@@ -786,7 +1052,7 @@ function closePopup() {
         white-space: pre-wrap;
         text-align: center;
         word-break: break-all;
-        background-color: var(--coffee-medium) !important;
+        background-color: var(--soccer-green) !important;
         border-radius: .13793rem;
         -webkit-transform: translate3d(-50%,-50%,0);
         transform: translate3d(-50%,-50%,0);
