@@ -135,7 +135,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+    }
+
+    .transaction-icon svg {
+      width: 20px;
+      height: 20px;
     }
 
     .income-icon {
@@ -180,6 +184,12 @@
       transform: translateY(-1px);
       box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
     }
+
+    .icon-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
   </style>
 </head>
 
@@ -211,7 +221,10 @@
             <p class="text-2xl font-bold" id="currentBalance">KZ 0</p>
           </div>
           <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-            <span class="text-green-600 font-bold text-lg">💰</span>
+            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+              <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/>
+            </svg>
           </div>
         </div>
       </div>
@@ -235,7 +248,12 @@
       <!-- Estatísticas do período -->
       <div class="white-card mb-4">
         <h3 class="font-semibold mb-3 text-green-800 flex items-center gap-2">
-          <span>📊</span> Resumo do Período
+          <span class="icon-wrapper">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          </span>
+          Resumo do Período
         </h3>
         <div class="grid grid-cols-2 gap-3 text-sm">
           <div class="text-center p-3 bg-green-50 rounded-lg">
@@ -252,7 +270,12 @@
       <!-- Lista de transações -->
       <div class="mb-4">
         <h3 class="font-semibold mb-3 text-green-800 flex items-center gap-2">
-          <span>🔄</span> Movimentos
+          <span class="icon-wrapper">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/>
+            </svg>
+          </span>
+          Movimentos
         </h3>
         <div class="space-y-2" id="transactionsContainer">
           <!-- As transações serão carregadas aqui -->
@@ -265,52 +288,128 @@
 
       <!-- Última atualização -->
       <div class="text-center">
-        <p id="lastUpdate" class="text-xs text-green-600">⏱️ Última atualização: --:--:--</p>
+        <p id="lastUpdate" class="text-xs text-green-600 flex items-center justify-center gap-1">
+          <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+          </svg>
+          Última atualização: --:--:--
+        </p>
       </div>
     </div>
 
-     <!-- Menu de navegação com ícones de imagem -->
-    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
-      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
-        
-        <li>
-          <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
-            <img src="img/home.png" alt="Início" class="w-6 h-6">
-            <span>Início</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
-            <img src="img/produto.png" alt="Renda" class="w-6 h-6">
-            <span>Renda</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
-            <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
-            <span>VIP</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
-            <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
-            <span>Bancária</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
-            <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
-            <span>Perfil</span>
-          </a>
-        </li>
+    <li>
+      <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+        <img src="img/home.png" alt="Início" class="w-6 h-6">
+        <span>Início</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+        <span>Renda</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+        <span>VIP</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+        <span>Bancária</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="perfil.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+        <span>Perfil</span>
+      </a>
+    </li>
 
-      </ul>
-    </nav>
+  </ul>
+</nav>
+  </div>
 
+  <!-- SVG Icons Definitions -->
+  <svg style="display: none;">
+    <!-- Wallet Icon -->
+    <symbol id="icon-wallet" viewBox="0 0 20 20">
+      <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+      <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Chart Icon -->
+    <symbol id="icon-chart" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Refresh Icon -->
+    <symbol id="icon-refresh" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Time Icon -->
+    <symbol id="icon-time" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Deposit Icon -->
+    <symbol id="icon-deposit" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Withdrawal Icon -->
+    <symbol id="icon-withdrawal" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm2 2a2 2 0 100 4 2 2 0 000-4z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Purchase Icon -->
+    <symbol id="icon-purchase" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Payout Icon -->
+    <symbol id="icon-payout" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M5 2a2 2 0 00-2 2v14l3.5-2 3.5 2 3.5-2 3.5 2V4a2 2 0 00-2-2H5zm4.707 5.707a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L8.414 10l1.293-1.293zm4 0a1 1 0 010 1.414L11.586 10l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Referral Icon -->
+    <symbol id="icon-referral" viewBox="0 0 20 20">
+      <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+    </symbol>
+
+    <!-- Checkin Icon -->
+    <symbol id="icon-checkin" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Income Icon -->
+    <symbol id="icon-income" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Admin Icon -->
+    <symbol id="icon-admin" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Refund Icon -->
+    <symbol id="icon-refund" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+    </symbol>
+
+    <!-- Default Transaction Icon -->
+    <symbol id="icon-default" viewBox="0 0 20 20">
+      <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+      <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"/>
+    </symbol>
+  </svg>
 
   <script>
     // Variáveis globais
@@ -371,23 +470,23 @@
         loadTransactions();
     }
 
-    // Função para obter ícone baseado no tipo de transação
+    // Função para obter ícone SVG baseado no tipo de transação
     function getTransactionIcon(type) {
         const icons = {
-            'deposit': '💰',
-            'withdrawal': '💸',
-            'purchase': '🛒',
-            'payout': '📈',
-            'referral_bonus': '👥',
-            'daily_checkin': '🎯',
-            'product_income': '⚡',
-            'admin_addition': '👑',
-            'admin_deduction': '⚠️',
-            'withdrawal_refund': '↩️',
-            'purchase_refund': '🔄'
+            'deposit': 'icon-deposit',
+            'withdrawal': 'icon-withdrawal',
+            'purchase': 'icon-purchase',
+            'payout': 'icon-payout',
+            'referral_bonus': 'icon-referral',
+            'daily_checkin': 'icon-checkin',
+            'product_income': 'icon-income',
+            'admin_addition': 'icon-admin',
+            'admin_deduction': 'icon-admin',
+            'withdrawal_refund': 'icon-refund',
+            'purchase_refund': 'icon-refund'
         };
         
-        return icons[type] || '💳';
+        return icons[type] || 'icon-default';
     }
 
     // Função para obter classe CSS baseada no tipo
@@ -518,7 +617,10 @@
                     <div class="text-center text-gray-500 py-8">
                         <p>Erro ao carregar transações</p>
                         <button onclick="loadTransactions()" class="mt-2 football-button text-sm">
-                            🔄 Tentar Novamente
+                            <svg class="w-4 h-4 mr-1 inline" fill="currentColor" viewBox="0 0 20 20">
+                              <use href="#icon-refresh"/>
+                            </svg>
+                            Tentar Novamente
                         </button>
                     </div>
                 `;
@@ -537,7 +639,14 @@
 
         if (!transactionsData || transactionsData.length === 0) {
             if (currentPage === 1) {
-                container.innerHTML = '<div class="text-center text-gray-500 py-8">Nenhuma transação encontrada 💳</div>';
+                container.innerHTML = `
+                  <div class="text-center text-gray-500 py-8">
+                    <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                      <use href="#icon-default"/>
+                    </svg>
+                    <p>Nenhuma transação encontrada</p>
+                  </div>
+                `;
             }
             hasMoreData = false;
             return;
@@ -566,12 +675,15 @@
             const isIncome = transaction.amount > 0;
             const amountClass = isIncome ? 'text-green-600' : 'text-red-600';
             const amountSign = isIncome ? '+' : '';
+            const iconId = getTransactionIcon(transaction.type);
             
             transactionElement.innerHTML = `
                 <div class="flex justify-between items-center">
                     <div class="flex items-center gap-3">
                         <div class="transaction-icon ${getTransactionClass(transaction.type, transaction.amount)}">
-                            ${getTransactionIcon(transaction.type)}
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                              <use href="#${iconId}"/>
+                            </svg>
                         </div>
                         <div>
                             <p class="font-medium text-gray-800">${getTransactionTypeText(transaction.type)}</p>
@@ -605,7 +717,7 @@
 
         isLoadingMore = false;
         
-        document.getElementById('lastUpdate').textContent = `⏱️ Última atualização: ${new Date().toLocaleTimeString()}`;
+        document.getElementById('lastUpdate').textContent = `Última atualização: ${new Date().toLocaleTimeString()}`;
     }
 
     // Atualizar resumo
