@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Histórico de Saques - Royal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            max-width: 80%;
+        }
+        
+        .toast-success {
+            background-color: #000;
+            border-left: 4px solid #10B981;
+        }
+        
+        .toast-error {
+            background-color: #000;
+            border-left: 4px solid #EF4444;
+        }
+        
+        .toast-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Cores de futebol - verde e branco */
+        .bg-futebol-green {
+            background-color: #16a34a;
+        }
+        
+        .bg-futebol-white {
+            background-color: #ffffff;
+        }
+        
+        .text-futebol-green {
+            color: #16a34a;
+        }
+        
+        .border-futebol-green {
+            border-color: #16a34a;
+        }
+        
+        .gradient-futebol {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+        }
+
+        /* Status colors */
+        .status-pending {
+            background-color: #fef3c7;
+            color: #d97706;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .status-completed {
+            background-color: #d1fae5;
+            color: #059669;
+            border-left: 4px solid #10b981;
+        }
+        
+        .status-failed {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border-left: 4px solid #ef4444;
+        }
+
+        /* Pull to refresh */
+        .pull-refresh {
+            transition: transform 0.3s ease;
+        }
+        
+        .refreshing {
+            transform: translateY(60px);
+        }
+
+        /* Loading animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+    <div class="max-w-md mx-auto pb-24">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-slate-200">
+            <a href="retirada.html" class="text-slate-500 text-xl font-bold">&#8592;</a>
+            <h1 class="text-lg font-bold text-green-800 tracking-tight">Histórico de Saques</h1>
+            <div class="w-6"></div> <!-- Espaço vazio para centralizar -->
+        </header>
+
+        <!-- Resumo -->
+        <section class="px-5 mt-6">
+            <div class="rounded-2xl gradient-futebol text-white p-5 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <p class="text-sm opacity-90 mb-1">Total de Saques</p>
+                        <p id="totalSaques" class="text-2xl font-bold">0</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm opacity-90 mb-1">Valor Total</p>
+                        <p id="valorTotal" class="text-2xl font-bold">KZ0.00</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                    <div class="bg-white/20 rounded-lg p-2">
+                        <p class="font-semibold" id="pendentesCount">0</p>
+                        <p class="opacity-80">Pendentes</p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-2">
+                        <p class="font-semibold" id="concluidosCount">0</p>
+                        <p class="opacity-80">Concluídos</p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-2">
+                        <p class="font-semibold" id="rejeitadosCount">0</p>
+                        <p class="opacity-80">Rejeitados</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtros -->
+        <section class="px-5 mt-4">
+            <div class="flex gap-2 overflow-x-auto pb-2">
+                <button class="filter-btn px-4 py-2 rounded-full bg-white border border-green-300 text-green-700 text-sm font-medium whitespace-nowrap active" data-filter="all">
+                    Todos
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-white border border-green-300 text-green-700 text-sm font-medium whitespace-nowrap" data-filter="pending">
+                    Pendentes
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-white border border-green-300 text-green-700 text-sm font-medium whitespace-nowrap" data-filter="completed">
+                    Concluídos
+                </button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-white border border-green-300 text-green-700 text-sm font-medium whitespace-nowrap" data-filter="failed">
+                    Rejeitados
+                </button>
+            </div>
+        </section>
+
+        <!-- Lista de Saques -->
+        <section class="px-5 mt-4">
+            <div id="saquesList" class="space-y-3">
+                <!-- Os saques serão carregados aqui via JavaScript -->
+            </div>
+
+            <!-- Loading indicator -->
+            <div id="loadingIndicator" class="hidden py-4 text-center">
+                <div class="loading-spinner mx-auto"></div>
+                <p class="text-green-600 text-sm mt-2">Carregando mais saques...</p>
+            </div>
+
+            <!-- Empty state -->
+            <div id="emptyState" class="hidden text-center py-8">
+                <i class='bx bx-wallet text-6xl text-green-300 mb-4'></i>
+                <p class="text-green-600 font-medium">Nenhum saque encontrado</p>
+                <p class="text-green-500 text-sm mt-1">Você ainda não realizou nenhum saque</p>
+                <a href="sacar.html" class="inline-block mt-4 gradient-futebol text-white px-6 py-2 rounded-lg text-sm font-semibold">
+                    Fazer Primeiro Saque
+                </a>
+            </div>
+
+            <!-- Pull to refresh indicator -->
+            <div id="pullRefresh" class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 transform -translate-y-full transition-transform duration-300">
+                <div class="flex items-center justify-center gap-2">
+                    <div class="loading-spinner"></div>
+                    <span>Atualizando...</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification Template -->
+    <div id="toast-template" class="toast hidden">
+        <i class='bx toast-icon'></i>
+        <div class="toast-message"></div>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+     <!-- Menu de navegação com ícones de imagem -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+        
+        <li>
+          <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+            <img src="img/home.png" alt="Início" class="w-6 h-6">
+            <span>Início</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+            <span>Renda</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+            <span>VIP</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+            <span>Bancária</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+            <span>Perfil</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+
+        // Variáveis globais
+        let currentPage = 1;
+        let isLoading = false;
+        let hasMore = true;
+        let currentFilter = 'all';
+        let allWithdrawals = [];
+
+        // Função para obter o token do usuário
+        function getUserToken() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return null;
+            
+            try {
+                const { token, expiry } = JSON.parse(tokenData);
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return null;
+                }
+                return token;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Toast personalizado
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast-template');
+            const newToast = toast.cloneNode(true);
+            
+            newToast.classList.remove('hidden');
+            newToast.classList.add(type === 'success' ? 'toast-success' : type === 'error' ? 'toast-error' : 'toast');
+            
+            const icon = newToast.querySelector('.toast-icon');
+            const messageDiv = newToast.querySelector('.toast-message');
+            
+            if (type === 'success') {
+                icon.className = 'bx bx-check-circle toast-icon';
+            } else if (type === 'error') {
+                icon.className = 'bx bx-error toast-icon';
+            } else {
+                icon.className = 'bx bx-info-circle toast-icon';
+            }
+            
+            messageDiv.textContent = message;
+            document.body.appendChild(newToast);
+            
+            setTimeout(() => {
+                newToast.remove();
+            }, 3000);
+        }
+
+        // Carregar histórico de saques
+        async function loadWithdrawals(page = 1, filter = 'all') {
+            const token = getUserToken();
+            
+            if (!token) {
+                showToast('Faça login para continuar', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            if (isLoading) return;
+            
+            isLoading = true;
+            
+            if (page === 1) {
+                document.getElementById('loadingIndicator').classList.remove('hidden');
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/withdrawals?page=${page}&limit=10`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao carregar histórico');
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    if (page === 1) {
+                        allWithdrawals = data.data.withdrawals;
+                    } else {
+                        allWithdrawals = [...allWithdrawals, ...data.data.withdrawals];
+                    }
+                    
+                    // Atualizar estatísticas
+                    updateStatistics(allWithdrawals);
+                    
+                    // Filtrar e exibir saques
+                    displayWithdrawals(filter);
+                    
+                    // Verificar se há mais páginas
+                    hasMore = data.data.pagination.pages > page;
+                    
+                    if (page === 1 && allWithdrawals.length === 0) {
+                        document.getElementById('emptyState').classList.remove('hidden');
+                    } else {
+                        document.getElementById('emptyState').classList.add('hidden');
+                    }
+                } else {
+                    showToast(data.message || 'Erro ao carregar histórico', 'error');
+                }
+
+            } catch (error) {
+                console.error('Erro ao carregar saques:', error);
+                showToast('Erro de conexão', 'error');
+            } finally {
+                isLoading = false;
+                document.getElementById('loadingIndicator').classList.add('hidden');
+                if (page === 1) {
+                    hidePullRefresh();
+                }
+            }
+        }
+
+        // Atualizar estatísticas
+        function updateStatistics(withdrawals) {
+            const total = withdrawals.length;
+            const pendentes = withdrawals.filter(w => w.status === 'pending').length;
+            const concluidos = withdrawals.filter(w => w.status === 'completed').length;
+            const rejeitados = withdrawals.filter(w => w.status === 'failed').length;
+            
+            const valorTotal = withdrawals
+                .filter(w => w.status === 'completed')
+                .reduce((sum, w) => sum + w.amount, 0);
+            
+            document.getElementById('totalSaques').textContent = total;
+            document.getElementById('valorTotal').textContent = `KZ${valorTotal.toLocaleString('pt-BR')}`;
+            document.getElementById('pendentesCount').textContent = pendentes;
+            document.getElementById('concluidosCount').textContent = concluidos;
+            document.getElementById('rejeitadosCount').textContent = rejeitados;
+        }
+
+        // Exibir saques com filtro
+        function displayWithdrawals(filter = 'all') {
+            const saquesList = document.getElementById('saquesList');
+            saquesList.innerHTML = '';
+            
+            let filteredWithdrawals = allWithdrawals;
+            
+            if (filter !== 'all') {
+                filteredWithdrawals = allWithdrawals.filter(w => w.status === filter);
+            }
+            
+            if (filteredWithdrawals.length === 0) {
+                document.getElementById('emptyState').classList.remove('hidden');
+                return;
+            }
+            
+            document.getElementById('emptyState').classList.add('hidden');
+            
+            filteredWithdrawals.forEach(withdrawal => {
+                const saqueElement = createSaqueElement(withdrawal);
+                saquesList.appendChild(saqueElement);
+            });
+        }
+
+        // Criar elemento de saque
+        function createSaqueElement(withdrawal) {
+            const div = document.createElement('div');
+            
+            // Configurar cores e ícones baseados no status
+            let statusClass, statusIcon, statusText, bankIcon;
+            
+            switch (withdrawal.status) {
+                case 'pending':
+                    statusClass = 'status-pending';
+                    statusIcon = 'bx bx-time-five';
+                    statusText = 'Pendente';
+                    bankIcon = 'bx bx-credit-card text-yellow-600';
+                    break;
+                case 'completed':
+                    statusClass = 'status-completed';
+                    statusIcon = 'bx bx-check-circle';
+                    statusText = 'Concluído';
+                    bankIcon = 'bx bx-credit-card text-green-600';
+                    break;
+                case 'failed':
+                    statusClass = 'status-failed';
+                    statusIcon = 'bx bx-x-circle';
+                    statusText = 'Rejeitado';
+                    bankIcon = 'bx bx-credit-card text-red-600';
+                    break;
+                default:
+                    statusClass = 'status-pending';
+                    statusIcon = 'bx bx-time-five';
+                    statusText = 'Pendente';
+                    bankIcon = 'bx bx-credit-card text-yellow-600';
+            }
+            
+            // Formatar data
+            const date = new Date(withdrawal.created_at);
+            const formattedDate = date.toLocaleDateString('pt-BR');
+            const formattedTime = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            
+            div.innerHTML = `
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden ${statusClass}">
+                    <div class="p-4">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start gap-3 flex-1">
+                                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mt-1">
+                                    <i class="${bankIcon} text-lg"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <p class="font-semibold text-gray-800">KZ${withdrawal.amount.toLocaleString('pt-BR')}</p>
+                                        <span class="px-2 py-1 rounded-full text-xs font-medium ${statusClass.replace('status-', 'bg-').replace('-pending', '-yellow-100 text-yellow-800').replace('-completed', '-green-100 text-green-800').replace('-failed', '-red-100 text-red-800')}">
+                                            ${statusText}
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-1">${withdrawal.bank_name} • ${withdrawal.account_name}</p>
+                                    <p class="text-xs text-gray-500">${formattedDate} às ${formattedTime}</p>
+                                    ${withdrawal.net_amount ? `<p class="text-xs text-gray-500 mt-1">Líquido: KZ${withdrawal.net_amount.toLocaleString('pt-BR')}</p>` : ''}
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end">
+                                <i class="${statusIcon} text-xl mb-2"></i>
+                                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                                    <i class='bx bx-credit-card-front text-white text-sm'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // Pull to refresh
+        let startY = 0;
+        let currentY = 0;
+        let isRefreshing = false;
+
+        function setupPullToRefresh() {
+            const container = document.body;
+            
+            container.addEventListener('touchstart', (e) => {
+                if (window.scrollY === 0 && !isRefreshing) {
+                    startY = e.touches[0].clientY;
+                }
+            });
+            
+            container.addEventListener('touchmove', (e) => {
+                if (window.scrollY === 0 && !isRefreshing) {
+                    currentY = e.touches[0].clientY;
+                    const diff = currentY - startY;
+                    
+                    if (diff > 0) {
+                        e.preventDefault();
+                        document.getElementById('pullRefresh').style.transform = `translateY(${Math.min(diff, 60)}px)`;
+                    }
+                }
+            });
+            
+            container.addEventListener('touchend', (e) => {
+                if (window.scrollY === 0 && !isRefreshing) {
+                    const diff = currentY - startY;
+                    
+                    if (diff > 100) {
+                        showPullRefresh();
+                        refreshData();
+                    } else {
+                        hidePullRefresh();
+                    }
+                }
+            });
+        }
+
+        function showPullRefresh() {
+            isRefreshing = true;
+            document.getElementById('pullRefresh').style.transform = 'translateY(0)';
+        }
+
+        function hidePullRefresh() {
+            isRefreshing = false;
+            document.getElementById('pullRefresh').style.transform = 'translateY(-100%)';
+        }
+
+        async function refreshData() {
+            currentPage = 1;
+            await loadWithdrawals(1, currentFilter);
+        }
+
+        // Infinite scroll
+        function setupInfiniteScroll() {
+            window.addEventListener('scroll', () => {
+                if (isLoading || !hasMore) return;
+                
+                const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+                
+                if (scrollTop + clientHeight >= scrollHeight - 100) {
+                    currentPage++;
+                    loadWithdrawals(currentPage, currentFilter);
+                }
+            });
+        }
+
+        // Filtros
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover classe active de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active', 'gradient-futebol', 'text-white'));
+                    
+                    // Adicionar classe active ao botão clicado
+                    button.classList.add('active', 'gradient-futebol', 'text-white');
+                    button.classList.remove('bg-white', 'border-green-300', 'text-green-700');
+                    
+                    // Aplicar filtro
+                    currentFilter = button.dataset.filter;
+                    currentPage = 1;
+                    displayWithdrawals(currentFilter);
+                });
+            });
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar dados iniciais
+            loadWithdrawals(1, 'all');
+            
+            // Configurar funcionalidades
+            setupPullToRefresh();
+            setupInfiniteScroll();
+            setupFilters();
+        });
+
+        // Verificar autenticação
+        function checkAuth() {
+            const token = getUserToken();
+            if (!token) {
+                window.location.href = 'index.html';
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

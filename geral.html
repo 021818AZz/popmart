@@ -1,737 +1,664 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="utf-8">
-    <title>Histórico de Transações</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        html, body {
-            width: 100%;
-            height: 100%;
-            background: #f9f5f0; /* Cor de fundo suave inspirada no café com leite */
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            overflow-x: hidden;
-            color: #4b2c20; /* Cor principal do café */
-        }
-        
-        .container {
-            padding: 12px;
-            max-width: 100%;
-            min-height: 100vh;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); /* Gradiente de cores café */
-            color: white;
-            padding: 20px 15px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            position: relative;
-            box-shadow: 0 6px 16px rgba(139, 69, 19, 0.25);
-            overflow: hidden;
-        }
-        
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
-        }
-        
-        .back-btn {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.25);
-            padding: 10px;
-            border-radius: 50%;
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            cursor: pointer;
-            z-index: 2;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        
-        .back-btn:hover {
-            background: rgba(255,255,255,0.35);
-            transform: translateY(-50%) scale(1.05);
-        }
-        
-        .header-title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            padding: 0 50px;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 0.5px;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 18px 12px;
-            border-radius: 16px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
-            border: 1px solid #e8d5c4;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(139, 69, 19, 0.15);
-        }
-        
-        .stat-number {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        
-        .stat-number.entrada {
-            color: #2E8B57; /* Verde mais suave que combina com o tema café */
-        }
-        
-        .stat-number.saida {
-            color: #CD5C5C; /* Vermelho terroso que combina com o tema */
-        }
-        
-        .stat-label {
-            font-size: 13px;
-            color: #8B7355;
-            line-height: 1.3;
-            font-weight: 500;
-        }
-        
-        .filter-container {
-            background: white;
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
-            border: 1px solid #e8d5c4;
-        }
-        
-        .filter-select {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #d9c7b1;
-            border-radius: 12px;
-            font-size: 15px;
-            background: #f9f5f0;
-            -webkit-appearance: none;
-            appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg fill="%234b2c20" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            background-size: 16px;
-            color: #4b2c20;
-            font-weight: 500;
-        }
-        
-        .filter-select:focus {
-            outline: none;
-            border-color: #8B4513;
-            box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.2);
-        }
-        
-        .transactions-list {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
-            max-height: 60vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            border: 1px solid #e8d5c4;
-        }
-        
-        .transaction-card {
-            padding: 18px;
-            border-bottom: 1px solid #f0e6d9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .transaction-card:active {
-            background-color: #f9f5f0;
-        }
-        
-        .transaction-card:last-child {
-            border-bottom: none;
-        }
-        
-        .transaction-card::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 18px;
-            right: 18px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, #e8d5c4, transparent);
-        }
-        
-        .transaction-card:last-child::after {
-            display: none;
-        }
-        
-        .transaction-info {
-            flex: 1;
-        }
-        
-        .transaction-type {
-            font-weight: 600;
-            font-size: 16px;
-            color: #4b2c20;
-            margin-bottom: 6px;
-        }
-        
-        .transaction-date {
-            font-size: 13px;
-            color: #8B7355;
-        }
-        
-        .transaction-amount {
-            font-weight: 700;
-            font-size: 17px;
-        }
-        
-        .amount-entrada {
-            color: #2E8B57;
-        }
-        
-        .amount-saida {
-            color: #CD5C5C;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 50px 20px;
-            color: #8B7355;
-        }
-        
-        .empty-state img {
-            width: 80px;
-            opacity: 0.7;
-            margin-bottom: 20px;
-        }
-        
-        .empty-state div {
-            font-size: 15px;
-            font-weight: 500;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 40px 20px;
-            color: #8B7355;
-            font-size: 15px;
-            font-weight: 500;
-        }
-        
-        .transaction-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-        }
-        
-        .icon-entrada {
-            background: linear-gradient(135deg, rgba(46, 139, 87, 0.15) 0%, rgba(46, 139, 87, 0.05) 100%);
-            color: #2E8B57;
-            border: 1px solid rgba(46, 139, 87, 0.2);
-        }
-        
-        .icon-saida {
-            background: linear-gradient(135deg, rgba(205, 92, 92, 0.15) 0%, rgba(205, 92, 92, 0.05) 100%);
-            color: #CD5C5C;
-            border: 1px solid rgba(205, 92, 92, 0.2);
-        }
-        
-        .transaction-content {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-
-        /* Animações */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .transaction-card {
-            animation: fadeIn 0.4s ease;
-        }
-        
-        /* Responsividade adicional */
-        @media (max-width: 360px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .stats-grid {
-                gap: 10px;
-            }
-            
-            .stat-card {
-                padding: 15px 10px;
-            }
-            
-            .stat-number {
-                font-size: 18px;
-            }
-            
-            .transaction-card {
-                padding: 16px;
-            }
-            
-            .transaction-amount {
-                font-size: 16px;
-            }
-            
-            .transaction-icon {
-                width: 44px;
-                height: 44px;
-                margin-right: 12px;
-            }
-        }
-        
-        .transaction-icon img {
-            max-width: 60%;
-            max-height: 60%;
-            object-fit: contain;
-        }
-        
-        /* Scrollbar personalizada */
-        .transactions-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .transactions-list::-webkit-scrollbar-track {
-            background: #f1e9df;
-            border-radius: 3px;
-        }
-        
-        .transactions-list::-webkit-scrollbar-thumb {
-            background: #d9c7b1;
-            border-radius: 3px;
-        }
-        
-        .transactions-list::-webkit-scrollbar-thumb:hover {
-            background: #c4b099;
-        }
-        
-        /* Efeito de brilho sutil nos cards */
-        .stat-card, .filter-container, .transactions-list {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stat-card::before, .filter-container::before, .transactions-list::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.7s;
-        }
-        
-        .stat-card:hover::before, .filter-container:hover::before, .transactions-list:hover::before {
-            left: 100%;
-        }
-
-    </style>
-</head>
-<body>
-<div class="container">
-    <!-- Cabeçalho -->
-    <div class="header">
-        <div class="back-btn" onclick="window.history.back()">
-            <img src="https://i.postimg.cc/CxzSVgWm/back.png" alt="Voltar" width="20" height="20">
-        </div>
-        <div class="header-title">Histórico de Transações</div>
-    </div>
-
-    <!-- Estatísticas Gerais -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-number entrada" id="totalEntradas">KZ 0</div>
-            <div class="stat-label">Total de Entradas</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number saida" id="totalSaidas">KZ 0</div>
-            <div class="stat-label">Total de Saídas</div>
-        </div>
-    </div>
-
-    <!-- Filtro -->
-    <div class="filter-container">
-        <select class="filter-select" id="filterType" onchange="filterTransactions()">
-            <option value="all">Todas as Transações</option>
-            <option value="entrada">Apenas Entradas</option>
-            <option value="saida">Apenas Saídas</option>
-        </select>
-    </div>
-
-    <!-- Lista de Transações -->
-    <div class="transactions-list">
-        <div id="transactionsContent">
-            <div class="loading">Carregando transações...</div>
-        </div>
-    </div>
-</div>
-
-<script>
-// Configuração da API
-const API_BASE_URL = 'https://bd-p4q7.onrender.com';
-
-// Dados carregados
-let transactionsData = [];
-let filteredTransactions = [];
-
-// Função para verificar autenticação
-function checkAuth() {
-    const tokenData = localStorage.getItem('user_token');
-    if (!tokenData) {
-        window.location.href = '/index.html';
-        return null;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Histórico - USHK</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
     }
     
-    try {
-        const { token, expiry } = JSON.parse(tokenData);
-        if (Date.now() > expiry) {
-            localStorage.removeItem('user_token');
-            window.location.href = '/index.html';
+    .animate-fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .loader {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Tema de Futebol - Verde e Branco */
+    .grass-background {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grass-background::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(90deg, transparent 79%, rgba(255,255,255,0.1) 80%, transparent 81%),
+        linear-gradient(transparent 79%, rgba(255,255,255,0.1) 80%, transparent 81%);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .football-button {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      border: 2px solid white;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .football-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    }
+
+    .white-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+    }
+
+    .nav-football {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+    }
+    
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .back-button i {
+      color: white;
+      font-size: 24px;
+    }
+
+    /* Estilos para os cartões de transação */
+    .transaction-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .transaction-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .transaction-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .income-icon {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+    }
+
+    .expense-icon {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+    }
+
+    .transfer-icon {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: white;
+    }
+
+    .infinite-scroll-loader {
+      text-align: center;
+      padding: 15px;
+      color: #666;
+    }
+
+    .filter-button {
+      background: white;
+      border: 2px solid #22c55e;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #22c55e;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-button.active {
+      background: #22c55e;
+      color: white;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
+    }
+  </style>
+</head>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+  <!-- Loading overlay -->
+  <div id="loadingOverlay" class="fixed inset-0 z-40 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center">
+      <div class="loader mb-4"></div>
+      <p class="text-gray-700">Carregando histórico...</p>
+    </div>
+  </div>
+
+  <div class="max-w-[500px] mx-auto pb-28 bg-green-50 text-neutral-900 min-h-screen font-sans">
+
+    <!-- Header com tema de futebol -->
+    <div class="grass-background px-5 pt-6 pb-4 text-white relative overflow-hidden">
+      <!-- Botão Voltar -->
+      <button class="back-button" onclick="goBack()">
+        <i class='bx bx-arrow-back'></i>
+      </button>
+
+      <h2 class="text-xl font-bold mb-4 text-center tracking-tight">Histórico de Transações</h2>
+
+      <!-- Cartão principal com estatísticas -->
+      <div class="bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl p-4 mb-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-sm opacity-90 mb-1">Saldo Atual</p>
+            <p class="text-2xl font-bold" id="currentBalance">KZ 0</p>
+          </div>
+          <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+            <span class="text-green-600 font-bold text-lg">💰</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtros rápidos -->
+      <div class="flex justify-between gap-2">
+        <button class="filter-button active" onclick="setFilter('all')">
+          <span>Todos</span>
+        </button>
+        <button class="filter-button" onclick="setFilter('income')">
+          <span>Entradas</span>
+        </button>
+        <button class="filter-button" onclick="setFilter('expense')">
+          <span>Saídas</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="px-5 -mt-4">
+      <!-- Estatísticas do período -->
+      <div class="white-card mb-4">
+        <h3 class="font-semibold mb-3 text-green-800 flex items-center gap-2">
+          <span>📊</span> Resumo do Período
+        </h3>
+        <div class="grid grid-cols-2 gap-3 text-sm">
+          <div class="text-center p-3 bg-green-50 rounded-lg">
+            <p class="text-green-600 font-medium">Total Entradas</p>
+            <p id="totalIncome" class="font-bold text-green-800">KZ 0</p>
+          </div>
+          <div class="text-center p-3 bg-red-50 rounded-lg">
+            <p class="text-red-600 font-medium">Total Saídas</p>
+            <p id="totalExpense" class="font-bold text-red-800">KZ 0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de transações -->
+      <div class="mb-4">
+        <h3 class="font-semibold mb-3 text-green-800 flex items-center gap-2">
+          <span>🔄</span> Movimentos
+        </h3>
+        <div class="space-y-2" id="transactionsContainer">
+          <!-- As transações serão carregadas aqui -->
+        </div>
+        <div id="infiniteLoader" class="infinite-scroll-loader hidden">
+          <div class="loader"></div>
+          <p>Carregando mais transações...</p>
+        </div>
+      </div>
+
+      <!-- Última atualização -->
+      <div class="text-center">
+        <p id="lastUpdate" class="text-xs text-green-600">⏱️ Última atualização: --:--:--</p>
+      </div>
+    </div>
+
+     <!-- Menu de navegação com ícones de imagem -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+        
+        <li>
+          <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+            <img src="img/home.png" alt="Início" class="w-6 h-6">
+            <span>Início</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+            <span>Renda</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+            <span>VIP</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+            <span>Bancária</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+            <span>Perfil</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+
+  <script>
+    // Variáveis globais
+    let currentPage = 1;
+    let isLoadingMore = false;
+    let hasMoreData = true;
+    let currentFilter = 'all';
+    let transactions = [];
+
+    // Função para voltar à página anterior
+    function goBack() {
+      window.history.back();
+    }
+
+    // Função para obter token do localStorage
+    function getAuthToken() {
+        const tokenData = localStorage.getItem('user_token');
+        if (!tokenData) return null;
+
+        try {
+            const { token, expiry } = JSON.parse(tokenData);
+            // Verificar expiração
+            if (Date.now() > expiry) {
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_id');
+                return null;
+            }
+            return token;
+        } catch (e) {
+            console.error('Erro ao processar token:', e);
             return null;
         }
-        return token;
-    } catch (e) {
-        window.location.href = '/index.html';
-        return null;
     }
-}
 
-// Função para carregar histórico de transações usando rotas existentes
-async function loadTransactionHistory() {
-    const token = checkAuth();
-    if (!token) return;
+    // Função para mostrar loading
+    function showLoading() {
+        document.getElementById('loadingOverlay').style.display = 'flex';
+    }
 
-    try {
-        showLoadingState();
+    // Função para esconder loading
+    function hideLoading() {
+        document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    // Função para definir filtro
+    function setFilter(filter) {
+        currentFilter = filter;
+        currentPage = 1;
+        hasMoreData = true;
         
-        // Usar rotas existentes do server.js para buscar dados
-        const [withdrawalsResponse, depositsResponse, tasksResponse, commissionsResponse] = await Promise.all([
-            // Saques
-            fetch(`${API_BASE_URL}/api/withdrawals`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            }),
-            // Depósitos
-            fetch(`${API_BASE_URL}/api/deposits`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            }),
-            // Tarefas (check-in e rendimentos)
-            fetch(`${API_BASE_URL}/api/tasks/history`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            }),
-            // Comissões (bônus)
-            fetch(`${API_BASE_URL}/api/team/commissions`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-        ]);
-
-        // Processar saques (withdrawals) - SAÍDAS
-        let saidas = [];
-        if (withdrawalsResponse.ok) {
-            const withdrawalsData = await withdrawalsResponse.json();
-            if (withdrawalsData.success && withdrawalsData.data.withdrawals) {
-                saidas = withdrawalsData.data.withdrawals.map(withdrawal => ({
-                    id: withdrawal.id,
-                    type: 'saida',
-                    operation_type: 'withdrawal',
-                    amount: withdrawal.amount,
-                    date: withdrawal.created_at,
-                    description: `Saque - ${withdrawal.bank_name}`,
-                    status: withdrawal.status
-                }));
-            }
-        }
-
-        // Processar depósitos - ENTRADAS (quando aprovados)
-        let entradas = [];
-        if (depositsResponse.ok) {
-            const depositsData = await depositsResponse.json();
-            if (depositsData.success && depositsData.data.deposits) {
-                entradas = depositsData.data.deposits
-                    .filter(deposit => deposit.status === 'completed')
-                    .map(deposit => ({
-                        id: deposit.id,
-                        type: 'entrada',
-                        operation_type: 'deposit',
-                        amount: deposit.amount,
-                        date: deposit.processed_at || deposit.created_at,
-                        description: `Depósito - ${deposit.bank_name}`,
-                        status: deposit.status
-                    }));
-            }
-        }
-
-        // Processar tarefas - ENTRADAS
-        let tarefas = [];
-        if (tasksResponse.ok) {
-            const tasksData = await tasksResponse.json();
-            if (tasksData.success && tasksData.data.tasks) {
-                tarefas = tasksData.data.tasks.map(task => ({
-                    id: task.id,
-                    type: 'entrada',
-                    operation_type: task.task_type === 'daily_checkin' ? 'checkin' : 'product_income',
-                    amount: task.amount,
-                    date: task.task_date,
-                    description: task.description || `Tarefa - ${task.task_type}`,
-                    status: 'completed'
-                }));
-            }
-        }
-
-        // Processar comissões - ENTRADAS
-        let comissoes = [];
-        if (commissionsResponse.ok) {
-            const commissionsData = await commissionsResponse.json();
-            if (commissionsData.success && commissionsData.data.commissions) {
-                comissoes = commissionsData.data.commissions.map(commission => ({
-                    id: commission.id,
-                    type: 'entrada',
-                    operation_type: 'commission',
-                    amount: commission.bonus_amount,
-                    date: commission.created_at,
-                    description: `Comissão Nível ${commission.level} - ${commission.referred_user.mobile}`,
-                    status: 'completed'
-                }));
-            }
-        }
-
-        // Combinar todas as transações
-        transactionsData = [...entradas, ...saidas, ...tarefas, ...comissoes];
-        filteredTransactions = [...transactionsData];
-        
-        updateStats();
-        renderTransactions();
-
-    } catch (error) {
-        console.error('Erro ao carregar histórico:', error);
-        showError('Erro ao carregar histórico de transações');
-    }
-}
-
-// Mostrar estado de carregamento
-function showLoadingState() {
-    const container = document.getElementById('transactionsContent');
-    if (container) {
-        container.innerHTML = '<div class="loading">Carregando transações...</div>';
-    }
-}
-
-// Atualizar estatísticas
-function updateStats() {
-    const totalEntradas = transactionsData
-        .filter(t => t.type === 'entrada')
-        .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
-    
-    const totalSaidas = transactionsData
-        .filter(t => t.type === 'saida')
-        .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
-
-    document.getElementById('totalEntradas').textContent = `KZ ${formatNumber(totalEntradas)}`;
-    document.getElementById('totalSaidas').textContent = `KZ ${formatNumber(totalSaidas)}`;
-}
-
-// Filtrar transações
-function filterTransactions() {
-    const filterType = document.getElementById('filterType').value;
-    
-    if (filterType === 'all') {
-        filteredTransactions = [...transactionsData];
-    } else {
-        filteredTransactions = transactionsData.filter(t => t.type === filterType);
-    }
-    
-    renderTransactions();
-}
-
-// Renderizar transações
-function renderTransactions() {
-    const container = document.getElementById('transactionsContent');
-
-    if (!filteredTransactions || filteredTransactions.length === 0) {
-        container.innerHTML = `
-            <div class="empty-state">
-                <div>📊</div>
-                <div>Nenhuma transação encontrada</div>
-            </div>
-        `;
-        return;
-    }
-
-    // Ordenar por data (mais recente primeiro)
-    const sortedTransactions = [...filteredTransactions].sort((a, b) => 
-        new Date(b.date) - new Date(a.date)
-    );
-
-    container.innerHTML = sortedTransactions.map(transaction => `
-        <div class="transaction-card">
-            <div class="transaction-content">
-                <div class="transaction-icon ${transaction.type === 'entrada' ? 'icon-entrada' : 'icon-saida'}">
-                    <img src="${transaction.type === 'entrada' ? 'https://i.postimg.cc/vZJc0sh8/external-transactions-gamefi-filled-outline-wichaiwi.png' : 'https://i.postimg.cc/2ygDCzVj/withdrawal-limit.png'}" alt="${transaction.type}">
-                </div>
-                <div class="transaction-info">
-                    <div class="transaction-type">${getTransactionTypeLabel(transaction.operation_type)}</div>
-                    <div class="transaction-date">${formatDate(transaction.date)}</div>
-                    ${transaction.status ? `<div style="font-size: 11px; color: ${getStatusColor(transaction.status)}; margin-top: 4px;">${getStatusLabel(transaction.status)}</div>` : ''}
-                </div>
-            </div>
-            <div class="transaction-amount ${transaction.type === 'entrada' ? 'amount-entrada' : 'amount-saida'}">
-                ${transaction.type === 'entrada' ? '+' : '-'} KZ ${formatNumber(transaction.amount)}
-            </div>
-        </div>
-    `).join('');
-}
-
-// Obter label do tipo de operação
-function getTransactionTypeLabel(operationType) {
-    const labels = {
-        'deposit': 'Depósito',
-        'withdrawal': 'Saque',
-        'checkin': 'Check-in Diário',
-        'product_income': 'Rendimento',
-        'commission': 'Comissão',
-        'purchase': 'Compra',
-        'transfer': 'Transferência',
-        'refund': 'Reembolso'
-    };
-    
-    return labels[operationType] || operationType;
-}
-
-// Obter label do status
-function getStatusLabel(status) {
-    const labels = {
-        'completed': 'Concluído',
-        'pending': 'Pendente',
-        'failed': 'Falhou',
-        'processing': 'Processando'
-    };
-    return labels[status] || status;
-}
-
-// Obter cor do status
-function getStatusColor(status) {
-    const colors = {
-        'completed': '#2E8B57',
-        'pending': '#D2691E',
-        'failed': '#CD5C5C',
-        'processing': '#4682B4'
-    };
-    return colors[status] || '#8B7355';
-}
-
-// Formatador de números
-function formatNumber(num) {
-    if (!num) return '0';
-    return new Intl.NumberFormat('pt-AO').format(parseFloat(num));
-}
-
-// Função para formatar data
-function formatDate(dateString) {
-    try {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-AO', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
+        // Atualizar botões ativos
+        document.querySelectorAll('.filter-button').forEach(btn => {
+            btn.classList.remove('active');
         });
-    } catch (e) {
-        return dateString;
+        event.target.classList.add('active');
+        
+        // Recarregar transações com filtro
+        loadTransactions();
     }
-}
 
-// Função para mostrar erro
-function showError(message) {
-    const container = document.getElementById('transactionsContent');
-    if (container) {
-        container.innerHTML = `<div style="color: #CD5C5C; text-align: center; padding: 30px; font-size: 15px; font-weight: 500;">${message}</div>`;
+    // Função para obter ícone baseado no tipo de transação
+    function getTransactionIcon(type) {
+        const icons = {
+            'deposit': '💰',
+            'withdrawal': '💸',
+            'purchase': '🛒',
+            'payout': '📈',
+            'referral_bonus': '👥',
+            'daily_checkin': '🎯',
+            'product_income': '⚡',
+            'admin_addition': '👑',
+            'admin_deduction': '⚠️',
+            'withdrawal_refund': '↩️',
+            'purchase_refund': '🔄'
+        };
+        
+        return icons[type] || '💳';
     }
-}
 
-// Carregar dados quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    // Prevenir comportamento de zoom duplo-toque
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', function (event) {
-        const now = (new Date()).getTime();
-        if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
+    // Função para obter classe CSS baseada no tipo
+    function getTransactionClass(type, amount) {
+        if (amount > 0) {
+            return 'income-icon';
+        } else if (amount < 0) {
+            return 'expense-icon';
+        } else {
+            return 'transfer-icon';
         }
-        lastTouchEnd = now;
-    }, false);
+    }
 
-    loadTransactionHistory();
-});
+    // Função para obter texto do tipo de transação
+    function getTransactionTypeText(type) {
+        const types = {
+            'deposit': 'Depósito',
+            'withdrawal': 'Saque',
+            'purchase': 'Compra',
+            'payout': 'Rendimento',
+            'referral_bonus': 'Bônus Indicação',
+            'daily_checkin': 'Check-in Diário',
+            'product_income': 'Rendimento Produto',
+            'admin_addition': 'Adição Admin',
+            'admin_deduction': 'Dedução Admin',
+            'withdrawal_refund': 'Devolução Saque',
+            'purchase_refund': 'Reembolso Compra'
+        };
+        
+        return types[type] || type;
+    }
 
-// Melhorar performance em dispositivos móveis
-document.addEventListener('touchmove', function(e) {
-    e.preventDefault();
-}, { passive: false });
-</script>
+    // Função para formatar data
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now - date);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (diffDays === 0) {
+            return `Hoje às ${date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+        } else if (diffDays === 1) {
+            return `Ontem às ${date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+        } else if (diffDays < 7) {
+            return `${diffDays} dias atrás`;
+        } else {
+            return date.toLocaleDateString('pt-BR');
+        }
+    }
+
+    // Função para formatar números
+    function formatNumber(num) {
+        return new Intl.NumberFormat('pt-AO').format(num);
+    }
+
+    // Buscar dados do histórico
+    async function fetchHistoryData() {
+        const authToken = getAuthToken();
+        const userId = localStorage.getItem('user_id');
+
+        if (!authToken || !userId) {
+            console.error('Usuário não autenticado');
+            window.location.href = '/index.html';
+            return;
+        }
+
+        showLoading();
+
+        try {
+            // Buscar perfil para saldo atual
+            const profileResponse = await fetch(`https://bd-p4q7.onrender.com/api/user/profile`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (profileResponse.ok) {
+                const profileData = await profileResponse.json();
+                document.getElementById('currentBalance').textContent = `KZ ${formatNumber(profileData.data.wallet_balance || 0)}`;
+            }
+
+            // Carregar transações
+            await loadTransactions();
+
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+        } finally {
+            hideLoading();
+        }
+    }
+
+    // Carregar transações
+    async function loadTransactions() {
+        const authToken = getAuthToken();
+        if (!authToken) return;
+
+        if (currentPage === 1) {
+            document.getElementById('transactionsContainer').innerHTML = `
+                <div class="infinite-scroll-loader">
+                    <div class="loader"></div>
+                    <p>Carregando transações...</p>
+                </div>
+            `;
+        }
+
+        try {
+            const response = await fetch(`https://bd-p4q7.onrender.com/api/user/transactions?page=${currentPage}&limit=10`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                displayTransactions(data.data.transactions || [], data.data.pagination);
+                updateSummary(data.data.transactions || []);
+            } else {
+                throw new Error('Erro ao carregar transações');
+            }
+        } catch (error) {
+            console.error('Erro:', error);
+            if (currentPage === 1) {
+                document.getElementById('transactionsContainer').innerHTML = `
+                    <div class="text-center text-gray-500 py-8">
+                        <p>Erro ao carregar transações</p>
+                        <button onclick="loadTransactions()" class="mt-2 football-button text-sm">
+                            🔄 Tentar Novamente
+                        </button>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    // Exibir transações
+    function displayTransactions(transactionsData, pagination) {
+        const container = document.getElementById('transactionsContainer');
+        
+        if (currentPage === 1) {
+            container.innerHTML = '';
+            transactions = [];
+        }
+
+        if (!transactionsData || transactionsData.length === 0) {
+            if (currentPage === 1) {
+                container.innerHTML = '<div class="text-center text-gray-500 py-8">Nenhuma transação encontrada 💳</div>';
+            }
+            hasMoreData = false;
+            return;
+        }
+
+        // Adicionar novas transações ao array
+        transactions = [...transactions, ...transactionsData];
+
+        // Aplicar filtro
+        let filteredTransactions = transactions;
+        if (currentFilter === 'income') {
+            filteredTransactions = transactions.filter(t => t.amount > 0);
+        } else if (currentFilter === 'expense') {
+            filteredTransactions = transactions.filter(t => t.amount < 0);
+        }
+
+        // Limpar container e adicionar transações filtradas
+        if (currentPage === 1) {
+            container.innerHTML = '';
+        }
+
+        filteredTransactions.forEach(transaction => {
+            const transactionElement = document.createElement('div');
+            transactionElement.className = 'transaction-card animate-fade-in';
+            
+            const isIncome = transaction.amount > 0;
+            const amountClass = isIncome ? 'text-green-600' : 'text-red-600';
+            const amountSign = isIncome ? '+' : '';
+            
+            transactionElement.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="transaction-icon ${getTransactionClass(transaction.type, transaction.amount)}">
+                            ${getTransactionIcon(transaction.type)}
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800">${getTransactionTypeText(transaction.type)}</p>
+                            <p class="text-xs text-gray-500">${transaction.description || 'Transação'}</p>
+                            <p class="text-xs text-gray-400">${formatDate(transaction.created_at)}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-semibold ${amountClass}">${amountSign}KZ ${formatNumber(Math.abs(transaction.amount))}</p>
+                        <p class="text-xs text-gray-500">Saldo: KZ ${formatNumber(transaction.balance_after || 0)}</p>
+                    </div>
+                </div>
+            `;
+            container.appendChild(transactionElement);
+        });
+
+        // Verificar se há mais dados
+        hasMoreData = currentPage < (pagination?.pages || 1);
+        
+        // Remover loader anterior se existir
+        const existingLoader = document.getElementById('infiniteLoader');
+        if (existingLoader) {
+            existingLoader.classList.add('hidden');
+        }
+
+        // Adicionar loader para próxima página se houver mais dados
+        if (hasMoreData) {
+            const loader = document.getElementById('infiniteLoader');
+            loader.classList.remove('hidden');
+        }
+
+        isLoadingMore = false;
+        
+        document.getElementById('lastUpdate').textContent = `⏱️ Última atualização: ${new Date().toLocaleTimeString()}`;
+    }
+
+    // Atualizar resumo
+    function updateSummary(transactionsData) {
+        const totalIncome = transactionsData
+            .filter(t => t.amount > 0)
+            .reduce((sum, t) => sum + t.amount, 0);
+            
+        const totalExpense = transactionsData
+            .filter(t => t.amount < 0)
+            .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+
+        document.getElementById('totalIncome').textContent = `KZ ${formatNumber(totalIncome)}`;
+        document.getElementById('totalExpense').textContent = `KZ ${formatNumber(totalExpense)}`;
+    }
+
+    // Manipular scroll infinito
+    function handleScroll() {
+        const scrollThreshold = 100;
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+        if (scrollHeight - scrollTop - clientHeight < scrollThreshold && 
+            !isLoadingMore && 
+            hasMoreData) {
+            
+            loadMoreTransactions();
+        }
+    }
+
+    // Carregar mais transações
+    async function loadMoreTransactions() {
+        if (isLoadingMore || !hasMoreData) return;
+
+        isLoadingMore = true;
+        currentPage++;
+        
+        await loadTransactions();
+    }
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', function () {
+        if (getAuthToken() && localStorage.getItem('user_id')) {
+            fetchHistoryData();
+            
+            // Adicionar event listener para scroll infinito
+            window.addEventListener('scroll', handleScroll);
+            
+            // Atualizar a cada 60 segundos
+            setInterval(fetchHistoryData, 60000);
+        } else {
+            window.location.href = '/index.html';
+        }
+    });
+  </script>
 </body>
 </html>

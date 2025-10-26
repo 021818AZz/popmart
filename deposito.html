@@ -1,504 +1,187 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
+
 <head>
-    <meta charset="utf-8">
-    <title>Depósito - Ai Tech 360</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Depósito - Royal Bank Angola</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <style>
-        /* Reset e configurações base */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-text-size-adjust: 100%;
+            font-family: 'Inter', sans-serif;
         }
 
-        html {
-            font-size: 14px;
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
-        body {
-            width: 100%;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #3e2723 0%, #5d4037 100%);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.5;
-            color: #fff;
-            overflow-x: hidden;
+        .animate-slide-up {
+            animation: slideUp 0.3s ease-out;
         }
 
-        /* Container principal */
-        .container {
-            padding: 0 1rem;
-            max-width: 100%;
-            margin: 0 auto;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Header refinado */
-        .header {
-            padding: 1rem 0;
-            background: rgba(78, 52, 46, 0.95);
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out;
         }
 
-        .back, .history-icon {
-            cursor: pointer;
-            padding: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .back:hover, .history-icon:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
-
-        .back img, .history-icon img {
-            width: 1.2rem;
-            height: 1.2rem;
-            filter: brightness(0) invert(1);
-        }
-
-        .name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .flex {
-            display: flex;
-            align-items: center;
-        }
-
-        .flex1 {
-            flex: 1;
-        }
-
-        .tac {
-            text-align: center;
-        }
-
-        /* Cartão de saldo premium */
-        .balance-card {
-            background: linear-gradient(135deg, #6d4c41 0%, #8d6e63 100%);
-            color: white;
-            border-radius: 1.2rem;
-            padding: 1.8rem 1.5rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .balance-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: cover;
-        }
-
-        .balance-label {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-        }
-
-        .balance-amount {
-            font-size: 2.2rem;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Formulário elegante */
-        .deposit-form {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 1.2rem;
-            padding: 1.8rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.8rem;
-            position: relative;
-        }
-
-        .form-label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.9rem;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            -webkit-appearance: none;
-        }
-
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #d7ccc8;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 3px rgba(215, 204, 200, 0.2);
-        }
-
-        /* Botões de valor rápido */
-        .quick-amounts {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem;
-            margin: 1.5rem 0;
-        }
-
-        .amount-btn {
-            padding: 1rem 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.9rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-            touch-action: manipulation;
-        }
-
-        .amount-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .amount-btn.active {
-            background: linear-gradient(135deg, #a1887f 0%, #8d6e63 100%);
-            color: white;
-            border-color: #a1887f;
-            box-shadow: 0 4px 12px rgba(141, 110, 99, 0.4);
-        }
-
-        /* Botão principal */
-        .submit-btn {
-            width: 100%;
-            padding: 1.3rem;
-            background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
-            color: white;
-            border: none;
-            border-radius: 0.9rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 0.8rem;
-            touch-action: manipulation;
-            min-height: 3.5rem;
-            box-shadow: 0 4px 15px rgba(109, 76, 65, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .submit-btn:hover::before {
-            left: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(109, 76, 65, 0.6);
-        }
-
-        .submit-btn:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        .submit-btn:disabled {
-            background: #5d4037;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-            opacity: 0.6;
-        }
-
-        /* Modal de informações bancárias */
-        .bank-info-modal {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 1.2rem;
-            padding: 1.8rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .bank-details {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 0.9rem;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .bank-detail-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            flex-wrap: wrap;
-        }
-
-        .bank-detail-item:last-child {
-            border-bottom: none;
-        }
-
-        .copy-btn {
-            background: linear-gradient(135deg, #a1887f 0%, #8d6e63 100%);
-            color: white;
-            border: none;
-            border-radius: 0.7rem;
-            padding: 0.7rem 1.2rem;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-left: 0.5rem;
-            touch-action: manipulation;
-            min-height: 2.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(141, 110, 99, 0.4);
-        }
-
-        /* Área de upload de comprovante */
-        .receipt-upload {
-            text-align: center;
-            padding: 2.5rem 1.5rem;
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 0.9rem;
-            margin: 1.5rem 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            touch-action: manipulation;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .receipt-upload:hover {
-            border-color: #d7ccc8;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .receipt-preview {
-            max-width: 100%;
-            max-height: 300px;
-            margin: 1.5rem auto;
-            border-radius: 0.9rem;
-            display: block;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Indicador de passos elegante */
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 2rem 0;
-            position: relative;
-        }
-
-        .step {
-            width: 2.8rem;
-            height: 2.8rem;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 0.8rem;
-            font-weight: bold;
-            font-size: 1rem;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            z-index: 2;
-        }
-
-        .step.active {
-            background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
-            color: white;
-            border-color: #d7ccc8;
-            box-shadow: 0 4px 12px rgba(141, 110, 99, 0.4);
-        }
-
-        .step-line {
-            flex: 1;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.2);
-            margin: 0 0.5rem;
-            max-width: 4rem;
-            position: relative;
-        }
-
-        .step-line::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0;
-            background: #8d6e63;
-            transition: width 0.5s ease;
-        }
-
-        .step-line.active::after {
-            width: 100%;
-        }
-
-        /* Modal refinado */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 1rem;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal {
-            background: linear-gradient(135deg, #5d4037 0%, #4e342e 100%);
-            border-radius: 1.2rem;
-            width: 100%;
-            max-width: 500px;
-            max-height: 80vh;
+        .compact-modal {
+            max-height: 85vh;
             overflow-y: auto;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            -webkit-overflow-scrolling: touch;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 95%;
+            max-width: 500px;
+        }
+        
+        .compact-modal-content {
+            padding: 1rem;
         }
 
-        .modal-overlay.active .modal {
-            transform: translateY(0);
+        /* Estilo para a barra de rolagem */
+        .compact-modal::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .compact-modal::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .compact-modal::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        
+        .compact-modal::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
 
-        .modal-header {
-            padding: 1.8rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            background: linear-gradient(135deg, #5d4037 0%, #4e342e 100%);
-            z-index: 10;
-            border-radius: 1.2rem 1.2rem 0 0;
-        }
-
-        .modal-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: white;
-        }
-
-        .modal-close {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: white;
-            width: 2.5rem;
-            height: 2.5rem;
+        /* Estilos para as bolas de futebol */
+        .football-ball {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            border: 3px solid #15803d;
+            overflow: hidden;
         }
 
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .football-ball::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* Linhas pretas do futebol */
+                linear-gradient(to right, #000 0%, #000 5%, transparent 5%, transparent 95%, #000 95%, #000 100%),
+                linear-gradient(to bottom, #000 0%, #000 5%, transparent 5%, transparent 95%, #000 95%, #000 100%),
+                /* Pentágonos pretos */
+                radial-gradient(circle at 30% 30%, #000 0%, #000 10%, transparent 10%),
+                radial-gradient(circle at 70% 30%, #000 0%, #000 10%, transparent 10%),
+                radial-gradient(circle at 50% 70%, #000 0%, #000 10%, transparent 10%),
+                radial-gradient(circle at 20% 50%, #000 0%, #000 10%, transparent 10%),
+                radial-gradient(circle at 80% 50%, #000 0%, #000 10%, transparent 10%);
+            background-size: 
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                100% 100%;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+        }
+
+        .football-ball.selected {
+            border: 3px solid #fbbf24;
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.5);
             transform: scale(1.1);
         }
 
-        .bank-option {
+        .ball-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #15803d;
+            font-weight: bold;
+            font-size: 12px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            padding: 0 5px;
+        }
+
+        .football-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
             display: flex;
             align-items: center;
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .bank-info-display {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .bank-name-display {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .bank-desc-display {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .confirm-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
+            margin-top: 15px;
             transition: all 0.3s ease;
-            touch-action: manipulation;
         }
 
-        .bank-option:hover {
-            background: rgba(255, 255, 255, 0.05);
+        .confirm-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(21, 128, 61, 0.3);
         }
 
-        .bank-option:last-child {
-            border-bottom: none;
+        .confirm-button:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         /* Loading elegante */
@@ -519,7 +202,7 @@
 
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.2);
-            border-top: 4px solid #d7ccc8;
+            border-top: 4px solid #3b82f6;
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -533,330 +216,496 @@
 
         /* Mensagens de status */
         .success-message {
-            background: rgba(76, 175, 80, 0.2);
-            color: #a5d6a7;
+            background: rgba(34, 197, 94, 0.2);
+            color: #16a34a;
             padding: 1.2rem;
             border-radius: 0.9rem;
             margin: 1.5rem 0;
             text-align: center;
-            border: 1px solid rgba(165, 214, 167, 0.3);
+            border: 1px solid rgba(22, 163, 74, 0.3);
         }
 
         .error-message {
-            background: rgba(244, 67, 54, 0.2);
-            color: #ef9a9a;
+            background: rgba(239, 68, 68, 0.2);
+            color: #dc2626;
             padding: 1.2rem;
             border-radius: 0.9rem;
             margin: 1.5rem 0;
             text-align: center;
-            border: 1px solid rgba(239, 154, 154, 0.3);
+            border: 1px solid rgba(220, 38, 38, 0.3);
         }
 
-        /* Dicas importantes */
-        .tips {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 1.2rem;
-            padding: 1.8rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Estilos para a tela de informações bancárias */
+        .bank-details-screen {
+            display: none;
         }
 
-        .tips h3 {
-            margin-bottom: 1.2rem;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
+        .bank-details-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
-        .tips ul {
-            padding-left: 1.5rem;
-        }
-
-        .tips li {
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Selecionador de banco */
-        .bank-selector {
+        .detail-item {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.9rem;
-            background: rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            touch-action: manipulation;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .bank-selector:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
+        .detail-item:last-child {
+            border-bottom: none;
         }
 
-        .bank-icon {
-            width: 2.8rem;
-            height: 2.8rem;
-            margin-right: 1.2rem;
-            filter: brightness(0) invert(1);
+        .detail-label {
+            font-weight: 500;
+            color: #64748b;
         }
 
-        .bank-info {
-            flex: 1;
-        }
+    .detail-value {
+      font-weight: 600;
+      color: #1e293b;
+    }
 
-        .bank-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-            color: white;
-        }
+    .copy-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
 
-        .bank-desc {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
+    .copy-btn:hover {
+      background: #2563eb;
+    }
 
-        .bank-arrow {
-            width: 1.2rem;
-            height: 1.2rem;
-            filter: brightness(0) invert(1);
-        }
+    .receipt-upload-area {
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #f8fafc;
+    }
 
-        /* Ajustes para telas muito pequenas */
-        @media (max-width: 360px) {
-            html {
-                font-size: 13px;
-            }
-            
-            .container {
-                padding: 0 0.75rem;
-            }
-            
-            .quick-amounts {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.6rem;
-            }
-            
-            .amount-btn {
-                min-width: 4rem;
-                padding: 0.9rem 0.25rem;
-                font-size: 0.8rem;
-            }
-        }
+    .receipt-upload-area:hover {
+      border-color: #3b82f6;
+      background: #f0f9ff;
+    }
 
-        /* Ajustes para telas maiores (tablets) */
-        @media (min-width: 768px) {
-            .container {
-                max-width: 600px;
-            }
-        }
+    .receipt-preview {
+      max-width: 100%;
+      max-height: 200px;
+      margin-top: 15px;
+      border-radius: 8px;
+      display: none;
+    }
 
-        /* Prevenir zoom em inputs no iOS */
-        @media screen and (-webkit-min-device-pixel-ratio:0) {
-            select,
-            textarea,
-            input {
-                font-size: 16px;
-            }
-        }
-    </style>
+    .back-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: #e2e8f0;
+    }
+
+    /* NOVOS ESTILOS PARA TEMA DE FUTEBOL */
+    .grass-background {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grass-background::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(90deg, transparent 79%, rgba(255,255,255,0.1) 80%, transparent 81%),
+        linear-gradient(transparent 79%, rgba(255,255,255,0.1) 80%, transparent 81%);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .football-field {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+      border: 2px solid #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .football-field::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.3) 50%, transparent 51%),
+        linear-gradient(transparent 49%, rgba(255,255,255,0.3) 50%, transparent 51%);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+
+    .bank-info-grass {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      border: 2px solid white;
+      border-radius: 12px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      margin: 15px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bank-info-grass::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 20%);
+      pointer-events: none;
+    }
+
+    .grass-button {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      border: 2px solid white;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .grass-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    }
+
+    .white-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+    }
+
+    .green-text {
+      color: #15803d;
+    }
+
+    .white-text {
+      color: white;
+    }
+  </style>
 </head>
-<body>
-<div id="app">
-    <div class="page">
-        <div class="headers">
-            <div class="header">
-                <div class="container flex">
-                    <div class="back" onclick="goBack()">
-                        <img src="https://i.postimg.cc/vmW7qTdx/back.png" alt="Voltar">
-                    </div>
-                    <div class="name tac flex1">Depósito Bancário</div>
-                    <div class="history-icon" onclick="goToHistory()">
-                        <img src="https://i.postimg.cc/vZZQdcvx/activity-history.png" alt="Histórico">
-                    </div>
-                </div>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+  <div class="max-w-md mx-auto pb-24">
+    <!-- Header -->
+    <header class="grass-background shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-green-600">
+      <a href="./" class="text-white text-xl font-bold">&#8592;</a>
+      <h1 class="text-lg font-bold text-white tracking-tight">Área de Depósito</h1>
+      <a href="historicodeposito.html" class="text-sm text-white hover:underline">Ver extrato</a>
+    </header>
+
+    <!-- Tela de seleção de banco (inicial) -->
+    <div id="bankSelectionScreen">
+      <!-- Cartão do saldo -->
+      <section class="px-5 mt-6">
+        <div class="football-field text-white p-5 flex items-center justify-between">
+          <div>
+            <p class="text-sm opacity-90 mb-1">Saldo atual</p>
+            <p class="text-2xl font-bold" id="userBalance">KZ 0,00</p>
+          </div>
+          <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+            <span class="text-green-600 font-bold text-lg">⚽</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seletor de valores -->
+      <section class="px-5 mt-8">
+        <p class="text-sm font-medium text-green-800 mb-2">Selecione um valor rápido</p>
+        <div class="grid grid-cols-3 gap-3">
+          <button data-value="5000" class="grass-button text-sm font-semibold py-2 text-center">KZ 5.000</button>
+          <button data-value="10000" class="grass-button text-sm font-semibold py-2 text-center">KZ 10.000</button>
+          <button data-value="30000" class="grass-button text-sm font-semibold py-2 text-center">KZ 30.000</button>
+          <button data-value="80000" class="grass-button text-sm font-semibold py-2 text-center">KZ 80.000</button>
+          <button data-value="150000" class="grass-button text-sm font-semibold py-2 text-center">KZ 150.000</button>
+          <button data-value="300000" class="grass-button text-sm font-semibold py-2 text-center">KZ 300.000</button>
+        </div>
+      </section>
+
+      <!-- Formulário -->
+      <section class="px-5 mt-6">
+        <form id="depositForm" class="space-y-5">
+          <div>
+            <label for="valorInput" class="text-sm font-medium text-green-800 block mb-1">Outro valor</label>
+            <div class="flex items-center bg-white border border-green-300 rounded-lg px-3 py-2">
+              <span class="text-green-600 font-semibold mr-2">KZ</span>
+              <input required name="amount" id="valorInput" type="number" class="w-full bg-transparent outline-none placeholder-green-400" placeholder="Digite um valor" value="" min="5000" />
             </div>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-green-800 mb-2">Escolha o banco para depósito</p>
+            <div class="bank-info-grass cursor-pointer" onclick="openBankModal()">
+              <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mr-3">
+                  <span class="text-green-600 font-bold">⚽</span>
+                </div>
+                <div class="bank-info">
+                  <div class="bank-name font-medium" id="selectedBankName">Selecione o banco</div>
+                  <div class="bank-desc text-green-100 text-sm" id="selectedBankDesc">Toque para escolher com as bolas de futebol</div>
+                </div>
+                <svg class="w-5 h-5 text-white ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+            <input type="hidden" id="bankCode" value="">
+          </div>
+
+          <button type="button" onclick="validateForm()" id="btnDepositar" class="w-full grass-button font-semibold py-3 shadow">Depositar agora</button>
+        </form>
+
+        <div class="mt-6 text-xs text-green-700 leading-relaxed space-y-3">
+          <h2 class="text-sm font-bold">Informações de Recarga</h2>
+          <div class="flex items-start gap-2">
+            <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
+            <p>O valor mínimo de recarga é de <strong>KZ 5.000</strong>.</p>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <div class="w-4 h-4 bg-yellow-500 rounded-full animate-bounce mt-1"></div>
+            <p><strong>Você deve enviar uma nova solicitação de recarga para cada depósito</strong>.</p>
+          </div>
+
+          <div class="flex items-start gap-2">
+            <div class="w-4 h-4 bg-white rounded-full animate-pulse mt-1"></div>
+            <p><strong>Caso encontre algum problema durante o processo de recarga, entre em contato com o <a class="underline" href="https://t.me/royalrbc">Atendimento ao Cliente.</a></strong></p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Tela de informações bancárias (aparece após selecionar um banco) -->
+    <div id="bankDetailsScreen" class="bank-details-screen px-5">
+      <button class="back-button" onclick="goBackToSelection()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Voltar
+      </button>
+
+      <div class="football-field text-white">
+        <h2 class="text-xl font-bold mb-4 text-center">Informações para Depósito</h2>
+        
+        <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-center">
+            <span class="font-medium">Banco Selecionado:</span>
+            <span class="font-bold" id="detailBankName">-</span>
+          </div>
         </div>
         
-        <div class="content-container">
-            <div class="content-scroll">
-                <div class="container">
-                    
-                    <!-- Cartão de Saldo -->
-                    <div class="balance-card">
-                        <div class="balance-label">Saldo Disponível</div>
-                        <div class="balance-amount" id="userBalance">0 KZ</div>
-                    </div>
-
-                    <!-- Indicador de Passos -->
-                    <div class="step-indicator">
-                        <div class="step active">1</div>
-                        <div class="step-line"></div>
-                        <div class="step">2</div>
-                        <div class="step-line"></div>
-                        <div class="step">3</div>
-                    </div>
-
-                    <!-- Fluxo de Depósito -->
-                    <div id="depositFlow">
-                        <!-- Passo 1: Valor do Depósito -->
-                        <div class="deposit-form" id="step1">
-                            <div class="form-group">
-                                <label class="form-label">Valor do Depósito (KZ)</label>
-                                <input type="number" class="form-input" id="depositAmount" min="2500" placeholder="Mínimo 2500 KZ" required inputmode="numeric">
-                                
-                                <div class="quick-amounts">
-                                    <button type="button" class="amount-btn" onclick="fillAmount(2500)">2.500 KZ</button>
-                                    <button type="button" class="amount-btn" onclick="fillAmount(5000)">5.000 KZ</button>
-                                    <button type="button" class="amount-btn" onclick="fillAmount(15000)">15.000 KZ</button>
-                                    <button type="button" class="amount-btn" onclick="fillAmount(30000)">30.000 KZ</button>
-                                    <button type="button" class="amount-btn" onclick="fillAmount(50000)">50.000 KZ</button>
-                                    <button type="button" class="amount-btn" onclick="fillAmount(100000)">100.000 KZ</button>
-                                    <button type="button" class="amount-btn" onclick="fillAmount(150000)">150.000 KZ</button>
-                                </div>
-                            </div>
-
-                            <button type="button" class="submit-btn" onclick="proceedToBankSelection()">Continuar</button>
-                        </div>
-
-                        <!-- Passo 2: Seleção do Banco -->
-                        <div class="deposit-form" id="step2" style="display: none;">
-                            <div class="form-group">
-                                <label class="form-label">Selecione o Banco</label>
-                                <div class="bank-selector" onclick="openBankModal()">
-                                    <img class="bank-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="Banco">
-                                    <div class="bank-info">
-                                        <div class="bank-name" id="selectedBankName">Selecione o banco</div>
-                                        <div class="bank-desc" id="selectedBankDesc">Toque para escolher</div>
-                                    </div>
-                                    <img class="bank-arrow" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNkw4IDEwTDEyIDZINloiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+" alt="Seta">
-                                </div>
-                                <input type="hidden" id="bankCode" value="">
-                            </div>
-
-                            <button type="button" class="submit-btn" id="confirmBankBtn" onclick="proceedToBankDetails()" disabled>Continuar</button>
-                        </div>
-
-                        <!-- Passo 3: Informações Bancárias -->
-                        <div class="deposit-form" id="step3" style="display: none;">
-                            <div class="bank-info-modal">
-                                <h3 style="text-align: center; margin-bottom: 1.5rem; color: white;">Informações para Depósito</h3>
-                                
-                                <div class="bank-details">
-                                    <div class="bank-detail-item">
-                                        <span>Banco:</span>
-                                        <strong id="displayBankName">-</strong>
-                                    </div>
-                                    <div class="bank-detail-item">
-                                        <span>Nome da Conta:</span>
-                                        <strong id="displayAccountName">-</strong>
-                                    </div>
-                                    <div class="bank-detail-item">
-                                        <span>IBAN:</span>
-                                        <div style="display: flex; align-items: center; flex-wrap: wrap;">
-                                            <strong id="displayIban" style="margin-right: 0.5rem; word-break: break-all;">-</strong>
-                                            <button class="copy-btn" onclick="copyToClipboard('displayIban')">Copiar</button>
-                                        </div>
-                                    </div>
-                                    <div class="bank-detail-item">
-                                        <span>Valor:</span>
-                                        <strong id="displayAmount">- KZ</strong>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Enviar Comprovante</label>
-                                    <div class="receipt-upload" onclick="openGallery()">
-                                        <input type="file" id="receiptInput" accept="image/*" style="display: none;" onchange="handleReceiptUpload(event)">
-                                        <img src="https://i.postimg.cc/qqNqD3XK/camera.png" alt="Upload" width="50" style="filter: brightness(0) invert(1);">
-                                        <p style="margin-top: 1rem;">Toque para enviar o comprovante</p>
-                                    </div>
-                                    <img id="receiptPreview" class="receipt-preview" style="display: none;">
-                                </div>
-                            </div>
-
-                            <button type="button" class="submit-btn" id="submitDepositBtn" onclick="submitDeposit()" disabled>Confirmar Depósito</button>
-                        </div>
-                    </div>
-
-                    <!-- Mensagens de status -->
-                    <div id="statusMessage" style="display: none;"></div>
-
-                    <!-- Dicas Importantes -->
-                    <div class="tips">
-                        <h3>Informações Importantes</h3>
-                        <ul>
-                            <li>Valor mínimo de depósito: 2.500 KZ</li>
-                            <li>Horário de depósito: das 8h00 às 21h00.</li>
-                            <li>Envie o comprovante dentro de 50 Minutos</li>
-                            <li>O processamento pode levar até 20 minutos</li>
-                            <li>Verifique se todas as informações estão corretas</li>
-                            <li>Após a confirmação, o valor será creditado em sua conta</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-center">
+            <span class="font-medium">Nome do Beneficiário:</span>
+            <span class="font-bold" id="detailBeneficiary">-</span>
+          </div>
         </div>
+        
+        <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-center">
+            <span class="font-medium">Número da Conta (IBAN):</span>
+            <div class="flex items-center">
+              <span class="font-bold mr-2" id="detailIban">-</span>
+              <button class="bg-white text-green-600 px-2 py-1 rounded text-xs font-bold" onclick="copyToClipboard('detailIban')">Copiar</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white bg-opacity-20 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-center">
+            <span class="font-medium">Referência:</span>
+            <div class="flex items-center">
+              <span class="font-bold mr-2" id="detailReference">-</span>
+              <button class="bg-white text-green-600 px-2 py-1 rounded text-xs font-bold" onclick="copyToClipboard('detailReference')">Copiar</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+          <div class="flex justify-between items-center">
+            <span class="font-medium">Valor do Depósito:</span>
+            <span class="font-bold" id="detailAmount">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="white-card mt-6">
+        <h3 class="text-lg font-semibold text-green-800 mb-4">Enviar Comprovante</h3>
+        
+        <div class="receipt-upload-area border-green-300" onclick="openGallery()">
+          <input type="file" id="receiptInput" accept="image/*" class="hidden" onchange="handleReceiptUpload(event)">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+              <span class="text-green-600 text-xl">⚽</span>
+            </div>
+            <p class="text-green-700 font-medium">Clique para enviar o comprovante</p>
+            <p class="text-green-600 text-sm mt-1">PNG, JPG (MAX. 5MB)</p>
+          </div>
+        </div>
+        
+        <img id="receiptPreview" class="receipt-preview">
+        <p id="fileName" class="text-sm text-green-600 mt-2 text-center hidden"></p>
+        
+        <button id="submitDepositBtn" class="w-full grass-button font-semibold py-3 shadow mt-4" onclick="submitDeposit()" disabled>Confirmar Depósito</button>
+      </div>
     </div>
-</div>
 
-<!-- Modal de Seleção de Bancos -->
-<div class="modal-overlay" id="bankModal">
-    <div class="modal">
-        <div class="modal-header">
-            <div class="modal-title">Selecione o Banco</div>
-            <button class="modal-close" onclick="closeBankModal()">&times;</button>
+    <!-- Modal de Seleção de Bancos com Bolas de Futebol -->
+    <div id="bankModal" class="fixed inset-0 z-50 hidden items-center justify-center backdrop-blur-sm bg-black/40" onclick="closeBankModal(event)">
+      <div onclick="event.stopPropagation()" class="football-field compact-modal">
+        <div class="compact-modal-content">
+          <div class="flex justify-between items-center border-b border-green-300 pb-3 mb-3">
+            <h3 class="text-lg font-bold text-white">Selecione o Banco</h3>
+            <button onclick="closeBankModal()" class="text-white hover:text-green-200 text-xl font-bold">×</button>
+          </div>
+          
+          <div class="text-center mb-4">
+            <p class="text-green-100">Escolha um banco tocando em uma bola de futebol</p>
+          </div>
+          
+          <div class="football-container" id="footballContainer">
+            <!-- As bolas de futebol serão inseridas aqui via JavaScript -->
+          </div>
         </div>
-        <div class="modal-body">
-            <div class="bank-option" onclick="selectBank('BFA', 'BFA - Banco de Fomento Angola', 'Banco de Fomento Angola')">
-                <img class="bank-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="BFA">
-                <div class="bank-info">
-                    <div class="bank-name">BFA</div>
-                    <div class="bank-desc">Banco de Fomento Angola</div>
-                </div>
-            </div>
-            <div class="bank-option" onclick="selectBank('BAI', 'BAI - Banco Angolano de Investimentos', 'Banco Angolano de Investimentos')">
-                <img class="bank-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="BAI">
-                <div class="bank-info">
-                    <div class="bank-name">BAI</div>
-                    <div class="bank-desc">Banco Angolano de Investimentos</div>
-                </div>
-            </div>
-            <div class="bank-option" onclick="selectBank('BIC', 'BIC - Banco Internacional de Crédito', 'Banco Internacional de Crédito')">
-                <img class="bank-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="BIC">
-                <div class="bank-info">
-                    <div class="bank-name">BIC</div>
-                    <div class="bank-desc">Banco Internacional de Crédito</div>
-                </div>
-            </div>
-            <div class="bank-option" onclick="selectBank('ATL', 'ATL - Banco Atlântico', 'Banco Atlântico')">
-                <img class="bank-icon" src="https://i.postimg.cc/2SdrFxfD/bank-card-back-side.png" alt="ATL">
-                <div class="bank-info">
-                    <div class="bank-name">ATL</div>
-                    <div class="bank-desc">Banco Atlântico</div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
 
-<!-- Loading Overlay -->
-<div class="loading" id="loadingOverlay">
-    <div class="spinner"></div>
-</div>
+    <!-- Loading -->
+    <div id="loading" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center">
+      <div class="football-field p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
+        <p class="text-white">Processando seu depósito...</p>
+      </div>
+    </div>
+  </div>
 
-<script>
+  <!-- Menu de navegação com ícones de imagem -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+        
+        <li>
+          <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+            <img src="img/home.png" alt="Início" class="w-6 h-6">
+            <span>Início</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+            <span>Renda</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+            <span>VIP</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+            <span>Bancária</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+            <span>Perfil</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+
+  <script>
     // Configurações
     const API_BASE_URL = 'https://bd-p4q7.onrender.com';
-    let currentStep = 1;
     let depositData = {};
     let receiptFile = null;
+    let selectedBank = '';
+    let depositAmount = 0;
+
+    // Informações dos bancos
+    const bankInfo = {
+      'BAI': {
+        name: 'BAI',
+        fullName: 'BAI - Banco Angolano de Investimentos',
+        beneficiary: 'ALEXANDRE GOMES',
+        iban: '004000003651963810295',
+        reference: 'RBC BANK' + Math.floor(10000 + Math.random() * 90000)
+      },
+      'BFA': {
+        name: 'BFA',
+        fullName: 'BFA - Banco de Fomento Angola',
+        beneficiary: 'JACOB TOMAS',
+        iban: '000600002035568230109',
+        reference: 'RBC BANCK' + Math.floor(10000 + Math.random() * 90000)
+      },
+      'BIC': {
+        name: 'BIC',
+        fullName: 'BIC - Banco Internacional de Crédito',
+        beneficiary: 'ALEXANDRE GOMES',
+        iban: '005100007348498810127',
+        reference: 'RBC BANCK' + Math.floor(10000 + Math.random() * 90000)
+      },
+      'ATL': {
+        name: 'ATL',
+        fullName: 'ATL - Banco Atlântico',
+        beneficiary: 'MAURICIO SANGODE',
+        iban: '005500006041284810139',
+        reference: 'XXXXXX' + Math.floor(10000 + Math.random() * 90000)
+      }
+    };
 
     // Inicialização
     document.addEventListener('DOMContentLoaded', function() {
@@ -866,14 +715,22 @@
         }
         loadUserData();
         setupEventListeners();
-        updateStepIndicator();
     });
 
     // Configurar listeners
     function setupEventListeners() {
-        document.getElementById('depositAmount').addEventListener('input', validateAmount);
-        document.getElementById('bankModal').addEventListener('click', function(e) {
-            if (e.target === this) closeBankModal();
+        // Selecionar valor rápido
+        const depositButtons = document.querySelectorAll('.grass-button');
+        const depositInput = document.getElementById('valorInput');
+
+        depositButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove a seleção de todos os botões
+                depositButtons.forEach(b => b.classList.remove('bg-green-800', 'text-white'));
+                // Adiciona seleção ao botão clicado
+                btn.classList.add('bg-green-800', 'text-white');
+                depositInput.value = btn.dataset.value;
+            });
         });
     }
 
@@ -882,15 +739,18 @@
         showLoading(true);
         try {
             const token = getToken();
-            const response = await fetch(`${API_BASE_URL}/user/profile`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+            const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
             });
             
             if (response.ok) {
                 const data = await response.json();
                 if (data.success) {
-                    document.getElementById('userBalance').textContent = 
-                        data.data.wallet_balance.toLocaleString('pt-AO') + ' KZ';
+                    const saldo = data.data.wallet_balance || 0;
+                    document.getElementById('userBalance').textContent = `KZ ${saldo.toLocaleString('pt-AO')}`;
                 }
             }
         } catch (error) {
@@ -901,116 +761,110 @@
         }
     }
 
-    // Validação do valor
-    function validateAmount() {
-        const amount = parseFloat(document.getElementById('depositAmount').value);
-        const isValid = amount && amount >= 2500;
-        
-        if (isValid) {
-            clearError();
-        }
-        return isValid;
-    }
-
-    // Navegação do fluxo
-    function proceedToBankSelection() {
-        if (!validateAmount()) {
-            showError('Valor mínimo de depósito é 2.500 KZ');
-            return;
-        }
-
-        depositData.amount = parseFloat(document.getElementById('depositAmount').value);
-        showStep(2);
-    }
-
-    function proceedToBankDetails() {
-        const bankCode = document.getElementById('bankCode').value;
-        if (!bankCode) {
-            showError('Selecione um banco');
-            return;
-        }
-
-        generateBankDetails();
-        showStep(3);
-    }
-
-    function generateBankDetails() {
-        const banks = {
-            'BFA': { accountName: 'Jacob Tomas', iban: '000600002035568230109' },
-            'BAI': { accountName: 'Jacob Tomas', iban: '004000008670876210154' },
-            'ATL': { accountName: 'Mauricio Sangode', iban: '005500006041284810139' },
-            'BIC': { accountName: 'Alexandre Gomes', iban: '005100007348498810127' },
-        };
-
-        const bankCode = document.getElementById('bankCode').value;
-        const bankInfo = banks[bankCode] || banks['OTHER'];
-
-        // CORREÇÃO: Use os nomes de campos que a API espera
-        depositData.account_name = bankInfo.accountName;
-        depositData.iban = bankInfo.iban;
-        depositData.bank_name = document.getElementById('selectedBankName').textContent;
-        depositData.bank_code = bankCode;
-
-        // Atualizar display
-        document.getElementById('displayBankName').textContent = depositData.bank_name;
-        document.getElementById('displayAccountName').textContent = depositData.account_name;
-        document.getElementById('displayIban').textContent = depositData.iban;
-        document.getElementById('displayAmount').textContent = depositData.amount.toLocaleString('pt-AO') + ' KZ';
-    }
-
-    function showStep(step) {
-        currentStep = step;
-        
-        // Esconder todos os passos
-        document.getElementById('step1').style.display = 'none';
-        document.getElementById('step2').style.display = 'none';
-        document.getElementById('step3').style.display = 'none';
-        
-        // Mostrar passo atual
-        document.getElementById(`step${step}`).style.display = 'block';
-        
-        updateStepIndicator();
-    }
-
-    function updateStepIndicator() {
-        const steps = document.querySelectorAll('.step');
-        const lines = document.querySelectorAll('.step-line');
-        
-        steps.forEach((step, index) => {
-            if (index + 1 <= currentStep) {
-                step.classList.add('active');
-            } else {
-                step.classList.remove('active');
-            }
-        });
-        
-        lines.forEach((line, index) => {
-            if (index + 1 < currentStep) {
-                line.classList.add('active');
-            } else {
-                line.classList.remove('active');
-            }
-        });
-    }
-
-    // Modal do banco
+    // Abrir modal de seleção de bancos
     function openBankModal() {
-        document.getElementById('bankModal').classList.add('active');
+        document.getElementById('bankModal').classList.remove('hidden');
+        document.getElementById('bankModal').classList.add('flex');
+        
+        // Inicializar as bolas de futebol
+        initFootballBalls();
     }
 
-    function closeBankModal() {
-        document.getElementById('bankModal').classList.remove('active');
+    // Fechar modal
+    function closeBankModal(event) {
+        const modal = document.getElementById("bankModal");
+        if (!event || event.target.id === "bankModal") {
+            modal.classList.add("hidden");
+        }
     }
 
-    function selectBank(code, name, desc) {
-        document.getElementById('bankCode').value = code;
-        document.getElementById('selectedBankName').textContent = name;
-        document.getElementById('selectedBankDesc').textContent = desc;
+    // Inicializar as bolas de futebol
+    function initFootballBalls() {
+        const container = document.getElementById('footballContainer');
+        container.innerHTML = '';
         
-        // Habilitar botão de continuar
-        document.getElementById('confirmBankBtn').disabled = false;
+        const banks = ['BAI', 'BFA', 'BIC', 'ATL'];
+        const radius = 120; // Raio do círculo
+        const centerX = container.offsetWidth / 2;
+        const centerY = container.offsetHeight / 2;
         
+        // Posições iniciais aleatórias fora da tela
+        banks.forEach((bankCode, index) => {
+            const ball = document.createElement('div');
+            ball.className = 'football-ball';
+            ball.id = `ball-${bankCode}`;
+            ball.dataset.bank = bankCode;
+            
+            const ballContent = document.createElement('div');
+            ballContent.className = 'ball-content';
+            ballContent.textContent = bankInfo[bankCode].name;
+            ball.appendChild(ballContent);
+            
+            // Posição inicial aleatória fora da tela
+            const startX = Math.random() * 100 - 50;
+            const startY = Math.random() * 100 - 50;
+            
+            ball.style.left = `${startX}px`;
+            ball.style.top = `${startY}px`;
+            
+            container.appendChild(ball);
+            
+            // Animação para mover a bola para sua posição no círculo
+            setTimeout(() => {
+                const angle = (index / banks.length) * 2 * Math.PI;
+                const x = centerX + radius * Math.cos(angle) - 40; // -40 para centralizar a bola
+                const y = centerY + radius * Math.sin(angle) - 40; // -40 para centralizar a bola
+                
+                ball.style.left = `${x}px`;
+                ball.style.top = `${y}px`;
+            }, 100 * index);
+            
+            // Adicionar evento de clique
+            ball.addEventListener('click', () => selectFootballBall(bankCode));
+        });
+    }
+
+    // Selecionar uma bola de futebol
+    function selectFootballBall(bankCode) {
+        selectedBank = bankCode;
+        
+        // Atualizar informações do banco selecionado
+        document.getElementById('selectedBankName').textContent = bankInfo[bankCode].fullName;
+        document.getElementById('selectedBankDesc').textContent = `Banco selecionado: ${bankInfo[bankCode].name}`;
+        
+        // Fechar o modal
         closeBankModal();
+    }
+
+    // Mostrar tela de informações bancárias
+    function showBankDetails() {
+        // Obter valor do depósito
+        const valorInput = document.getElementById('valorInput');
+        depositAmount = parseFloat(valorInput.value) || 0;
+        
+        // Validar valor
+        if (!depositAmount || depositAmount < 5000) {
+            showError('Por favor, insira um valor válido (mínimo KZ 5.000)');
+            return;
+        }
+        
+        // Atualizar informações na tela de detalhes
+        document.getElementById('detailBankName').textContent = bankInfo[selectedBank].fullName;
+        document.getElementById('detailBeneficiary').textContent = bankInfo[selectedBank].beneficiary;
+        document.getElementById('detailIban').textContent = bankInfo[selectedBank].iban;
+        document.getElementById('detailReference').textContent = bankInfo[selectedBank].reference;
+        document.getElementById('detailAmount').textContent = `KZ ${depositAmount.toLocaleString('pt-AO')}`;
+        
+        // Mostrar tela de detalhes e esconder tela de seleção
+        document.getElementById('bankSelectionScreen').style.display = 'none';
+        document.getElementById('bankDetailsScreen').classList.remove('bank-details-screen');
+    }
+
+    // Voltar para a tela de seleção
+    function goBackToSelection() {
+        document.getElementById('bankDetailsScreen').classList.add('bank-details-screen');
+        document.getElementById('bankSelectionScreen').style.display = 'block';
+        receiptFile = null;
     }
 
     // Função para abrir a galeria
@@ -1044,6 +898,11 @@
             preview.src = e.target.result;
             preview.style.display = 'block';
             
+            // Mostrar nome do arquivo
+            const fileNameElement = document.getElementById('fileName');
+            fileNameElement.textContent = `Arquivo selecionado: ${file.name}`;
+            fileNameElement.classList.remove('hidden');
+            
             // Habilitar botão de confirmação
             document.getElementById('submitDepositBtn').disabled = false;
         };
@@ -1052,7 +911,26 @@
         clearError();
     }
 
-    // Submeter depósito
+    // Validar formulário (na tela de seleção)
+    function validateForm() {
+        const valor = parseFloat(document.getElementById('valorInput').value);
+        
+        if (!valor || isNaN(valor) || valor < 5000) {
+            showError('O valor mínimo para depósito é KZ 5.000');
+            return;
+        }
+
+        if (!selectedBank) {
+            showError('Selecione um banco para continuar');
+            openBankModal();
+            return;
+        }
+
+        // Se já tem um banco selecionado, ir direto para a tela de detalhes
+        showBankDetails();
+    }
+
+    // Submeter depósito - EXATAMENTE COMO NO SEU CÓDIGO ORIGINAL
     async function submitDeposit() {
         if (!receiptFile) {
             showError('Por favor, envie o comprovante');
@@ -1066,6 +944,15 @@
             const formData = new FormData();
             formData.append('receipt', receiptFile);
 
+            // Preparar dados do depósito
+            const depositRequestData = {
+                amount: depositAmount,
+                account_name: bankInfo[selectedBank].beneficiary,
+                iban: bankInfo[selectedBank].iban,
+                bank_name: bankInfo[selectedBank].fullName,
+                bank_code: selectedBank
+            };
+
             // 1. Criar solicitação de depósito
             const depositResponse = await fetch(`${API_BASE_URL}/api/deposit`, {
                 method: 'POST',
@@ -1073,7 +960,7 @@
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(depositData)
+                body: JSON.stringify(depositRequestData)
             });
 
             const depositResult = await depositResponse.json();
@@ -1085,7 +972,7 @@
             // 2. Upload do comprovante
             formData.append('deposit_id', depositResult.data.deposit_id);
             
-            const uploadResponse = await fetch(`${API_BASE_URL}/api/deposit-receipt`, {
+            const uploadResponse = await fetch(`${API_BASE_URL}/api/upload/deposit-receipt`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -1104,7 +991,7 @@
             
             // Redirecionar após 3 segundos
             setTimeout(() => {
-                window.location.href = '/historico1.html';
+                window.location.href = 'historicodeposito.html';
             }, 3000);
 
         } catch (error) {
@@ -1115,37 +1002,27 @@
         }
     }
 
-    // Funções auxiliares
-    function fillAmount(amount) {
-        document.getElementById('depositAmount').value = amount;
-        validateAmount();
-        
-        // Ativar visualmente o botão clicado
-        document.querySelectorAll('.amount-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        event.target.classList.add('active');
-    }
-
+    // Copiar para a área de transferência
     function copyToClipboard(elementId) {
         const element = document.getElementById(elementId);
         const text = element.textContent;
         
         navigator.clipboard.writeText(text).then(() => {
             showTemporaryMessage('Copiado para a área de transferência!');
-        }).catch(err => {
-            console.error('Erro ao copiar:', err);
-            // Fallback para método antigo
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            showTemporaryMessage('Copiado!');
-        });
-    }
+       }).catch((err) => {
+  console.error('Erro ao copiar:', err);
+  // Fallback para método antigo
+  const textArea = document.createElement('textarea');
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textArea);
+  showTemporaryMessage('Copiado!');
+});
+} 
 
+    // Funções auxiliares
     function showTemporaryMessage(message) {
         const msgDiv = document.createElement('div');
         msgDiv.style.cssText = `
@@ -1170,40 +1047,24 @@
     }
 
     function showError(message) {
-        const statusDiv = document.getElementById('statusMessage');
-        statusDiv.innerHTML = `<div class="error-message">${message}</div>`;
-        statusDiv.style.display = 'block';
-        
-        setTimeout(() => {
-            statusDiv.style.display = 'none';
-        }, 5000);
+        alert(message); // Simples alert para erro
     }
 
     function showSuccess(message) {
-        const statusDiv = document.getElementById('statusMessage');
-        statusDiv.innerHTML = `<div class="success-message">${message}</div>`;
-        statusDiv.style.display = 'block';
+        alert(message); // Simples alert para sucesso
     }
 
     function clearError() {
-        document.getElementById('statusMessage').style.display = 'none';
+        // Limpar mensagens de erro se necessário
     }
 
     function showLoading(show) {
-        document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
-    }
-
-    // Funções de navegação
-    function goBack() {
-        if (currentStep > 1) {
-            showStep(currentStep - 1);
+        const loading = document.getElementById('loading');
+        if (show) {
+            loading.classList.remove('hidden');
         } else {
-            window.history.back();
+            loading.classList.add('hidden');
         }
-    }
-
-    function goToHistory() {
-        window.location.href = '/historico1.html';
     }
 
     // Funções de autenticação
@@ -1230,6 +1091,6 @@
             return null;
         }
     }
-</script>
+  </script>
 </body>
-</html>
+html>

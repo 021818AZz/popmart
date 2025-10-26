@@ -1,797 +1,958 @@
 <!DOCTYPE html>
-<html style="font-size: 48.5333px; height: 100%;">
+<html lang="pt-BR">
+
 <head>
-    <meta charset="utf-8">
-    <title>Assets</title>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="full-screen" content="true">
-    <meta name="x5-fullscreen" content="true">
-    <meta name="360-fullscreen" content="true">
-    <meta name="renderer" content="webkit">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <style>
-        /* Cores de café definidas */
-        :root {
-            --coffee-dark: #5D4037;
-            --coffee-medium: #8B4513;
-            --coffee-light: #A1887F;
-            --coffee-cream: #D7CCC8;
-            --coffee-lighter: #EFEBE9;
-            --coffee-accent: #6D4C41;
-            --coffee-gradient: linear-gradient(90deg, var(--coffee-medium), var(--coffee-accent));
-        }
-
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            background-color: var(--coffee-lighter);
-            color: var(--coffee-dark);
-            overflow-x: hidden;
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
-        /* Estrutura principal corrigida */
-        #app, .applang {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
+        .animate-slide-up {
+            animation: slideUp 0.3s ease-out;
         }
-
-        .page {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        
+        .responsive-text {
+            white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        
+        .smaller-text {
+            font-size: 0.85rem;
         }
 
-        /* Cabeçalho fixo */
-        .headers {
+        .toast {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #494a49;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
             z-index: 1000;
-            background: var(--coffee-gradient) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            max-width: 80%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .toast.show {
+            opacity: 1;
         }
 
-        .head {
-            background: var(--coffee-gradient) !important;
+        .hidden {
+            display: none;
         }
-
-        /* Container de conteúdo rolável */
-        .content-container {
-            flex: 1;
-            overflow-y: auto;
-            padding-top: 43px; /* Altura do cabeçalho */
-            padding-bottom: 50px; /* Altura do rodapé */
-            -webkit-overflow-scrolling: touch; /* Scroll suave em dispositivos móveis */
+        
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
-        .content-scroll {
-            min-height: 100%;
-        }
-
-        /* Rodapé fixo */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: var(--coffee-gradient) !important;
-        }
-
-        /* Estilos existentes mantidos */
-        .container {
-            background-color: transparent;
-        }
-
-        .bgs {
-            background-color: var(--coffee-lighter);
-        }
-
-        .itemBox {
-            background-color: var(--coffee-cream);
-            border-radius: 12px;
-            margin: 10px;
-            padding: 15px;
-            border: 1px solid var(--coffee-light);
-        }
-
-        .income_box {
-            background: var(--coffee-gradient) !important;
-            color: white !important;
-            border-radius: 12px;
-            padding: 15px;
-        }
-
-        .income_box .name {
-            color: white !important;
-        }
-
-        .income_box .am {
-            color: white !important;
-        }
-
-        .income_box .qb li {
-            background-color: rgba(255,255,255,0.2);
-            border-radius: 8px;
-            padding: 10px;
-            margin: 5px 0;
-        }
-
-        .income_box .qb .n {
-            color: white !important;
-        }
-
-        .income_box .qb .s {
-            color: white !important;
-            font-weight: bold;
-        }
-
-        .bonus-info {
-            background: var(--coffee-cream) !important;
-            border: 1px solid var(--coffee-medium) !important;
-            color: var(--coffee-dark) !important;
-            border-radius: 8px;
-            margin: 10px;
-            padding: 15px;
-        }
-
-        .tab {
-            background-color: var(--coffee-cream);
-            border-radius: 12px;
-            margin: 10px;
-            padding: 10px;
-        }
-
-        .tab li {
-            background-color: var(--coffee-lighter);
-            border: 1px solid var(--coffee-light);
-            border-radius: 8px;
-            padding: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .tab li:hover {
-            background-color: var(--coffee-medium);
-        }
-
-        .tab .s0, .tab .s1 {
-            color: var(--coffee-dark) !important;
-        }
-
-        .tab li:hover .s0, .tab li:hover .s1 {
-            color: white !important;
-        }
-
-        .nav1 {
-            background-color: var(--coffee-cream);
-        }
-
-        .nav1 li {
-            background-color: var(--coffee-lighter);
-            border: 1px solid var(--coffee-light);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .nav1 li:hover {
-            background-color: var(--coffee-medium);
+        
+        .card-hover:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
-
-        .nav1 li p {
-            color: var(--coffee-dark) !important;
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         }
-
-        .nav1 li:hover p {
-            color: white !important;
-        }
-
-        .lucku_bann {
-            background-color: var(--coffee-cream);
-            border-radius: 12px;
-            margin: 10px;
-            padding: 15px;
-            border: 1px solid var(--coffee-light);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .lucku_bann:hover {
-            background-color: var(--coffee-medium);
-            color: white !important;
-        }
-
-        .lucku_bann .item {
-            color: var(--coffee-dark);
-            font-weight: bold;
-        }
-
-        .lucku_bann:hover .item {
-            color: white !important;
-        }
-
-        .footers {
-            background: transparent;
-        }
-
-        .footers .item {
-            color: white !important;
-        }
-
-        .footers .item:hover {
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 8px;
-        }
-
-        /* Texto em branco para elementos importantes */
-        .head .name {
-            color: white !important;
-        }
-
-        #uid div {
-            color: white !important;
-        }
-
-        #uid div:first-child {
-            color: rgba(255,255,255,0.8) !important;
-        }
-
-        /* Popup e modais */
-        .popup_box {
-            background-color: var(--coffee-cream);
-            border: 1px solid var(--coffee-light);
-            border-radius: 12px;
-        }
-
-        .line ul li {
-            color: var(--coffee-dark);
-        }
-
-        .line ul li:hover {
-            background-color: var(--coffee-medium);
-            color: white !important;
-        }
-
-        /* Botão de sair no final */
-        .logout-section {
-            margin: 20px 10px;
-            text-align: center;
-        }
-
-        .logout-btn {
-            background-color: var(--coffee-cream);
-            border: 1px solid var(--coffee-light);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            width: 100%;
-            color: var(--coffee-dark);
-        }
-
-        .logout-btn:hover {
-            background-color: var(--coffee-medium);
-            color: white !important;
-        }
-    </style>
-    <link href="https://aitech360.site/public/static/css/app.c1933b14.css" rel="preload" as="style">
-    <link href="https://aitech360.site/public/static/css/chunk-vant.d14f5539.css" rel="preload" as="style">
-    <link href="https://aitech360.site/public/static/css/chunk-vendors.794edbf9.css" rel="preload" as="style">
-    <link href="https://aitech360.site/public/static/css/chunk-vant.d14f5539.css" rel="stylesheet">
-    <link href="https://aitech360.site/public/static/css/chunk-vendors.794edbf9.css" rel="stylesheet">
-    <link href="https://aitech360.site/public/static/css/app.c1933b14.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-bb5a8aa2.30a0a654.css">
-    <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-5576a184.9f52f39a.css">
-    <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-3b94db02.5929650c.css">
-    <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-a6d04a00.3a1821fc.css">
-    <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-5ba702ec.7902583a.css">
-    <link rel="stylesheet" type="text/css" href="https://aitech360.site/public/static/css/chunk-9884782a.e91864af.css">
-    <style>
-        .list .it .n[data-v-35d43c50] {
-            font-size: 15px;
+        
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-<body class="w856">
-<div id="app" class="applang">
-    <div data-v-6e534c71="" data-v-35d43c50="" class="page">
-        <!-- Cabeçalho fixo -->
-        <div data-v-6e534c71="" class="headers">
-            <div data-v-a53c4a36="" data-v-35d43c50="" class="head" data-v-6e534c71="">
-                <div data-v-a53c4a36="" class="container flex">
-                    <div data-v-a53c4a36="" class="back"><img data-v-a53c4a36=""
-                                                              src="https://i.postimg.cc/0yGRHYfx/image.png"
-                                                              alt=""></div>
-                    <div data-v-a53c4a36="" class="name tac" style="color: white !important;"> Blommer</div>
-                    <div data-v-a53c4a36="" class="flex1"></div>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+    <div class="max-w-[500px] mx-auto min-h-screen pb-24">
+        <!-- Toast para mensagens -->
+        <div id="toast" class="toast hidden">
+            <p id="toast-message"></p>
+        </div>
+
+        <!-- Cabeçalho com informações do usuário -->
+        <div class="gradient-bg text-white px-4 pt-8 pb-6 rounded-b-3xl shadow-lg">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="relative w-16 h-16 flex-shrink-0">
+                    <img id="profile-img-preview" src="img/logo1.jpg" alt="Foto de Perfil" class="w-full h-full rounded-full object-cover border-2 border-white shadow">
                 </div>
-                <div data-v-a53c4a36=""></div>
+                <div class="min-w-0 flex-1">
+                    <p id="user-phone" class="text-sm font-medium responsive-text">Telefone: Carregando...</p>
+                    <p id="user-balance" class="text-xl font-bold">KZ 0,00</p>
+                </div>
             </div>
-        </div>
-        
-        <!-- Conteúdo rolável -->
-        <div data-v-6e534c71="" id="scroll" class="content-container">
-            <div data-v-6e534c71="" id="content" class="content-scroll">
-                <div data-v-35d43c50="" data-v-6e534c71="" class="bgs">
-                    <div data-v-35d43c50="" data-v-6e534c71="" class="container">
-                        <div data-v-35d43c50="" data-v-6e534c71="" class="itemBox">
-                            <div data-v-35d43c50="" data-v-6e534c71="" class="income_box b">
-                              <div data-v-35d43c50="" data-v-6e534c71="" class="name" style="color: white !important;">Saldo Real</div>
-<div data-v-35d43c50="" data-v-6e534c71="" class="flex" style="justify-content: space-between; align-items: center;">
-
-    <!-- Saldo -->
-    <div class="am" style="white-space: nowrap; font-weight: bold; color: #fff !important;">
-        KZ 
-    </div>
-
-    <!-- Telefone -->
-    <div style="text-align: right; color: #fff !important; font-size: 14px;" id="uid">
-        <div style="font-size: 12px; color: rgba(255,255,255,0.8) !important; font-weight: normal; margin-bottom: 2px;">
-            Número telefone
-        </div>
-        <div style="font-weight: bold; color: #fff !important;">
             
-        </div>
-    </div>
-
-</div>
-
-                                
-                                <ul data-v-35d43c50="" data-v-6e534c71="" class="qb wrap bet">
-                                    <li data-v-35d43c50="" data-v-6e534c71="">
-                                        <div data-v-35d43c50="" data-v-6e534c71="" class="n" style="color: white !important;">Comissão da equipe de hoje</div>
-                                        <div data-v-35d43c50="" data-v-6e534c71="" class="s" style="color: white !important;">
-                                                                                        KZ 0
-                                        </div>
-                                    </li>
-                                    <li data-v-35d43c50="" data-v-6e534c71="">
-                                        <div data-v-35d43c50="" data-v-6e534c71="" class="n" style="color: white !important;">Hoje minha comissão</div>
-                                        <div data-v-35d43c50="" data-v-6e534c71="" class="s" style="color: white !important;">
-                                                                                        KZ 0
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                               
-                                                <ul data-v-35d43c50="" data-v-6e534c71="" class="tab flex">
-                            <li data-v-35d43c50="" data-v-6e534c71=""
-                                onclick="window.location.href='/deposito.html'"><img data-v-35d43c50=""
-                                                                                            data-v-6e534c71=""
-                                                                                            src="https://aitech360.site/public/download (34).png"
-                                                                                            alt="">
-                                <div data-v-35d43c50="" data-v-6e534c71="" class="s0" style="color: var(--coffee-dark) !important;">Recarregar</div>
-                            </li>
-                            <li data-v-35d43c50="" data-v-6e534c71=""
-                                onclick="window.location.href='/retirada.html'"><img data-v-35d43c50=""
-                                                                                                 data-v-6e534c71=""
-                                                                                                 src="https://aitech360.site/public/download (34).png"
-                                                                                                 alt="">
-                                <div data-v-35d43c50="" data-v-6e534c71="" class="s1" style="color: var(--coffee-dark) !important;">Retirar</div>
-                            </li>
-                        </ul> <div data-v-98526a88="" data-v-6e534c71="" class="lucku_bann"
+            <!-- Cartão de status VIP -->
+            <div class="bg-white/20 backdrop-blur-sm rounded-xl p-3 mt-2">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-xs opacity-90">Status VIP</p>
+                        <p id="vip-level" class="text-sm font-semibold">VIP 0</p>
                     </div>
-               
-                 
-                
-                
-                
-                                 </div> <div data-v-98526a88="" data-v-6e534c71="" class="itemBox">
-                    <ul data-v-98526a88="" data-v-6e534c71="" class="nav1">
-                        <li data-v-98526a88="" data-v-6e534c71=""
-                            onclick="window.location.href='/historico1.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://aitech360.site/public/download (28).png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Registro de recarga</p></div>
-                        </li>
-                        <li data-v-98526a88="" data-v-6e534c71=""
-                            onclick="window.location.href='/historico.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://aitech360.site/public/download (29).png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Retirar registro</p></div>
-                        </li>
-
-                        <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='/seting.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://aitech360.site/public/download (30).png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Alteração de senha</p></div>
-                        </li>
-
-         </div>
-                
-                                                 <div data-v-98526a88="" data-v-6e534c71="" class="itemBox">
-                    <ul data-v-98526a88="" data-v-6e534c71="" class="nav1">
-                        <li data-v-98526a88="" data-v-6e534c71=""
-                            onclick="window.location.href='depois'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://aitech360.site/public/download (31).png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="#" style="color: var(--coffee-dark) !important;">Cadastrar Chave Pix</p></div>
-                        </li>
-
-                         <li data-v-98526a88="" data-v-6e534c71=""
-                            onclick="window.location.href='/geral.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://aitech360.site/public/download (29).png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Registro <br> Geral</p></div>
-                        </li>
-                        
-
-                        <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='https://t.me/blommerx'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://aitech360.site/public/download (33).png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--coffee-dark) !important;">Ajuda</p></div>
-                        </li>
-                   </div>
-                   
-                   <!-- Botão de Sair adicionado no final -->
-                   <div class="logout-section">
-                       <div class="logout-btn" onclick="logout()">
-                           Sair
-                       </div>
-                   </div>
-                   
-                <div data-v-35d43c50="" data-v-6e534c71="" class="container">
-                    <div data-v-a386f8f2="" class="popup_box" id="sidebar">
-                        <div data-v-a2a35538="" data-v-a386f8f2="" class="my">
-                            <div data-v-a2a35538="" class="container">
-                                <link rel="stylesheet" type="text/css" href="chunk-57673b88.2a470e9d.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-5576a184.9f52f39a.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-3b94db02.5929650c.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-a6d04a00.3a1821fc.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-9884782a.e91864af.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-7d55f7da.3489dd4d.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-8917473a.d09efe5c.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-159f11a9.a3a3db2b.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-5ba702ec.7902583a.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-17da4a2a.50c915cc.css">
-                                <link rel="stylesheet" type="text/css" href="chunk-c84dac42.bdbf9084.css">
-                                <style>
-                                    .line li[data-v-a2a35538] {
-                                        position: relative;
-                                        height: 46px;
-                                        padding: 0;
-                                    }
-                                </style>
-                                <div data-v-a2a35538="" class="line">
-                                    <ul data-v-a2a35538="">
-                                       
-                  <div data-v-98526a88="" data-v-6e534c71="" class="lucku_bann"
-                    
+                    <div class="text-right">
+                        <p class="text-xs opacity-90">Próximo nível</p>
+                        <p id="next-vip" class="text-sm font-semibold">KZ 5.000,00</p>
                     </div>
-                 </div>
-                </div>  
-                                        
                 </div>
-                <!-- Removido o botão de sair duplicado -->
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div data-v-a53c4a36=""></div>
+                <div class="w-full bg-white/30 rounded-full h-2 mt-2">
+                    <div id="vip-progress" class="bg-white h-2 rounded-full" style="width: 0%"></div>
                 </div>
             </div>
         </div>
-        
-        <!-- Rodapé fixo -->
-        <div data-v-6e534c71="" class="footer">
-    <div data-v-47e63dc4="" data-v-98526a88="" class="footers" data-v-6e534c71="">
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
-            <div data-v-47e63dc4="" class="on"><img data-v-47e63dc4=""
-                                                    src="https://aitech360.site/public/download (23).png"
-                                                    alt=""><span data-v-47e63dc4="" style="color: white !important;"> Lar </span></div>
-        </div>
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/tarefa.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
-                                                  src="https://aitech360.site/public/download (24).png"
-                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Meus ganhos </span></div>
-        </div>
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/produtos.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4="" src="img/footer3.jpg"
-                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;">Plano Café </span></div>
-        </div>
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/equipe.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
-                                                  src="https://aitech360.site/public/download (26).png"
-                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Equipe </span></div>
-        </div>
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/dashboard.html'">
-            <div data-v-47e63dc4="" class=""><img data-v-47e63dc4=""
-                                                  src="https://aitech360.site/public/download (27).png"
-                                                  alt=""><span data-v-47e63dc4="" style="color: white !important;"> Meu </span></div>
-        </div>
-    </div>
-</div>
-    </div>
-</div>
 
-<script>
-// Suas funções JavaScript permanecem exatamente as mesmas
-// Configuração da API
-const API_BASE_URL = 'https://bd-p4q7.onrender.com';
-const TOKEN_EXPIRY_HOURS = 5;
-
-// Função para seleção de código de área
-function quhao_select() {
-    layer.open({
-        type: 1,
-        content: '<div style="padding:0 10px;"><div style="height:200px;overflow-y:scroll;"><div class="guojia-list-item" onclick="qhselect(1)">(USA) +1</div><div class="guojia-list-item" onclick="qhselect(7)">(Russia) +7</div><div class="guojia-list-item" onclick="qhselect(20)">(Egypt) +20</div><div class="guojia-list-item" onclick="qhselect(27)">(South Africa) +27</div><div class="guojia-list-item" onclick="qhselect(30)">(Greece) +30</div><div class="guojia-list-item" onclick="qhselect(31)">(Netherlands) +31</div><div class="guojia-list-item" onclick="qhselect(32)">(Belgium) +32</div><div class="guojia-list-item" onclick="qhselect(33)">(France) +33</div><div class="guojia-list-item" onclick="qhselect(34)">(Spain) +34</div><div class="guojia-list-item" onclick="qhselect(39)">(Italy) +39</div><div class="guojia-list-item" onclick="qhselect(40)">(Romania) +40</div><div class="guojia-list-item" onclick="qhselect(41)">(Switzerland) +41</div><div class="guojia-list-item" onclick="qhselect(43)">(Austria) +43</div><div class="guojia-list-item" onclick="qhselect(44)">(United Kingdom) +44</div><div class="guojia-list-item" onclick="qhselect(45)">(Denmark) +45</div><div class="guojia-list-item" onclick="qhselect(46)">(Sweden) +46</div><div class="guojia-list-item" onclick="qhselect(47)">(Norway) +47</div><div class="guojia-list-item" onclick="qhselect(48)">(Poland) +48</div><div class="guojia-list-item" onclick="qhselect(49)">(Germany) +49</div><div class="guojia-list-item" onclick="qhselect(51)">(Peru) +51</div><div class="guojia-list-item" onclick="qhselect(52)">(Mexico) +52</div><div class="guojia-list-item" onclick="qhselect(53)">(Cuba) +53</div><div class="guojia-list-item" onclick="qhselect(54)">(Argentina) +54</div><div class="guojia-list-item" onclick="qhselect(55)">(Brazil) +55</div><div class="guojia-list-item" onclick="qhselect(56)">(Chile) +56</div><div class="guojia-list-item" onclick="qhselect(57)">(Colombia) +57</div><div class="guojia-list-item" onclick="qhselect(58)">(Venezuela) +58</div><div class="guojia-list-item" onclick="qhselect(60)">(Malaysia) +60</div><div class="guojia-list-item" onclick="qhselect(61)">(Australia) +61</div><div class="guojia-list-item" onclick="qhselect(62)">(Indonesia) +62</div><div class="guojia-list-item" onclick="qhselect(63)">(Philippines) +63</div><div class="guojia-list-item" onclick="qhselect(64)">(New Zealand) +64</div><div class="guojia-list-item" onclick="qhselect(65)">(Singapore) +65</div><div class="guojia-list-item" onclick="qhselect(66)">(Thailand) +66</div><div class="guojia-list-item" onclick="qhselect(81)">(Japan) +81</div><div class="guojia-list-item" onclick="qhselect(82)">(South Korea) +82</div><div class="guojia-list-item" onclick="qhselect(84)">(Vietnam) +84</div><div class="guojia-list-item" onclick="qhselect(86)">(China) +86</div><div class="guojia-list-item" onclick="qhselect(90)">(Turkey) +90</div><div class="guojia-list-item" onclick="qhselect(91)">(India) +91</div><div class="guojia-list-item" onclick="qhselect(92)">(Pakistan) +92</div><div class="guojia-list-item" onclick="qhselect(93)">(Afghanistan) +93</div><div class="guojia-list-item" onclick="qhselect(94)">(Sri Lanka) +94</div><div class="guojia-list-item" onclick="qhselect(95)">(Myanmar) +95</div><div class="guojia-list-item" onclick="qhselect(98)">(Iran) +98</div><div class="guojia-list-item" onclick="qhselect(213)">(Algeria) +213</div><div class="guojia-list-item" onclick="qhselect(216)">(Tunisia) +216</div><div class="guojia-list-item" onclick="qhselect(218)">(Libya) +218</div><div class="guojia-list-item" onclick="qhselect(220)">(Gambia) +220</div><div class="guojia-list-item" onclick="qhselect(221)">(Senegal) +221</div><div class="guojia-list-item" onclick="qhselect(222)">(Mauritania) +222</div><div class="guojia-list-item" onclick="qhselect(223)">(Mali) +223</div><div class="guojia-list-item" onclick="qhselect(224)">(Guinea) +224</div><div class="guojia-list-item" onclick="qhselect(225)">(Côte d\'Ivoire) +225</div><div class="guojia-list-item" onclick="qhselect(226)">(Burkina Faso) +226</div><div class="guojia-list-item" onclick="qhselect(227)">(Niger) +227</div><div class="guojia-list-item" onclick="qhselect(228)">(Togo) +228</div><div class="guojia-list-item" onclick="qhselect(229)">(Benin) +229</div><div class="guojia-list-item" onclick="qhselect(230)">(Mauritius) +230</div><div class="guojia-list-item" onclick="qhselect(231)">(Liberia) +231</div><div class="guojia-list-item" onclick="qhselect(232)">(Sierra Leone) +232</div><div class="guojia-list-item" onclick="qhselect(233)">(Ghana) +233</div><div class="guojia-list-item" onclick="qhselect(234)">(Nigeria) +234</div><div class="guojia-list-item" onclick="qhselect(235)">(Chad) +235</div><div class="guojia-list-item" onclick="qhselect(237)">(Cameroon) +237</div><div class="guojia-list-item" onclick="qhselect(238)">(Cape Verde) +238</div><div class="guojia-list-item" onclick="qhselect(244)">(Angola) +244</div><div class="guojia-list-item" onclick="qhselect(974)">(Qatar) +974</div><div class="guojia-list-item" onclick="qhselect(994)">(Azerbaijan) +994</div></div></div>',
-        anim: 'up',
-        style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;'
-    });
-}
-
-function qhselect(quhao) {
-    quhao = quhao || $("#quhaose").val();
-    $("#area_code").html(quhao);
-    $("#area_codei").val(quhao);
-    layer.closeAll();
-}
-
-// Função para mostrar/ocultar loading
-function showLoading(show) {
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    if (loadingOverlay) {
-        loadingOverlay.style.display = show ? 'flex' : 'none';
-    } else if (show) {
-        // Criar overlay de loading se não existir
-        const overlay = document.createElement('div');
-        overlay.id = 'loadingOverlay';
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        `;
-        overlay.innerHTML = `
-            <div style="background: white; padding: 20px; border-radius: 8px;">
-                <p>Carregando...</p>
+        <!-- Seção de botões Recarregar e Sacar -->
+        <div class="px-4 -mt-4 mb-4">
+            <div class="bg-white rounded-2xl p-4 shadow-lg">
+                <div class="flex gap-3">
+                    <a href="retirada.html" class="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow text-center">
+                        Recarregar
+                    </a>
+                    <a href="deposito.html" class="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow text-center">
+                        Sacar
+                    </a>
+                </div>
             </div>
-        `;
-        document.body.appendChild(overlay);
-    }
-}
+        </div>
 
-// Função para carregar dados do usuário
-async function loadUserData() {
-    try {
-        const tokenData = localStorage.getItem('user_token');
-        if (!tokenData) {
-            window.location.href = '/index.html';
-            return;
-        }
-
-        const { token } = JSON.parse(tokenData);
-        
-        const response = await fetch(`${API_BASE_URL}/user/profile`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            if (data.success) {
-                // Atualizar os dados na página
-                document.querySelector('.am').textContent = `KZ ${data.data.wallet_balance || 0}`;
-                document.getElementById('uid').querySelector('div:last-child').textContent = data.data.mobile || 'N/A';
+        <!-- Nova Seção de Estatísticas -->
+        <div class="px-4 mb-4">
+            <div class="grid grid-cols-2 gap-3">
+                <!-- Linha 1 -->
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Ganhos de ontem</p>
+                        <p id="yesterday-earnings" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Ganhos de hoje</p>
+                        <p id="today-earnings" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
                 
-                // Atualizar comissões (você pode adicionar chamadas para outras APIs aqui)
-                updateCommissionData(token);
-            }
-        } else {
-            console.error('Erro ao carregar dados do usuário');
-        }
-    } catch (error) {
-        console.error('Erro:', error);
-    }
-}
+                <!-- Linha 2 -->
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Ganhos desta semana</p>
+                        <p id="week-earnings" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Ganhos deste mês</p>
+                        <p id="month-earnings" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                
+                <!-- Linha 3 -->
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Renda da equipe</p>
+                        <p id="team-income" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow card-hover relative">
+                    <div class="absolute top-3 right-3 opacity-30">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="#166534"/>
+                            <path d="M12 6C8.69 6 6 8.69 6 12C6 15.31 8.69 18 12 18C15.31 18 18 15.31 18 12C18 8.69 15.31 6 12 6ZM10.5 14.5L7.5 11.5L8.91 10.09L10.5 11.67L15.09 7.09L16.5 8.5L10.5 14.5Z" fill="#166534"/>
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-gray-500 mb-1">Receita total</p>
+                        <p id="total-income" class="text-base font-bold text-green-600 loading">KZ 0,00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Campo Crescimento -->
+            <div class="mt-4 text-center">
+                <div class="bg-white rounded-xl p-4 shadow card-hover">
+                    <p class="text-sm font-semibold text-green-800 mb-2">Crescimento</p>
+                    <div class="w-full bg-green-100 rounded-full h-3">
+                        <div id="growth-bar" class="bg-gradient-to-r from-green-500 to-emerald-600 h-3 rounded-full" style="width: 45%"></div>
+                    </div>
+                    <p id="growth-percentage" class="text-xs text-gray-600 mt-2">45% este mês</p>
+                </div>
+            </div>
+        </div>
 
-// Função para atualizar dados de comissão
-async function updateCommissionData(token) {
-    try {
-        // Buscar dados da equipe
-        const teamResponse = await fetch(`${API_BASE_URL}/api/team/statistics`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
+        <!-- Cartões de informações adicionais -->
+        <div class="px-4 mb-4">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-4 shadow card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs opacity-80 mb-1">Check-in Diário</p>
+                            <p id="checkin-status" class="text-sm font-semibold">Disponível</p>
+                        </div>
+                        <i class='bx bx-calendar-check text-xl'></i>
+                    </div>
+                    <button id="checkin-btn" class="mt-2 w-full bg-white text-green-600 py-1 rounded-lg text-xs font-semibold hover:bg-green-50 transition">
+                        Fazer Check-in
+                    </button>
+                </div>
+                
+                <div class="bg-gradient-to-r from-emerald-500 to-green-600 text-white rounded-xl p-4 shadow card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs opacity-80 mb-1">Membros na Equipe</p>
+                            <p id="team-members" class="text-sm font-semibold">0</p>
+                        </div>
+                        <i class='bx bx-group text-xl'></i>
+                    </div>
+                    <a href="equipe.html" class="mt-2 block w-full bg-white text-green-600 py-1 rounded-lg text-xs font-semibold text-center hover:bg-green-50 transition">
+                        Ver Equipe
+                    </a>
+                </div>
+            </div>
+        </div>
 
-        if (teamResponse.ok) {
-            const teamData = await teamResponse.json();
-            if (teamData.success) {
-                // Atualizar comissões na página (ajuste os seletores conforme necessário)
-                const commissionElements = document.querySelectorAll('.s');
-                if (commissionElements.length >= 2) {
-                    // Comissão da equipe de hoje
-                    commissionElements[0].textContent = `KZ ${teamData.data.income_analysis.valid_withdrawal || 0}`;
-                    // Minha comissão de hoje
-                    commissionElements[1].textContent = `KZ ${teamData.data.income_analysis.valid_withdrawal || 0}`;
+        <!-- Cartão de bônus e convite -->
+        <div class="px-4 mb-4">
+            <div class="bg-gradient-to-r from-green-400 to-emerald-500 text-white rounded-xl p-4 shadow card-hover">
+                <div class="flex items-center justify-between mb-2">
+                    <div>
+                        <p class="text-sm font-semibold">Bônus de Convite</p>
+                        <p class="text-xs opacity-80">Ganhe 1% em cada recarga</p>
+                    </div>
+                    <i class='bx bx-gift text-xl'></i>
+                </div>
+                <div class="bg-white/20 rounded-lg p-2 text-center">
+                    <p class="text-xs mb-1">Seu código de convite</p>
+                    <p id="invite-code" class="text-sm font-bold">CARREGANDO...</p>
+                </div>
+                <button onclick="copyInviteCode()" class="mt-2 w-full bg-white text-green-600 py-2 rounded-lg text-sm font-semibold hover:bg-green-50 transition">
+                    Copiar Código
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu de navegação rápida -->
+        <div class="px-4 mb-4">
+            <h3 class="text-lg font-bold text-green-800 mb-3">Acesso Rápido</h3>
+            <div class="grid grid-cols-4 gap-3 text-center">
+                <a href="renda.html" class="bg-white rounded-xl p-3 shadow card-hover">
+                    <i class='bx bx-trending-up text-green-600 text-xl mb-1'></i>
+                    <p class="text-xs font-medium text-gray-700">Renda</p>
+                </a>
+                <a href="equipe.html" class="bg-white rounded-xl p-3 shadow card-hover">
+                    <i class='bx bx-star text-green-600 text-xl mb-1'></i>
+                    <p class="text-xs font-medium text-gray-700">VIP</p>
+                </a>
+                <a href="iban.html" class="bg-white rounded-xl p-3 shadow card-hover">
+                    <i class='bx bx-bank text-green-600 text-xl mb-1'></i>
+                    <p class="text-xs font-medium text-gray-700">Banco</p>
+                </a>
+                <a href="geral.html" class="bg-white rounded-xl p-3 shadow card-hover">
+                    <i class='bx bx-history text-green-600 text-xl mb-1'></i>
+                    <p class="text-xs font-medium text-gray-700">Histórico</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Menu de opções -->
+        <div class="px-4 space-y-3 text-sm">
+            <a href="geral.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
+                <div class="flex items-center gap-2">
+                    <i class='bx bx-history text-green-600'></i>
+                    Histórico de Depósitos
+                </div>
+                <span class="text-gray-400">›</span>
+            </a>
+            <a href="historico-saques.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
+                <div class="flex items-center gap-2">
+                    <i class='bx bx-money-withdraw text-green-600'></i>
+                    Histórico de Retiradas
+                </div>
+                <span class="text-gray-400">›</span>
+            </a>
+            <a href="iban.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
+                <div class="flex items-center gap-2">
+                    <i class='bx bx-credit-card text-green-600'></i>
+                    Número da Conta Bancária
+                </div>
+                <span class="text-gray-400">›</span>
+            </a>
+            <a href="seting.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
+                <div class="flex items-center gap-2">
+                    <i class='bx bx-lock-alt text-green-600'></i>
+                    Alterar Senha
+                </div>
+                <span class="text-gray-400">›</span>
+            </a>
+            <a target="_blank" href="online.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
+                <div class="flex items-center gap-2">
+                    <i class='bx bx-support text-green-600'></i>
+                    Serviço Online
+                </div>
+                <span class="text-gray-400">›</span>
+            </a>
+            <a href="#" class="bg-white p-3 rounded-xl shadow flex opacity-40 items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class='bx bxl-play-store text-green-600'></i>
+                    Baixar App
+                </div>
+                <span class="text-gray-400">›</span>
+            </a>
+        </div>
+
+        <!-- Botão de logout -->
+        <div class="text-center mt-6">
+            <button onclick="logout()" class="text-gray-500 text-sm hover:text-gray-700 transition">Terminar Sessão</button>
+        </div>
+
+        <!-- Menu de navegação com ícones de imagem -->
+<nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+  <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+    
+    <li>
+      <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+        <img src="img/home.png" alt="Início" class="w-6 h-6">
+        <span>Início</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+        <span>Renda</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+        <span>VIP</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+        <span>Bancária</span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="perfil.html" class="flex flex-col items-center gap-0.5 opacity-80">
+        <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+        <span>Perfil</span>
+      </a>
+    </li>
+
+  </ul>
+</nav>
+    </div>
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+
+        // Função para obter o token do localStorage
+        function getToken() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return null;
+            
+            try {
+                const { token, expiry } = JSON.parse(tokenData);
+                // Verificar se o token expirou
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return null;
                 }
+                return token;
+            } catch (e) {
+                console.error('Erro ao obter token:', e);
+                return null;
             }
         }
-    } catch (error) {
-        console.error('Erro ao carregar dados de comissão:', error);
-    }
-}
 
-// Função principal de login
-async function dosubmit() {
-    const areaCode = $("#area_code").html();
-    const user_name = $("#user_name").val();
-    const password = $("#password").val();
-    
-    // Validações
-    if (!user_name) {
-        layer.open({
-            content: 'Digite o número de telefone',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
-    
-    if (!password) {
-        layer.open({
-            content: 'Digite a senha',
-            skin: 'msg',
-            time: 2
-        });
-        return false;
-    }
+        // Função para mostrar toast
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('show');
+            
+            // Cor de fundo baseada no tipo
+            if (type === 'success') {
+                toast.style.backgroundColor = '#10B981';
+            } else if (type === 'error') {
+                toast.style.backgroundColor = '#EF4444';
+            } else {
+                toast.style.backgroundColor = '#166534';
+            }
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.classList.add('hidden');
+            }, 3000);
+        }
 
-    // Combinar código do país com número de telefone
-    const mobile = areaCode + user_name;
+        // Função para copiar código de convite
+        function copyInviteCode() {
+            const inviteCode = document.getElementById('invite-code').textContent;
+            if (inviteCode && inviteCode !== 'CARREGANDO...') {
+                navigator.clipboard.writeText(inviteCode).then(() => {
+                    showToast('Código copiado para a área de transferência!', 'success');
+                }).catch(err => {
+                    console.error('Erro ao copiar código: ', err);
+                    showToast('Erro ao copiar código', 'error');
+                });
+            }
+        }
 
-    showLoading(true);
+        // Função para fazer logout
+        async function logout() {
+            try {
+                const token = getToken();
+                if (!token) {
+                    // Se não há token, apenas redireciona
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    window.location.href = 'login.html';
+                    return;
+                }
 
-    try {
-        // Fazer requisição para a API de login
-        const response = await fetch(`${API_BASE_URL}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                mobile: mobile,
-                password: password
-            })
-        });
+                // Tentar fazer logout na API
+                const response = await fetch(`${API_BASE_URL}/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
 
-        const data = await response.json();
+                // Independente da resposta da API, limpar localStorage e redirecionar
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_id');
+                
+                showToast('Sessão terminada com sucesso', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
 
-        if (data.success) {
-            // Login bem-sucedido - Armazenar no localStorage com expiração
-            const tokenData = {
-                token: data.data.token,
-                expiry: Date.now() + (TOKEN_EXPIRY_HOURS * 60 * 60 * 1000) // 5 horas a partir de agora
+            } catch (error) {
+                console.error('Erro no logout:', error);
+                // Mesmo com erro, limpar localStorage e redirecionar
+                localStorage.removeItem('user_token');
+                localStorage.removeItem('user_id');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Função para buscar dados do perfil
+        async function fetchProfileData() {
+            try {
+                const token = getToken();
+                if (!token) {
+                    showToast('Sessão expirada. Faça login novamente.', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                    return;
+                }
+
+                // Buscar dados do perfil
+                const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        showToast('Sessão expirada. Faça login novamente.', 'error');
+                        localStorage.removeItem('user_token');
+                        localStorage.removeItem('user_id');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 2000);
+                        return;
+                    }
+                    throw new Error('Erro ao carregar dados do perfil');
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateProfileUI(data.data);
+                } else {
+                    throw new Error(data.message || 'Erro ao carregar dados');
+                }
+
+            } catch (error) {
+                console.error('Erro ao buscar dados do perfil:', error);
+                showToast('Erro ao carregar dados: ' + error.message, 'error');
+            }
+        }
+
+        // Função para calcular ganhos baseado nas tarefas
+        async function calculateEarningsFromTasks() {
+            try {
+                const token = getToken();
+                if (!token) return;
+
+                // Buscar histórico de tarefas
+                const response = await fetch(`${API_BASE_URL}/api/tasks/history`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar histórico de tarefas');
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    const tasks = data.data.tasks || [];
+                    return calculateEarnings(tasks);
+                } else {
+                    throw new Error(data.message || 'Erro ao processar tarefas');
+                }
+
+            } catch (error) {
+                console.error('Erro ao calcular ganhos:', error);
+                // Retornar valores padrão em caso de erro
+                return {
+                    yesterday: 0,
+                    today: 0,
+                    week: 0,
+                    month: 0
+                };
+            }
+        }
+
+        // Função para calcular ganhos baseado nas datas das tarefas
+        function calculateEarnings(tasks) {
+            const now = new Date();
+            const yesterday = new Date(now);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            const weekAgo = new Date(now);
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            
+            const monthAgo = new Date(now);
+            monthAgo.setMonth(monthAgo.getMonth() - 1);
+
+            // Filtrar tarefas por período
+            const yesterdayTasks = tasks.filter(task => {
+                const taskDate = new Date(task.task_date);
+                return taskDate.toDateString() === yesterday.toDateString();
+            });
+
+            const todayTasks = tasks.filter(task => {
+                const taskDate = new Date(task.task_date);
+                return taskDate.toDateString() === now.toDateString();
+            });
+
+            const weekTasks = tasks.filter(task => {
+                const taskDate = new Date(task.task_date);
+                return taskDate >= weekAgo && taskDate <= now;
+            });
+
+            const monthTasks = tasks.filter(task => {
+                const taskDate = new Date(task.task_date);
+                return taskDate >= monthAgo && taskDate <= now;
+            });
+
+            // Calcular totais
+            const earnings = {
+                yesterday: yesterdayTasks.reduce((sum, task) => sum + (task.amount || 0), 0),
+                today: todayTasks.reduce((sum, task) => sum + (task.amount || 0), 0),
+                week: weekTasks.reduce((sum, task) => sum + (task.amount || 0), 0),
+                month: monthTasks.reduce((sum, task) => sum + (task.amount || 0), 0)
             };
+
+            return earnings;
+        }
+
+        // Função para buscar dados da equipe
+        async function fetchTeamData() {
+            try {
+                const token = getToken();
+                if (!token) return;
+
+                const response = await fetch(`${API_BASE_URL}/api/team/statistics`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        updateTeamUI(data.data);
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao buscar dados da equipe:', error);
+            }
+        }
+
+        // Função para atualizar a UI com dados do perfil
+        function updateProfileUI(profileData) {
+            // Atualizar telefone do usuário
+            const userPhoneElement = document.getElementById('user-phone');
+            if (userPhoneElement) {
+                // Se não houver telefone no perfil, usar o ID como fallback
+                const phoneNumber = profileData.mobile || profileData.user_id || 'N/A';
+                userPhoneElement.textContent = `Telefone: ${phoneNumber}`;
+            }
+
+            // Atualizar saldo
+            const userBalanceElement = document.getElementById('user-balance');
+            if (userBalanceElement && profileData.wallet_balance !== undefined) {
+                userBalanceElement.textContent = `KZ ${formatCurrency(profileData.wallet_balance)}`;
+            }
+
+            // Atualizar código de convite se estiver disponível
+            const inviteCodeElement = document.getElementById('invite-code');
+            if (inviteCodeElement && profileData.invitation_code) {
+                inviteCodeElement.textContent = profileData.invitation_code;
+            }
+
+            // Atualizar nível VIP (simulação)
+            const vipLevelElement = document.getElementById('vip-level');
+            const nextVipElement = document.getElementById('next-vip');
+            const vipProgressElement = document.getElementById('vip-progress');
             
-            // Salvar no localStorage (sem cookies)
-            localStorage.setItem('user_token', JSON.stringify(tokenData));
-            localStorage.setItem('user_mobile', user_name);
-            localStorage.setItem('user_id', data.data.user.id);
-            
-            layer.open({
-                content: 'Login realizado com sucesso!',
-                skin: 'msg',
-                time: 2,
-                end: function() {
-                    // Redirecionar para a página principal/dashboard
-                    window.location.href = '/dashboard.html';
+            if (vipLevelElement && nextVipElement && vipProgressElement) {
+                // Simulação de nível VIP baseado no saldo
+                const balance = profileData.wallet_balance || 0;
+                let vipLevel = 0;
+                let nextLevelAmount = 5000;
+                
+                if (balance >= 2000000) vipLevel = 10;
+                else if (balance >= 1300000) vipLevel = 9;
+                else if (balance >= 800000) vipLevel = 8;
+                else if (balance >= 500000) vipLevel = 7;
+                else if (balance >= 300000) vipLevel = 6;
+                else if (balance >= 150000) vipLevel = 5;
+                else if (balance >= 80000) vipLevel = 4;
+                else if (balance >= 30000) vipLevel = 3;
+                else if (balance >= 10000) vipLevel = 2;
+                else if (balance >= 5000) vipLevel = 1;
+                
+                vipLevelElement.textContent = `VIP ${vipLevel}`;
+                
+                // Calcular progresso para o próximo nível
+                if (vipLevel < 10) {
+                    const currentLevelMin = vipLevel === 0 ? 0 : 
+                                          vipLevel === 1 ? 5000 :
+                                          vipLevel === 2 ? 10000 :
+                                          vipLevel === 3 ? 30000 :
+                                          vipLevel === 4 ? 80000 :
+                                          vipLevel === 5 ? 150000 :
+                                          vipLevel === 6 ? 300000 :
+                                          vipLevel === 7 ? 500000 :
+                                          vipLevel === 8 ? 800000 :
+                                          vipLevel === 9 ? 1300000 : 0;
+                    
+                    nextLevelAmount = vipLevel === 0 ? 5000 :
+                                    vipLevel === 1 ? 10000 :
+                                    vipLevel === 2 ? 30000 :
+                                    vipLevel === 3 ? 80000 :
+                                    vipLevel === 4 ? 150000 :
+                                    vipLevel === 5 ? 300000 :
+                                    vipLevel === 6 ? 500000 :
+                                    vipLevel === 7 ? 800000 :
+                                    vipLevel === 8 ? 1300000 :
+                                    vipLevel === 9 ? 2000000 : 0;
+                    
+                    const progress = ((balance - currentLevelMin) / (nextLevelAmount - currentLevelMin)) * 100;
+                    vipProgressElement.style.width = `${Math.min(progress, 100)}%`;
+                    nextVipElement.textContent = `KZ ${formatCurrency(nextLevelAmount)}`;
+                } else {
+                    vipProgressElement.style.width = '100%';
+                    nextVipElement.textContent = 'Máximo';
+                }
+            }
+        }
+
+        // Função para atualizar estatísticas na UI
+        async function updateEarningsUI() {
+            try {
+                // Mostrar estado de carregamento
+                setEarningsLoading(true);
+                
+                // Calcular ganhos baseado nas tarefas
+                const earnings = await calculateEarningsFromTasks();
+                
+                // Atualizar ganhos de ontem
+                const yesterdayEarningsElement = document.getElementById('yesterday-earnings');
+                if (yesterdayEarningsElement) {
+                    yesterdayEarningsElement.textContent = `KZ ${formatCurrency(earnings.yesterday)}`;
+                    yesterdayEarningsElement.classList.remove('loading');
+                }
+
+                // Atualizar ganhos de hoje
+                const todayEarningsElement = document.getElementById('today-earnings');
+                if (todayEarningsElement) {
+                    todayEarningsElement.textContent = `KZ ${formatCurrency(earnings.today)}`;
+                    todayEarningsElement.classList.remove('loading');
+                }
+
+                // Atualizar ganhos da semana
+                const weekEarningsElement = document.getElementById('week-earnings');
+                if (weekEarningsElement) {
+                    weekEarningsElement.textContent = `KZ ${formatCurrency(earnings.week)}`;
+                    weekEarningsElement.classList.remove('loading');
+                }
+
+                // Atualizar ganhos do mês
+                const monthEarningsElement = document.getElementById('month-earnings');
+                if (monthEarningsElement) {
+                    monthEarningsElement.textContent = `KZ ${formatCurrency(earnings.month)}`;
+                    monthEarningsElement.classList.remove('loading');
+                }
+
+                // Atualizar barra de crescimento baseado nos ganhos do mês
+                const growthBarElement = document.getElementById('growth-bar');
+                const growthPercentageElement = document.getElementById('growth-percentage');
+                if (growthBarElement && growthPercentageElement) {
+                    const growthPercentage = Math.min(100, Math.max(0, (earnings.month / 10000) * 100));
+                    growthBarElement.style.width = `${growthPercentage}%`;
+                    growthPercentageElement.textContent = `${Math.round(growthPercentage)}% este mês`;
+                }
+
+            } catch (error) {
+                console.error('Erro ao atualizar ganhos:', error);
+                // Em caso de erro, definir valores como zero
+                resetEarningsToZero();
+            }
+        }
+
+        // Função para definir estado de carregamento dos ganhos
+        function setEarningsLoading(loading) {
+            const earningsElements = [
+                'yesterday-earnings',
+                'today-earnings', 
+                'week-earnings',
+                'month-earnings',
+                'team-income',
+                'total-income'
+            ];
+
+            earningsElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    if (loading) {
+                        element.classList.add('loading');
+                    } else {
+                        element.classList.remove('loading');
+                    }
                 }
             });
-        } else {
-            layer.open({
-                content: data.message || 'Erro ao fazer login',
-                skin: 'msg',
-                time: 3
+        }
+
+        // Função para resetar ganhos para zero em caso de erro
+        function resetEarningsToZero() {
+            const earningsElements = [
+                'yesterday-earnings',
+                'today-earnings', 
+                'week-earnings',
+                'month-earnings'
+            ];
+
+            earningsElements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = 'KZ 0,00';
+                    element.classList.remove('loading');
+                }
             });
         }
-    } catch (error) {
-        console.error('Erro no login:', error);
-        layer.open({
-            content: 'Erro de conexão com o servidor',
-            skin: 'msg',
-            time: 3
-        });
-    } finally {
-        showLoading(false);
-    }
-}
 
-// Função para verificar se o token no localStorage ainda é válido
-function isTokenValid() {
-    const tokenData = localStorage.getItem('user_token');
-    
-    if (!tokenData) return false;
-    
-    try {
-        const { token, expiry } = JSON.parse(tokenData);
-        
-        // Verificar se o token expirou
-        if (Date.now() > expiry) {
-            // Token expirado, remover do localStorage
-            localStorage.removeItem('user_token');
-            localStorage.removeItem('user_mobile');
-            localStorage.removeItem('user_id');
-            return false;
-        }
-        
-        return true;
-    } catch (e) {
-        console.error('Erro ao verificar token:', e);
-        return false;
-    }
-}
+        // Função para atualizar dados da equipe
+        function updateTeamUI(teamData) {
+            // Atualizar membros da equipe
+            const teamMembersElement = document.getElementById('team-members');
+            if (teamMembersElement && teamData.team_overview) {
+                teamMembersElement.textContent = teamData.team_overview.people_added || 0;
+            }
 
-// Carregar dados do usuário quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    // Verificar se há token válido no localStorage
-    if (isTokenValid()) {
-        // Carregar dados do usuário
-        loadUserData();
-        
-        // Carregar número salvo se existir
-        const savedMobile = localStorage.getItem('user_mobile');
-        if (savedMobile && document.getElementById('user_name')) {
-            document.getElementById('user_name').value = savedMobile;
+            // Atualizar renda da equipe se disponível
+            const teamIncomeElement = document.getElementById('team-income');
+            if (teamIncomeElement && teamData.income_analysis) {
+                teamIncomeElement.textContent = `KZ ${formatCurrency(teamData.income_analysis.valid_withdrawal || 0)}`;
+                teamIncomeElement.classList.remove('loading');
+            }
+
+            // Atualizar receita total
+            const totalIncomeElement = document.getElementById('total-income');
+            if (totalIncomeElement) {
+                // Calcular receita total (ganhos do mês + renda da equipe)
+                const monthEarnings = parseFloat(document.getElementById('month-earnings')?.textContent?.replace('KZ ', '').replace('.', '').replace(',', '.') || 0);
+                const teamIncome = parseFloat(teamIncomeElement.textContent?.replace('KZ ', '').replace('.', '').replace(',', '.') || 0);
+                const totalIncome = monthEarnings + teamIncome;
+                
+                totalIncomeElement.textContent = `KZ ${formatCurrency(totalIncome)}`;
+                totalIncomeElement.classList.remove('loading');
+            }
         }
-    } else {
-        // Se não tem token válido, redirecionar para login
-        window.location.href = '/index.html';
-    }
-    
-    // Tecla Enter para submeter o formulário (apenas se o campo existir)
-    const passwordField = document.getElementById('password');
-    if (passwordField) {
-        passwordField.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                dosubmit();
+
+        // Função para formatar valores monetários
+        function formatCurrency(value) {
+            if (typeof value !== 'number') {
+                value = parseFloat(value) || 0;
+            }
+            return value.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Função para verificar autenticação e carregar dados
+        function initializePage() {
+            const token = getToken();
+            
+            if (!token) {
+                showToast('Sessão expirada. Redirecionando para login...', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            // Carregar dados do perfil
+            fetchProfileData();
+            
+            // Carregar e calcular ganhos das tarefas
+            updateEarningsUI();
+            
+            // Carregar dados da equipe
+            fetchTeamData();
+        }
+
+        // Inicializar a página quando carregada
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+            
+            // Adicionar animação de entrada
+            const elements = document.querySelectorAll('.bg-white, .card-hover');
+            elements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+                element.classList.add('animate-slide-up');
+            });
+            
+            // Adicionar evento de check-in
+            const checkinBtn = document.getElementById('checkin-btn');
+            if (checkinBtn) {
+                checkinBtn.addEventListener('click', async function() {
+                    try {
+                        const token = getToken();
+                        if (!token) return;
+
+                        const response = await fetch(`${API_BASE_URL}/api/tasks/daily-checkin`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data.success) {
+                                showToast('Check-in realizado! +5 KZ adicionados', 'success');
+                                checkinBtn.disabled = true;
+                                checkinBtn.textContent = 'Concluído';
+                                
+                                // Atualizar saldo
+                                const balanceElement = document.getElementById('user-balance');
+                                if (balanceElement) {
+                                    balanceElement.textContent = `KZ ${formatCurrency(data.data.new_balance)}`;
+                                }
+                                
+                                // Recarregar ganhos
+                                updateEarningsUI();
+                            }
+                        } else {
+                            showToast('Erro ao fazer check-in', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Erro no check-in:', error);
+                        showToast('Erro ao fazer check-in', 'error');
+                    }
+                });
             }
         });
-    }
-});
 
-// Função para fazer logout
-function logout() {
-    localStorage.removeItem('user_token');
-    localStorage.removeItem('user_mobile');
-    localStorage.removeItem('user_id');
-    window.location.href = '/index.html';
-}
-</script>
-
+        // Prevenir comportamento padrão dos links se necessário
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>

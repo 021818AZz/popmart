@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conta Bancária - Royal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            max-width: 80%;
+        }
+        
+        .toast-success {
+            background-color: #000;
+            border-left: 4px solid #10B981;
+        }
+        
+        .toast-error {
+            background-color: #000;
+            border-left: 4px solid #EF4444;
+        }
+        
+        .toast-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Cores de futebol - verde e branco */
+        .bg-futebol-green {
+            background-color: #16a34a;
+        }
+        
+        .bg-futebol-white {
+            background-color: #ffffff;
+        }
+        
+        .text-futebol-green {
+            color: #16a34a;
+        }
+        
+        .border-futebol-green {
+            border-color: #16a34a;
+        }
+        
+        .gradient-futebol {
+            background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+    <div class="max-w-md mx-auto pb-24">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-slate-200">
+            <a href="perfil.html" class="text-slate-500 text-xl font-bold">&#8592;</a>
+            <h1 class="text-lg font-bold text-green-800 tracking-tight">Conta Bancária</h1>
+            <div></div>
+        </header>
+
+        <!-- Informações da Conta -->
+        <section class="px-5 mt-6">
+            <div class="rounded-2xl gradient-futebol text-white p-5 flex items-center justify-between shadow-lg">
+                <div>
+                    <p class="text-sm opacity-90 mb-1">Sua Conta Bancária</p>
+                    <p id="contaStatus" class="text-lg font-bold">Cadastre sua conta</p>
+                </div>
+                <i class='bx bxs-bank text-3xl opacity-80'></i>
+            </div>
+        </section>
+
+        <!-- Formulário de Conta Bancária -->
+        <section class="px-5 mt-8">
+            <form id="formIban" class="space-y-4">
+                <div>
+                    <label for="bankName" class="text-sm font-medium text-green-800 block mb-1">Nome do Banco</label>
+                    <select id="bankName" name="bank_name" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required>
+                        <option value="" disabled selected>Selecione o banco</option>
+                        <option value="BAI">BAI</option>
+                        <option value="BFA">BFA</option>
+                        <option value="ATLANTICO">ATLANTICO</option>
+                        <option value="BIC">BIC</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="accountHolder" class="text-sm font-medium text-green-800 block mb-1">Titular da Conta</label>
+                    <input id="accountHolder" name="account_holder" type="text" placeholder="Nome completo do titular" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required />
+                </div>
+
+                <div>
+                    <label for="accountNumber" class="text-sm font-medium text-green-800 block mb-1">Número da Conta</label>
+                    <input id="accountNumber" name="account_number" type="text" placeholder="Número da conta iban" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required />
+                </div>
+
+                <div>
+                    <label for="branchCode" class="text-sm font-medium text-green-800 block mb-1">Seu Apelido</label>
+                    <input id="branchCode" name="branch_code" type="text" placeholder="Apelido" class="w-full border border-green-300 rounded-lg px-3 py-2 bg-white text-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 transition" required />
+                </div>
+
+                <button id="btnSalvar" type="submit" class="w-full gradient-futebol hover:brightness-110 transition text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-[1.02] active:scale-[0.98]">
+                    Salvar Conta Bancária
+                </button>
+            </form>
+
+            <!-- Informações da Conta Atual -->
+            <div id="contaAtual" class="mt-6 hidden">
+                <div class="bg-white p-4 rounded-xl border border-green-200">
+                    <h3 class="text-sm font-bold text-green-800 mb-3">Conta Cadastrada</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Banco:</span>
+                            <span id="infoBankName" class="font-semibold text-green-700"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Titular:</span>
+                            <span id="infoAccountHolder" class="font-semibold text-green-700"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Conta:</span>
+                            <span id="infoAccountNumber" class="font-semibold text-green-700"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Agência:</span>
+                            <span id="infoBranchCode" class="font-semibold text-green-700"></span>
+                        </div>
+                    </div>
+                    <button id="btnEditar" class="w-full mt-4 border border-green-500 text-green-600 hover:bg-green-50 transition font-semibold py-2 rounded-lg">
+                        Editar Conta
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-6 text-xs text-green-700 leading-relaxed space-y-3 bg-white p-4 rounded-xl border border-green-200">
+                <h2 class="text-sm font-bold text-green-800 mb-3">Informações Importantes</h2>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
+                    <p><strong>Dados Corretos:</strong> Certifique-se de que todos os dados estão corretos para receber seus saques.</p>
+                </div>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce mt-1"></div>
+                    <p><strong>Titularidade:</strong> A conta deve estar em seu nome para processarmos os saques.</p>
+                </div>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
+                    <p><strong>Segurança:</strong> Seus dados bancários são armazenados com segurança.</p>
+                </div>
+
+                <div class="flex items-start gap-2">
+                    <div class="w-4 h-4 bg-green-500 rounded-full animate-spin mt-1"></div>
+                    <p><strong>Atualização:</strong> Você pode atualizar seus dados a qualquer momento.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification Template -->
+    <div id="toast-template" class="toast hidden">
+        <i class='bx toast-icon'></i>
+        <div class="toast-message"></div>
+    </div>
+
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- Menu de navegação com ícones de imagem -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
+        
+        <li>
+          <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+            <img src="img/home.png" alt="Início" class="w-6 h-6">
+            <span>Início</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+            <span>Renda</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+            <span>VIP</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+            <span>Bancária</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+            <span>Perfil</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+
+
+    <script>
+        // Configuração da API
+        const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+
+        // Função para obter o token do usuário
+        function getUserToken() {
+            const tokenData = localStorage.getItem('user_token');
+            if (!tokenData) return null;
+            
+            try {
+                const { token, expiry } = JSON.parse(tokenData);
+                if (Date.now() > expiry) {
+                    localStorage.removeItem('user_token');
+                    localStorage.removeItem('user_id');
+                    return null;
+                }
+                return token;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Toast personalizado
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast-template');
+            const newToast = toast.cloneNode(true);
+            
+            newToast.classList.remove('hidden');
+            newToast.classList.add(type === 'success' ? 'toast-success' : type === 'error' ? 'toast-error' : 'toast');
+            
+            const icon = newToast.querySelector('.toast-icon');
+            const messageDiv = newToast.querySelector('.toast-message');
+            
+            if (type === 'success') {
+                icon.className = 'bx bx-check-circle toast-icon';
+            } else if (type === 'error') {
+                icon.className = 'bx bx-error toast-icon';
+            } else {
+                icon.className = 'bx bx-info-circle toast-icon';
+            }
+            
+            messageDiv.textContent = message;
+            document.body.appendChild(newToast);
+            
+            setTimeout(() => {
+                newToast.remove();
+            }, 3000);
+        }
+
+        // Carregar dados da conta bancária
+        async function loadBankAccount() {
+            const token = getUserToken();
+            
+            if (!token) {
+                showToast('Faça login para continuar', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.success && data.data) {
+                        // Mostrar informações da conta
+                        showBankAccountInfo(data.data);
+                    } else {
+                        // Mostrar formulário para cadastrar
+                        showBankAccountForm();
+                    }
+                } else {
+                    showBankAccountForm();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar conta bancária:', error);
+                showBankAccountForm();
+            }
+        }
+
+        // Mostrar informações da conta
+        function showBankAccountInfo(bankAccount) {
+            document.getElementById('contaStatus').textContent = 'Conta Cadastrada';
+            document.getElementById('infoBankName').textContent = bankAccount.bank_name;
+            document.getElementById('infoAccountHolder').textContent = bankAccount.account_holder;
+            document.getElementById('infoAccountNumber').textContent = bankAccount.account_number;
+            document.getElementById('infoBranchCode').textContent = bankAccount.branch_code;
+            
+            document.getElementById('formIban').classList.add('hidden');
+            document.getElementById('contaAtual').classList.remove('hidden');
+        }
+
+        // Mostrar formulário para cadastrar
+        function showBankAccountForm() {
+            document.getElementById('contaStatus').textContent = 'Cadastre sua conta';
+            document.getElementById('formIban').classList.remove('hidden');
+            document.getElementById('contaAtual').classList.add('hidden');
+        }
+
+        // Salvar conta bancária
+        async function salvarContaBancaria(event) {
+            event.preventDefault();
+            
+            const token = getUserToken();
+            if (!token) {
+                showToast('Faça login para continuar', 'error');
+                return;
+            }
+
+            const formData = {
+                bank_name: document.getElementById('bankName').value,
+                account_holder: document.getElementById('accountHolder').value,
+                account_number: document.getElementById('accountNumber').value,
+                branch_code: document.getElementById('branchCode').value
+            };
+
+            // Validar dados
+            if (!formData.bank_name || !formData.account_holder || !formData.account_number || !formData.branch_code) {
+                showToast('Preencha todos os campos', 'error');
+                return;
+            }
+
+            // Desabilitar botão e mostrar loading
+            const btnSalvar = document.getElementById('btnSalvar');
+            btnSalvar.disabled = true;
+            btnSalvar.innerHTML = '<div class="loading-spinner"></div> Salvando...';
+
+            try {
+                // Verificar se já existe conta
+                const checkResponse = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                let response;
+                if (checkResponse.ok) {
+                    const checkData = await checkResponse.json();
+                    if (checkData.success && checkData.data) {
+                        // Atualizar conta existente
+                        response = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                            method: 'PUT',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(formData)
+                        });
+                    } else {
+                        // Criar nova conta
+                        response = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(formData)
+                        });
+                    }
+                } else {
+                    // Criar nova conta
+                    response = await fetch(`${API_BASE_URL}/api/user/bank-account`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showToast('Conta bancária salva com sucesso!', 'success');
+                    await loadBankAccount();
+                } else {
+                    showToast(data.message || 'Erro ao salvar conta bancária', 'error');
+                }
+
+            } catch (error) {
+                console.error('Erro ao salvar conta:', error);
+                showToast('Erro de conexão', 'error');
+            } finally {
+                // Reabilitar botão
+                btnSalvar.disabled = false;
+                btnSalvar.textContent = 'Salvar Conta Bancária';
+            }
+        }
+
+        // Editar conta
+        function editarConta() {
+            document.getElementById('formIban').classList.remove('hidden');
+            document.getElementById('contaAtual').classList.add('hidden');
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar dados da conta bancária
+            loadBankAccount();
+            
+            // Event listener para o formulário
+            const formIban = document.getElementById('formIban');
+            if (formIban) {
+                formIban.addEventListener('submit', salvarContaBancaria);
+            }
+            
+            // Event listener para botão editar
+            const btnEditar = document.getElementById('btnEditar');
+            if (btnEditar) {
+                btnEditar.addEventListener('click', editarConta);
+            }
+        });
+
+        // Verificar autenticação
+        function checkAuth() {
+            const token = getUserToken();
+            if (!token) {
+                window.location.href = 'index.html';
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

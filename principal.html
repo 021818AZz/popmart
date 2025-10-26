@@ -1,1274 +1,764 @@
 <!DOCTYPE html>
-<html style="font-size: 47.2px;">
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <title>Alimentos Fortes</title>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="full-screen" content="true">
-    <meta name="x5-fullscreen" content="true">
-    <meta name="360-fullscreen" content="true">
-    <meta name="renderer" content="webkit">
-    <style>
-        /* Cores de futebol definidas */
-        :root {
-            --soccer-green: #f1f3f1;
-            --soccer-dark-green: #f6f9f6;
-            --soccer-light-green: #4CAF50;
-            --soccer-white: #FFFFFF;
-            --soccer-light-gray: #F5F5F5;
-            --soccer-gray: #E0E0E0;
-            --soccer-dark: #333333;
-            --soccer-gradient: linear-gradient(135deg, var(--soccer-green), var(--soccer-dark-green));
-            --soccer-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minha Casa</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    .scroll-text {
+      animation: slide-left 15s linear infinite;
+    }
 
-        html,
-        body {
-            width: 100%;
-            background-color: var(--soccer-light-gray);
-            color: var(--soccer-dark);
-        }
+    @keyframes slide-left {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
 
-        /* Layout principal */
-        .page {
-            background-color: var(--soccer-light-gray);
-            min-height: 100vh;
-        }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-        .headers {
-            background: var(--soccer-gradient) !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+    .animate-slide-up { animation: slideUp 0.4s ease-out; }
 
-        .head {
-            background: var(--soccer-gradient) !important;
-        }
+    .zoom-in {
+      transform: scale(0.85);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
-        .content-container {
-            background-color: var(--soccer-light-gray);
-            padding: 15px 0;
-        }
+    .zoom-in.show {
+      transform: scale(1);
+      opacity: 1;
+    }
 
-        .content-scroll {
-            background-color: var(--soccer-light-gray);
-        }
+    @keyframes scaleFadeUp {
+      0% { opacity: 0; transform: scale(0.9) translateY(50px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
 
-        .container {
-            background-color: transparent;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
+    .animate-scale-fade-up { animation: scaleFadeUp 0.4s ease-out forwards; }
 
-        /* Cartões */
-        .card {
-            background-color: var(--soccer-white);
-            border-radius: 12px;
-            box-shadow: var(--soccer-card-shadow);
-            margin: 15px 0;
-            padding: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 4px solid var(--soccer-green);
-        }
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .scroll0 {
-            background-color: var(--soccer-white);
-            border-radius: 12px;
-            margin: 15px 0;
-            padding: 15px;
-            box-shadow: var(--soccer-card-shadow);
-            display: flex;
-            align-items: center;
-        }
-
-        .itemBox {
-            background-color: transparent;
-            margin: 20px 0;
-        }
-
-        /* Menu de navegação */
-        .nav1 {
-            background-color: transparent;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .nav1 li {
-            background-color: var(--soccer-white);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: var(--soccer-card-shadow);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 10px;
-            cursor: pointer;
-            border-top: 3px solid var(--soccer-green);
-        }
-
-        .nav1 li:hover {
-            background-color: var(--soccer-green);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(27, 94, 32, 0.3);
-        }
-
-        .nav1 li:hover p {
-            color: var(--soccer-white) !important;
-        }
-
-        .nav1 li:hover img {
-            filter: brightness(0) invert(1);
-        }
-
-        /* Texto dos itens do menu */
-        .nav1 li p {
-            color: var(--soccer-dark) !important;
-            font-weight: 600;
-            margin-top: 8px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .lucku_bann {
-            background-color: var(--soccer-white);
-            border-radius: 12px;
-            margin: 20px 0;
-            padding: 15px;
-            box-shadow: var(--soccer-card-shadow);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .lucku_bann:hover {
-            transform: scale(1.02);
-        }
-
-        .footer {
-            background: var(--soccer-gradient) !important;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .footers {
-            background: transparent;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-        }
-
-        .footers .item {
-            color: var(--soccer-white) !important;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 8px 15px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .footers .item:hover {
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .footers .item span {
-            font-size: 0.8rem;
-            margin-top: 5px;
-        }
-
-        /* Popup com tema futebol */
-        .popup-content {
-            background: var(--soccer-white);
-            color: var(--soccer-dark);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-top: 5px solid var(--soccer-green);
-        }
-
-        .popup-content h3 {
-            color: var(--soccer-green);
-            border-bottom: 2px solid var(--soccer-gray);
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-            text-align: center;
-            font-size: 1.4rem;
-        }
-
-        .popup-content button {
-            background: var(--soccer-gradient);
-            color: var(--soccer-white) !important;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
-        }
-
-        .popup-content button:hover {
-            background: var(--soccer-dark-green);
-            transform: translateY(-2px);
-        }
-
-        /* Notices e barras */
-        .van-notice-bar {
-            background: var(--soccer-white) !important;
-            color: var(--soccer-dark) !important;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            padding: 10px 15px;
-        }
-
-        /* Check-in com tema futebol */
-        #checkin-btn {
-            background-color: var(--soccer-white);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: var(--soccer-card-shadow);
-            position: relative;
-            border-top: 3px solid var(--soccer-green);
-        }
-
-        #checkin-btn:hover:not(:disabled) {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(27, 94, 32, 0.3);
-        }
-
-        #checkin-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .checkin-available {
-            border: 2px solid var(--soccer-green);
-            animation: soccer-pulse 2s infinite;
-        }
-
-        @keyframes soccer-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(27, 94, 32, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
-        }
-
-        #checkin-status {
-            background: var(--soccer-green) !important;
-            color: var(--soccer-white) !important;
-        }
-
-        /* Toast e mensagens */
-        .van-toast {
-            background-color: var(--soccer-green) !important;
-            color: var(--soccer-white) !important;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .gig_box {
-            background-color: var(--soccer-green) !important;
-        }
-
-        /* Banner e carousel */
-        .banner {
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 20px 0;
-            box-shadow: var(--soccer-card-shadow);
-        }
-
-        .carousel__slide__overlay {
-            background-color: rgba(27, 94, 32, 0.3);
-        }
-
-        /* Texto do cabeçalho */
-        .head .name {
-            color: var(--soccer-white) !important;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        /* Ícones e imagens */
-        .myName img {
-            border-radius: 8px;
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-        }
-
-        .ico img {
-            width: 30px;
-            height: 30px;
-        }
-
-        .nav1 li img {
-            width: 30px;
-            height: 30px;
-            transition: all 0.3s ease;
-        }
-
-        /* Seção de título */
-        .section-title {
-            position: relative;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--soccer-green);
-            border-radius: 3px;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .nav1 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .footers .item span {
-                font-size: 0.7rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav1 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            html {
-                font-size: 42px;
-            }
-        }
-    </style>
-    <link href="app.c1933b14.css" rel="preload" as="style">
-    <link href="vant.d14f5539.css" rel="preload" as="style">
-    <link href="vendors.794edbf9.css" rel="preload" as="style">
-    <link href="vant.d14f5539.css" rel="stylesheet">
-    <link href="vendors.794edbf9.css" rel="stylesheet">
-    <link href="app.c1933b14.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="chunk-57673b88.2a470e9d.css">
-    <link rel="stylesheet" type="text/css" href="chunk-5576a184.9f52f39a.css">
-    <link rel="stylesheet" type="text/css" href="chunk-3b94db02.5929650c.css">
-    <link rel="stylesheet" type="text/css" href="chunk-a6d04a00.3a1821fc.css">
-    <link rel="stylesheet" type="text/css" href="chunk-9884782a.e91864af.css">
-    <link rel="stylesheet" type="text/css" href="chunk-7d55f7da.3489dd4d.css">
-    <link rel="stylesheet" type="text/css" href="chunk-8917473a.d09efe5c.css">
-    <link rel="stylesheet" type="text/css" href="chunk-159f11a9.a3a3db2b.css">
-    <link rel="stylesheet" type="text/css" href="chunk-5ba702ec.7902583a.css">
-    <link rel="stylesheet" type="text/css" href="chunk-17da4a2a.50c915cc.css">
-    <link rel="stylesheet" type="text/css" href="chunk-c84dac42.bdbf9084.css">
-    <link rel="stylesheet" href="slick@1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="slick/slick-theme.css">
-    <link href="noty.min.css" rel="stylesheet">
-    <script src="min.js"></script>
-    <script src="noty.min.js"></script>
-    <style>
-        .paraList[data-v-98526a88] {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .my_index .popup_box[data-v-a386f8f2] {
-            margin-left: -4px;
-        }
-
-        .carousel__slide__inner {
-            overflow: hidden;
-            position: relative;
-        }
-        .doAnimation .slick-active .carousel__slide__inner .carousel__image {
-            animation: scale-out 0.875s cubic-bezier(0.7, 0, 0.3, 1) 0.375s both;
-            transform: scale(1.3);
-        }
-        .carousel__slide__overlay {
-            background-color: transparent;
-            background-size: 100%;
-            height: 100%;
-            left: 0;
-            opacity: 0.5;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            z-index: 2;
-        }
-        .slick-active .carousel__slide__overlay {
-            animation: scale-in-hor-left 1.375s cubic-bezier(0.645, 0.045, 0.355, 1) 0.25s reverse both;
-        }
-        .carousel__image {
-            height: 100%;
-            object-fit: cover;
-            position: relative;
-            transform: scale(1);
-            width: 100%;
-            z-index: 1;
-        }
-        @keyframes scale-out {
-            0% {
-                transform: scale(1.3);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        @keyframes scale-in-hor-left {
-            0% {
-                -webkit-transform: translateX(-100%) scaleX(0);
-                transform: translateX(-100%) scaleX(0);
-                -webkit-transform-origin: 0% 0%;
-                transform-origin: 0% 0%;
-                opacity: 1;
-            }
-            50% {
-                -webkit-transform: translateX(-50%) scaleX(0.5);
-                transform: translateX(-50%) scaleX(0.5);
-                -webkit-transform-origin: 0% 0%;
-                transform-origin: 0% 0%;
-                opacity: 1;
-            }
-            100% {
-                -webkit-transform: translateX(0) scaleX(1);
-                transform: translateX(0) scaleX(1);
-                -webkit-transform-origin: 0% 0%;
-                transform-origin: 0% 0%;
-                opacity: 1;
-            }
-        }
-
-        .banner {
-            height: 200px;
-            overflow: hidden;
-        }
-        .banner img[data-v-98526a88] {
-            width: 100%;
-            height: 200px;
-        }
-    </style>
-
-    <style>
-#checkin-btn {
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-#checkin-btn:hover:not(:disabled) {
-    transform: scale(1.05);
-}
-
-#checkin-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.checkin-available {
-    border: 2px solid var(--soccer-green);
-    animation: soccer-pulse 2s infinite;
-}
-
-@keyframes soccer-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(27, 94, 32, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(27, 94, 32, 0); }
-}
-</style>
-
-
+    .animate-slide-down { animation: slideDown 0.4s ease-out; }
+    
+    .toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #166534; /* Verde escuro */
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-align: center;
+    }
+  </style>
 </head>
-<body class="w856">
-<div id="app" class="applang">
-    <div data-v-6e534c71="" data-v-98526a88="" class="page">
-        <div data-v-6e534c71="" class="headers">
-            <div data-v-a53c4a36="" data-v-98526a88="" class="head" data-v-6e534c71="">
-                <div data-v-a53c4a36="" class="container flex">
-                    <div data-v-a53c4a36="" class="myName"><img data-v-a53c4a36=""
-                                                                src="img/logo1.jpg"
-                                                                alt=""></div>
-                    <div data-v-a53c4a36="" class="name tac" style="color: white !important;"> Blommer</div>
-                    <div data-v-a53c4a36="" class="flex1"></div>
-                    <div data-v-a53c4a36="" class="lang"><img data-v-a53c4a36=""
-                                                              src="https://i.postimg.cc/P5T4C7Tm/b9839d010ab7f254febe57fd0398f0ad.png"
-                                                              alt=""></div>
-                    <div data-v-a53c4a36="" class="notice"><img data-v-a53c4a36=""
-                                                                src="https://i.postimg.cc/T30cgc3B/a0486a1340083788d4db56d97ee8acee.png"
-                                                                alt=""></div>
-                </div>
-            </div>
+
+<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+  
+  <!-- Toast para mensagens -->
+  <div id="toast" class="toast hidden">
+    <p id="toast-message"></p>
+  </div>
+
+  <div class="mx-auto max-w-sm">
+    <img src="img/logo2.png" alt="Banner">
+    
+    <!-- Seção de Resumo Financeiro -->
+    <div class="grid grid-cols-2 gap-2 px-4 mt-2">
+      <!-- Card Saldo -->
+      <div class="bg-gradient-to-r from-green-600 to-emerald-600 text-white p-3 rounded-xl shadow">
+        <p class="text-xs opacity-80 mb-1">Saldo Disponível</p>
+        <p class="text-lg font-bold" id="userBalance">KZ0,00</p>
+      </div>
+      
+      <!-- Card Total Retiradas -->
+      <div class="bg-gradient-to-r from-emerald-600 to-green-700 text-white p-3 rounded-xl shadow">
+        <p class="text-xs opacity-80 mb-1">Total Retirado</p>
+        <p class="text-lg font-bold" id="totalWithdrawals">KZ0,00</p>
+      </div>
+    </div>
+
+    <!-- Seção do Check-in Diário -->
+    <div class="px-4 mt-4">
+      <div class="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 rounded-xl shadow-lg">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs opacity-80 mb-1">Check-in Diário</p>
+            <p class="text-sm font-semibold">Status: <span id="checkin-status">Verificando...</span></p>
+          </div>
+          <button id="checkin-btn" class="bg-white text-green-600 px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition disabled:opacity-50 disabled:cursor-not-allowed">
+            Fazer Check-in
+          </button>
         </div>
-
-        <div data-v-6e534c71="" id="scroll" class="content-container" style="padding-top: 45px; padding-bottom: 54px;">
-            <div data-v-6e534c71="" id="content" class="content-scroll">
-                <div data-v-98526a88="" data-v-6e534c71="" class="container">
-                    <div data-v-98526a88="" data-v-6e534c71="" class="banner">
-                        <div class="carousel">
-
-                                                        <div class="carousel__slide">
-                                <div class="carousel__slide__inner">
-                                    <div data-v-98526a88="" class="item">
-                                        <img data-v-98526a88="" src="img/logo1.jpg" alt="">
-                                    </div>
-                                    <div class="carousel__slide__overlay"></div>
-                                </div>
-                            </div>
-
-                                                    <div class="carousel__slide">
-                                <div class="carousel__slide__inner">
-                                    <div data-v-98526a88="" class="item">
-                                        <img data-v-98526a88="" src="img/logo2.png" alt="">
-                                    </div>
-                                    <div class="carousel__slide__overlay"></div>
-                                </div>
-                            </div>
-                                                        <div class="carousel__slide">
-                                <div class="carousel__slide__inner">
-                                    <div data-v-98526a88="" class="item">
-                                        <img data-v-98526a88="" src="img/baner2.jpg" alt="">
-                                    </div>
-                                    <div class="carousel__slide__overlay"></div>
-                                </div>
-                            </div>
-                                                    </div>
-
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-                        <script>
-                            var carousel = $(".carousel");
-                            var options = {
-                                adaptiveHeight: true,
-                                arrows: false,
-                                dots: true,
-                                fade: true,
-                                infinite: false,
-                                mobileFirst: true,
-                                rows: 0,
-                                slidesToScroll: 1,
-                                slidesToShow: 1,
-                                speed: 0,
-                                zIndex: 75,
-                                autoplay:true,
-                            };
-
-                            var addAnimationClass = true;
-
-                            carousel.on('beforeChange', function(e, slick, current, next) {
-                                var current = carousel.find('.slick-slide')[current];
-                                var next = carousel.find('.slick-slide')[next];
-                                var src = $(current).find('.carousel__image').attr('src');
-
-                                $(next).find('.carousel__slide__overlay').css('background-image', 'url("' + src + '")');
-
-
-                                if(addAnimationClass) {
-                                    carousel.addClass('doAnimation');
-
-                                    // so that adding the class only happens once
-                                    addAnimationClass = false;
-                                }
-                            });
-                            carousel.not('.slick-initialized').slick(options);
-                        </script>
-
-                    </div>
-                    <div data-v-98526a88="" data-v-6e534c71="" class="scroll0 flex">
-                        <div data-v-98526a88="" data-v-6e534c71="" class="ico">
-                            <img data-v-98526a88="" data-v-6e534c71="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAXCAYAAAAYyi9XAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAALCSURBVHgBrVVRbtpAEJ1Zr5tKVSWO4N7AqKSC/MRRSNW/hBOEnqD0BIETNDlB0xMk/asCFUSqAClG0BOUG9SfjWv2O7PGhFJsIGWk1XrXs/NmZmfeAjxCCqXXHwp7R7pQLHuwochNlF3Py8l7eQWoPV4roZws3VGnEyzuC1gXrOg5VmgPAdFbpVvYK9dlaP+kDJw9CvBV8fDUEvYQARxa3gLoz5kHNMSRCaxT6occ7dqA7KUS4pLAchrgwu82PdQYZJ3xe61zqawXCDimpUvRtpN/0tzLL+n+4yTqHKA4ps8qjQAVvPf7zcs0kEKpfKURg4n63Rj1O+N+/8uYbOft8MlQg3Y5zX63VZfmXoRJ1V9C3sWzJi8jXbm7a47SwEzKQvQ4CxbaHt33AYNy0RSLbw4iMflBlt6R3rmY3kuAGj4tDlJqPNsJ81lgLGyYUpintFwjgkOg7eTeONLYFnCFV01b0N0Efq9Zhf8QNkxTpVA6ahOoJ0NZo3Xd2Nf6kqr7lAI4Xrst1hatG/GM+8lW9DSKM4Tgbh3Q77c6NAVk3Ev2pgTAI7f9CFfI1gGZkWjigtksNN4Ltg4oUZ7wjHOAcyT/XS7ZnAlf9jICThOOjpr/jDvYUlZj9kPE96lBjcTUG4d4r7040gh4mRDT1KZ8m+P+nbYJxEDcEgC2ss8l8yMpuSl29g0Bl8putBO9zYpWI9QSvh10b+ozR2KHHRq37IQcdJu1NCNES85EqDYZO7HubTehrGW6tpJeJCNn8M20hRF398iltNZ5m5ioynNm0bBHlhIH9DlKKGuXjaTo+nNg5kmzYfpKPKR4ZZUaQ91m3qSeQLUNQ4UPLLJMuACTJ43B/LkUr90WcerRVB6CdrJ0uboR1IXQqjIPFp/dUF6WDk8QxUfgAtFYGfRurjc5v3HjD3pfr/kp4gie74Qd2FD+APTMLv5BP+uHAAAAAElFTkSuQmCC" alt="">
-                        </div>
-                        <div data-v-98526a88="" data-v-6e534c71="" class="flex1">
-                            <div data-v-98526a88="" role="alert" class="van-notice-bar" data-v-6e534c71=""
-                                 style="color: var(--soccer-dark); background: none;">
-                                <marquee behavior="" direction="">Olá amigos da Blommer, bem-vindos ao registro em nossa plataforma!
-                                    Nossa plataforma é um projeto de ganhos permanente e seguro!</marquee>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div data-v-98526a88="" data-v-6e534c71="" class="itemBox">
-                    <h3 class="section-title" style="color: var(--soccer-green); margin-left: 15px;">Menu Principal</h3>
-                    <ul data-v-98526a88="" data-v-6e534c71="" class="nav1">
-                        <li data-v-98526a88="" data-v-6e534c71=""
-                            onclick="window.location.href='/deposito.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="img/recarregar.png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Recarregar</p></div>
-                        </li>
-                        <!-- No seu HTML, substitua o botão de check-in por este: -->
-<li data-v-98526a88="" data-v-6e534c71="" id="checkin-btn" style="position: relative;">
-    <div data-v-98526a88="" data-v-6e534c71="">
-        <img data-v-98526a88="" data-v-6e534c71=""
-            src="img/vida2.png"
-            alt="Check-in">
-        <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Check-in</p>
-        <div id="checkin-status" style="
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--soccer-green);
-            color: white !important;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 10px;
-            font-weight: bold;
-            min-width: 60px;
-            text-align: center;
-        "></div>
+        <p class="text-xs mt-2 opacity-80">Receba 10 KZ todos os dias fazendo check-in!</p>
+      </div>
     </div>
-</li>
-                        <li data-v-98526a88="" data-v-6e534c71=""
-                            onclick="window.location.href='/retirada.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="img/retirar.png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Retirar</p></div>
-                        </li>
 
-                        <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='produtos.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="img/1.png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Produtos</p></div>
-                        </li>
-
-                        <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='/produtos.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="img/produto.png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Código de presente</p></div>
-                        </li>
-
-                        <li data-v-98526a88="" data-v-6e534c71=""
-                            onclick="window.location.href='/tarefa.html'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="https://i.postimg.cc/Njd15fNc/ff7e05e7e4e86beace60c23c9852c228.png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Ganhos recebidos</p></div>
-                        </li>
-               <li data-v-98526a88="" data-v-6e534c71=""
-    onclick="window.location.href='https://raw.githubusercontent.com/021818AZz/aplicativo/main/app-debug.apk'">
-    <div data-v-98526a88="" data-v-6e534c71="">
-        <img data-v-98526a88="" data-v-6e534c71=""
-             src="img/app.png"
-             alt="">
-        <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Baixar App</p>
+    <div class="bg-gradient-to-r from-green-600 to-emerald-600 text-white p-4 rounded-b-3xl shadow">
+      <p class="text-sm font-medium">Consultoria financeira gratuita para você.</p>
+      <p class="text-xs mt-1">Telefone: <strong id="userPhone">Carregando...</strong></p>
     </div>
-</li>
 
-                        <li data-v-98526a88="" data-v-6e534c71="" onclick="window.location.href='https://t.me/+I_ZCdcMWo2AwOTk0'">
-                            <div data-v-98526a88="" data-v-6e534c71=""><img data-v-98526a88="" data-v-6e534c71=""
-                                                                            src="img/suporte.png"
-                                                                            alt="">
-                                <p data-v-98526a88="" data-v-6e534c71="" style="color: var(--soccer-dark) !important;">Central de ajuda</p></div>
-                        </li>
-                       
-                    </ul>
-                </div>
-                
-                <div data-v-98526a88="" data-v-6e534c71="" class="lucku_bann"
-                     onclick="window.location.href='/equipe.html'">
-                    <div data-v-98526a88="" data-v-6e534c71="">
-                        <div data-v-98526a88="" data-v-6e534c71="" class="item"><img data-v-98526a88=""
-                                                                                     data-v-6e534c71=""
-                                                                                     src="img/anuncio.png"
-                                                                                     alt=""></div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h3 class="section-title" style="color: var(--soccer-green);">Sobre a Plataforma</h3>
-                    <p style="line-height: 1.6; margin-top: 10px;">
-                        A Blommer é uma plataforma de investimentos segura e confiável, focada em proporcionar 
-                        retornos consistentes para nossos usuários. Com uma equipe experiente e tecnologia de ponta, 
-                        garantimos transparência e segurança em todas as operações.
-                    </p>
-                </div>
-               
-                <div class="van-overlay" style="z-index: 2002; display: none;"></div>
-                <div class="popup-overlay" id="systemPopup">
-    <div class="popup-content" style="text-align: center;">
+    <div class="grid grid-cols-4 gap-2 p-4">
+      <a href="deposito.html" class="flex flex-col items-center text-xs text-dark-700 hover:text-green-900">
+        <img src="img/retirar.png" class="w-12 mb-1" alt="Recarregar">
+        Recarregar
+      </a>
+      <a href="retirada.html" class="flex flex-col items-center text-xs text-dark-700 hover:text-green-900">
+        <img src="img/recarregar.png" class="w-12 mb-1" alt="Retirada">
+        Retirada
+      </a>
+      <a href="equipe.html" class="flex flex-col items-center text-xs text-dark-700 hover:text-green-900">
+        <img src="img/presente.png" class="w-12 mb-1" alt="Indicar">
+        Indicar
+      </a>
+      <a href="renda.html" class="flex flex-col items-center text-xs text-dark-700 hover:text-green-900">
+        <img src="img/app.png" class="w-12 mb-1" alt="Rendendo">
+        Aplicativo
+      </a>
+    </div>
+
+    <section class="p-4">
+      <div class="flex items-center gap-2 mb-3">
+        <h4 class="text-green-800 font-semibold text-sm">Projetos em Destaque</h4>
+      </div>
+
+      <!-- Lista de produtos -->
+      <div class="space-y-4" id="products-container">
+        <!-- Os produtos serão carregados dinamicamente via JavaScript -->
+      </div>
+
+      <div style="margin-bottom: 60px"></div>
+    </section>
+
+     <!-- Menu de navegação com ícones de imagem -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
+      <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white text-xs">
         
-        <!-- IMAGEM ACIMA DO TEXTO -->
-        <img src="img/tabela.jpg" 
-             alt="Logo Sistema" 
-             style="max-width: 200px; height: auto; margin-bottom: 15px; border-radius: 8px;">
+        <li>
+          <a href="principal.html" class="flex flex-col items-center gap-0.5 font-bold">
+            <img src="img/home.png" alt="Início" class="w-6 h-6">
+            <span>Início</span>
+          </a>
+        </li>
         
-        <h3 class="text-lg font-semibold section-title mb-4" style="color: var(--soccer-green);">Sistema Anúncio</h3>
+        <li>
+          <a href="renda.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/produto.png" alt="Renda" class="w-6 h-6">
+            <span>Renda</span>
+          </a>
+        </li>
         
-        <div class="text-sm leading-relaxed space-y-3" style="text-align: left; color: var(--soccer-dark);">
-            <p>
-               1: Bônus de inscrição de KZ 400, bônus de check-in diário de KZ 10.
-            </p>
-            <p>
-                2: Investimento mínimo de KZ 2500.
-            </p>
-            <p>
-               3: Invista 2500 e saque KZ 1000 instantaneamente, com saques diários ilimitados.
-            </p>
-            
-            <p>
-               4: Invista em produtos Blommer e ganhe retornos diários realizandos tarefas a cada dia.
-            </p>
-            <p>
+        <li>
+          <a href="equipe.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="VIP" class="w-6 h-6">
+            <span>VIP</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="iban.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/fortuna.png" alt="Bancária" class="w-6 h-6">
+            <span>Bancária</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="dashboard.html" class="flex flex-col items-center gap-0.5 opacity-80">
+            <img src="img/equipe.png" alt="Perfil" class="w-6 h-6">
+            <span>Perfil</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+
+    <!-- Modal de boas-vindas -->
+    <div id="customModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center">
+      <div onclick="closeModal()" class="absolute inset-0 cursor-pointer"></div>
+
+      <div id="modalContent" onclick="event.stopPropagation()" class="relative bg-white rounded-2xl shadow-xl max-w-md w-[90%] overflow-hidden animate-slide-down text-gray-800">
+        <img src="img/vip8.png" alt="Destaque" class="w-full h-40 object-cover rounded-t-2xl">
+
+        <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-300 hover:text-red-500 text-2xl font-bold">
+          &times;
+        </button>
+
+        <div class="p-6">
+          <h2 class="text-xl font-bold mb-2 text-center">Bem vindo(a) à USHK!</h2>
+          <p class="text-sm text-gray-600 text-center mb-4">
+            USHK no Mundo Desde 1864, ajudando você a prosperar financeiramente. Temos como missão oferecer soluções financeiras de alta qualidade que ajudam pessoas e empresas a prosperarem.
+          </p>
+
+          <a href="https://t.me/+ftLUyASea403YjQ8" target="_blank" class="mt-6 block w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:brightness-110 text-white text-center font-semibold py-3 rounded-full text-sm transition">
+            Acessar Canal Oficial
+          </a>
+
+          <button onclick="closeModal()" class="mt-4 w-full border border-gray-300 text-gray-600 py-2 rounded-full text-sm hover:bg-gray-100">
+            Fechar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Configuração da API
+      const API_BASE_URL = 'https://bd-p4q7.onrender.com';
+      
+      // Dados dos produtos
+      const productsData = [
+        {
+          id: 1,
+          name: "Produto 1",
+          image: "vip1.png",
+          price: 5000,
+          dailyReturn: 1000,
+          totalReturn: 60000,
+          period: 60,
+          bonusLevel: 1
+        },
+        {
+          id: 2,
+          name: "Produto 2",
+          image: "vip2.png",
+          price: 10000,
+          dailyReturn: 2000,
+          totalReturn: 120000,
+          period: 60,
+          bonusLevel: 1
+        },
+        {
+          id: 3,
+          name: "Produto 3",
+          image: "vip3.png",
+          price: 30000,
+          dailyReturn: 6000,
+          totalReturn: 360000,
+          period: 60,
+          bonusLevel: 2
+        },
+        {
+          id: 4,
+          name: "Produto 4",
+          image: "vip4.png",
+          price: 80000,
+          dailyReturn: 16000,
+          totalReturn: 960000,
+          period: 60,
+          bonusLevel: 2
+        },
+        {
+          id: 5,
+          name: "Produto 5",
+          image: "vip5.png",
+          price: 150000,
+          dailyReturn: 30000,
+          totalReturn: 1800000,
+          period: 60,
+          bonusLevel: 2
+        },
+        {
+          id: 6,
+          name: "Produto 6",
+          image: "img/vip7.png",
+          price: 300000,
+          dailyReturn: 60000,
+          totalReturn: 3600000,
+          period: 60,
+          bonusLevel: 3
+        },
+        {
+          id: 7,
+          name: "Produto 7",
+          image: "img/vip6.png",
+          price: 500000,
+          dailyReturn: 100000,
+          totalReturn: 6000000,
+          period: 60,
+          bonusLevel: 3
+        },
+        {
+          id: 8,
+          name: "Produto 8",
+          image: "img/vip8.png",
+          price: 800000,
+          dailyReturn: 160000,
+          totalReturn: 9600000,
+          period: 60,
+          bonusLevel: 3
+        },
+        {
+          id: 9,
+          name: "Produto 9",
+          image: "img/vip9.png",
+          price: 1300000,
+          dailyReturn: 260000,
+          totalReturn: 15000000,
+          period: 60,
+          bonusLevel: 3
+        },
+        {
+          id: 10,
+          name: "Produto 10",
+          image: "img/vip10.png",
+          price: 2000000,
+          dailyReturn: 400000,
+          totalReturn: 24000000,
+          period: 60,
+          bonusLevel: 3
+        }
+      ];
+
+      // Função para obter o token do usuário
+      function getUserToken() {
+          const tokenData = localStorage.getItem('user_token');
+          if (!tokenData) return null;
+          
+          try {
+              const { token, expiry } = JSON.parse(tokenData);
+              if (Date.now() > expiry) {
+                  localStorage.removeItem('user_token');
+                  localStorage.removeItem('user_id');
+                  return null;
+              }
+              return token;
+          } catch (e) {
+              return null;
+          }
+      }
+
+      // Função para obter o ID do usuário
+      function getUserId() {
+          return localStorage.getItem('user_id');
+      }
+
+      // Toast personalizado
+      function showToast(message, type = 'info') {
+          const toast = document.getElementById('toast');
+          const toastMessage = document.getElementById('toast-message');
+          
+          toastMessage.textContent = message;
+          
+          // Estilo baseado no tipo
+          if (type === 'success') {
+              toast.style.backgroundColor = '#10B981';
+          } else if (type === 'error') {
+              toast.style.backgroundColor = '#EF4444';
+          } else {
+              toast.style.backgroundColor = '#166534'; // Verde escuro
+          }
+          
+          toast.classList.remove('hidden');
+          toast.style.opacity = '1';
+          
+          setTimeout(() => {
+              toast.style.opacity = '0';
+              setTimeout(() => {
+                  toast.classList.add('hidden');
+              }, 300);
+          }, 3000);
+      }
+
+      // Carregar dados do usuário
+      async function loadUserData() {
+          const token = getUserToken();
+          const userId = getUserId();
+          
+          if (!token || !userId) {
+              showToast('Faça login para continuar', 'error');
+              setTimeout(() => {
+                  window.location.href = 'index.html';
+              }, 2000);
+              return;
+          }
+
+          try {
+              // Carregar perfil do usuário
+              const profileResponse = await fetch(`${API_BASE_URL}/api/user/profile`, {
+                  headers: {
+                      'Authorization': `Bearer ${token}`
+                  }
+              });
+
+              if (!profileResponse.ok) {
+                  throw new Error('Erro ao carregar dados do usuário');
+              }
+
+              const profileData = await profileResponse.json();
               
-               5: Convide amigos para investir na Blommer e ganhe até 31% de comissão e recompensas por indicação.
-            </p>
-        </div>
-
-        <!-- ICONE TELEGRAM - MANTIDO EM AZUL -->
-        <div class="telegram-link" style="margin-top: 20px; text-align: center;">
-            <a href="https://t.me/+I_ZCdcMWo2AwOTk0" target="_blank" title="Entrar no Grupo do Telegram" style="display: inline-flex; align-items: center; gap: 8px; color: #0088cc !important; font-weight: bold;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#0088cc !important" viewBox="0 0 24 24">
-                    <path d="M12 0C5.372 0 0 5.373 0 12c0 6.627 
-                        5.372 12 12 12s12-5.373 12-12C24 5.373 
-                        18.628 0 12 0zm5.684 8.217c-.173 
-                        1.823-.922 6.249-1.304 8.281-.162.869-.479 
-                        1.162-.786 1.19-.668.062-1.176-.441-1.823-.864-1.014-.664-1.588-1.078-2.571-1.727-1.137-.75-.4-1.163.248-1.837.17-.177 
-                        3.132-2.871 3.19-3.115.007-.031.014-.146-.054-.207-.068-.061-.168-.04-.24-.023-.102.023-1.726 
-                        1.097-4.875 3.207-.462.317-.88.472-1.256.464-.413-.009-1.207-.233-1.797-.425-.724-.237-1.298-.363-1.248-.767.026-.21.315-.425.867-.646 
-                        3.396-1.478 5.66-2.45 6.791-2.902 3.233-1.345 3.906-1.58 4.345-1.588.096-.002.31.022.449.136.117.095.19.228.208.375.017.147.005.295-.003.43z"/>
-                </svg>
-                <span style="color: #0088cc !important;">Grupo no Telegram</span>
-            </a>
-        </div>
-
-        <!-- BOTÃO FECHAR EMBAIXO -->
-        <div style="margin-top: 20px; text-align: center;">
-            <button onclick="closePopup()" 
-                style="background: var(--soccer-gradient); color: white !important; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;">
-                Fechar
-            </button>
-        </div>
-    </div>
-</div>
-
-
-            </div>
-        </div>
-        
-        
-
-<style>
-
- 
-  /* Footer com tema de futebol - verde e branco */
-.footer {
-    background: linear-gradient(135deg, #1b5e20, #2e7d32) !important;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    z-index: 1000;
-    border-top: 2px solid #4caf50;
+              if (profileData.success) {
+                  // Atualizar saldo
+                  document.getElementById('userBalance').textContent = `KZ${profileData.data.wallet_balance.toLocaleString('pt-BR')}`;
+               // Exibir número de telefone (mobile) em vez do ID
+if (profileData.data.mobile) {
+  document.getElementById('userPhone').textContent = profileData.data.mobile;
+} else {
+  document.getElementById('userPhone').textContent = profileData.data.user_id;
 }
+              }
 
-.footers {
-    background: transparent;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
+              // Carregar total de retiradas
+              await loadTotalWithdrawals(token);
+              
+              // Verificar status do check-in
+              await checkCheckinStatus(token);
 
-.footers .item {
-    color: white !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 8px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    height: 100%;
-    flex: 1;
-    min-width: 0;
-    background: transparent;
-}
+          } catch (error) {
+              console.error('Erro ao carregar dados:', error);
+              showToast('Erro ao carregar dados', 'error');
+          }
+      }
 
-.footers .item:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-}
+      // Carregar total de retiradas
+      async function loadTotalWithdrawals(token) {
+          try {
+              const response = await fetch(`${API_BASE_URL}/api/withdrawals`, {
+                  headers: {
+                      'Authorization': `Bearer ${token}`
+                  }
+              });
 
-.footers .item.active {
-    background-color: rgba(76, 175, 80, 0.3);
-    border-bottom: 2px solid white;
-}
+              if (response.ok) {
+                  const data = await response.json();
+                  if (data.success) {
+                      const totalWithdrawals = data.data.withdrawals
+                          .filter(w => w.status === 'completed')
+                          .reduce((sum, withdrawal) => sum + withdrawal.amount, 0);
+                      
+                      document.getElementById('totalWithdrawals').textContent = `KZ${totalWithdrawals.toLocaleString('pt-BR')}`;
+                  }
+              }
+          } catch (error) {
+              console.error('Erro ao carregar retiradas:', error);
+          }
+      }
 
-.footers .item img {
-    width: 20px !important;
-    height: 20px !important;
-    margin-bottom: 2px;
-    filter: brightness(0) invert(1); /* Torna as imagens brancas */
-}
+      // Verificar status do check-in
+      async function checkCheckinStatus(token) {
+          try {
+              const response = await fetch(`${API_BASE_URL}/api/checkin/status`, {
+                  headers: {
+                      'Authorization': `Bearer ${token}`
+                  }
+              });
 
-.footers .item span {
-    font-size: 0.6rem !important;
-    margin-top: 0;
-    line-height: 1;
-    text-align: center;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-    color: white !important;
-}
+              if (response.ok) {
+                  const data = await response.json();
+                  const checkinStatus = document.getElementById('checkin-status');
+                  const checkinBtn = document.getElementById('checkin-btn');
+                  
+                  if (data.success) {
+                      if (data.data.can_checkin) {
+                          checkinStatus.textContent = 'Disponível';
+                          checkinBtn.disabled = false;
+                      } else {
+                          checkinStatus.textContent = 'Já realizado hoje';
+                          checkinBtn.disabled = true;
+                          // Mostrar próximo check-in
+                          const nextCheckin = new Date(data.data.next_checkin);
+                          checkinStatus.textContent = `Próximo: ${nextCheckin.toLocaleTimeString('pt-BR')}`;
+                      }
+                  }
+              }
+          } catch (error) {
+              console.error('Erro ao verificar check-in:', error);
+              document.getElementById('checkin-status').textContent = 'Erro ao verificar';
+          }
+      }
 
-/* Ajuste no container de conteúdo para não ficar atrás do footer */
-.content-container {
-    padding-bottom: 60px !important;
-}
+      // Realizar check-in
+      async function performCheckin() {
+          const token = getUserToken();
+          const checkinBtn = document.getElementById('checkin-btn');
+          
+          if (!token) {
+              showToast('Faça login para continuar', 'error');
+              return;
+          }
 
-/* Efeito de campo de futebol no fundo do footer */
-.footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        linear-gradient(transparent 49%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 51%),
-        radial-gradient(circle at 50% 50%, transparent 40%, rgba(255,255,255,0.1) 40%, rgba(255,255,255,0.1) 42%, transparent 42%);
-    background-size: 100% 10px, 100% 100%;
-    opacity: 0.3;
-    pointer-events: none;
-}
+          checkinBtn.disabled = true;
+          checkinBtn.textContent = 'Processando...';
 
-/* Para telas muito pequenas */
-@media (max-width: 320px) {
-    .footers .item span {
-        font-size: 0.55rem !important;
-    }
-    
-    .footers .item img {
-        width: 18px !important;
-        height: 18px !important;
-    }
-    
-    .footer {
-        height: 48px;
-    }
-    
-    .content-container {
-        padding-bottom: 58px !important;
-    }
-}
-/* Ajuste no container de conteúdo para não ficar atrás do footer */
-.content-container {
-    padding-bottom: 60px !important; /* Espaço para o footer fixo */
-}
-/* Overlay */
-.popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(27, 94, 32, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
+          try {
+              const response = await fetch(`${API_BASE_URL}/api/checkin`, {
+                  method: 'POST',
+                  headers: {
+                      'Authorization': `Bearer ${token}`,
+                      'Content-Type': 'application/json'
+                  }
+              });
 
-/* Conteúdo do popup */
-.popup-content {
-    background: var(--soccer-white);
-    color: var(--soccer-dark);
-    padding: 20px;
-    max-width: 500px;
-    width: 90%;
-    border-radius: 12px;
-    position: relative;
-    border-top: 5px solid var(--soccer-green);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
+              const data = await response.json();
 
-/* Botão de fechar */
-.popup-close {
-    position: absolute;
-    top: 10px; 
-    right: 10px;
-    cursor: pointer;
-}
-</style>
+              if (data.success) {
+                  showToast('Check-in realizado! +10 KZ adicionados', 'success');
+                  document.getElementById('checkin-status').textContent = 'Concluído hoje';
+                  
+                  // Atualizar saldo
+                  await loadUserData();
+              } else {
+                  showToast(data.message || 'Erro no check-in', 'error');
+                  checkinBtn.disabled = false;
+              }
 
-<style>
-.telegram-link {
-    margin-top: 20px;
-    text-align: center;
-}
-.telegram-link a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #0088cc !important;
-    text-decoration: none;
-}
-.telegram-link a:hover {
-    text-decoration: underline;
-    color: #006699 !important;
-}
-</style>
+          } catch (error) {
+              console.error('Erro no check-in:', error);
+              showToast('Erro de conexão', 'error');
+              checkinBtn.disabled = false;
+          } finally {
+              checkinBtn.textContent = 'Fazer Check-in';
+          }
+      }
 
-<script>
-function openPopup() {
-    document.getElementById("systemPopup").style.display = "flex";
-}
+      // Funções do modal
+      function abrirModalCompra(modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+              modal.classList.remove('hidden');
+              modal.classList.add('flex');
+              document.body.style.overflow = 'hidden';
+          }
+      }
 
-function closePopup() {
-    document.getElementById("systemPopup").style.display = "none";
-}
+      function fecharModalCompra(event, modalId) {
+          if (event) {
+              event.stopPropagation();
+          }
+          const modal = document.getElementById(modalId);
+          if (modal) {
+              modal.classList.add('hidden');
+              modal.classList.remove('flex');
+              document.body.style.overflow = 'auto';
+          }
+      }
 
-// Exemplo: abrir automaticamente ao carregar a página
-// window.onload = openPopup;
-</script>
+      // Função de investimento
+      async function investir(productId, amount) {
+          const token = getUserToken();
+          
+          if (!token) {
+              showToast('Faça login para continuar', 'error');
+              return;
+          }
 
-      <div data-v-6e534c71="" class="footer">
-    <div data-v-47e63dc4="" data-v-98526a88="" class="footers" data-v-6e534c71="">
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/principal.html'">
-            <div data-v-47e63dc4="" class="on">
-                <img data-v-47e63dc4="" src="img/home.png" alt="">
-                <span data-v-47e63dc4="" style="color: white !important;"></span>
-            </div>
-        </div>
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/tarefa.html'">
-            <div data-v-47e63dc4="" class="">
-                <img data-v-47e63dc4="" src="img/tarefa.png" alt="">
-                <span data-v-47e63dc4="" style="color: white !important;"></span>
-            </div>
-        </div>
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/produtos.html'">
-            <div data-v-47e63dc4="" class="">
-                <img data-v-47e63dc4="" src="img/produto.png" alt="">
-                <span data-v-47e63dc4="" style="color: white !important;"></span>
-            </div>
-        </div>
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/equipe.html'">
-            <div data-v-47e63dc4="" class="">
-                <img data-v-47e63dc4="" src="img/fortuna.png" alt="">
-                <span data-v-47e63dc4="" style="color: white !important;"></span>
-            </div>
-        </div>
-        <div data-v-47e63dc4="" class="item" onclick="window.location.href='/dashboard.html'">
-            <div data-v-47e63dc4="" class="">
-                <img data-v-47e63dc4="" src="img/equipe.png" alt="">
-                <span data-v-47e63dc4="" style="color: white !important;"></span>
-            </div>
-        </div>
-    </div>
-</div>
-    </div>
-</div>
+          // Encontrar o produto nos dados
+          const product = productsData.find(p => p.id === productId);
+          if (!product) {
+              showToast('Produto não encontrado', 'error');
+              return;
+          }
 
+          // Calcular bônus baseado no nível
+          let bonusPercentage = 0;
+          if (product.bonusLevel === 1) {
+              bonusPercentage = 0.25; // 25% para nível 1
+          } else if (product.bonusLevel === 2) {
+              bonusPercentage = 0.02; // 2% para nível 2
+          } else if (product.bonusLevel === 3) {
+              bonusPercentage = 0.01; // 1% para nível 3
+          }
 
-<style>
-    .van-toast {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        flex-direction: column;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        box-sizing: content-box;
-        width: 85px;
-        max-width: 70%;
-        min-height: 1.51724rem;
-        padding: .27586rem;
-        color: white !important;
-        font-size: .24138rem;
-        white-space: pre-wrap;
-        text-align: center;
-        word-break: break-all;
-        background-color: var(--soccer-green) !important;
-        border-radius: .13793rem;
-        -webkit-transform: translate3d(-50%,-50%,0);
-        transform: translate3d(-50%,-50%,0);
-        transition: .4s;
-        z-index: -1;
-        opacity: 0;
-    }
+          const bonusAmount = amount * bonusPercentage;
 
-    .gig_box {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        flex-direction: column;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        box-sizing: content-box;
-        width: 85px;
-        max-width: 70%;
-        min-height: 1.51724rem;
-        padding: .27586rem;
-        color: white !important;
-        font-size: .24138rem;
-        white-space: pre-wrap;
-        text-align: center;
-        word-break: break-all;
-        background-color: var(--soccer-green) !important;
-        border-radius: .13793rem;
-        -webkit-transform: translate3d(-50%,-50%,0);
-        transform: translate3d(-50%,-50%,0);
-        transition: .4s;
-        z-index: -1;
-        opacity: 0;
-    }
-    .gig_box .gif {
-        width: 20px !important;
-    }
-</style>
+          try {
+              showToast('Processando investimento...', 'info');
 
-<div class="gig_box" id="preLoad">
-    <img src="https://i.postimg.cc/yYDNK1w5/loading.gif" class="gif" alt="loading">
-</div>
+              const response = await fetch(`${API_BASE_URL}/api/purchase`, {
+                  method: 'POST',
+                  headers: {
+                      'Authorization': `Bearer ${token}`,
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                      product_id: `produto_${productId}`,
+                      product_name: product.name,
+                      amount: amount,
+                      quantity: 1,
+                      daily_return: product.dailyReturn,
+                      cycle_days: product.period,
+                      bonus_amount: bonusAmount
+                  })
+              });
 
-<div class="van-toast van-toast middle van-toast success" id="msg" style=""><i
-        class="van-icon van-icon-success van-toast__icon"></i>
-    <div class="van-toast__text">Message</div>
-</div>
+              const data = await response.json();
 
-<script>
-// Função para obter o token do localStorage
-function getToken() {
-    try {
-        const tokenData = localStorage.getItem('user_token');
-        if (tokenData) {
-            const parsed = JSON.parse(tokenData);
-            return parsed.token || parsed.access_token || parsed;
-        }
-        return null;
-    } catch (error) {
-        console.error('Erro ao obter token:', error);
-        return null;
-    }
-}
+              if (data.success) {
+                  showToast(`Investimento realizado com sucesso! Bônus de KZ${bonusAmount.toLocaleString('pt-BR')} adicionado`, 'success');
+                  
+                  // Fechar modal
+                  const modalId = `modal-${productId}`;
+                  fecharModalCompra(null, modalId);
+                  
+                  // Recarregar página após 2 segundos
+                  setTimeout(() => {
+                      window.location.reload();
+                  }, 2000);
+              } else {
+                  showToast(data.message || 'Erro ao realizar investimento', 'error');
+              }
 
-// Função para verificar status do check-in
-function checkCheckinStatus() {
-    const token = getToken();
-    if (!token) {
-        document.getElementById('checkin-status').textContent = 'Faça login';
-        document.getElementById('checkin-status').style.color = '#ff4444';
-        return;
-    }
+          } catch (error) {
+              console.error('Erro no investimento:', error);
+              showToast('Erro de conexão', 'error');
+          }
+      }
 
-    $.ajax({
-        url: "https://bd-p4q7.onrender.com/api/checkin/status",
-        method: "GET",
-        headers: {
-            'Authorization': 'Bearer ' + token
-        },
-        success: function(res) {
-            if (res.success) {
-                const statusElement = document.getElementById('checkin-status');
-                if (res.data.can_checkin) {
-                    statusElement.textContent = '✅ Disponível';
-                    statusElement.style.color = '#4CAF50';
-                    // Tornar o botão clicável
-                    $('#checkin-btn').css('opacity', '1').css('pointer-events', 'auto');
-                } else {
-                    const nextCheckin = new Date(res.data.next_checkin);
-                    const now = new Date();
-                    const diffMs = nextCheckin - now;
-                    
-                    if (diffMs <= 0) {
-                        statusElement.textContent = '✅ Disponível';
-                        statusElement.style.color = '#4CAF50';
-                    } else {
-                        const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
-                        const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-                        
-                        statusElement.textContent = `⏳ ${diffHrs}h${diffMins}m`;
-                        statusElement.style.color = '#ff9800';
-                    }
-                    
-                    // Desabilitar botão se não pode fazer check-in
-                    $('#checkin-btn').css('opacity', '0.6').css('pointer-events', 'none');
-                }
-            }
-        },
-        error: function(xhr) {
-            console.log('Erro ao verificar status do check-in');
-            document.getElementById('checkin-status').textContent = 'Erro';
-            document.getElementById('checkin-status').style.color = '#ff4444';
-        }
-    });
-}
+      // Modal de boas-vindas
+      function showWelcomeModal() {
+          const modal = document.getElementById('customModal');
+          if (modal) {
+              modal.classList.remove('hidden');
+              modal.classList.add('flex');
+              document.body.style.overflow = 'hidden';
+          }
+      }
 
-// Função para fazer check-in
-$(document).on('click', '#checkin-btn', function() {
-    const token = getToken();
-    
-    if (!token) {
-        new Noty({
-            type: 'error',
-            text: 'Por favor, faça login primeiro',
-            timeout: 2000
-        }).show();
-        return;
-    }
+      function closeModal() {
+          const modal = document.getElementById('customModal');
+          if (modal) {
+              modal.classList.add('hidden');
+              modal.classList.remove('flex');
+              document.body.style.overflow = 'auto';
+          }
+      }
 
-    // Verificar se o botão está habilitado
-    if ($(this).css('pointer-events') === 'none') {
-        return;
-    }
+      // Carregar produtos dinamicamente
+      function loadProducts() {
+          const container = document.getElementById('products-container');
+          
+          productsData.forEach(product => {
+              // Criar elemento do produto
+              const productElement = document.createElement('div');
+              productElement.className = 'bg-gradient-to-br from-green-50 via-white to-green-100 rounded-3xl p-5 shadow-lg flex items-center justify-between border border-green-200';
+              productElement.innerHTML = `
+                <div class="flex items-center gap-4">
+                  <img src="${product.image}" class="w-20 h-20 rounded-2xl object-cover border-2 border-green-300 shadow-sm" />
+                  <div class="space-y-1">
+                    <h3 class="text-base font-bold text-green-800">${product.name}</h3>
+                    <p class="text-sm text-gray-600">Rendimento diário:</p>
+                    <p class="text-lg font-semibold text-green-600">KZ${product.dailyReturn.toLocaleString('pt-BR')}</p>
+                    <p class="text-xs text-gray-500 mt-1">Valor do produto</p>
+                    <p class="text-base font-bold text-green-500">KZ${product.price.toLocaleString('pt-BR')}</p>
+                  </div>
+                </div>
+                <div class="flex items-center justify-center">
+                  <button onclick="abrirModalCompra('modal-${product.id}')"
+                    class="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 text-sm rounded-full shadow-md hover:brightness-110 transition">
+                    comprar
+                  </button>
+                </div>
+              `;
+              
+              container.appendChild(productElement);
+              
+              // Criar modal do produto
+              const modalElement = document.createElement('div');
+              modalElement.id = `modal-${product.id}`;
+              modalElement.className = 'fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden items-center justify-center px-4';
+              modalElement.setAttribute('onclick', `fecharModalCompra(event, 'modal-${product.id}')`);
+              modalElement.innerHTML = `
+                <div onclick="event.stopPropagation()"
+                  class="modal-deco relative w-full max-w-md bg-white border-2 border-green-500 rounded-3xl p-6 animate-scale-fade-up shadow-2xl">
+                  <button onclick="fecharModalCompra(null, 'modal-${product.id}')"
+                    class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl">&times;</button>
+                  <div class="flex items-center gap-4 mb-4">
+                    <img src="${product.image}" class="w-12 h-12 rounded-full" />
+                    <div>
+                      <h3 class="text-lg font-bold text-green-800">${product.name}</h3>
+                      <p class="text-sm font-semibold text-green-700">KZ${product.price.toLocaleString('pt-BR')}</p>
+                    </div>
+                  </div>
+                  <ul class="text-sm text-gray-700 mb-6">
+                    <li>Diário: <strong>KZ${product.dailyReturn.toLocaleString('pt-BR')}</strong></li>
+                    <li>Total: <strong>KZ${product.totalReturn.toLocaleString('pt-BR')}</strong></li>
+                    <li>Dias: <strong>${product.period} dias</strong></li>
+                    <li>Bônus: <strong>${product.bonusLevel === 1 ? '25%' : product.bonusLevel === 2 ? '2%' : '1%'}</strong></li>
+                  </ul>
+                  <button onclick="investir(${product.id}, ${product.price})"
+                    class="block w-full text-center bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-sm font-semibold">
+                    Investir agora
+                  </button>
+                </div>
+              `;
+              
+              container.appendChild(modalElement);
+          });
+      }
 
-    if (confirm('Deseja fazer check-in de hoje e receber 10 KZ?')) {
-        // Mostrar loading
-        const notyLoading = new Noty({
-            type: 'info',
-            text: 'Processando check-in...',
-            timeout: false,
-            killer: true
-        }).show();
+      // Event Listeners
+      document.addEventListener('DOMContentLoaded', function() {
+          // Carregar dados do usuário
+          loadUserData();
+          
+          // Carregar produtos
+          loadProducts();
+          
+          // Mostrar modal de boas-vindas sempre que a página for carregada
+          setTimeout(showWelcomeModal, 1000);
+          
+          // Event listener para check-in
+          const checkinBtn = document.getElementById('checkin-btn');
+          if (checkinBtn) {
+              checkinBtn.addEventListener('click', performCheckin);
+          }
+          
+          // Event listeners para tecla Escape nos modais
+          document.addEventListener('keydown', function(event) {
+              if (event.key === 'Escape') {
+                  closeModal();
+                  // Fechar todos os modais de produtos
+                  productsData.forEach(product => {
+                      fecharModalCompra(null, `modal-${product.id}`);
+                  });
+              }
+          });
+      });
 
-        $.ajax({
-            url: "https://bd-p4q7.onrender.com/api/checkin",
-            method: "POST",
-            headers: {
-                'Authorization': 'Bearer ' + token
-            },
-            success: function(res) {
-                notyLoading.close();
-                
-                if (res.success) {
-                    new Noty({
-                        type: 'success',
-                        text: '✅ ' + res.message + ' Saldo: ' + res.data.new_balance + ' KZ',
-                        timeout: 4000,
-                        progressBar: true
-                    }).show();
-                    
-                    // Atualizar status após 2 segundos
-                    setTimeout(checkCheckinStatus, 2000);
-                    
-                    // Atualizar saldo na interface se necessário
-                    updateUserBalance(res.data.new_balance);
-                } else {
-                    new Noty({
-                        type: 'error',
-                        text: '❌ ' + res.message,
-                        timeout: 3000
-                    }).show();
-                }
-            },
-            error: function(xhr) {
-                notyLoading.close();
-                let errorMsg = 'Erro na conexão';
-                if (xhr.responseJSON && xhr.responseJSON.message) {
-                    errorMsg = xhr.responseJSON.message;
-                }
-                new Noty({
-                    type: 'error',
-                    text: '❌ ' + errorMsg,
-                    timeout: 3000
-                }).show();
-            }
-        });
-    }
-});
+      // Função para formatar valores em KZ
+      function formatCurrency(value) {
+          return `KZ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      }
 
-// Função para atualizar saldo na interface (ajuste conforme sua estrutura)
-function updateUserBalance(newBalance) {
-    // Procura elementos que possam conter o saldo
-    const balanceElements = document.querySelectorAll('[class*="balance"], [class*="saldo"], [id*="balance"], [id*="saldo"]');
-    balanceElements.forEach(element => {
-        if (element.textContent.includes('KZ') || element.textContent.match(/\d+/)) {
-            element.textContent = newBalance + ' KZ';
-        }
-    });
-    
-    // Ou atualiza um elemento específico se você tiver
-    const specificBalance = document.getElementById('user-balance');
-    if (specificBalance) {
-        specificBalance.textContent = newBalance + ' KZ';
-    }
-}
+      // Verificar autenticação em todas as páginas
+      function checkAuth() {
+          const token = getUserToken();
+          if (!token) {
+              window.location.href = 'index.html';
+              return false;
+          }
+          return true;
+      }
 
-// Verificar status ao carregar a página
-$(document).ready(function() {
-    // Aguardar um pouco para garantir que o token foi carregado
-    setTimeout(checkCheckinStatus, 1000);
-    
-    // Verificar a cada 30 segundos
-    setInterval(checkCheckinStatus, 30000);
-});
-
-// Função para resetar check-ins diariamente às 00:00
-function scheduleDailyReset() {
-    const now = new Date();
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
-    
-    const timeUntilReset = tomorrow - now;
-    
-    console.log('Próximo reset do check-in em:', Math.floor(timeUntilReset / 1000 / 60), 'minutos');
-    
-    setTimeout(function() {
-        console.log('Reset automático do check-in realizado');
-        checkCheckinStatus();
-        scheduleDailyReset();
-    }, timeUntilReset);
-}
-
-// Iniciar agendamento do reset
-scheduleDailyReset();
-
-// Listener para quando o usuário fizer login
-window.addEventListener('storage', function(e) {
-    if (e.key === 'user_token') {
-        checkCheckinStatus();
-    }
-});
-
-// Também verificar quando a página ganha foco
-window.addEventListener('focus', checkCheckinStatus);
-</script>
+      // Logout function (se necessário)
+      function logout() {
+          localStorage.removeItem('user_token');
+          localStorage.removeItem('user_id');
+          localStorage.removeItem('hasVisited');
+          window.location.href = 'index.html';
+      }
+    </script>
+  </div>
+</body>
+</html>
