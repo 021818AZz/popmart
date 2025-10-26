@@ -306,56 +306,62 @@
             </div>
         </div>
 
-        <!-- Menu de opções -->
-        <div class="px-4 space-y-3 text-sm">
-            <a href="geral.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
-                <div class="flex items-center gap-2">
-                    <i class='bx bx-history text-green-600'></i>
-                    Histórico de Depósitos
-                </div>
-                <span class="text-gray-400">›</span>
-            </a>
-            <a href="historico-saques.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
-                <div class="flex items-center gap-2">
-                    <i class='bx bx-money-withdraw text-green-600'></i>
-                    Histórico de Retiradas
-                </div>
-                <span class="text-gray-400">›</span>
-            </a>
-            <a href="iban.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
-                <div class="flex items-center gap-2">
-                    <i class='bx bx-credit-card text-green-600'></i>
-                    Número da Conta Bancária
-                </div>
-                <span class="text-gray-400">›</span>
-            </a>
-            <a href="seting.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
-                <div class="flex items-center gap-2">
-                    <i class='bx bx-lock-alt text-green-600'></i>
-                    Alterar Senha
-                </div>
-                <span class="text-gray-400">›</span>
-            </a>
-            <a target="_blank" href="online.html" class="bg-white p-3 rounded-xl shadow flex items-center justify-between card-hover">
-                <div class="flex items-center gap-2">
-                    <i class='bx bx-support text-green-600'></i>
-                    Serviço Online
-                </div>
-                <span class="text-gray-400">›</span>
-            </a>
-            <a href="#" class="bg-white p-3 rounded-xl shadow flex opacity-40 items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <i class='bx bxl-play-store text-green-600'></i>
-                    Baixar App
-                </div>
-                <span class="text-gray-400">›</span>
-            </a>
-        </div>
+       <!-- Menu de opções -->
+<div class="px-4 space-y-3 text-sm">
+  <a href="geral.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="img/historico.png" alt="Histórico" class="w-5 h-5">
+      <span>Histórico de Depósitos</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
 
-        <!-- Botão de logout -->
-        <div class="text-center mt-6">
-            <button onclick="logout()" class="text-gray-500 text-sm hover:text-gray-700 transition">Terminar Sessão</button>
-        </div>
+  <a href="historico-saques.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="img/historico.png" alt="Retirada" class="w-5 h-5">
+      <span>Histórico de Retiradas</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a href="iban.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" alt="Cartão" class="w-5 h-5">
+      <span>Número da Conta Bancária</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a href="seting.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Senha" class="w-5 h-5">
+      <span>Alterar Senha</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a target="_blank" href="online.html" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md hover:bg-green-50">
+    <div class="flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/3449/3449720.png" alt="Suporte" class="w-5 h-5">
+      <span>Serviço Online</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+
+  <a href="#" class="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between opacity-50 cursor-not-allowed">
+    <div class="flex items-center gap-2">
+      <img src="https://cdn-icons-png.flaticon.com/512/3004/3004458.png" alt="App" class="w-5 h-5">
+      <span>Baixar App</span>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Seta" class="w-3 h-3 opacity-60">
+  </a>
+</div>
+
+<!-- Botão de logout -->
+<div class="text-center mt-6">
+  <button onclick="logout()" class="text-gray-500 text-sm hover:text-green-600 transition">Terminar Sessão</button>
+</div>
+
 
         <!-- Menu de navegação com ícones de imagem -->
 <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-100 rounded-t-2xl overflow-hidden">
