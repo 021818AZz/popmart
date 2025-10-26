@@ -489,7 +489,7 @@
                 showToast('Sessão terminada com sucesso', 'success');
                 
                 setTimeout(() => {
-                    window.location.href = 'login.html';
+                    window.location.href = 'index.html';
                 }, 1500);
 
             } catch (error) {
@@ -497,7 +497,7 @@
                 // Mesmo com erro, limpar localStorage e redirecionar
                 localStorage.removeItem('user_token');
                 localStorage.removeItem('user_id');
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
             }
         }
 
@@ -508,7 +508,7 @@
                 if (!token) {
                     showToast('Sessão expirada. Faça login novamente.', 'error');
                     setTimeout(() => {
-                        window.location.href = 'login.html';
+                        window.location.href = 'index.html';
                     }, 2000);
                     return;
                 }
@@ -528,7 +528,7 @@
                         localStorage.removeItem('user_token');
                         localStorage.removeItem('user_id');
                         setTimeout(() => {
-                            window.location.href = 'login.html';
+                            window.location.href = 'index.html';
                         }, 2000);
                         return;
                     }
