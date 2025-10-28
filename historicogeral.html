@@ -15,6 +15,11 @@
             -webkit-tap-highlight-color: transparent;
         }
         
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
         .animate-fade-in {
             animation: fadeIn 0.3s ease-in-out;
         }
@@ -251,6 +256,21 @@
             border: 1px solid #bbf7d0;
         }
 
+        /* Container principal com scroll */
+        .main-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 20px;
+        }
+
         /* Melhorias para dispositivos com notch */
         @supports(padding: max(0px)) {
             .grass-background {
@@ -263,8 +283,8 @@
                 padding-right: max(20px, env(safe-area-inset-right));
             }
             
-            .pb-28 {
-                padding-bottom: max(112px, env(safe-area-inset-bottom));
+            .content-wrapper {
+                padding-bottom: max(20px, env(safe-area-inset-bottom));
             }
         }
 
@@ -278,27 +298,39 @@
         }
 
         /* Scrollbar personalizada */
-        .transactions-container::-webkit-scrollbar {
+        .content-wrapper::-webkit-scrollbar {
             width: 6px;
         }
         
-        .transactions-container::-webkit-scrollbar-track {
+        .content-wrapper::-webkit-scrollbar-track {
             background: #f1f5f9;
             border-radius: 3px;
         }
         
-        .transactions-container::-webkit-scrollbar-thumb {
+        .content-wrapper::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 3px;
         }
         
-        .transactions-container::-webkit-scrollbar-thumb:hover {
+        .content-wrapper::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
+        }
+
+        /* Garantir que o container de transações tenha scroll */
+        .transactions-section {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .transactions-container {
+            max-height: 50vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
 
-<body class="bg-green-50 text-neutral-900 min-h-screen font-sans">
+<body class="bg-green-50 text-neutral-900">
   <!-- Loading overlay -->
   <div id="loadingOverlay" class="loading-overlay hidden">
     <div class="loading-content">
@@ -307,8 +339,7 @@
     </div>
   </div>
 
-  <div class="max-w-[500px] mx-auto pb-28 bg-green-50 text-neutral-900 min-h-screen font-sans">
-
+  <div class="main-container max-w-[500px] mx-auto">
     <!-- Header com tema de futebol -->
     <div class="grass-background px-5 pt-6 pb-4 text-white relative overflow-hidden">
       <!-- Botão Voltar -->
@@ -348,8 +379,8 @@
       </div>
     </div>
 
-    <!-- Conteúdo principal -->
-    <div class="px-5 -mt-4">
+    <!-- Conteúdo principal com scroll -->
+    <div class="content-wrapper px-5">
       <!-- Estatísticas do período -->
       <div class="white-card mb-4">
         <h3 class="font-semibold mb-3 text-green-800 flex items-center gap-2">
@@ -373,7 +404,7 @@
       </div>
 
       <!-- Lista de transações -->
-      <div class="mb-4">
+      <div class="transactions-section">
         <h3 class="font-semibold mb-3 text-green-800 flex items-center gap-2">
           <span class="icon-wrapper">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -382,7 +413,7 @@
           </span>
           Movimentos
         </h3>
-        <div class="transactions-container max-h-[60vh] overflow-y-auto">
+        <div class="transactions-container">
           <div class="space-y-2" id="transactionsContainer">
             <!-- As transações serão carregadas aqui -->
           </div>
@@ -394,7 +425,7 @@
       </div>
 
       <!-- Última atualização -->
-      <div class="text-center">
+      <div class="text-center mt-4">
         <p id="lastUpdate" class="text-xs text-green-600 flex items-center justify-center gap-1">
           <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
@@ -877,7 +908,7 @@
         }
     }
 
-    // Prevenir comportamento de zoom duplo-toque
+    // Prevenir comportamento de zoom duplo-toque (mantido para evitar zoom acidental)
     let lastTouchEnd = 0;
     document.addEventListener('touchend', function (event) {
         const now = (new Date()).getTime();
@@ -887,10 +918,10 @@
         lastTouchEnd = now;
     }, false);
 
-    // Melhorar performance em dispositivos móveis
-    document.addEventListener('touchmove', function(e) {
-        e.preventDefault();
-    }, { passive: false });
+    // REMOVIDO: Event listener que estava bloqueando o scroll
+    // document.addEventListener('touchmove', function(e) {
+    //     e.preventDefault();
+    // }, { passive: false });
   </script>
 </body>
 </html>
