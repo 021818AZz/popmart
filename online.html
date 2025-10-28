@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte - Royal Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+        body {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23005940' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-white min-h-screen">
+    <div class="max-w-md mx-auto pb-24">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-40 flex items-center justify-between px-5 py-4 border-b border-green-200">
+            <a href="profile.html" class="text-green-700 text-xl font-bold">&#8592;</a>
+            <h1 class="text-lg font-bold text-green-800 tracking-tight">Suporte</h1>
+            <div class="w-6"></div>
+        </header>
+
+        <!-- Conteúdo Principal -->
+        <main class="px-4 mt-6">
+            <!-- Card de Canais de Atendimento -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6 card-hover transition-all duration-300 border border-green-100">
+                <div class="bg-gradient-to-r from-green-600 to-green-700 p-4 text-white">
+                    <h2 class="text-lg font-semibold flex items-center gap-2">
+                        <i class='bx bx-headphone text-xl'></i>
+                        Canais de Atendimento
+                    </h2>
+                </div>
+                <div class="p-4">
+                    <div class="space-y-4">
+                        <!-- Telegram -->
+                        <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-100">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                <i class='bx bxl-telegram text-2xl'></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Gerente</h3>
+                                <p class="text-sm text-slate-600">Atendimento 9h-21h</p>
+                                <a href="https://t.me/royalrbc" class="text-green-600 text-sm font-medium mt-1 inline-block">Telegram</a>
+                            </div>
+                        </div>
+
+                        <!-- Canal -->
+                        <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-100">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                <i class='bx bxl-telegram text-2xl'></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Canal</h3>
+                                <p class="text-sm text-slate-600">Informações 24h</p>
+                                <a href="https://t.me/+ftLUyASea403YjQ8" class="text-green-600 text-sm font-medium mt-1 inline-block">Telegram</a>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-100">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                <i class='bx bx-envelope text-2xl'></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Email</h3>
+                                <p class="text-sm text-slate-600">Respondemos em até 24h</p>
+                                <a href="mailto:suporte@royalbank.com" class="text-green-600 text-sm font-medium mt-1 inline-block">suporte@royalbank.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Apoio ao Cliente -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6 card-hover transition-all duration-300 border border-green-100">
+                <div class="bg-gradient-to-r from-green-600 to-green-700 p-4 text-white">
+                    <h2 class="text-lg font-semibold flex items-center gap-2">
+                        <i class='bx bx-support text-xl'></i>
+                        Apoio ao Cliente
+                    </h2>
+                </div>
+                <div class="p-4">
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <i class='bx bx-check-circle text-green-500 mt-1'></i>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Problemas com acesso</h3>
+                                <p class="text-sm text-slate-600">Recupere sua conta ou redefina sua senha</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class='bx bx-credit-card text-green-500 mt-1'></i>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Problemas com pagamentos</h3>
+                                <p class="text-sm text-slate-600">Relate problemas com transações</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class='bx bx-shield-alt text-green-500 mt-1'></i>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Segurança da conta</h3>
+                                <p class="text-sm text-slate-600">Proteja sua conta contra atividades suspeitas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="window.location.href='perfil.html'" class="w-full mt-4 bg-green-50 hover:bg-green-100 text-green-700 py-2 rounded-lg font-medium transition border border-green-200">
+                        Ver FAQ Completo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dicas de Segurança -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6 border border-green-100">
+                <div class="bg-gradient-to-r from-green-600 to-green-700 p-4 text-white">
+                    <h2 class="text-lg font-semibold flex items-center gap-2">
+                        <i class='bx bx-info-circle text-xl'></i>
+                        Dicas de Segurança
+                    </h2>
+                </div>
+                <div class="p-4">
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                <i class='bx bx-lock-alt'></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Proteja sua senha</h3>
+                                <p class="text-sm text-slate-600">Nunca compartilhe sua senha com ninguém, nem mesmo com funcionários do banco.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                <i class='bx bx-check-shield'></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Verifique os links</h3>
+                                <p class="text-sm text-slate-600">Sempre confira se está no site oficial antes de inserir seus dados.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                <i class='bx bx-bell'></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-slate-800">Ative notificações</h3>
+                                <p class="text-sm text-slate-600">Receba alertas de todas as transações em sua conta.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-green-100">
+                <div class="bg-gradient-to-r from-green-600 to-green-700 p-4 text-white">
+                    <h2 class="text-lg font-semibold flex items-center gap-2">
+                        <i class='bx bx-share-alt text-xl'></i>
+                        Nossas Redes Sociais
+                    </h2>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-center gap-4">
+                        <!-- Facebook -->
+                        <a href="https://facebook.com/royalbank" target="_blank" class="social-icon bg-green-600 text-white p-3 rounded-full">
+                            <i class='bx bxl-facebook text-xl'></i>
+                        </a>
+                        
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/royalbank" target="_blank" class="social-icon bg-green-600 text-white p-3 rounded-full">
+                            <i class='bx bxl-instagram text-xl'></i>
+                        </a>
+                        
+                        <!-- Twitter -->
+                        <a href="https://twitter.com/royalbank" target="_blank" class="social-icon bg-green-600 text-white p-3 rounded-full">
+                            <i class='bx bxl-twitter text-xl'></i>
+                        </a>
+                        
+                        <!-- LinkedIn -->
+                        <a href="https://linkedin.com/company/royalbank" target="_blank" class="social-icon bg-green-600 text-white p-3 rounded-full">
+                            <i class='bx bxl-linkedin text-xl'></i>
+                        </a>
+                        
+                        <!-- YouTube -->
+                        <a href="https://youtube.com/royalbank" target="_blank" class="social-icon bg-green-600 text-white p-3 rounded-full">
+                            <i class='bx bxl-youtube text-xl'></i>
+                        </a>
+                    </div>
+                    <p class="text-center text-sm text-slate-500 mt-4">Siga-nos para novidades e dicas financeiras</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] z-50 shadow-xl border-t border-green-200 rounded-t-2xl overflow-hidden">
+        <ul class="flex justify-around items-center py-2 bg-gradient-to-r from-green-600 to-green-700 text-white text-xs">
+            <li>
+                <a href="dashboard.html" class="flex flex-col items-center gap-0.5 text-white/70">
+                    <i class='bx bxs-home text-[22px]'></i>
+                    <span>Início</span>
+                </a>
+            </li>
+            <li>
+                <a href="renda.html" class="flex flex-col items-center gap-0.5 text-white/70">
+                    <i class='bx bxs-dollar-circle text-[22px]'></i>
+                    <span>Investimentos</span>
+                </a>
+            </li>
+            <li>
+                <a href="iban.html" class="flex flex-col items-center gap-0.5 text-white">
+                    <i class='bx bxs-support text-[22px]'></i>
+                    <span>Suporte</span>
+                </a>
+            </li>
+            <li>
+                <a href="perfil.html" class="flex flex-col items-center gap-0.5 text-white/70">
+                    <i class='bx bxs-user text-[22px]'></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html
