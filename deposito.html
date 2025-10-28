@@ -679,34 +679,34 @@
 
     // Informações dos bancos
     const bankInfo = {
-      'BAI': {
-        name: 'BAI',
-        fullName: 'BAI - Banco Angolano de Investimentos',
-        beneficiary: 'Maria',
-        iban: '004000009649885610118',
-        reference: 'Trony' + Math.floor(10000 + Math.random() * 90000)
-      },
-      'BFA': {
-        name: 'BFA',
-        fullName: 'BFA - Banco de Fomento Angola',
-        beneficiary: 'Gomes',
-        iban: '000600009844984130105',
-        reference: 'Tmfdgf' + Math.floor(10000 + Math.random() * 90000)
-      },
-      'BIC': {
-        name: 'BIC',
-        fullName: 'BIC - Banco Internacional de Crédito',
-        beneficiary: 'Alexandre',
-        iban: '005100007348498810127',
-        reference: 'gfhgjgh' + Math.floor(10000 + Math.random() * 90000)
-      },
-      'ATL': {
-        name: 'ATL',
-        fullName: 'ATL - Banco Atlântico',
-        beneficiary: 'Sangonde',
-        iban: '005500006041284810139',
-        reference: 'XXXXXX' + Math.floor(10000 + Math.random() * 90000)
-      }
+        'BAI': {
+            name: 'BAI',
+            fullName: 'BAI - Banco Angolano de Investimentos',
+            beneficiary: 'Maria',
+            iban: '004000009649885610118',
+            reference: 'Trony' + Math.floor(10000 + Math.random() * 90000)
+        },
+        'BFA': {
+            name: 'BFA',
+            fullName: 'BFA - Banco de Fomento Angola',
+            beneficiary: 'Gomes',
+            iban: '000600009844984130105',
+            reference: 'Tmfdgf' + Math.floor(10000 + Math.random() * 90000)
+        },
+        'BIC': {
+            name: 'BIC',
+            fullName: 'BIC - Banco Internacional de Crédito',
+            beneficiary: 'Alexandre',
+            iban: '005100007348498810127',
+            reference: 'gfhgjgh' + Math.floor(10000 + Math.random() * 90000)
+        },
+        'ATL': {
+            name: 'ATL',
+            fullName: 'ATL - Banco Atlântico',
+            beneficiary: 'Sangonde',
+            iban: '005500006041284810139',
+            reference: 'XXXXXX' + Math.floor(10000 + Math.random() * 90000)
+        }
     };
 
     // Inicialização
@@ -722,17 +722,24 @@
     // Configurar listeners
     function setupEventListeners() {
         // Selecionar valor rápido
-        const depositButtons = document.querySelectorAll('.grass-button');
+        const amountButtons = document.querySelectorAll('[data-value]');
         const depositInput = document.getElementById('valorInput');
 
-        depositButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove a seleção de todos os botões
-                depositButtons.forEach(b => b.classList.remove('bg-green-800', 'text-white'));
-                // Adiciona seleção ao botão clicado
-                btn.classList.add('bg-green-800', 'text-white');
-                depositInput.value = btn.dataset.value;
+        amountButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                depositInput.value = value;
+                
+                // Ativar visualmente o botão clicado
+                amountButtons.forEach(b => b.classList.remove('bg-green-800', 'text-white'));
+                this.classList.add('bg-green-800', 'text-white');
             });
+        });
+
+        // Validar input manual
+        depositInput.addEventListener('input', function() {
+            // Remover seleção dos botões quando digitar manualmente
+            amountButtons.forEach(b => b.classList.remove('bg-green-800', 'text-white'));
         });
     }
 
@@ -754,6 +761,8 @@
                     const saldo = data.data.wallet_balance || 0;
                     document.getElementById('userBalance').textContent = `KZ ${saldo.toLocaleString('pt-AO')}`;
                 }
+            } else {
+                throw new Error('Falha ao carregar dados do usuário');
             }
         } catch (error) {
             console.error('Erro ao carregar dados:', error);
@@ -774,9 +783,9 @@
 
     // Fechar modal
     function closeBankModal(event) {
-        const modal = document.getElementById("bankModal");
         if (!event || event.target.id === "bankModal") {
-            modal.classList.add("hidden");
+            document.getElementById("bankModal").classList.add("hidden");
+            document.getElementById("bankModal").classList.remove("flex");
         }
     }
 
@@ -786,11 +795,10 @@
         container.innerHTML = '';
         
         const banks = ['BAI', 'BFA', 'BIC', 'ATL'];
-        const radius = 120; // Raio do círculo
+        const radius = 120;
         const centerX = container.offsetWidth / 2;
         const centerY = container.offsetHeight / 2;
         
-        // Posições iniciais aleatórias fora da tela
         banks.forEach((bankCode, index) => {
             const ball = document.createElement('div');
             ball.className = 'football-ball';
@@ -802,7 +810,7 @@
             ballContent.textContent = bankInfo[bankCode].name;
             ball.appendChild(ballContent);
             
-            // Posição inicial aleatória fora da tela
+            // Posição inicial aleatória
             const startX = Math.random() * 100 - 50;
             const startY = Math.random() * 100 - 50;
             
@@ -814,8 +822,8 @@
             // Animação para mover a bola para sua posição no círculo
             setTimeout(() => {
                 const angle = (index / banks.length) * 2 * Math.PI;
-                const x = centerX + radius * Math.cos(angle) - 40; // -40 para centralizar a bola
-                const y = centerY + radius * Math.sin(angle) - 40; // -40 para centralizar a bola
+                const x = centerX + radius * Math.cos(angle) - 40;
+                const y = centerY + radius * Math.sin(angle) - 40;
                 
                 ball.style.left = `${x}px`;
                 ball.style.top = `${y}px`;
@@ -833,14 +841,14 @@
         // Atualizar informações do banco selecionado
         document.getElementById('selectedBankName').textContent = bankInfo[bankCode].fullName;
         document.getElementById('selectedBankDesc').textContent = `Banco selecionado: ${bankInfo[bankCode].name}`;
+        document.getElementById('bankCode').value = bankCode;
         
         // Fechar o modal
         closeBankModal();
     }
 
-    // Mostrar tela de informações bancárias
-    function showBankDetails() {
-        // Obter valor do depósito
+    // Validar formulário (na tela de seleção)
+    function validateForm() {
         const valorInput = document.getElementById('valorInput');
         depositAmount = parseFloat(valorInput.value) || 0;
         
@@ -850,6 +858,18 @@
             return;
         }
         
+        if (!selectedBank) {
+            showError('Selecione um banco para continuar');
+            openBankModal();
+            return;
+        }
+
+        // Mostrar tela de detalhes
+        showBankDetails();
+    }
+
+    // Mostrar tela de informações bancárias
+    function showBankDetails() {
         // Atualizar informações na tela de detalhes
         document.getElementById('detailBankName').textContent = bankInfo[selectedBank].fullName;
         document.getElementById('detailBeneficiary').textContent = bankInfo[selectedBank].beneficiary;
@@ -857,16 +877,30 @@
         document.getElementById('detailReference').textContent = bankInfo[selectedBank].reference;
         document.getElementById('detailAmount').textContent = `KZ ${depositAmount.toLocaleString('pt-AO')}`;
         
+        // Preparar dados para a API
+        depositData = {
+            amount: depositAmount,
+            account_name: bankInfo[selectedBank].beneficiary,
+            iban: bankInfo[selectedBank].iban,
+            bank_name: bankInfo[selectedBank].fullName,
+            bank_code: selectedBank
+        };
+        
         // Mostrar tela de detalhes e esconder tela de seleção
         document.getElementById('bankSelectionScreen').style.display = 'none';
-        document.getElementById('bankDetailsScreen').classList.remove('bank-details-screen');
+        document.getElementById('bankDetailsScreen').style.display = 'block';
     }
 
     // Voltar para a tela de seleção
     function goBackToSelection() {
-        document.getElementById('bankDetailsScreen').classList.add('bank-details-screen');
+        document.getElementById('bankDetailsScreen').style.display = 'none';
         document.getElementById('bankSelectionScreen').style.display = 'block';
         receiptFile = null;
+        
+        // Resetar preview
+        document.getElementById('receiptPreview').style.display = 'none';
+        document.getElementById('fileName').classList.add('hidden');
+        document.getElementById('submitDepositBtn').disabled = true;
     }
 
     // Função para abrir a galeria
@@ -913,26 +947,7 @@
         clearError();
     }
 
-    // Validar formulário (na tela de seleção)
-    function validateForm() {
-        const valor = parseFloat(document.getElementById('valorInput').value);
-
-        if (!valor || isNaN(valor) || valor < 4000) {
-            showError('O valor mínimo para depósito é KZ 4.000');
-            return;
-        }
-
-        if (!selectedBank) {
-            showError('Selecione um banco para continuar');
-            openBankModal();
-            return;
-        }
-
-        // Se já tem um banco selecionado, ir direto para a tela de detalhes
-        showBankDetails();
-    }
-
-    // Submeter depósito - EXATAMENTE COMO NO SEU CÓDIGO ORIGINAL
+    // Submeter depósito
     async function submitDeposit() {
         if (!receiptFile) {
             showError('Por favor, envie o comprovante');
@@ -946,15 +961,6 @@
             const formData = new FormData();
             formData.append('receipt', receiptFile);
 
-            // Preparar dados do depósito
-            const depositRequestData = {
-                amount: depositAmount,
-                account_name: bankInfo[selectedBank].beneficiary,
-                iban: bankInfo[selectedBank].iban,
-                bank_name: bankInfo[selectedBank].fullName,
-                bank_code: selectedBank
-            };
-
             // 1. Criar solicitação de depósito
             const depositResponse = await fetch(`${API_BASE_URL}/api/deposit`, {
                 method: 'POST',
@@ -962,19 +968,19 @@
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(depositRequestData)
+                body: JSON.stringify(depositData)
             });
 
             const depositResult = await depositResponse.json();
 
             if (!depositResult.success) {
-                throw new Error(depositResult.message);
+                throw new Error(depositResult.message || 'Erro ao criar depósito');
             }
 
             // 2. Upload do comprovante
             formData.append('deposit_id', depositResult.data.deposit_id);
             
-            const uploadResponse = await fetch(`${API_BASE_URL}/api/upload/deposit-receipt`, {
+            const uploadResponse = await fetch(`${API_BASE_URL}/api/deposit-receipt`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -985,7 +991,7 @@
             const uploadResult = await uploadResponse.json();
 
             if (!uploadResult.success) {
-                throw new Error(uploadResult.message);
+                throw new Error(uploadResult.message || 'Erro ao enviar comprovante');
             }
 
             // Sucesso
@@ -1011,18 +1017,18 @@
         
         navigator.clipboard.writeText(text).then(() => {
             showTemporaryMessage('Copiado para a área de transferência!');
-       }).catch((err) => {
-  console.error('Erro ao copiar:', err);
-  // Fallback para método antigo
-  const textArea = document.createElement('textarea');
-  textArea.value = text;
-  document.body.appendChild(textArea);
-  textArea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textArea);
-  showTemporaryMessage('Copiado!');
-});
-} 
+        }).catch(err => {
+            console.error('Erro ao copiar:', err);
+            // Fallback para método antigo
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            showTemporaryMessage('Copiado!');
+        });
+    }
 
     // Funções auxiliares
     function showTemporaryMessage(message) {
@@ -1049,23 +1055,25 @@
     }
 
     function showError(message) {
-        alert(message); // Simples alert para erro
+        alert('Erro: ' + message);
     }
 
     function showSuccess(message) {
-        alert(message); // Simples alert para sucesso
+        alert('Sucesso: ' + message);
     }
 
     function clearError() {
-        // Limpar mensagens de erro se necessário
+        // Implementação para limpar mensagens de erro se necessário
     }
 
     function showLoading(show) {
         const loading = document.getElementById('loading');
         if (show) {
             loading.classList.remove('hidden');
+            loading.classList.add('flex');
         } else {
             loading.classList.add('hidden');
+            loading.classList.remove('flex');
         }
     }
 
@@ -1093,6 +1101,4 @@
             return null;
         }
     }
-  </script>
-</body>
-html>
+</script>
