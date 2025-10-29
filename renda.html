@@ -912,26 +912,33 @@
             }
         }
 
-        // Função para verificar se há compras hoje - VERSÃO SIMPLIFICADA E FUNCIONAL
+        // Função para verificar se há compras hoje - VERSÃO CORRIGIDA
         function checkRecentPurchases(purchases) {
-            if (!purchases || purchases.length === 0) return false;
+            if (!purchases || purchases.length === 0) {
+                console.log('❌ Nenhuma compra para verificar');
+                return false;
+            }
             
             const today = new Date();
-            const todayString = today.toDateString();
+            const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            const todayEnd = new Date(todayStart.getTime() + 24 * 60 * 60 * 1000);
+            
+            console.log('📅 Hoje:', todayStart.toISOString(), 'até', todayEnd.toISOString());
             
             for (let purchase of purchases) {
                 if (purchase.purchase_date) {
                     const purchaseDate = new Date(purchase.purchase_date);
-                    const purchaseDateString = purchaseDate.toDateString();
+                    console.log('📦 Compra:', purchase.product_name, '- Data:', purchaseDate.toISOString());
                     
-                    // Comparar as datas (ignorando horas, minutos, segundos)
-                    if (purchaseDateString === todayString) {
-                        console.log('✅ Compra encontrada hoje:', purchase.product_name);
+                    // Verificar se a compra está entre o início e o fim de hoje
+                    if (purchaseDate >= todayStart && purchaseDate < todayEnd) {
+                        console.log('✅ COMPRA HOJE ENCONTRADA:', purchase.product_name);
                         return true;
                     }
                 }
             }
             
+            console.log('❌ Nenhuma compra de hoje encontrada');
             return false;
         }
 
@@ -1036,7 +1043,7 @@
             }
         }
 
-        // Carregar dados de exemplo - SEMPRE com compra hoje para testar
+        // Carregar dados de exemplo - COM COMPRA HOJE para testar
         function loadSampleData() {
             const today = new Date();
             const yesterday = new Date(today);
@@ -1077,10 +1084,13 @@
             taskState.hasActivePurchases = data.has_active_purchases || false;
             taskState.todayEarnings = 0;
             
-            // VERIFICAÇÃO SIMPLES E DIRETA: Se há compras hoje
+            // VERIFICAÇÃO DETALHADA: Se há compras hoje
+            console.log('🔍 Verificando compras recentes...');
+            console.log('📦 Compras ativas:', data.active_purchases || []);
+            
             taskState.hasRecentPurchase = checkRecentPurchases(data.active_purchases || []);
             
-            console.log('📊 Estado atualizado:', {
+            console.log('📊 Estado final:', {
                 checkinCompleted: taskState.checkinCompleted,
                 incomeCompleted: taskState.incomeCompleted,
                 hasActivePurchases: taskState.hasActivePurchases,
@@ -1089,7 +1099,7 @@
             });
             
             // Calcular ganhos
-            if (taskState.checkinCompleted) taskState.todayEarnings += 50;
+            if (taskState.checkinCompleted) taskState.todayEarnings += 1; // Recompensa fixa para check-in
             if (taskState.incomeCompleted) taskState.todayEarnings += (data.tasks_status?.product_income?.reward || 0);
 
             updateStats();
@@ -1101,7 +1111,9 @@
                 playersGrid.innerHTML = data.active_purchases.map((purchase, index) => {
                     const purchaseDate = new Date(purchase.purchase_date);
                     const today = new Date();
-                    const isToday = purchaseDate.toDateString() === today.toDateString();
+                    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                    const todayEnd = new Date(todayStart.getTime() + 24 * 60 * 60 * 1000);
+                    const isToday = purchaseDate >= todayStart && purchaseDate < todayEnd;
                     
                     return `
                         <div class="player-card">
@@ -1250,8 +1262,8 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    showToast('✅ Aquecimento concluído! +50 KZ');
-                    taskState.todayEarnings += 50;
+                    showToast('✅ Aquecimento concluído! +1 KZ');
+                    taskState.todayEarnings += 1;
                     updateStats();
                     setTimeout(loadTasksStatus, 1000);
                 } else {
