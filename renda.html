@@ -1010,7 +1010,7 @@
 
             try {
                 // Carregar dados das tarefas
-                const tasksResponse = await fetch('https://bd-p4q7.onrender/api/tasks/status', {
+                const tasksResponse = await fetch('https://bd-p4q7.onrender.com/api/tasks/status', {
                     method: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + token,
@@ -1239,7 +1239,7 @@
             }
 
             try {
-                const response = await fetch('https://bd-p4q7.onrender/api/tasks/daily-checkin', {
+                const response = await fetch('https://bd-p4q7.onrender.com/api/tasks/daily-checkin', {
                     method: 'POST',
                     headers: {
                         'Authorization': 'Bearer ' + token,
@@ -1278,7 +1278,7 @@
             }
 
             try {
-                const response = await fetch('https://bd-p4q7.onrender/api/tasks/collect-product-income', {
+                const response = await fetch('https://bd-p4q7.onrender.com/api/tasks/collect-product-income', {
                     method: 'POST',
                     headers: {
                         'Authorization': 'Bearer ' + token,
