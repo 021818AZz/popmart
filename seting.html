@@ -21,17 +21,17 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #3e2723 0%, #5d4037 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+            color: #333;
             line-height: 1.5;
             min-height: 100vh;
         }
         
         .classreturnbox {
-            background: linear-gradient(135deg, #6d4c41 0%, #8d6e63 100%);
+            background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
             padding: 12px 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
         }
         
         .classreturn {
@@ -52,14 +52,14 @@
         }
         
         .return {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.3);
             padding: 8px;
             border-radius: 50%;
             transition: all 0.3s ease;
         }
         
         .return:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.4);
             transform: scale(1.05);
         }
         
@@ -78,13 +78,13 @@
         
         .section-container {
             margin: 16px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
         }
         
         .am-list {
@@ -95,20 +95,20 @@
             display: flex;
             align-items: center;
             padding: 18px 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
             text-decoration: none;
-            color: #fff;
+            color: #333;
             position: relative;
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.8);
         }
         
         .am-list-item:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(76, 175, 80, 0.1);
         }
         
         .am-list-item:active {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(76, 175, 80, 0.15);
             transform: scale(0.98);
         }
         
@@ -125,24 +125,25 @@
             object-fit: cover;
             width: 44px;
             height: 44px;
-            border: 2px solid rgba(255,255,255,0.2);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .am-list-content {
             flex: 1;
             font-size: 16px;
             font-weight: 500;
+            color: #2e7d32;
         }
         
         .am-list-extra {
             font-size: 15px;
-            color: rgba(255,255,255,0.8);
+            color: #666;
             margin-right: 12px;
         }
         
         .am-list-arrow {
-            color: rgba(255,255,255,0.6);
+            color: #4caf50;
             font-size: 18px;
         }
         
@@ -152,7 +153,7 @@
             margin: 20px 16px;
             padding: 16px;
             text-align: center;
-            background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
             color: #fff;
             border: none;
             border-radius: 12px;
@@ -160,12 +161,12 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(183, 28, 28, 0.4);
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
         }
         
         .logout-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(183, 28, 28, 0.6);
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.6);
         }
         
         .logout-button:active {
@@ -182,24 +183,24 @@
             width: 100%;
             font-size: 16px;
             padding: 14px 16px;
-            color: #fff;
+            color: #333;
             vertical-align: middle;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(76, 175, 80, 0.3);
             border-radius: 12px;
             box-sizing: border-box;
             transition: all 0.3s ease;
         }
         
         .adr-form-group input::placeholder {
-            color: rgba(255,255,255,0.6);
+            color: #888;
         }
         
         .adr-form-group input:focus {
             outline: none;
-            border-color: #d7ccc8;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 3px rgba(215, 204, 200, 0.2);
+            border-color: #4caf50;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
         }
         
         .bottoma {
@@ -227,7 +228,7 @@
         
         .bottoma:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .am-grid {
@@ -254,13 +255,13 @@
         .am-grid-item-thumb img {
             width: 100%;
             border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(76, 175, 80, 0.3);
             transition: all 0.3s ease;
         }
         
         .am-grid-item-thumb img:hover {
-            border-color: #d7ccc8;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-color: #4caf50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .imgzsy {
@@ -268,15 +269,14 @@
             height: auto;
         }
         
-        
         .error-message {
-            color: #ffcdd2;
+            color: #d32f2f;
             text-align: center;
             padding: 14px;
             margin: 16px;
-            background: rgba(244, 67, 54, 0.2);
+            background: rgba(244, 67, 54, 0.1);
             border-radius: 12px;
-            border: 1px solid rgba(244, 67, 54, 0.3);
+            border: 1px solid rgba(244, 67, 54, 0.2);
             display: none;
             font-weight: 500;
         }
@@ -298,19 +298,19 @@
         }
         
         .modal-content {
-            background: linear-gradient(135deg, #5d4037 0%, #4e342e 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
             padding: 0;
             border-radius: 16px;
             max-width: 90%;
             max-height: 80%;
             overflow: auto;
             width: 400px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(76, 175, 80, 0.2);
         }
         
         .modal-title {
-            background: linear-gradient(135deg, #6d4c41 0%, #8d6e63 100%);
+            background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
             color: #fff;
             padding: 20px;
             margin: 0;
@@ -322,6 +322,7 @@
         
         .modal-body {
             padding: 24px;
+            background: #fff;
         }
         
         .modal-buttons {
@@ -343,24 +344,24 @@
         }
         
         .modal-button.confirm {
-            background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
+            background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(109, 76, 65, 0.4);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
         }
         
         .modal-button.confirm:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(109, 76, 65, 0.6);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.6);
         }
         
         .modal-button.cancel {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255,255,255,0.9);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(76, 175, 80, 0.1);
+            color: #2e7d32;
+            border: 1px solid rgba(76, 175, 80, 0.3);
         }
         
         .modal-button.cancel:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(76, 175, 80, 0.2);
         }
         
         .msg {
@@ -402,7 +403,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transition: left 0.7s;
         }
         
@@ -434,6 +435,22 @@
             input, select, textarea {
                 font-size: 16px !important;
             }
+        }
+        
+        /* Loading Overlay */
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            font-size: 18px;
         }
     </style>
 </head>
