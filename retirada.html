@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saque - Royal</title>
+    <title>Saque - USHK</title>
     <script src="js/tailwindcss.js"></script>
     <link href="js/fonts.googleapis.css" rel="stylesheet">
     <style>
@@ -139,7 +139,7 @@
 
                 <div class="flex items-start gap-2">
                     <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce mt-1"></div>
-                    <p><strong>Horário de Atendimento:</strong> De <strong class="text-green-600">segunda a sábado</strong>, das <strong class="text-green-600">9h às 18h</strong>.</p>
+                    <p><strong>Horário de Atendimento:</strong> De <strong class="text-green-600">segunda a sábado</strong>, das <strong class="text-green-600">10h30 às 17h</strong>.</p>
                 </div>
 
                 <div class="flex items-start gap-2">
@@ -406,19 +406,24 @@
             }
         }
 
-        // Validar horário de saque (segunda a sábado, 9h às 18h)
+        // Validar horário de saque (segunda a sábado, 10h30 às 17h)
         function validarHorarioSaque() {
             const agora = new Date();
             const diaSemana = agora.getDay(); // 0 = domingo, 1 = segunda, ..., 6 = sábado
             const hora = agora.getHours();
+            const minutos = agora.getMinutes();
             
             // Domingo (0) não permite saques
             if (diaSemana === 0) {
                 return false;
             }
             
-            // Segunda a sábado: apenas das 9h às 18h
-            if (hora < 9 || hora >= 18) {
+            // Segunda a sábado: apenas das 10h30 às 17h
+            const horaAtual = hora + (minutos / 60);
+            const horaInicio = 10.5; // 10h30
+            const horaFim = 17; // 17h
+            
+            if (horaAtual < horaInicio || horaAtual >= horaFim) {
                 return false;
             }
             
@@ -437,7 +442,7 @@
 
             // Validar horário
             if (!validarHorarioSaque()) {
-                showToast('Saques disponíveis apenas de segunda a sábado, das 9h às 18h', 'error');
+                showToast('Saques disponíveis apenas de segunda a sábado, das 10h30 às 17h', 'error');
                 return;
             }
 
