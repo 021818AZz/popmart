@@ -137,10 +137,10 @@
                     <p><strong>Valor do Saque:</strong> Deve estar entre <strong class="text-green-600">KZ1,200.00</strong> e <strong class="text-green-600">KZ2,000,000.00</strong>.</p>
                 </div>
 
-                <div class="flex items-start gap-2">
-                    <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce mt-1"></div>
-                    <p><strong>Horário de Atendimento:</strong> De <strong class="text-green-600">segunda a sábado</strong>, das <strong class="text-green-600">10h30 às 17h</strong>.</p>
-                </div>
+               <div class="flex items-start gap-2">
+    <div class="w-4 h-4 bg-green-500 rounded-full animate-bounce mt-1"></div>
+    <p><strong>Horário de Retiradas:</strong> De <strong class="text-green-600">segunda a sexta-feira</strong>, das <strong class="text-green-600">11h30 às 15h30</strong>.</p>
+</div>
 
                 <div class="flex items-start gap-2">
                     <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse mt-1"></div>
@@ -407,29 +407,29 @@
         }
 
         // Validar horário de saque (segunda a sábado, 10h30 às 17h)
-        function validarHorarioSaque() {
-            const agora = new Date();
-            const diaSemana = agora.getDay(); // 0 = domingo, 1 = segunda, ..., 6 = sábado
-            const hora = agora.getHours();
-            const minutos = agora.getMinutes();
-            
-            // Domingo (0) não permite saques
-            if (diaSemana === 0) {
-                return false;
-            }
-            
-            // Segunda a sábado: apenas das 10h30 às 17h
-            const horaAtual = hora + (minutos / 60);
-            const horaInicio = 10.5; // 10h30
-            const horaFim = 17; // 17h
-            
-            if (horaAtual < horaInicio || horaAtual >= horaFim) {
-                return false;
-            }
-            
-            return true;
-        }
-
+        // Validar horário de saque (segunda a sexta, 11h30 às 15h30)
+function validarHorarioSaque() {
+    const agora = new Date();
+    const diaSemana = agora.getDay(); // 0 = domingo, 1 = segunda, ..., 6 = sábado
+    const hora = agora.getHours();
+    const minutos = agora.getMinutes();
+    
+    // Apenas segunda a sexta (1 a 5)
+    if (diaSemana === 0 || diaSemana === 6) { // Domingo (0) e Sábado (6)
+        return false;
+    }
+    
+    // Segunda a sexta: apenas das 11h30 às 15h30
+    const horaAtual = hora + (minutos / 60);
+    const horaInicio = 11.5; // 11h30
+    const horaFim = 15.5; // 15h30
+    
+    if (horaAtual < horaInicio || horaAtual >= horaFim) {
+        return false;
+    }
+    
+    return true;
+}
         // Processar saque
         async function processarSaque(event) {
             event.preventDefault();
@@ -442,7 +442,7 @@
 
             // Validar horário
             if (!validarHorarioSaque()) {
-                showToast('Saques disponíveis apenas de segunda a sábado, das 10h30 às 17h', 'error');
+                showToast('Saques disponíveis apenas de segunda a sexta, das 11h30 às 15h30', 'error');
                 return;
             }
 
