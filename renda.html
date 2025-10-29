@@ -344,6 +344,43 @@
             padding: 0 5px;
         }
 
+        /* NOVO: Bola girando */
+        .football-ball.spinning {
+            animation: spinBall 1s linear infinite;
+        }
+
+        @keyframes spinBall {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* NOVO: Efeito de recebimento */
+        .earnings-popup {
+            position: absolute;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #0d3d0d;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            z-index: 20;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.6);
+            border: 2px solid #0d3d0d;
+            animation: floatUp 1.5s ease-out forwards;
+            white-space: nowrap;
+        }
+
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+
         .trophy {
             position: absolute;
             font-size: 3.5rem;
@@ -648,18 +685,36 @@
         }
 
         /* ===== ANIMAÇÕES ===== */
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         @keyframes ballToGoal {
-            0% { transform: translate(-50%, -50%); }
-            100% { transform: translate(120px, 60px); }
+            0% { 
+                transform: translate(-50%, -50%) scale(1);
+                left: 50%;
+                top: 50%;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% { 
+                transform: translate(120px, 60px) scale(1);
+                left: calc(50% + 120px);
+                top: calc(50% + 60px);
+            }
         }
 
         @keyframes ballToCheckin {
-            0% { transform: translate(-50%, -50%); }
-            100% { transform: translate(-150px, -100px); }
+            0% { 
+                transform: translate(-50%, -50%) scale(1);
+                left: 50%;
+                top: 50%;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% { 
+                transform: translate(-150px, -100px) scale(1);
+                left: calc(50% - 150px);
+                top: calc(50% - 100px);
+            }
         }
 
         /* ===== TOAST PERSONALIZADO ===== */
@@ -710,13 +765,35 @@
             }
 
             @keyframes ballToGoal {
-                0% { transform: translate(-50%, -50%); }
-                100% { transform: translate(200px, 80px); }
+                0% { 
+                    transform: translate(-50%, -50%) scale(1);
+                    left: 50%;
+                    top: 50%;
+                }
+                50% {
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+                100% { 
+                    transform: translate(200px, 80px) scale(1);
+                    left: calc(50% + 200px);
+                    top: calc(50% + 80px);
+                }
             }
             
             @keyframes ballToCheckin {
-                0% { transform: translate(-50%, -50%); }
-                100% { transform: translate(-200px, -120px); }
+                0% { 
+                    transform: translate(-50%, -50%) scale(1);
+                    left: 50%;
+                    top: 50%;
+                }
+                50% {
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+                100% { 
+                    transform: translate(-200px, -120px) scale(1);
+                    left: calc(50% - 200px);
+                    top: calc(50% - 120px);
+                }
             }
         }
 
@@ -1055,7 +1132,23 @@
             return todaysPurchases.length > 0;
         }
 
-        // Função para manipular clique na bola
+        // NOVA FUNÇÃO: Mostrar popup de ganhos
+        function showEarningsPopup(amount, position) {
+            const popup = document.createElement('div');
+            popup.className = 'earnings-popup';
+            popup.textContent = `+${amount} KZ`;
+            popup.style.left = position.x + 'px';
+            popup.style.top = position.y + 'px';
+            
+            document.getElementById('footballField').appendChild(popup);
+            
+            // Remover popup após animação
+            setTimeout(() => {
+                popup.remove();
+            }, 1500);
+        }
+
+        // Função para manipular clique na bola - AGORA COM ANIMAÇÕES MELHORADAS
         function handleBallClick() {
             console.log('⚽ Clique na bola - Estado:', {
                 isNewRegistration: taskState.isNewRegistration,
@@ -1075,40 +1168,86 @@
 
             const ball = document.getElementById('footballBall');
             const trophy = document.getElementById('trophy');
+            const field = document.getElementById('footballField');
             
             // Desativar a bola durante a animação
             ball.style.pointerEvents = 'none';
-            
+
             if (!taskState.checkinCompleted) {
-                ball.style.animation = 'ballToCheckin 1s forwards';
+                // ANIMAÇÃO: Bola girando + indo para check-in
+                ball.classList.add('spinning');
                 
                 setTimeout(() => {
-                    performDailyCheckin();
-                    setTimeout(() => {
-                        ball.style.animation = '';
-                        ball.style.left = '50%';
-                        ball.style.top = '50%';
-                        ball.style.transform = 'translate(-50%, -50%)';
-                        ball.style.pointerEvents = 'auto';
-                    }, 1000);
-                }, 1000);
-            } 
-            else if (!taskState.incomeCompleted && taskState.hasActivePurchases) {
-                ball.style.animation = 'ballToGoal 1.5s forwards';
-                
-                setTimeout(() => {
-                    collectProductIncome();
-                    trophy.classList.add('show');
+                    // Parar de girar e ir para o local
+                    ball.classList.remove('spinning');
+                    ball.style.animation = 'ballToCheckin 1s forwards';
                     
                     setTimeout(() => {
-                        trophy.classList.remove('show');
-                        ball.style.animation = '';
-                        ball.style.left = '50%';
-                        ball.style.top = '50%';
-                        ball.style.transform = 'translate(-50%, -50%)';
-                        ball.style.pointerEvents = 'auto';
-                    }, 2000);
-                }, 1500);
+                        // Processar check-in
+                        performDailyCheckin().then((earnings) => {
+                            if (earnings > 0) {
+                                // Mostrar popup de ganhos
+                                const checkinArea = document.querySelector('.checkin-area');
+                                const rect = checkinArea.getBoundingClientRect();
+                                const fieldRect = field.getBoundingClientRect();
+                                
+                                showEarningsPopup(earnings, {
+                                    x: rect.left - fieldRect.left + rect.width / 2,
+                                    y: rect.top - fieldRect.top + rect.height / 2
+                                });
+                            }
+                            
+                            // Resetar bola
+                            setTimeout(() => {
+                                ball.style.animation = '';
+                                ball.style.left = '50%';
+                                ball.style.top = '50%';
+                                ball.style.transform = 'translate(-50%, -50%)';
+                                ball.style.pointerEvents = 'auto';
+                            }, 1000);
+                        });
+                    }, 1000);
+                }, 1500); // Tempo girando
+            } 
+            else if (!taskState.incomeCompleted && taskState.hasActivePurchases) {
+                // ANIMAÇÃO: Bola girando + indo para o gol
+                ball.classList.add('spinning');
+                
+                setTimeout(() => {
+                    // Parar de girar e ir para o gol
+                    ball.classList.remove('spinning');
+                    ball.style.animation = 'ballToGoal 1.5s forwards';
+                    
+                    setTimeout(() => {
+                        // Processar coleta
+                        collectProductIncome().then((earnings) => {
+                            if (earnings > 0) {
+                                // Mostrar popup de ganhos
+                                const goal = document.querySelector('.goal');
+                                const rect = goal.getBoundingClientRect();
+                                const fieldRect = field.getBoundingClientRect();
+                                
+                                showEarningsPopup(earnings, {
+                                    x: rect.left - fieldRect.left + rect.width / 2,
+                                    y: rect.top - fieldRect.top + rect.height / 2
+                                });
+                                
+                                // Mostrar troféu
+                                trophy.classList.add('show');
+                            }
+                            
+                            // Resetar bola e troféu
+                            setTimeout(() => {
+                                trophy.classList.remove('show');
+                                ball.style.animation = '';
+                                ball.style.left = '50%';
+                                ball.style.top = '50%';
+                                ball.style.transform = 'translate(-50%, -50%)';
+                                ball.style.pointerEvents = 'auto';
+                            }, 2000);
+                        });
+                    }, 1500);
+                }, 1500); // Tempo girando
             } 
             else if (taskState.checkinCompleted && taskState.incomeCompleted) {
                 showToast('🎉 Todas as tarefas concluídas hoje!');
@@ -1171,7 +1310,7 @@
             }
         }
 
-        // Atualizar UI para novo cadastro
+        // Atualizar UI para novo cadastro - AGORA MOSTRA PRODUTOS
         function updateUIForNewRegistration(data) {
             const ball = document.getElementById('footballBall');
             const tacticsContent = document.getElementById('tacticsContent');
@@ -1187,7 +1326,7 @@
             document.getElementById('completedTasks').textContent = '0/2';
             document.getElementById('todayEarnings').textContent = '0 KZ';
             
-            // Mostrar produtos comprados hoje (se houver)
+            // SEMPRE MOSTRAR PRODUTOS - MESMO SE CADASTROU HOJE
             if (data.active_purchases && data.active_purchases.length > 0) {
                 const positions = ["Atacante", "Meio-Campo", "Zagueiro", "Goleiro", "Lateral"];
                 playersGrid.innerHTML = data.active_purchases.map((purchase, index) => {
@@ -1338,7 +1477,7 @@
 
             updateStats();
 
-            // Atualizar jogadores (produtos)
+            // Atualizar jogadores (produtos) - SEMPRE MOSTRAR PRODUTOS
             const playersGrid = document.getElementById('playersGrid');
             if (data.active_purchases && data.active_purchases.length > 0) {
                 const positions = ["Atacante", "Meio-Campo", "Zagueiro", "Goleiro", "Lateral"];
@@ -1490,93 +1629,106 @@
             }
         }
 
-        // Função para fazer check-in
+        // MODIFICADA: Função para fazer check-in - AGORA RETORNA PROMISE
         async function performDailyCheckin() {
-            // Verificar bloqueios
-            if (taskState.isNewRegistration) {
-                showNewRegistrationModal();
-                return;
-            }
-
-            if (taskState.hasRecentPurchase) {
-                showRecentPurchaseModal();
-                return;
-            }
-
-            const token = getToken();
-            if (!token) {
-                showToast('❌ Faça login para continuar');
-                return;
-            }
-
-            try {
-                const response = await fetch('https://bd-p4q7.onrender.com/api/tasks/daily-checkin', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + token,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    showToast('✅ Aquecimento concluído! +1 KZ');
-                    taskState.todayEarnings += 1;
-                    updateStats();
-                    setTimeout(loadTasksStatus, 1000);
-                } else {
-                    throw new Error(data.message || 'Erro no check-in');
+            return new Promise(async (resolve) => {
+                // Verificar bloqueios
+                if (taskState.isNewRegistration) {
+                    showNewRegistrationModal();
+                    resolve(0);
+                    return;
                 }
-            } catch (error) {
-                console.error('Erro no check-in:', error);
-                showToast('❌ Falha no aquecimento');
-            }
+
+                if (taskState.hasRecentPurchase) {
+                    showRecentPurchaseModal();
+                    resolve(0);
+                    return;
+                }
+
+                const token = getToken();
+                if (!token) {
+                    showToast('❌ Faça login para continuar');
+                    resolve(0);
+                    return;
+                }
+
+                try {
+                    const response = await fetch('https://bd-p4q7.onrender.com/api/tasks/daily-checkin', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        const earnings = 1; // Recompensa fixa do check-in
+                        taskState.todayEarnings += earnings;
+                        updateStats();
+                        setTimeout(loadTasksStatus, 1000);
+                        resolve(earnings);
+                    } else {
+                        throw new Error(data.message || 'Erro no check-in');
+                    }
+                } catch (error) {
+                    console.error('Erro no check-in:', error);
+                    showToast('❌ Falha no aquecimento');
+                    resolve(0);
+                }
+            });
         }
 
-        // Função para coletar rendimentos
+        // MODIFICADA: Função para coletar rendimentos - AGORA RETORNA PROMISE
         async function collectProductIncome() {
-            // Verificar bloqueios
-            if (taskState.isNewRegistration) {
-                showNewRegistrationModal();
-                return;
-            }
-
-            if (taskState.hasRecentPurchase) {
-                showRecentPurchaseModal();
-                return;
-            }
-
-            const token = getToken();
-            if (!token) {
-                showToast('❌ Faça login para continuar');
-                return;
-            }
-
-            try {
-                const response = await fetch('https://bd-p4q7.onrender.com/api/tasks/collect-product-income', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + token,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    const earnings = data.data?.total_income || 0;
-                    showToast(`✅ Gol marcado! +${earnings} KZ`);
-                    taskState.todayEarnings += earnings;
-                    updateStats();
-                    setTimeout(loadTasksStatus, 1000);
-                } else {
-                    throw new Error(data.message || 'Erro na coleta de rendimentos');
+            return new Promise(async (resolve) => {
+                // Verificar bloqueios
+                if (taskState.isNewRegistration) {
+                    showNewRegistrationModal();
+                    resolve(0);
+                    return;
                 }
-            } catch (error) {
-                console.error('Erro na coleta:', error);
-                showToast('❌ Falha na finalização');
-            }
+
+                if (taskState.hasRecentPurchase) {
+                    showRecentPurchaseModal();
+                    resolve(0);
+                    return;
+                }
+
+                const token = getToken();
+                if (!token) {
+                    showToast('❌ Faça login para continuar');
+                    resolve(0);
+                    return;
+                }
+
+                try {
+                    const response = await fetch('https://bd-p4q7.onrender.com/api/tasks/collect-product-income', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        const earnings = data.data?.total_income || 0;
+                        taskState.todayEarnings += earnings;
+                        updateStats();
+                        setTimeout(loadTasksStatus, 1000);
+                        resolve(earnings);
+                    } else {
+                        throw new Error(data.message || 'Erro na coleta de rendimentos');
+                    }
+                } catch (error) {
+                    console.error('Erro na coleta:', error);
+                    showToast('❌ Falha na finalização');
+                    resolve(0);
+                }
+            });
         }
 
         // Inicializar
