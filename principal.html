@@ -231,92 +231,112 @@
       const productsData = [
         {
           id: 1,
-          name: "Premier League",
-          image: "vip1.png",
-          price: 4000,
-          dailyReturn: 750,
-          totalReturn: 45000,
-          period: 60,
+          name: "Plano Inicial",
+          image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23FFD700' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='35' fill='%23FFF8DC'/%3E%3Ccircle cx='50' cy='50' r='25' fill='%23FFEC8B'/%3E%3C/svg%3E",
+          price: 1000,
+          dailyReturn: 40, // 4% de 1000
+          totalReturn: 14600, // 365 dias * 40
+          period: 365,
           bonusLevel: 1
         },
         {
           id: 2,
-          name: "La Liga",
-          image: "vip2.png",
-          price: 8000,
-          dailyReturn: 1500,
-          totalReturn: 90000,
-          period: 60,
+          name: "Plano Intermediário",
+          image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23FFD700' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='35' fill='%23FFF8DC'/%3E%3Ccircle cx='50' cy='50' r='25' fill='%23FFEC8B'/%3E%3C/svg%3E",
+          price: 2500,
+          dailyReturn: 100, // 4% de 2500
+          totalReturn: 36500, // 365 dias * 100
+          period: 365,
           bonusLevel: 1
         },
         {
           id: 3,
-          name: "Serie A",
-          image: "vip3.png",
-          price: 16000,
-          dailyReturn: 3000,
-          totalReturn: 180000,
-          period: 60,
-          bonusLevel: 2
+          name: "Premier League",
+          image: "vip1.png",
+          price: 4000,
+          dailyReturn: 160, // 4% de 4000
+          totalReturn: 58400, // 365 dias * 160
+          period: 365,
+          bonusLevel: 1
         },
         {
           id: 4,
-          name: "Bundesliga",
-          image: "vip4.png",
-          price: 32000,
-          dailyReturn: 6000,
-          totalReturn: 360000,
-          period: 60,
-          bonusLevel: 2
+          name: "La Liga",
+          image: "vip2.png",
+          price: 8000,
+          dailyReturn: 320, // 4% de 8000
+          totalReturn: 116800, // 365 dias * 320
+          period: 365,
+          bonusLevel: 1
         },
         {
           id: 5,
-          name: "Ligue 1",
-          image: "vip5.png",
-          price: 64000,
-          dailyReturn: 12000,
-          totalReturn: 720000,
-          period: 60,
+          name: "Serie A",
+          image: "vip3.png",
+          price: 16000,
+          dailyReturn: 640, // 4% de 16000
+          totalReturn: 233600, // 365 dias * 640
+          period: 365,
           bonusLevel: 2
         },
         {
           id: 6,
-          name: "Eredivisie",
-          image: "img/vip7.png",
-          price: 128000,
-          dailyReturn: 24000,
-          totalReturn: 1440000,
-          period: 60,
-          bonusLevel: 3
+          name: "Bundesliga",
+          image: "vip4.png",
+          price: 32000,
+          dailyReturn: 1280, // 4% de 32000
+          totalReturn: 467200, // 365 dias * 1280
+          period: 365,
+          bonusLevel: 2
         },
         {
           id: 7,
-          name: "Primeira Liga",
-          image: "img/vip6.png",
-          price: 256000,
-          dailyReturn: 48400,
-          totalReturn: 2880000,
-          period: 60,
-          bonusLevel: 3
+          name: "Ligue 1",
+          image: "vip5.png",
+          price: 64000,
+          dailyReturn: 2560, // 4% de 64000
+          totalReturn: 934400, // 365 dias * 2560
+          period: 365,
+          bonusLevel: 2
         },
         {
           id: 8,
-          name: "Pro League",
-          image: "img/vip8.png",
-          price: 512000,
-          dailyReturn: 96000,
-          totalReturn: 5760000,
-          period: 60,
+          name: "Eredivisie",
+          image: "img/vip7.png",
+          price: 128000,
+          dailyReturn: 5120, // 4% de 128000
+          totalReturn: 1868800, // 365 dias * 5120
+          period: 365,
           bonusLevel: 3
         },
         {
           id: 9,
+          name: "Primeira Liga",
+          image: "img/vip6.png",
+          price: 256000,
+          dailyReturn: 10240, // 4% de 256000
+          totalReturn: 3737600, // 365 dias * 10240
+          period: 365,
+          bonusLevel: 3
+        },
+        {
+          id: 10,
+          name: "Pro League",
+          image: "img/vip8.png",
+          price: 512000,
+          dailyReturn: 20480, // 4% de 512000
+          totalReturn: 7475200, // 365 dias * 20480
+          period: 365,
+          bonusLevel: 3
+        },
+        {
+          id: 11,
           name: "League Europe",
           image: "img/vip9.png",
           price: 1800000,
-          dailyReturn: 192000,
-          totalReturn: 11520000,
-          period: 60,
+          dailyReturn: 72000, // 4% de 1800000
+          totalReturn: 26280000, // 365 dias * 72000
+          period: 365,
           bonusLevel: 3
         }
       ];
